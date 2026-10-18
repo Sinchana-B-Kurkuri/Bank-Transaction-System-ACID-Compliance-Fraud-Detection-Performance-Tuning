@@ -1,0 +1,25 @@
+Verification attempts on 2026-10-18; database execution is blocked.
+COMMAND: powershell -File build/rebuild.ps1 -Database bank_txn -Mode Standalone (repeat 1)
+C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\rebuild.ps1 : BANK_MYSQL_CNF 
+is unset; configure a local MySQL option file (never commit credentials).
+At C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\rebuild.ps1:28 char:11
++ } catch { Write-Error $_; exit 1 } finally { Pop-Location }
++           ~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,rebuild.ps1
+ 
+Exit code: 1
+COMMAND: powershell -File build/rebuild.ps1 -Database bank_txn -Mode Standalone (repeat 2)
+C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\rebuild.ps1 : BANK_MYSQL_CNF 
+is unset; configure a local MySQL option file (never commit credentials).
+At C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\rebuild.ps1:28 char:11
++ } catch { Write-Error $_; exit 1 } finally { Pop-Location }
++           ~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,rebuild.ps1
+ 
+Exit code: 1

@@ -1,0 +1,16 @@
+# Workbench order; select the banking schema first. Core + B tables (or stubs) + cross FKs + lab.
+schema/01_tables/01_branches.sql | A
+schema/01_tables/02_employees.sql | A
+schema/01_tables/03_customers.sql | A
+schema/01_tables/04_account_types.sql | A
+schema/01_tables/05_accounts.sql | A
+schema/01_tables/06_transactions.sql | A
+schema/01_tables/07_loans.sql | A
+schema/01_tables/08_fraud_flags.sql | A
+schema/01_tables/09_audit_log.sql | A
+schema/02_constraints/01_core_constraints.sql | A
+tests/stubs/member_b_interface_stubs.sql | A
+schema/02_constraints/02_cross_module_fks.sql | A
+schema/04_lab/01_bank_lab.sql | A
+# B real tables 10-16 replace tests/stubs/member_b_interface_stubs.sql before cross FKs.
+# B bank_lab.Benchmark_Results optional when supplied.

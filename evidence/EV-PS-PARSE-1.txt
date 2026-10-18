@@ -1,0 +1,5 @@
+build\env_check.ps1 : 0 parse errors
+build\mysql_common.ps1 : 0 parse errors
+build\rebuild.ps1 : 0 parse errors
+tests\run_tests.ps1 : 0 parse errors
+tests\schema\03_source_order.ps1 : 0 parse errors

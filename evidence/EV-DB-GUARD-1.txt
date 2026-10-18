@@ -1,0 +1,9 @@
+Database must be bank_txn or bank_txn_scratch.
+At C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\mysql_common.ps1:3 char:59
++ ... scratch')) { throw 'Database must be bank_txn or bank_txn_scratch.' }
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Database must b...nk_txn_scratch.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Database must be bank_txn or bank_txn_scratch.
+ 
+Exit code: 1

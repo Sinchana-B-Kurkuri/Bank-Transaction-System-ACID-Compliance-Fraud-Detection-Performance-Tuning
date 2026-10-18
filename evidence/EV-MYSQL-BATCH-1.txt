@@ -1,0 +1,1 @@
+TEST|PASS|real MySQL batch fail-fast|Exit=1; original stderr=ERROR 1054 (42S22) at line 2: Unknown column 'missing_column_for_wrapper_test' in 'field list'
