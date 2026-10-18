@@ -83,3 +83,48 @@ Use SIGNAL SQLSTATE '45000' and MESSAGE_TEXT 'E_NAME: text' without PII. Failed 
 ### Actor and transaction ownership
 
 Resolve USER() through DB_User_Map, exact login then user-part fallback; unmapped means System. Public routines own transactions and use SQL SECURITY DEFINER; private sp_internal_* routines have no transaction control and receive no role grants. See SPEC A17 for customer debit ownership, employee identity, and Branch Teller restrictions.
+
+## Prompt 2 — functions, actor resolution, and trigger contracts
+
+The following objects are installed by both build lists, after core/B tables and FKs. The frozen schema and SPEC signatures are unchanged; no migration is needed.
+
+| Function | Signature / return | Behavior |
+|---|---|---|
+| fn_get_balance | (p_account_id INT) RETURNS DECIMAL(14,2) | Stored balance in any status; NULL for NULL/missing account |
+| fn_available_balance | (p_account_id INT) RETURNS DECIMAL(14,2) | Active: GREATEST(balance-min_balance,0); otherwise 0.00 |
+| fn_calc_interest | (p_account_id INT) RETURNS DECIMAL(14,2) | Active: ROUND(balance*type interest_rate/100/12,2); otherwise 0.00 |
+| fn_generate_reference | () RETURNS VARCHAR(30) | 28 characters: T + 20 timestamp digits including six microseconds + hyphen + six uppercase base36 characters |
+| fn_mask_id_proof | (p_id_proof VARCHAR(30)) RETURNS VARCHAR(30) | NULL-safe; keeps last four characters; shorter values unchanged; uses character length |
+| fn_approval_threshold | () RETURNS DECIMAL(14,2) | 100000.00 |
+
+The first four are NOT DETERMINISTIC / READS SQL DATA; mask and threshold are DETERMINISTIC / NO SQL. All use SQL SECURITY DEFINER. Reference generation combines NOW(6) with a six-character base36 residue of UUID_SHORT(); the 1000-call test includes one statement with a shared timestamp. It is not a cryptographic identifier. The unique reference_no constraint remains the definitive duplicate guard.
+
+sp_resolve_actor retains its SPEC signature and performs no transaction control or result-set emission. Matching is case-sensitive: exact full login first, then an explicit bare-user key, then host-specific rows with the same user part. Multiple matching rows that agree on actor/ids are accepted; conflicting fallback identities return System with NULL ids. Exact full-login mappings always win. NULL/unmapped logins resolve to System. No schema or B table contract changes are required.
+
+The six guards enforce: below-minimum balance decreases/zero without simultaneous closure (5015), balance/status changes on already Closed accounts (5011), ledger UPDATE/DELETE (5012), audit UPDATE/DELETE (5013), device ownership mismatch (5014), and self-counterparty (5005). An absent device/account reference is left to the FK (1452). Balance increases below the minimum are permitted; settlement must set balance=0 and status=Closed together. These are UPDATE guards, not a replacement for later account-opening procedures or loader validation.
+
+The nine audit triggers serialize all 8 Accounts, 14 Transactions, and 8 Loans columns into old/new JSON snapshots. They call sp_resolve_actor(USER(),...) into local variables; Audit_Log.db_session_user is always USER(). INSERT old_value and DELETE new_value are SQL NULL. Transactions AFTER UPDATE/DELETE audit triggers remain installed as specified but cannot be reached while ledger immutability guards are installed. No trigger commits or rolls back; audit rows roll back with their originating statement/transaction. The install script records DATABASE()-scoped maxima and installed_at in bank_lab.Experiment_Log. Reinstallation records a new watermark; it cannot retroactively audit changes made while auditing was disabled.
+
+### EXP-13 / EXP-17 audit toggles
+
+From the repository root, use the fail-fast wrapper (or a client configured to stop on SQL errors):
+
+```powershell
+. ./build/mysql_common.ps1
+Invoke-BankMysql -Database bank_txn_scratch -Sql 'source triggers/lab/drop_audit_triggers.sql'
+Invoke-BankMysql -Database bank_txn_scratch -Sql 'source triggers/lab/create_audit_triggers.sql'
+```
+
+Each script validates the selected database before any trigger DDL. The default is scratch only; another selected database requires `SET @allow_trigger_toggle=1;` in the SAME client session before SOURCE. It is not a persistent setting. Validation uses a disposable bank_lab procedure, which is dropped after a successful check; a denied invocation can leave that harmless validator until the next invocation. Neither script touches guards or B triggers. Create drops/recreates A's nine audits and records a fresh watermark.
+
+A14 remains mandatory: B's fraud AFTER INSERT trigger must be created with FOLLOWS trg_transactions_ai_audit. The toggle validator rejects an existing dependent Transactions AFTER INSERT trigger (5017) to prevent silently reversing ordering when auditing is recreated. B must manage its own fraud trigger lifecycle around EXP-13 and reinstall it with FOLLOWS after A's audits are restored. No B code is edited by these scripts.
+
+### Reference loaders and regression tests
+
+Build order is bank_lab, tables, constraints, functions, resolver, guards, audits, watermark, reference data. Natural-key reference data is always included; -WithSeed additionally runs all data/seed/NN_*.sql loaders in numeric order (the reference script may run again safely). Branch assignments resolve synthetic IFSC keys, not assumed auto-increment ids. No B-owned reference rows are seeded.
+
+The unchanged Prompt 1 native-constraint fixture contains three Transactions UPDATE-to-NULL checks. The runner temporarily removes ONLY trg_transactions_bu_immutable around that fixture and restores it in finally, allowing the existing 1048 assertions to continue testing native column constraints. Guard tests then separately require every ledger UPDATE/DELETE to raise 5012. Tests require disposable databases and an unmapped administrative login.
+
+The restricted-login attribution test creates only reserved zz_a_teller_test / zz_a_customer_test users after confirming they do not already exist. Random passwords stay in memory and the child MYSQL_PWD environment; no password is written to disk or arguments. Grants are Accounts SELECT(account_id,balance)/UPDATE(balance) plus EXECUTE on a temporary identity probe. Exact USER() strings are calibrated from each session, and the probe demonstrates that CURRENT_USER() in the matching definer context is different. Users, maps, and the probe are removed in finally. Synthetic actor fixtures remain in the disposable schema because immutable audit rows reference them; a subsequent rebuild removes them. The test requires CREATE USER, GRANT, routine DDL, and administrative fixture privileges; inability to obtain them is a reported failure/blocker, never a claimed pass.
+
+The persistent actor fixture includes an opening Completed Deposit and one matching Deposit for each of its four test credits. Its final balance and latest balance_after are explicitly reconciled, so it does not leave an inconsistent ledger for later invariant tests.

@@ -21,7 +21,25 @@ try {
   foreach ($file in $files) {
    $relative=$file.FullName.Substring($root.Length+1).Replace('\','/')
    try {
-    if ($file.Extension -eq '.sql') { $output=@(Invoke-BankMysql -Database $Database -Sql "SET @test_run_id='$runId';`nsource $relative") }
+    if ($file.Extension -eq '.sql') {
+     $restoreLedgerGuard=$false
+     try {
+      # Prompt 1's unchanged constraint fixture deliberately UPDATEs ledger NULLs.
+      # Test native column errors independently of Prompt 2's unconditional guard,
+      # then restore the guard before any function/trigger/procedure tests run.
+      if ($relative -eq 'tests/schema/01_negative_constraints.sql') {
+       $installed=@(Invoke-BankMysql -Database $Database -Sql "SELECT COUNT(*) FROM information_schema.triggers WHERE trigger_schema=DATABASE() AND trigger_name='trg_transactions_bu_immutable';")
+       if ([int]$installed[0] -eq 1) {
+        Invoke-BankMysql -Database $Database -Sql 'DROP TRIGGER trg_transactions_bu_immutable;' | Out-Null
+        $restoreLedgerGuard=$true
+        $log.Add('INFO|Native constraint isolation: temporarily suspend ledger UPDATE guard for unchanged Prompt 1 fixture; restore in finally.')
+       }
+      }
+      $output=@(Invoke-BankMysql -Database $Database -Sql "SET @test_run_id='$runId';`nsource $relative")
+     } finally {
+      if ($restoreLedgerGuard) { Invoke-BankMysql -Database $Database -Sql 'source triggers/guards/trg_transactions_bu_immutable.sql' | Out-Null }
+     }
+    }
     else {
      $ErrorActionPreference='Continue'
      $output=@(& powershell -NoProfile -File $file.FullName -Database $Database 2>&1 | ForEach-Object { "$_" })
