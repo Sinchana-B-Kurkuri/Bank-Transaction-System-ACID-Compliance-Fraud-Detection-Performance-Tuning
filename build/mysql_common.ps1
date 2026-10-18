@@ -35,7 +35,7 @@ function Invoke-BankMysql {
  if (!(Test-Path -LiteralPath $env:BANK_MYSQL_CNF -PathType Leaf)) { throw 'BANK_MYSQL_CNF does not name an existing file.' }
  $optionFile=(Resolve-Path -LiteralPath $env:BANK_MYSQL_CNF).ProviderPath
  $client=Get-Command mysql.exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
- $clientPath=if ($client) { $client.Source } else { $null }
+ $clientPath=if ($env:BANK_MYSQL_BIN) { (Resolve-Path -LiteralPath $env:BANK_MYSQL_BIN -ErrorAction Stop).ProviderPath } elseif ($client) { $client.Source } else { $null }
  if (!$clientPath -and $env:ProgramFiles) {
   $candidates=@(Get-ChildItem -Path (Join-Path $env:ProgramFiles 'MySQL/MySQL Server */bin/mysql.exe') -File -ErrorAction SilentlyContinue)
   if ($candidates.Count -eq 1) { $clientPath=$candidates[0].FullName }

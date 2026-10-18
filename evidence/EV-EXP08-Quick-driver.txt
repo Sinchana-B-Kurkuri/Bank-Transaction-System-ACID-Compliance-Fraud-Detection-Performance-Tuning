@@ -1,0 +1,2 @@
+RESULT|EXP-08|ALL|throughput_runs|4
+RESULT|EXP-08|ALL|hardware|MEASURED from authorized same-day Get-CimInstance record evidence/EV-EXP08-hardware.json

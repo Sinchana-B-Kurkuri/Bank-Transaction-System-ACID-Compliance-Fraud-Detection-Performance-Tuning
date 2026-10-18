@@ -1,0 +1,10 @@
+﻿I1	2	FAIL	2026-10-18 22:51:53.363
+I1b	0	PASS	2026-10-18 22:51:53.363
+I2	0	PASS	2026-10-18 22:51:53.363
+I3	0	PASS	2026-10-18 22:51:53.363
+I4	0	PASS	2026-10-18 22:51:53.363
+I5	1	FAIL	2026-10-18 22:51:53.363
+I1	NULL	TOTAL	aggregate balance differs from completed ledger
+I1	1	1	balance differs from completed ledger
+I5	1	1	latest completed balance_after differs
+CHECK|2

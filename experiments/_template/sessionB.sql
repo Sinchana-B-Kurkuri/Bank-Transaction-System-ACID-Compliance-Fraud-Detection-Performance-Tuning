@@ -1,0 +1,3 @@
+-- LAB ONLY — never ship
+-- STEP 2 (B) @ t+1s
+SELECT CONCAT('RESULT|TEMPLATE|SESSION|connection|',CONNECTION_ID());

@@ -1,0 +1,2 @@
+SELECT CONCAT('META|',VERSION(),'|',NOW(6),'|',CONNECTION_ID()); SELECT CONCAT('CONNECTION|',CONNECTION_ID());
+SET @lab_first_lock_sleep=0.05,@lab_sleep_seconds=0.01; CALL sp_lab_retry_loop(10,9,50,3);

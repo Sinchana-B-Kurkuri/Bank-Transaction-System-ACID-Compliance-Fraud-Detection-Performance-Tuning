@@ -1,0 +1,18 @@
+EXP02 overdraw	PASS	expected=5004;actual=5004;message=E_INSUFFICIENT_FUNDS: minimum balance would be breached
+EXP02 below minimum	PASS	expected=5004;actual=5004;message=E_INSUFFICIENT_FUNDS: minimum balance would be breached
+EXP02 negative amount	PASS	expected=5001;actual=5001;message=E_INVALID_AMOUNT: amount must be positive
+EXP02 zero amount	PASS	expected=5001;actual=5001;message=E_INVALID_AMOUNT: amount must be positive
+EXP02 same account	PASS	expected=5005;actual=5005;message=E_SAME_ACCOUNT: accounts must differ
+EXP02 nonexistent account	PASS	expected=5002;actual=5002;message=E_ACCOUNT_NOT_FOUND: account does not exist
+EXP02 threshold	PASS	expected=5006;actual=5006;message=E_APPROVAL_REQUIRED: approval threshold reached
+EXP02 ledger update	PASS	expected=5012;actual=5012;message=E_LEDGER_IMMUTABLE: ledger rows cannot be updated
+EXP02 ledger delete	PASS	expected=5012;actual=5012;message=E_LEDGER_IMMUTABLE: ledger rows cannot be deleted
+EXP02 audit update	PASS	expected=5013;actual=5013;message=E_AUDIT_IMMUTABLE: audit rows cannot be updated
+EXP02 audit delete	PASS	expected=5013;actual=5013;message=E_AUDIT_IMMUTABLE: audit rows cannot be deleted
+EXP02 raw negative balance	PASS	expected=5015;actual=5015;message=E_MINBAL_GUARD: decrease would breach minimum balance
+EXP02 raw zero amount	PASS	expected=3819;actual=3819;message=Check constraint 'chk_transactions_amount' is violated.
+EXP02 raw nonexistent FK	PASS	expected=1452;actual=1452;message=Cannot add or update a child row: a foreign key constraint fails (`bank_txn_scratch`.`transactions`, CONSTRAINT `fk_transactions_account_id` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`) ON DELETE RESTRICT ON UPDATE RESTRICT)
+EXP02 duplicate reference	PASS	expected=1062;actual=1062;message=Duplicate entry 'T20261018215031439311-M2565N' for key 'transactions.uq_transactions_reference'
+EXP02 frozen	PASS	expected=5003;actual=5003;message=E_ACCOUNT_NOT_ACTIVE: active account required
+EXP02 closed	PASS	expected=5003;actual=5003;message=E_ACCOUNT_NOT_ACTIVE: active account required
+EXP02 device owner	PASS	expected=5014;actual=5014;message=E_DEVICE_OWNER_MISMATCH: device belongs to another customer

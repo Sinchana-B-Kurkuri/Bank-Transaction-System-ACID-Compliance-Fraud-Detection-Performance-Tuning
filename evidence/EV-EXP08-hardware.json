@@ -1,0 +1,11 @@
+{
+  "measured_at": "2026-10-18T21:59:58.8137233+05:30",
+  "cpu": {
+    "Name": "Intel(R) Core(TM) Ultra 5 125H",
+    "NumberOfCores": 14,
+    "NumberOfLogicalProcessors": 18
+  },
+  "memory": {
+    "TotalPhysicalMemory": 16568156160
+  }
+}

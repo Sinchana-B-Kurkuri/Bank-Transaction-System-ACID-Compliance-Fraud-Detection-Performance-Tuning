@@ -1,0 +1,87 @@
+RUNNING|EXP-01
+RESULT|EXP-01|ALL|iterations|200
+RESULT|EXP-01|ALL|partial_transfers|0
+RESULT|EXP-01|ALL|kill_snapshot_unchanged|YES
+RUNNING|EXP-02
+RESULT|EXP-02|ALL|passed|18
+RUNNING|EXP-04
+RESULT|EXP-04|READ UNCOMMITTED|naive|OBSERVED
+RESULT|EXP-04|READ UNCOMMITTED|naive-balances|expected=999700;actual=999800.00;committed_amount=300
+RESULT|EXP-04|READ UNCOMMITTED|atomic|NOT OBSERVED
+RESULT|EXP-04|READ UNCOMMITTED|atomic-balances|expected=999700;actual=999700.00;committed_amount=300
+RESULT|EXP-04|READ UNCOMMITTED|ordered|NOT OBSERVED
+RESULT|EXP-04|READ UNCOMMITTED|ordered-balances|expected=999700;actual=999700.00;committed_amount=300
+RESULT|EXP-04|READ COMMITTED|naive|OBSERVED
+RESULT|EXP-04|READ COMMITTED|naive-balances|expected=999700;actual=999800.00;committed_amount=300
+RESULT|EXP-04|READ COMMITTED|atomic|NOT OBSERVED
+RESULT|EXP-04|READ COMMITTED|atomic-balances|expected=999700;actual=999700.00;committed_amount=300
+RESULT|EXP-04|READ COMMITTED|ordered|NOT OBSERVED
+RESULT|EXP-04|READ COMMITTED|ordered-balances|expected=999700;actual=999700.00;committed_amount=300
+RESULT|EXP-04|REPEATABLE READ|naive|OBSERVED
+RESULT|EXP-04|REPEATABLE READ|naive-balances|expected=999700;actual=999800.00;committed_amount=300
+RESULT|EXP-04|REPEATABLE READ|atomic|NOT OBSERVED
+RESULT|EXP-04|REPEATABLE READ|atomic-balances|expected=999700;actual=999700.00;committed_amount=300
+RESULT|EXP-04|REPEATABLE READ|ordered|NOT OBSERVED
+RESULT|EXP-04|REPEATABLE READ|ordered-balances|expected=999700;actual=999700.00;committed_amount=300
+RESULT|EXP-04|SERIALIZABLE|naive|BLOCKED
+RESULT|EXP-04|SERIALIZABLE|naive-balances|expected=999900;actual=999900.00;committed_amount=100
+RESULT|EXP-04|SERIALIZABLE|atomic|NOT OBSERVED
+RESULT|EXP-04|SERIALIZABLE|atomic-balances|expected=999700;actual=999700.00;committed_amount=300
+RESULT|EXP-04|SERIALIZABLE|ordered|NOT OBSERVED
+RESULT|EXP-04|SERIALIZABLE|ordered-balances|expected=999700;actual=999700.00;committed_amount=300
+RUNNING|EXP-05
+RESULT|EXP-05|READ UNCOMMITTED|anomaly|OBSERVED
+RESULT|EXP-05|READ COMMITTED|anomaly|NOT OBSERVED
+RESULT|EXP-05|REPEATABLE READ|anomaly|NOT OBSERVED
+RESULT|EXP-05|SERIALIZABLE|anomaly|BLOCKED
+RUNNING|EXP-06
+RESULT|EXP-06|READ UNCOMMITTED|anomaly|OBSERVED
+RESULT|EXP-06|READ COMMITTED|anomaly|OBSERVED
+RESULT|EXP-06|REPEATABLE READ|anomaly|NOT OBSERVED
+RESULT|EXP-06|SERIALIZABLE|anomaly|BLOCKED
+RUNNING|EXP-07
+RESULT|EXP-07|READ UNCOMMITTED|anomaly|OBSERVED
+RESULT|EXP-07|READ COMMITTED|anomaly|OBSERVED
+RESULT|EXP-07|REPEATABLE READ|anomaly|NOT OBSERVED (nuance)
+RESULT|EXP-07|SERIALIZABLE|anomaly|BLOCKED
+RESULT|EXP-07|REPEATABLE READ|gap_writer|BLOCKED
+RUNNING|EXP-09-20
+RESULT|EXP-09|ALL|parallel|20
+RESULT|EXP-09|ALL|iterations_each|50
+RESULT|EXP-09|ALL|successful|1000
+RESULT|EXP-09|ALL|errors|0
+RESULT|EXP-09|ALL|seconds|5.8121539
+RUNNING|EXP-09-50
+RESULT|EXP-09|ALL|parallel|50
+RESULT|EXP-09|ALL|iterations_each|50
+RESULT|EXP-09|ALL|successful|2500
+RESULT|EXP-09|ALL|errors|0
+RESULT|EXP-09|ALL|seconds|12.0218262
+RUNNING|EXP-10
+RESULT|EXP-10|CREATE|victim_errno|1213
+RESULT|EXP-10|DETECT|error_log|NEEDS MANUAL VERIFICATION: performance_schema returned no deadlock rows; datadir error log access denied
+RESULT|EXP-10|CONTRAST|errno|1205
+RESULT|EXP-10|MODE-3|deadlocks|46
+RESULT|EXP-10|MODE-3|success|95/100
+RESULT|EXP-10|MODE-3|retry_exhausted|5
+RESULT|EXP-10|MODE-2|deadlocks|6
+RESULT|EXP-10|MODE-2|success|100/100
+RESULT|EXP-10|MODE-2|retry_exhausted|0
+# Measured isolation matrix
+
+Sources:
+C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\evidence\raw\EXP-04\20261018-215039-090
+C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\evidence\raw\EXP-05\20261018-215342-152
+C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\evidence\raw\EXP-06\20261018-215431-512
+C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\evidence\raw\EXP-07\20261018-215504-624
+
+| Isolation | Lost update: textbook expectation | Measured | Dirty: textbook expectation | Measured | Nonrepeatable: textbook expectation | Measured | Phantom: textbook expectation | Measured | Difference / implementation detail |
+|---|---|---|---|---|---|---|---|---|---|
+| READ UNCOMMITTED | OBSERVED | OBSERVED | OBSERVED | OBSERVED | OBSERVED | OBSERVED | OBSERVED | OBSERVED | None |
+| READ COMMITTED | OBSERVED | OBSERVED | NOT OBSERVED | NOT OBSERVED | OBSERVED | OBSERVED | OBSERVED | OBSERVED | None |
+| REPEATABLE READ | OBSERVED | OBSERVED | NOT OBSERVED | NOT OBSERVED | NOT OBSERVED | NOT OBSERVED | PERMITTED | NOT OBSERVED (nuance) | 07 |
+| SERIALIZABLE | NOT OBSERVED | BLOCKED | NOT OBSERVED | BLOCKED | NOT OBSERVED | BLOCKED | NOT OBSERVED | BLOCKED | 04,05,06,07 |
+
+Textbook OBSERVED means the anomaly is permitted and the schedule is designed to expose it, not that every execution must exhibit it. PERMITTED for RR phantoms is the ANSI minimum guarantee: InnoDB plain consistent reads provide a stable snapshot, hence the flagged stronger result. SERIALIZABLE BLOCKED also prevents the anomaly; its flagged difference describes the protection mechanism, not a violation. Locking reads use the current committed version. Lost-update expectations concern the deliberately unsafe read/absolute-write procedure, not an additional ANSI isolation prohibition.
+
+Quick throughput failed.

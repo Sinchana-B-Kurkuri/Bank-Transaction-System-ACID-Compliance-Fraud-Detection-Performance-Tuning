@@ -1,0 +1,12 @@
+﻿C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\rebuild.ps1 : Exception 
+calling "Start" with "0" argument(s): "Access is denied"
+At C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\rebuild.ps1:28 char:11
++ } catch { Write-Error $_; exit 1 } finally { Pop-Location }
++           ~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,rebuild.ps1
+ 
+TEST|FAIL|runner|Rebuild failed; tests not executed.
+TOTAL|PASS=0|FAIL=1

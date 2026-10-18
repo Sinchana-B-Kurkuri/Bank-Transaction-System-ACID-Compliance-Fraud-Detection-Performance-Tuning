@@ -1,0 +1,18 @@
+TEST|PASS|EXP02 overdraw|expected=5004;actual=5004;message=E_INSUFFICIENT_FUNDS: minimum balance would be breached
+TEST|PASS|EXP02 below minimum|expected=5004;actual=5004;message=E_INSUFFICIENT_FUNDS: minimum balance would be breached
+TEST|PASS|EXP02 negative amount|expected=5001;actual=5001;message=E_INVALID_AMOUNT: amount must be positive
+TEST|PASS|EXP02 zero amount|expected=5001;actual=5001;message=E_INVALID_AMOUNT: amount must be positive
+TEST|PASS|EXP02 same account|expected=5005;actual=5005;message=E_SAME_ACCOUNT: accounts must differ
+TEST|PASS|EXP02 nonexistent account|expected=5002;actual=5002;message=E_ACCOUNT_NOT_FOUND: account does not exist
+TEST|PASS|EXP02 threshold|expected=5006;actual=5006;message=E_APPROVAL_REQUIRED: approval threshold reached
+TEST|PASS|EXP02 ledger update|expected=5012;actual=5012;message=E_LEDGER_IMMUTABLE: ledger rows cannot be updated
+TEST|PASS|EXP02 ledger delete|expected=5012;actual=5012;message=E_LEDGER_IMMUTABLE: ledger rows cannot be deleted
+TEST|PASS|EXP02 audit update|expected=5013;actual=5013;message=E_AUDIT_IMMUTABLE: audit rows cannot be updated
+TEST|PASS|EXP02 audit delete|expected=5013;actual=5013;message=E_AUDIT_IMMUTABLE: audit rows cannot be deleted
+TEST|PASS|EXP02 raw negative balance|expected=5015;actual=5015;message=E_MINBAL_GUARD: decrease would breach minimum balance
+TEST|PASS|EXP02 raw zero amount|expected=3819;actual=3819;message=Check constraint 'chk_transactions_amount' is violated.
+TEST|PASS|EXP02 raw nonexistent FK|expected=1452;actual=1452;message=Cannot add or update a child row: a foreign key constraint fails (`bank_txn_scratch`.`transactions`, CONSTRAINT `fk_transactions_account_id` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`) ON DELETE RESTRICT ON UPDATE RESTRICT)
+TEST|PASS|EXP02 duplicate reference|expected=1062;actual=1062;message=Duplicate entry 'T20261018215031439311-M2565N' for key 'transactions.uq_transactions_reference'
+TEST|PASS|EXP02 frozen|expected=5003;actual=5003;message=E_ACCOUNT_NOT_ACTIVE: active account required
+TEST|PASS|EXP02 closed|expected=5003;actual=5003;message=E_ACCOUNT_NOT_ACTIVE: active account required
+TEST|PASS|EXP02 device owner|expected=5014;actual=5014;message=E_DEVICE_OWNER_MISMATCH: device belongs to another customer

@@ -1,0 +1,2 @@
+8.4.11	2026-10-18 21:50:03.127131	REPEATABLE-READ	0	NULL
+lock_deadlocks	enabled

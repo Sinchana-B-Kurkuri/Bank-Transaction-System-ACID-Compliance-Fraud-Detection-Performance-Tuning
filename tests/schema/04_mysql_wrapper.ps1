@@ -7,6 +7,7 @@ $directory=Join-Path ([IO.Path]::GetTempPath()) ('bank wrapper probe ' + [guid]:
 [void][IO.Directory]::CreateDirectory($directory)
 $savedPath=$env:PATH
 $savedCnf=$env:BANK_MYSQL_CNF
+$savedBin=$env:BANK_MYSQL_BIN
 $savedLocation=Get-Location
 $failures=0
 function Report-Probe([string]$Name,[bool]$Condition,[string]$Detail) {
@@ -43,6 +44,8 @@ public class MysqlWrapperProbe {
 '@
  Add-Type -TypeDefinition $source -OutputAssembly (Join-Path $directory 'mysql.exe') -OutputType ConsoleApplication
  $env:PATH=$directory + [IO.Path]::PathSeparator + $savedPath
+ # The explicit executable override takes precedence over PATH in Invoke-BankMysql.
+ $env:BANK_MYSQL_BIN=Join-Path $directory 'mysql.exe'
  $env:BANK_MYSQL_CNF=Join-Path $directory 'client settings.cnf'
  [IO.File]::WriteAllText($env:BANK_MYSQL_CNF,"[client]`n",[Text.UTF8Encoding]::new($false))
  Set-Location $directory
@@ -73,6 +76,7 @@ public class MysqlWrapperProbe {
  Set-Location $savedLocation
  $env:PATH=$savedPath
  $env:BANK_MYSQL_CNF=$savedCnf
+ $env:BANK_MYSQL_BIN=$savedBin
  # Only the exact temporary files created above are removed; no recursive deletion.
  foreach ($name in @('mysql.exe','client settings.cnf','nested file.sql','recursive.sql')) {
   $path=Join-Path $directory $name
