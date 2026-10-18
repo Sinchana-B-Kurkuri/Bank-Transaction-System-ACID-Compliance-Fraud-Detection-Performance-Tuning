@@ -1,0 +1,30 @@
+# Credentials and environment variables
+*.cnf
+.env
+.env.*
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Database backups and dumps
+*.sql.gz
+*.dump
+backup/out/
+
+# Temporary files
+*.log
+*.tmp
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Member A generated or sensitive inputs
+data/raw/
+evidence/**/*.large
+experiments/**/raw_large/

@@ -1,0 +1,29 @@
+﻿TEST|FAIL|tests/schema/00_interface_contract.sql|BANK_MYSQL_CNF is unset; configure a local MySQL option file (never commit credentials).
+TEST|FAIL|tests/schema/01_negative_constraints.sql|BANK_MYSQL_CNF is unset; configure a local MySQL option file (never commit credentials).
+TEST|FAIL|tests/schema/02_structure.sql|BANK_MYSQL_CNF is unset; configure a local MySQL option file (never commit credentials).
+TEST|PASS|run_all.sql SOURCE schema/01_tables/01_branches.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/02_employees.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/03_customers.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/04_account_types.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/05_accounts.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/06_transactions.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/07_loans.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/08_fraud_flags.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/09_audit_log.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/02_constraints/01_core_constraints.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/02_constraints/02_cross_module_fks.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/04_lab/01_bank_lab.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/01_branches.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/02_employees.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/03_customers.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/04_account_types.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/05_accounts.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/06_transactions.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/07_loans.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/08_fraud_flags.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/09_audit_log.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/02_constraints/01_core_constraints.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE tests/stubs/member_b_interface_stubs.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/02_constraints/02_cross_module_fks.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/04_lab/01_bank_lab.sql|present and ordered in file_order.txt
+TOTAL|PASS=25|FAIL=3

@@ -1,0 +1,188 @@
+﻿Rebuilt bank_txn (Standalone) in 3.12 seconds.
+TEST|PASS|contract Devices.device_id|Missing or incompatible Devices.device_id (int; nullable NO)
+TEST|PASS|contract Devices.customer_id|Missing or incompatible Devices.customer_id (int; nullable NO)
+TEST|PASS|contract Devices.device_fingerprint|Missing or incompatible Devices.device_fingerprint (char(64); nullable NO)
+TEST|PASS|contract Devices.device_type|Missing or incompatible Devices.device_type (varchar(20); nullable NO)
+TEST|PASS|contract Devices.first_seen_at|Missing or incompatible Devices.first_seen_at (datetime; nullable NO)
+TEST|PASS|contract Devices.last_seen_at|Missing or incompatible Devices.last_seen_at (datetime; nullable NO)
+TEST|PASS|contract Devices.is_trusted|Missing or incompatible Devices.is_trusted (tinyint(1); nullable NO)
+TEST|PASS|contract Locations.location_id|Missing or incompatible Locations.location_id (int; nullable NO)
+TEST|PASS|contract Locations.city|Missing or incompatible Locations.city (varchar(50); nullable NO)
+TEST|PASS|contract Locations.state|Missing or incompatible Locations.state (varchar(50); nullable YES)
+TEST|PASS|contract Locations.country|Missing or incompatible Locations.country (varchar(50); nullable NO)
+TEST|PASS|contract Locations.latitude|Missing or incompatible Locations.latitude (decimal(9,6); nullable NO)
+TEST|PASS|contract Locations.longitude|Missing or incompatible Locations.longitude (decimal(9,6); nullable NO)
+TEST|PASS|contract Fraud_Rules.rule_id|Missing or incompatible Fraud_Rules.rule_id (int; nullable NO)
+TEST|PASS|contract Fraud_Rules.rule_code|Missing or incompatible Fraud_Rules.rule_code (varchar(40); nullable NO)
+TEST|PASS|contract Fraud_Rules.description|Missing or incompatible Fraud_Rules.description (varchar(200); nullable YES)
+TEST|PASS|contract Fraud_Rules.weight|Missing or incompatible Fraud_Rules.weight (decimal(5,2); nullable NO)
+TEST|PASS|contract Fraud_Rules.param_json|Missing or incompatible Fraud_Rules.param_json (json; nullable YES)
+TEST|PASS|contract Fraud_Rules.is_active|Missing or incompatible Fraud_Rules.is_active (tinyint(1); nullable NO)
+TEST|PASS|contract DB_User_Map.db_login|Missing or incompatible DB_User_Map.db_login (varchar(100); nullable NO)
+TEST|PASS|contract DB_User_Map.actor_type|Missing or incompatible DB_User_Map.actor_type (enum('customer','employee'); nullable NO)
+TEST|PASS|contract DB_User_Map.employee_id|Missing or incompatible DB_User_Map.employee_id (int; nullable YES)
+TEST|PASS|contract DB_User_Map.customer_id|Missing or incompatible DB_User_Map.customer_id (int; nullable YES)
+TEST|PASS|contract Transaction_Approvals.approval_id|Missing or incompatible Transaction_Approvals.approval_id (int; nullable NO)
+TEST|PASS|contract Transaction_Approvals.requested_by_actor_type|Missing or incompatible Transaction_Approvals.requested_by_actor_type (enum('customer','employee'); nullable NO)
+TEST|PASS|contract Transaction_Approvals.requested_by_employee_id|Missing or incompatible Transaction_Approvals.requested_by_employee_id (int; nullable YES)
+TEST|PASS|contract Transaction_Approvals.requested_by_customer_id|Missing or incompatible Transaction_Approvals.requested_by_customer_id (int; nullable YES)
+TEST|PASS|contract Transaction_Approvals.requested_at|Missing or incompatible Transaction_Approvals.requested_at (datetime; nullable NO)
+TEST|PASS|contract Transaction_Approvals.from_account_id|Missing or incompatible Transaction_Approvals.from_account_id (int; nullable NO)
+TEST|PASS|contract Transaction_Approvals.to_account_id|Missing or incompatible Transaction_Approvals.to_account_id (int; nullable NO)
+TEST|PASS|contract Transaction_Approvals.amount|Missing or incompatible Transaction_Approvals.amount (decimal(14,2); nullable NO)
+TEST|PASS|contract Transaction_Approvals.status|Missing or incompatible Transaction_Approvals.status (enum('requested','approved','rejected'); nullable NO)
+TEST|PASS|contract Transaction_Approvals.decided_by|Missing or incompatible Transaction_Approvals.decided_by (int; nullable YES)
+TEST|PASS|contract Transaction_Approvals.decided_at|Missing or incompatible Transaction_Approvals.decided_at (datetime; nullable YES)
+TEST|PASS|contract Transaction_Approvals.resulting_transfer_group_id|Missing or incompatible Transaction_Approvals.resulting_transfer_group_id (char(36); nullable YES)
+TEST|PASS|contract Fraud_Ground_Truth.transaction_id|Missing or incompatible Fraud_Ground_Truth.transaction_id (bigint; nullable NO)
+TEST|PASS|contract Fraud_Ground_Truth.is_fraud|Missing or incompatible Fraud_Ground_Truth.is_fraud (tinyint(1); nullable NO)
+TEST|PASS|contract Fraud_Ground_Truth.scenario_label|Missing or incompatible Fraud_Ground_Truth.scenario_label (varchar(40); nullable YES)
+TEST|PASS|duplicate customer email|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate customer phone|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate customer id proof|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate ifsc|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate employee email|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate account type|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate account number|expected errno=1062; actual errno=1062
+TEST|PASS|negative balance|expected errno=3819; actual errno=3819
+TEST|PASS|missing customer FK|expected errno=1452; actual errno=1452
+TEST|PASS|missing branch FK|expected errno=1452; actual errno=1452
+TEST|PASS|missing account type FK|expected errno=1452; actual errno=1452
+TEST|PASS|delete customer owning account|expected errno=1451; actual errno=1451
+TEST|PASS|duplicate reference|expected errno=1062; actual errno=1062
+TEST|PASS|invalid amount 0|expected errno=3819; actual errno=3819
+TEST|PASS|invalid amount -1|expected errno=3819; actual errno=3819
+TEST|PASS|duplicate transfer group type|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate transaction rule|expected errno=1062; actual errno=1062
+TEST|PASS|risk score above 100|expected errno=3819; actual errno=3819
+TEST|PASS|invalid loan principal|expected errno=3819; actual errno=3819
+TEST|PASS|invalid loan principal negative|expected errno=3819; actual errno=3819
+TEST|PASS|invalid loan tenure|expected errno=3819; actual errno=3819
+TEST|PASS|invalid loan tenure negative|expected errno=3819; actual errno=3819
+TEST|PASS|invalid enum Employees.role|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Customers.id_proof_type|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Customers.kyc_status|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Accounts.status|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Transactions.transaction_type|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Transactions.channel|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Transactions.status|expected errno=1265; actual errno=1265
+TEST|PASS|invalid loan enum|expected errno=1265; actual errno=1265
+TEST|PASS|invalid flag enum|expected errno=1265; actual errno=1265
+TEST|PASS|invalid audit action enum|expected errno=1265; actual errno=1265
+TEST|PASS|invalid audit actor enum|expected errno=1265; actual errno=1265
+TEST|PASS|audit actor CHECK Employee-NULL-NULL|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK Customer-NULL-NULL|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK System-@employee-NULL|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK System-NULL-@customer|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK Employee-@employee-@customer|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK Customer-@employee-@customer|expected errno=3819; actual errno=3819
+TEST|PASS|missing device_id FK|expected errno=1452; actual errno=1452
+TEST|PASS|missing location_id FK|expected errno=1452; actual errno=1452
+TEST|PASS|NULL Accounts.customer_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Accounts.branch_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Accounts.account_type_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Accounts.balance|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Employees.branch_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Transactions.account_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Transactions.amount|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Transactions.balance_after|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Fraud_Flags.transaction_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Fraud_Flags.rule_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Fraud_Flags.risk_score|expected errno=1048; actual errno=1048
+TEST|PASS|NULL loan customer|expected errno=1048; actual errno=1048
+TEST|PASS|NULL loan principal|expected errno=1048; actual errno=1048
+TEST|PASS|NULL loan interest rate|expected errno=1048; actual errno=1048
+TEST|PASS|NULL account type minimum|expected errno=1048; actual errno=1048
+TEST|PASS|NULL account type interest rate|expected errno=1048; actual errno=1048
+TEST|PASS|table Branches InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Branches.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Branches.uq_branches_ifsc|Named UNIQUE required
+TEST|PASS|table Employees InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Employees.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Employees.uq_employees_email|Named UNIQUE required
+TEST|PASS|table Customers InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Customers.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Customers.uq_customers_email|Named UNIQUE required
+TEST|PASS|constraint Customers.uq_customers_phone|Named UNIQUE required
+TEST|PASS|constraint Customers.uq_customers_id_proof|Named UNIQUE required
+TEST|PASS|table Account_Types InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Account_Types.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Account_Types.uq_account_types_name|Named UNIQUE required
+TEST|PASS|table Accounts InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Accounts.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Accounts.uq_accounts_number|Named UNIQUE required
+TEST|PASS|constraint Accounts.chk_accounts_balance|Named CHECK required
+TEST|PASS|table Transactions InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Transactions.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Transactions.uq_transactions_reference|Named UNIQUE required
+TEST|PASS|constraint Transactions.uq_transactions_group_type|Named UNIQUE required
+TEST|PASS|constraint Transactions.chk_transactions_amount|Named CHECK required
+TEST|PASS|table Loans InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Loans.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Loans.chk_loans_principal|Named CHECK required
+TEST|PASS|constraint Loans.chk_loans_tenure|Named CHECK required
+TEST|PASS|table Fraud_Flags InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Fraud_Flags.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Fraud_Flags.uq_fraud_flags_transaction_rule|Named UNIQUE required
+TEST|PASS|constraint Fraud_Flags.chk_fraud_flags_risk|Named CHECK required
+TEST|PASS|table Audit_Log InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Audit_Log.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Audit_Log.chk_audit_log_actor|Named CHECK required
+TEST|PASS|FK fk_employees_branch_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_accounts_customer_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_accounts_branch_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_accounts_account_type_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_account_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_related_account_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_employee_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_loans_customer_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_loans_disbursement_account_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_fraud_flags_transaction_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_fraud_flags_reviewed_by|FK required with RESTRICT actions
+TEST|PASS|FK fk_audit_log_actor_employee_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_audit_log_actor_customer_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_device|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_location|FK required with RESTRICT actions
+TEST|PASS|FK fk_fraud_flags_rule|FK required with RESTRICT actions
+TEST|PASS|no legacy Card|Final schema only
+TEST|PASS|no legacy CustomerAccount|Final schema only
+TEST|PASS|no legacy TransactionType|Final schema only
+TEST|PASS|no legacy TransactionLog|Final schema only
+TEST|PASS|no legacy FraudAlert|Final schema only
+TEST|PASS|column Customers.is_active|Required interface column
+TEST|PASS|column Transactions.transfer_group_id|Required interface column
+TEST|PASS|column Transactions.device_id|Required interface column
+TEST|PASS|column Transactions.location_id|Required interface column
+TEST|PASS|column Loans.disbursement_account_id|Required interface column
+TEST|PASS|column Audit_Log.db_session_user|Required interface column
+TEST|PASS|cross FKs idempotent|Both repeated applications completed
+TEST|PASS|run_all.sql SOURCE schema/01_tables/01_branches.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/02_employees.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/03_customers.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/04_account_types.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/05_accounts.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/06_transactions.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/07_loans.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/08_fraud_flags.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/01_tables/09_audit_log.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/02_constraints/01_core_constraints.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/02_constraints/02_cross_module_fks.sql|present and ordered in file_order.txt
+TEST|PASS|run_all.sql SOURCE schema/04_lab/01_bank_lab.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/01_branches.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/02_employees.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/03_customers.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/04_account_types.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/05_accounts.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/06_transactions.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/07_loans.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/08_fraud_flags.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/01_tables/09_audit_log.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/02_constraints/01_core_constraints.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE tests/stubs/member_b_interface_stubs.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/02_constraints/02_cross_module_fks.sql|present and ordered in file_order.txt
+TEST|PASS|run_all_A_standalone.sql SOURCE schema/04_lab/01_bank_lab.sql|present and ordered in file_order.txt
+TEST|PASS|wrapper include expansion|Nested include with spaces expanded before batch execution
+TEST|PASS|wrapper paths with spaces|Executable and first option-file argument survived Windows PowerShell quoting; SQL used stdin
+TEST|PASS|wrapper stderr and exit code|Exit 2, partial stdout and original stderr retained in exception data and message
+TEST|PASS|wrapper recursive include guard|Rejected include cycle before starting a process
+TOTAL|PASS=186|FAIL=0
