@@ -1,0 +1,2 @@
+SELECT CONCAT('META|',VERSION(),'|',NOW(6),'|',CONNECTION_ID()); SELECT CONCAT('CONNECTION|',CONNECTION_ID());
+SET @a=(SELECT account_id FROM Accounts WHERE account_number='LAB-0001'); START TRANSACTION; UPDATE Accounts SET balance=balance+7 WHERE account_id=@a; INSERT INTO Transactions(account_id,transaction_type,amount,balance_after,channel,status,reference_no) SELECT @a,'Deposit',7,balance,'Online','Completed','DUR-UNCOMMITTED-230808315' FROM Accounts WHERE account_id=@a; SELECT 'UNCOMMITTED_READY'; SELECT SLEEP(600); ROLLBACK;

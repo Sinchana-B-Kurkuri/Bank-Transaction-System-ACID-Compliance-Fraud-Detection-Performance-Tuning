@@ -1,0 +1,19 @@
+Rebuilt bank_txn_scratch (Standalone) in 5.38 seconds.
+RESULT|EXP-16|backup|bytes=316423|coordinate=LAPTOP-TEKJAJEQ-bin.000010:158|state=backup/out/recovery_state.json
+RESULT|EXP-16|workload|commits=500|T1=2026-10-18T23:06:05.326697
+T2|2026-10-18 23:06:09.408236
+DELETED|1
+RESULT|EXP-16|oops|stop-before-transaction=LAPTOP-TEKJAJEQ-bin.000010:841158
+RESULT|EXP-16|loss|time=2026-10-18T23:06:17.675895|database=bank_txn_scratch
+RESULT|EXP-16|dump-only|FAIL
+RESULT|EXP-16|before-loss|NEEDS MANUAL VERIFICATION
+RESULT|EXP-16|before-oops|NEEDS MANUAL VERIFICATION
+Recovery checksum comparison failed; see evidence.
+At C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\backup\ps\restore_and_pitr.ps1:56 
+char:13
++ if($failed){throw 'Recovery checksum comparison failed; see evidence. ...
++             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Recovery checks...; see evidence.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Recovery checksum comparison failed; see evidence.
+ 

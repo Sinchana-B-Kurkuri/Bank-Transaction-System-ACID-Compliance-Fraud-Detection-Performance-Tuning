@@ -1,0 +1,3 @@
+audits_before=386
+audits_after=386
+MISSING: opening account, opening deposit, unrouted loan while DBA disabled audit triggers. DBA can also TRUNCATE/DROP Audit_Log; trigger guards cannot stop DDL.

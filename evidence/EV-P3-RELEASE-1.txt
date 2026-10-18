@@ -8,10 +8,10 @@ TEST|PASS|released public rejects mode 1|expected errno=5017; actual errno=5017
 TEST|PASS|released private rejects mode 1|expected errno=5017; actual errno=5017
 TEST|PASS|release rejection leaves no Failed rows|No ledger rows added by 5017
 TEST|PASS|released ordered transfer works|actual errno=0
-I1	0	PASS	2026-10-18 22:54:27.545
-I1b	0	PASS	2026-10-18 22:54:27.545
-I2	0	PASS	2026-10-18 22:54:27.545
-I3	0	PASS	2026-10-18 22:54:27.545
-I4	0	PASS	2026-10-18 22:54:27.545
-I5	0	PASS	2026-10-18 22:54:27.545
+I1	0	PASS	2026-10-18 23:23:32.300
+I1b	0	PASS	2026-10-18 23:23:32.300
+I2	0	PASS	2026-10-18 23:23:32.300
+I3	0	PASS	2026-10-18 23:23:32.300
+I4	0	PASS	2026-10-18 23:23:32.300
+I5	0	PASS	2026-10-18 23:23:32.300
 TEST|PASS|released invariants|Six summaries checked
