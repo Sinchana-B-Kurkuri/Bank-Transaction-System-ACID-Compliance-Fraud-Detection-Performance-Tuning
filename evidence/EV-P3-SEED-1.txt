@@ -1,0 +1,9 @@
+COMMAND: powershell -File build/rebuild.ps1 -Database bank_txn -Mode Standalone -WithSeed (run 1)
+Rebuilt bank_txn (Standalone) in 3.61 seconds.
+Exit=0
+COMMAND: powershell -File build/rebuild.ps1 -Database bank_txn -Mode Standalone -WithSeed (run 2)
+Rebuilt bank_txn (Standalone) in 3.80 seconds.
+Exit=0
+Before seed rerun: COUNTS|6|8|1|21
+After seed rerun: COUNTS|6|8|1|21
+TEST|PASS|tiny seed idempotent|Customers=6 Accounts=8 Loans=1 Transactions=21 unchanged
