@@ -1,0 +1,13 @@
+Get-CimInstance unavailable: Access denied 
+{
+  "measured_at": "2026-10-18T21:59:58.8137233+05:30",
+  "cpu": {
+    "Name": "Intel(R) Core(TM) Ultra 5 125H",
+    "NumberOfCores": 14,
+    "NumberOfLogicalProcessors": 18
+  },
+  "memory": {
+    "TotalPhysicalMemory": 16568156160
+  }
+}
+8.4.11	2026-10-18 22:08:32	REPEATABLE-READ	134217728	151	1	1

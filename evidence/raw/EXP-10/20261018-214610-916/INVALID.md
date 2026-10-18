@@ -1,0 +1,1 @@
+REJECTED FOR GLOBAL-COUNTER COMPARISON: another database stress run overlapped this run, contaminating global lock_deadlocks deltas. Native errors and session outputs are real but this comparison is superseded by the isolated sequential runner.

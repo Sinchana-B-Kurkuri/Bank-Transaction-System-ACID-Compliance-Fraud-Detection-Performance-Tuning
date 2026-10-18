@@ -1,0 +1,3 @@
+Raw: C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\evidence\raw\EXP-10-lock-diagnosis\20261018-223254-712
+RESULT|EXP-10|original|shared_records_before_first_exclusive_read|2
+RESULT|EXP-10|corrected|shared_records_before_first_exclusive_read|0

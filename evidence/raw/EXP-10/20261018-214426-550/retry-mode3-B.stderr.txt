@@ -1,0 +1,1 @@
+ERROR 1213 (40001) at line 2: E_RETRY_EXHAUSTED: whole-transaction retry limit reached

@@ -1,0 +1,5 @@
+RESULT|EXP-09|ALL|parallel|20
+RESULT|EXP-09|ALL|iterations_each|50
+RESULT|EXP-09|ALL|successful|1000
+RESULT|EXP-09|ALL|errors|0
+RESULT|EXP-09|ALL|seconds|3.7792032

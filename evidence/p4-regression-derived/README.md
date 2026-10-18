@@ -1,0 +1,1 @@
+Existing regression tests regenerate these legacy Prompt 3 evidence files. Their new measured outputs are retained here; original tracked evidence was restored from HEAD with the configured CRLF checkout line endings. Complete new regression output is EV-P4-REGRESSION.txt.

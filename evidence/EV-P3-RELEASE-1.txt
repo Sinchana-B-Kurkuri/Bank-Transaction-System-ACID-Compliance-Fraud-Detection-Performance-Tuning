@@ -1,21 +1,17 @@
 ﻿RELEASE|sp_transfer_funds|signature retained; guard added; lab regions removed
-warning: in the working copy of 'C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\procedures\sp_transfer_funds.sql', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\release\procedures\sp_transfer_funds.sql', LF will be replaced by CRLF the next time Git touches it
  ...-Tuning\\build\\release\\procedures\\sp_transfer_funds.sql" | 10 ++--------
  1 file changed, 2 insertions(+), 8 deletions(-)
 RELEASE|sp_internal_post_transfer|signature retained; guard added; lab regions removed
-warning: in the working copy of 'C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\procedures\sp_internal_post_transfer.sql', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\release\procedures\sp_internal_post_transfer.sql', LF will be replaced by CRLF the next time Git touches it
  ...release\\procedures\\sp_internal_post_transfer.sql" | 18 +++---------------
  1 file changed, 3 insertions(+), 15 deletions(-)
 TEST|PASS|released public rejects mode 1|expected errno=5017; actual errno=5017
 TEST|PASS|released private rejects mode 1|expected errno=5017; actual errno=5017
 TEST|PASS|release rejection leaves no Failed rows|No ledger rows added by 5017
 TEST|PASS|released ordered transfer works|actual errno=0
-I1	0	PASS	2026-10-18 21:23:30.045
-I1b	0	PASS	2026-10-18 21:23:30.045
-I2	0	PASS	2026-10-18 21:23:30.045
-I3	0	PASS	2026-10-18 21:23:30.045
-I4	0	PASS	2026-10-18 21:23:30.045
-I5	0	PASS	2026-10-18 21:23:30.045
+I1	0	PASS	2026-10-18 22:54:27.545
+I1b	0	PASS	2026-10-18 22:54:27.545
+I2	0	PASS	2026-10-18 22:54:27.545
+I3	0	PASS	2026-10-18 22:54:27.545
+I4	0	PASS	2026-10-18 22:54:27.545
+I5	0	PASS	2026-10-18 22:54:27.545
 TEST|PASS|released invariants|Six summaries checked

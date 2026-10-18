@@ -1,0 +1,3 @@
+TEST|PASS|wrapper include expansion|Nested include with spaces expanded before batch execution
+TEST|FAIL|wrapper probe execution|mysql exited 1:
+ERROR 1045 (28000): Access denied for user 'ODBC'@'localhost' (using password: NO)

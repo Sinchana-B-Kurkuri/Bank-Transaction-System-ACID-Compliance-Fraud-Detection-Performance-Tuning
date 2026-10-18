@@ -6,9 +6,7 @@ BEGIN
  IF p_amount IS NULL OR p_amount<=0 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5001,MESSAGE_TEXT='E_INVALID_AMOUNT: amount must be positive'; END IF;
  IF p_lab_mode IS NULL OR p_lab_mode NOT IN (0,1,2,3) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5018,MESSAGE_TEXT='E_INVALID_ARGUMENT: invalid lab mode'; END IF;
  -- RELEASE_GUARD_PLACEHOLDER
- IF p_from_account_id IS NULL OR p_to_account_id IS NULL OR NOT EXISTS(SELECT 1 FROM Accounts WHERE account_id=p_from_account_id) OR NOT EXISTS(SELECT 1 FROM Accounts WHERE account_id=p_to_account_id) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: transfer account does not exist'; END IF;
- IF p_from_account_id=p_to_account_id THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5005,MESSAGE_TEXT='E_SAME_ACCOUNT: accounts must differ'; END IF;
- IF p_allow_approval=0 AND p_amount>=fn_approval_threshold() THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5006,MESSAGE_TEXT='E_APPROVAL_REQUIRED: approval threshold reached'; END IF;
+ IF p_from_account_id IS NULL OR p_to_account_id IS NULL THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: transfer account does not exist'; END IF;
  -- LAB_NAIVE_BEGIN
  IF p_lab_mode=3 THEN
   SET v_first=p_from_account_id,v_second=p_to_account_id;
@@ -18,8 +16,19 @@ BEGIN
  -- LAB_NAIVE_BEGIN
  END IF;
  -- LAB_NAIVE_END
- SELECT account_id INTO v_lock FROM Accounts WHERE account_id=v_first FOR UPDATE;
- SELECT account_id INTO v_lock FROM Accounts WHERE account_id=v_second FOR UPDATE;
+ -- The locking reads also validate existence: no shared lookup locks may precede
+ -- the canonical exclusive-lock order. The local handler cannot mask later reads.
+ BEGIN
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_lock=NULL;
+  SET v_lock=NULL;
+  SELECT account_id INTO v_lock FROM Accounts WHERE account_id=v_first FOR UPDATE;
+  IF v_lock IS NULL THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: transfer account does not exist'; END IF;
+  SET v_lock=NULL;
+  SELECT account_id INTO v_lock FROM Accounts WHERE account_id=v_second FOR UPDATE;
+  IF v_lock IS NULL THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: transfer account does not exist'; END IF;
+ END;
+ IF p_from_account_id=p_to_account_id THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5005,MESSAGE_TEXT='E_SAME_ACCOUNT: accounts must differ'; END IF;
+ IF p_allow_approval=0 AND p_amount>=fn_approval_threshold() THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5006,MESSAGE_TEXT='E_APPROVAL_REQUIRED: approval threshold reached'; END IF;
  SELECT a.balance,a.status,t.min_balance INTO v_fb,v_fs,v_min FROM Accounts a JOIN Account_Types t USING(account_type_id) WHERE a.account_id=p_from_account_id;
  SELECT balance,status INTO v_tb,v_ts FROM Accounts WHERE account_id=p_to_account_id;
  IF v_fs<>'Active' OR v_ts<>'Active' THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5003,MESSAGE_TEXT='E_ACCOUNT_NOT_ACTIVE: both accounts must be active'; END IF;

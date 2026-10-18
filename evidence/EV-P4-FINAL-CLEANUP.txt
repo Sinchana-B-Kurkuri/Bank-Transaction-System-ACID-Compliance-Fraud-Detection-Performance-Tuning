@@ -1,0 +1,5 @@
+LAB_ROUTINES|bank_txn|0
+LAB_ROUTINES|bank_txn_scratch|0
+PROBE_MARKERS|0
+8.4.11	2026-10-18 22:21:34.844263	REPEATABLE-READ	0	NULL
+lock_deadlocks	enabled

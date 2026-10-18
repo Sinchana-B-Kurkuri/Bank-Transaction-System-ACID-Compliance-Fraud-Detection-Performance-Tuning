@@ -1,0 +1,10 @@
+RESULT|EXP-10|CREATE|victim_errno|1213
+RESULT|EXP-10|DETECT|error_log|NEEDS MANUAL VERIFICATION: performance_schema returned no deadlock rows; datadir error log access denied
+RESULT|EXP-10|CONTRAST|errno|1205
+RESULT|EXP-10|MODE-3|deadlocks|54
+RESULT|EXP-10|MODE-3|success|97/100
+RESULT|EXP-10|MODE-3|retry_exhausted|3
+RESULT|EXP-10|MODE-2|deadlocks|9
+RESULT|EXP-10|MODE-2|success|100/100
+RESULT|EXP-10|MODE-2|retry_exhausted|0
+RESULT|EXP-10|PREVENT|target|TARGET NOT MET: ordered mode still had 9 deadlocks; inspect retained graph

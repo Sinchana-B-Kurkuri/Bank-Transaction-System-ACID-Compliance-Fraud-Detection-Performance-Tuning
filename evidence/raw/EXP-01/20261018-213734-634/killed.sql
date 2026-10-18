@@ -1,0 +1,2 @@
+SELECT CONCAT('META|',VERSION(),'|',NOW(6),'|',CONNECTION_ID()); SELECT CONCAT('CONNECTION|',CONNECTION_ID());
+SET @lab_sleep_seconds=30; CALL sp_transfer_funds(9,10,10,'Online',NULL,NULL,NULL,2,@g,@d,@c);

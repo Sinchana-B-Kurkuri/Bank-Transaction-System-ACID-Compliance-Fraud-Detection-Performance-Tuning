@@ -1,0 +1,9 @@
+RESULT|EXP-10|CREATE|victim_errno|1213
+RESULT|EXP-10|DETECT|error_log|NEEDS MANUAL VERIFICATION: performance_schema returned no deadlock rows; datadir error log access denied
+RESULT|EXP-10|CONTRAST|errno|1205
+RESULT|EXP-10|MODE-3|deadlocks|43
+RESULT|EXP-10|MODE-3|success|94/100
+RESULT|EXP-10|MODE-3|retry_exhausted|6
+RESULT|EXP-10|MODE-2|deadlocks|0
+RESULT|EXP-10|MODE-2|success|100/100
+RESULT|EXP-10|MODE-2|retry_exhausted|0

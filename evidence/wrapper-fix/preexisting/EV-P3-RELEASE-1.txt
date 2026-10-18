@@ -1,0 +1,17 @@
+﻿RELEASE|sp_transfer_funds|signature retained; guard added; lab regions removed
+ ...-Tuning\\build\\release\\procedures\\sp_transfer_funds.sql" | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+RELEASE|sp_internal_post_transfer|signature retained; guard added; lab regions removed
+ ...release\\procedures\\sp_internal_post_transfer.sql" | 18 +++---------------
+ 1 file changed, 3 insertions(+), 15 deletions(-)
+TEST|PASS|released public rejects mode 1|expected errno=5017; actual errno=5017
+TEST|PASS|released private rejects mode 1|expected errno=5017; actual errno=5017
+TEST|PASS|release rejection leaves no Failed rows|No ledger rows added by 5017
+TEST|PASS|released ordered transfer works|actual errno=0
+I1	0	PASS	2026-10-18 22:47:00.361
+I1b	0	PASS	2026-10-18 22:47:00.361
+I2	0	PASS	2026-10-18 22:47:00.361
+I3	0	PASS	2026-10-18 22:47:00.361
+I4	0	PASS	2026-10-18 22:47:00.361
+I5	0	PASS	2026-10-18 22:47:00.361
+TEST|PASS|released invariants|Six summaries checked

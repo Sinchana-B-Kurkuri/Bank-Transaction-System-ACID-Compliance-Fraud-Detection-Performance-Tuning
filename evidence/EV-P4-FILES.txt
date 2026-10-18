@@ -1,0 +1,1625 @@
+build/mysql_common.ps1
+docs/interfaces.md
+docs/member-a/EXP10_ORDERED_LOCK_FIX.md
+docs/member-a/PROMPT4_DELIVERY.md
+evidence/EV-EXP-SUMMARY.md
+evidence/EV-EXP01-driver.txt
+evidence/EV-EXP01-final-driver.txt
+evidence/EV-EXP02-1.md
+evidence/EV-EXP02-driver.txt
+evidence/EV-EXP04-driver.txt
+evidence/EV-EXP05-driver.txt
+evidence/EV-EXP06-driver.txt
+evidence/EV-EXP07-driver.txt
+evidence/EV-EXP08-Full-driver.txt
+evidence/EV-EXP08-Full-throughput.csv
+evidence/EV-EXP08-Full-throughput.md
+evidence/EV-EXP08-hardware.json
+evidence/EV-EXP08-matrix.md
+evidence/EV-EXP08-Quick-driver.txt
+evidence/EV-EXP08-Quick-throughput.csv
+evidence/EV-EXP08-Quick-throughput.md
+evidence/EV-EXP08-throughput.csv
+evidence/EV-EXP08-throughput.md
+evidence/EV-EXP09-20-driver.txt
+evidence/EV-EXP09-50-driver.txt
+evidence/EV-EXP10-compare.md
+evidence/EV-EXP10-corrected-1-compare.md
+evidence/EV-EXP10-corrected-2-compare.md
+evidence/EV-EXP10-driver.txt
+evidence/EV-EXP10-final-driver.txt
+evidence/EV-EXP10-ordered-latest-status.txt
+evidence/EV-LAB-UNINSTALL.txt
+evidence/EV-P4-ALIAS.txt
+evidence/EV-P4-AUTO-driver.txt
+evidence/EV-P4-AUTO-initial-failure.txt
+evidence/EV-P4-AUTO-resume.txt
+evidence/EV-P4-CLIENT-OVERRIDE.txt
+evidence/EV-P4-FILES.txt
+evidence/EV-P4-FINAL-CLEANUP.txt
+evidence/EV-P4-FINAL-INVARIANTS.txt
+evidence/EV-P4-GLOBALS-before.txt
+evidence/EV-P4-OWNERSHIP.txt
+evidence/EV-P4-REBUILD.txt
+evidence/EV-P4-REGRESSION.txt
+evidence/EXP10-lock-fix/cleanup.txt
+evidence/EXP10-lock-fix/contract-checks.txt
+evidence/EXP10-lock-fix/corrected-run-1.txt
+evidence/EXP10-lock-fix/corrected-run-2.txt
+evidence/EXP10-lock-fix/diagnosis-driver.txt
+evidence/EXP10-lock-fix/diagnosis.txt
+evidence/EXP10-lock-fix/final-audit.txt
+evidence/EXP10-lock-fix/invariants-bank_txn_scratch.txt
+evidence/EXP10-lock-fix/invariants-bank_txn.txt
+evidence/EXP10-lock-fix/original-preservation.txt
+evidence/EXP10-lock-fix/original/EV-EXP-SUMMARY.md
+evidence/EXP10-lock-fix/original/EV-EXP10-compare.md
+evidence/EXP10-lock-fix/original/EV-EXP10-final-driver.txt
+evidence/EXP10-lock-fix/original/EXP10-README.md
+evidence/EXP10-lock-fix/original/EXP10-RESULTS.md
+evidence/EXP10-lock-fix/original/PROMPT4_DELIVERY.md
+evidence/EXP10-lock-fix/original/SHA256.txt
+evidence/EXP10-lock-fix/original/sp_internal_post_transfer.sql
+evidence/EXP10-lock-fix/regression-derived/EV-P3-ALL-INVARIANTS-1.txt
+evidence/EXP10-lock-fix/regression-derived/EV-P3-AUDIT-GAP-1.txt
+evidence/EXP10-lock-fix/regression-derived/EV-P3-INJECT-1.txt
+evidence/EXP10-lock-fix/regression-derived/EV-P3-RELEASE-1.txt
+evidence/EXP10-lock-fix/regression.txt
+evidence/p4-baseline.txt
+evidence/p4-exp04-driver.txt
+evidence/p4-regression-derived/EV-P3-ALL-INVARIANTS-1.txt
+evidence/p4-regression-derived/EV-P3-AUDIT-GAP-1.txt
+evidence/p4-regression-derived/EV-P3-INJECT-1.txt
+evidence/p4-regression-derived/EV-P3-RELEASE-1.txt
+evidence/p4-regression-derived/README.md
+evidence/raw/EXP-01/20261018-213658-783/before.txt
+evidence/raw/EXP-01/20261018-213658-783/injected.txt
+evidence/raw/EXP-01/20261018-213658-783/killed.sql
+evidence/raw/EXP-01/20261018-213658-783/killed.stderr.txt
+evidence/raw/EXP-01/20261018-213658-783/killed.stdout.txt
+evidence/raw/EXP-01/20261018-213734-634/after.txt
+evidence/raw/EXP-01/20261018-213734-634/before.txt
+evidence/raw/EXP-01/20261018-213734-634/injected.txt
+evidence/raw/EXP-01/20261018-213734-634/invariants.txt
+evidence/raw/EXP-01/20261018-213734-634/kill.txt
+evidence/raw/EXP-01/20261018-213734-634/killed.sql
+evidence/raw/EXP-01/20261018-213734-634/killed.stderr.txt
+evidence/raw/EXP-01/20261018-213734-634/killed.stdout.txt
+evidence/raw/EXP-01/20261018-213734-634/mid-transfer-locks.txt
+evidence/raw/EXP-01/20261018-213734-634/results.txt
+evidence/raw/EXP-01/20261018-215019-381/after.txt
+evidence/raw/EXP-01/20261018-215019-381/before.txt
+evidence/raw/EXP-01/20261018-215019-381/injected.txt
+evidence/raw/EXP-01/20261018-215019-381/invariants.txt
+evidence/raw/EXP-01/20261018-215019-381/kill.txt
+evidence/raw/EXP-01/20261018-215019-381/killed.sql
+evidence/raw/EXP-01/20261018-215019-381/killed.stderr.txt
+evidence/raw/EXP-01/20261018-215019-381/killed.stdout.txt
+evidence/raw/EXP-01/20261018-215019-381/mid-transfer-locks.txt
+evidence/raw/EXP-01/20261018-215019-381/results.txt
+evidence/raw/EXP-01/20261018-221325-586/after.txt
+evidence/raw/EXP-01/20261018-221325-586/before.txt
+evidence/raw/EXP-01/20261018-221325-586/injected.txt
+evidence/raw/EXP-01/20261018-221325-586/invariants.txt
+evidence/raw/EXP-01/20261018-221325-586/kill.txt
+evidence/raw/EXP-01/20261018-221325-586/killed.sql
+evidence/raw/EXP-01/20261018-221325-586/killed.stderr.txt
+evidence/raw/EXP-01/20261018-221325-586/killed.stdout.txt
+evidence/raw/EXP-01/20261018-221325-586/mid-transfer-locks.txt
+evidence/raw/EXP-01/20261018-221325-586/results.txt
+evidence/raw/EXP-01/20261018-221911-398/after.txt
+evidence/raw/EXP-01/20261018-221911-398/before.txt
+evidence/raw/EXP-01/20261018-221911-398/injected.txt
+evidence/raw/EXP-01/20261018-221911-398/invariants.txt
+evidence/raw/EXP-01/20261018-221911-398/kill.txt
+evidence/raw/EXP-01/20261018-221911-398/killed-connection-state.txt
+evidence/raw/EXP-01/20261018-221911-398/killed.sql
+evidence/raw/EXP-01/20261018-221911-398/killed.stderr.txt
+evidence/raw/EXP-01/20261018-221911-398/killed.stdout.txt
+evidence/raw/EXP-01/20261018-221911-398/mid-transfer-locks.txt
+evidence/raw/EXP-01/20261018-221911-398/results.txt
+evidence/raw/EXP-02/20261018-214257-404/test-results.txt
+evidence/raw/EXP-02/20261018-214257-404/tests.txt
+evidence/raw/EXP-02/20261018-215031-324/test-results.txt
+evidence/raw/EXP-02/20261018-215031-324/tests.txt
+evidence/raw/EXP-04/20261018-213821-251/INVALID.md
+evidence/raw/EXP-04/20261018-213821-251/invariants.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-atomic-A.sql
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-atomic-B.sql
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-naive-A.sql
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-naive-B.sql
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-ordered-A.sql
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-ordered-B.sql
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ COMMITTED-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-atomic-A.sql
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-atomic-B.sql
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-naive-A.sql
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-naive-B.sql
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-ordered-A.sql
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-ordered-B.sql
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/READ UNCOMMITTED-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/rejected-results.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-atomic-A.sql
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-atomic-B.sql
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-naive-A.sql
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-naive-B.sql
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-ordered-A.sql
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-ordered-B.sql
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/REPEATABLE READ-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-atomic-A.sql
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-atomic-B.sql
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-naive-A.sql
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-naive-B.sql
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-ordered-A.sql
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-ordered-B.sql
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-213821-251/SERIALIZABLE-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/invariants.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-atomic-A.sql
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-atomic-B.sql
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-naive-A.sql
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-naive-B.sql
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-ordered-A.sql
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-ordered-B.sql
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ COMMITTED-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-atomic-A.sql
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-atomic-B.sql
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-naive-A.sql
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-naive-B.sql
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-ordered-A.sql
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-ordered-B.sql
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/READ UNCOMMITTED-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-atomic-A.sql
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-atomic-B.sql
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-naive-A.sql
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-naive-B.sql
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-ordered-A.sql
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-ordered-B.sql
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/REPEATABLE READ-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/results.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-atomic-A.sql
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-atomic-B.sql
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-naive-A.sql
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-naive-B.sql
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-ordered-A.sql
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-ordered-B.sql
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-214151-017/SERIALIZABLE-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/invariants.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-atomic-A.sql
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-atomic-B.sql
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-atomic-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-naive-A.sql
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-naive-B.sql
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-naive-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-ordered-A.sql
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-ordered-B.sql
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ COMMITTED-ordered-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-atomic-A.sql
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-atomic-B.sql
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-atomic-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-naive-A.sql
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-naive-B.sql
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-naive-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-ordered-A.sql
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-ordered-B.sql
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/READ UNCOMMITTED-ordered-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-atomic-A.sql
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-atomic-B.sql
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-atomic-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-naive-A.sql
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-naive-B.sql
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-naive-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-ordered-A.sql
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-ordered-B.sql
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/REPEATABLE READ-ordered-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/results.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-atomic-A.sql
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-atomic-B.sql
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-atomic-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-naive-A.sql
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-naive-B.sql
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-naive-locks.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-ordered-A.sql
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-ordered-B.sql
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-214654-862/SERIALIZABLE-ordered-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/invariants.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-atomic-A.sql
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-atomic-B.sql
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-atomic-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-naive-A.sql
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-naive-B.sql
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-naive-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-ordered-A.sql
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-ordered-B.sql
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ COMMITTED-ordered-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-atomic-A.sql
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-atomic-B.sql
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-atomic-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-naive-A.sql
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-naive-B.sql
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-naive-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-ordered-A.sql
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-ordered-B.sql
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/READ UNCOMMITTED-ordered-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-atomic-A.sql
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-atomic-B.sql
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-atomic-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-naive-A.sql
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-naive-B.sql
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-naive-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-ordered-A.sql
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-ordered-B.sql
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/REPEATABLE READ-ordered-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/results.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-atomic-A.sql
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-atomic-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-atomic-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-atomic-B.sql
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-atomic-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-atomic-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-atomic-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-naive-A.sql
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-naive-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-naive-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-naive-B.sql
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-naive-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-naive-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-naive-locks.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-ordered-A.sql
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-ordered-A.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-ordered-A.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-ordered-B.sql
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-ordered-B.stderr.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-ordered-B.stdout.txt
+evidence/raw/EXP-04/20261018-215039-090/SERIALIZABLE-ordered-locks.txt
+evidence/raw/EXP-05/20261018-214324-455/invariants.txt
+evidence/raw/EXP-05/20261018-214324-455/READ COMMITTED-A.sql
+evidence/raw/EXP-05/20261018-214324-455/READ COMMITTED-A.stderr.txt
+evidence/raw/EXP-05/20261018-214324-455/READ COMMITTED-A.stdout.txt
+evidence/raw/EXP-05/20261018-214324-455/READ COMMITTED-B.sql
+evidence/raw/EXP-05/20261018-214324-455/READ COMMITTED-B.stderr.txt
+evidence/raw/EXP-05/20261018-214324-455/READ COMMITTED-B.stdout.txt
+evidence/raw/EXP-05/20261018-214324-455/READ UNCOMMITTED-A.sql
+evidence/raw/EXP-05/20261018-214324-455/READ UNCOMMITTED-A.stderr.txt
+evidence/raw/EXP-05/20261018-214324-455/READ UNCOMMITTED-A.stdout.txt
+evidence/raw/EXP-05/20261018-214324-455/READ UNCOMMITTED-B.sql
+evidence/raw/EXP-05/20261018-214324-455/READ UNCOMMITTED-B.stderr.txt
+evidence/raw/EXP-05/20261018-214324-455/READ UNCOMMITTED-B.stdout.txt
+evidence/raw/EXP-05/20261018-214324-455/REPEATABLE READ-A.sql
+evidence/raw/EXP-05/20261018-214324-455/REPEATABLE READ-A.stderr.txt
+evidence/raw/EXP-05/20261018-214324-455/REPEATABLE READ-A.stdout.txt
+evidence/raw/EXP-05/20261018-214324-455/REPEATABLE READ-B.sql
+evidence/raw/EXP-05/20261018-214324-455/REPEATABLE READ-B.stderr.txt
+evidence/raw/EXP-05/20261018-214324-455/REPEATABLE READ-B.stdout.txt
+evidence/raw/EXP-05/20261018-214324-455/results.txt
+evidence/raw/EXP-05/20261018-214324-455/SERIALIZABLE-A.sql
+evidence/raw/EXP-05/20261018-214324-455/SERIALIZABLE-A.stderr.txt
+evidence/raw/EXP-05/20261018-214324-455/SERIALIZABLE-A.stdout.txt
+evidence/raw/EXP-05/20261018-214324-455/SERIALIZABLE-B.sql
+evidence/raw/EXP-05/20261018-214324-455/SERIALIZABLE-B.stderr.txt
+evidence/raw/EXP-05/20261018-214324-455/SERIALIZABLE-B.stdout.txt
+evidence/raw/EXP-05/20261018-215342-152/invariants.txt
+evidence/raw/EXP-05/20261018-215342-152/READ COMMITTED-A.sql
+evidence/raw/EXP-05/20261018-215342-152/READ COMMITTED-A.stderr.txt
+evidence/raw/EXP-05/20261018-215342-152/READ COMMITTED-A.stdout.txt
+evidence/raw/EXP-05/20261018-215342-152/READ COMMITTED-B.sql
+evidence/raw/EXP-05/20261018-215342-152/READ COMMITTED-B.stderr.txt
+evidence/raw/EXP-05/20261018-215342-152/READ COMMITTED-B.stdout.txt
+evidence/raw/EXP-05/20261018-215342-152/READ UNCOMMITTED-A.sql
+evidence/raw/EXP-05/20261018-215342-152/READ UNCOMMITTED-A.stderr.txt
+evidence/raw/EXP-05/20261018-215342-152/READ UNCOMMITTED-A.stdout.txt
+evidence/raw/EXP-05/20261018-215342-152/READ UNCOMMITTED-B.sql
+evidence/raw/EXP-05/20261018-215342-152/READ UNCOMMITTED-B.stderr.txt
+evidence/raw/EXP-05/20261018-215342-152/READ UNCOMMITTED-B.stdout.txt
+evidence/raw/EXP-05/20261018-215342-152/REPEATABLE READ-A.sql
+evidence/raw/EXP-05/20261018-215342-152/REPEATABLE READ-A.stderr.txt
+evidence/raw/EXP-05/20261018-215342-152/REPEATABLE READ-A.stdout.txt
+evidence/raw/EXP-05/20261018-215342-152/REPEATABLE READ-B.sql
+evidence/raw/EXP-05/20261018-215342-152/REPEATABLE READ-B.stderr.txt
+evidence/raw/EXP-05/20261018-215342-152/REPEATABLE READ-B.stdout.txt
+evidence/raw/EXP-05/20261018-215342-152/results.txt
+evidence/raw/EXP-05/20261018-215342-152/SERIALIZABLE-A.sql
+evidence/raw/EXP-05/20261018-215342-152/SERIALIZABLE-A.stderr.txt
+evidence/raw/EXP-05/20261018-215342-152/SERIALIZABLE-A.stdout.txt
+evidence/raw/EXP-05/20261018-215342-152/SERIALIZABLE-B.sql
+evidence/raw/EXP-05/20261018-215342-152/SERIALIZABLE-B.stderr.txt
+evidence/raw/EXP-05/20261018-215342-152/SERIALIZABLE-B.stdout.txt
+evidence/raw/EXP-06/20261018-214359-389/invariants.txt
+evidence/raw/EXP-06/20261018-214359-389/READ COMMITTED-A.sql
+evidence/raw/EXP-06/20261018-214359-389/READ COMMITTED-A.stderr.txt
+evidence/raw/EXP-06/20261018-214359-389/READ COMMITTED-A.stdout.txt
+evidence/raw/EXP-06/20261018-214359-389/READ COMMITTED-B.sql
+evidence/raw/EXP-06/20261018-214359-389/READ COMMITTED-B.stderr.txt
+evidence/raw/EXP-06/20261018-214359-389/READ COMMITTED-B.stdout.txt
+evidence/raw/EXP-06/20261018-214359-389/READ UNCOMMITTED-A.sql
+evidence/raw/EXP-06/20261018-214359-389/READ UNCOMMITTED-A.stderr.txt
+evidence/raw/EXP-06/20261018-214359-389/READ UNCOMMITTED-A.stdout.txt
+evidence/raw/EXP-06/20261018-214359-389/READ UNCOMMITTED-B.sql
+evidence/raw/EXP-06/20261018-214359-389/READ UNCOMMITTED-B.stderr.txt
+evidence/raw/EXP-06/20261018-214359-389/READ UNCOMMITTED-B.stdout.txt
+evidence/raw/EXP-06/20261018-214359-389/REPEATABLE READ-A.sql
+evidence/raw/EXP-06/20261018-214359-389/REPEATABLE READ-A.stderr.txt
+evidence/raw/EXP-06/20261018-214359-389/REPEATABLE READ-A.stdout.txt
+evidence/raw/EXP-06/20261018-214359-389/REPEATABLE READ-B.sql
+evidence/raw/EXP-06/20261018-214359-389/REPEATABLE READ-B.stderr.txt
+evidence/raw/EXP-06/20261018-214359-389/REPEATABLE READ-B.stdout.txt
+evidence/raw/EXP-06/20261018-214359-389/results.txt
+evidence/raw/EXP-06/20261018-214359-389/SERIALIZABLE-A.sql
+evidence/raw/EXP-06/20261018-214359-389/SERIALIZABLE-A.stderr.txt
+evidence/raw/EXP-06/20261018-214359-389/SERIALIZABLE-A.stdout.txt
+evidence/raw/EXP-06/20261018-214359-389/SERIALIZABLE-B.sql
+evidence/raw/EXP-06/20261018-214359-389/SERIALIZABLE-B.stderr.txt
+evidence/raw/EXP-06/20261018-214359-389/SERIALIZABLE-B.stdout.txt
+evidence/raw/EXP-06/20261018-215431-512/invariants.txt
+evidence/raw/EXP-06/20261018-215431-512/READ COMMITTED-A.sql
+evidence/raw/EXP-06/20261018-215431-512/READ COMMITTED-A.stderr.txt
+evidence/raw/EXP-06/20261018-215431-512/READ COMMITTED-A.stdout.txt
+evidence/raw/EXP-06/20261018-215431-512/READ COMMITTED-B.sql
+evidence/raw/EXP-06/20261018-215431-512/READ COMMITTED-B.stderr.txt
+evidence/raw/EXP-06/20261018-215431-512/READ COMMITTED-B.stdout.txt
+evidence/raw/EXP-06/20261018-215431-512/READ UNCOMMITTED-A.sql
+evidence/raw/EXP-06/20261018-215431-512/READ UNCOMMITTED-A.stderr.txt
+evidence/raw/EXP-06/20261018-215431-512/READ UNCOMMITTED-A.stdout.txt
+evidence/raw/EXP-06/20261018-215431-512/READ UNCOMMITTED-B.sql
+evidence/raw/EXP-06/20261018-215431-512/READ UNCOMMITTED-B.stderr.txt
+evidence/raw/EXP-06/20261018-215431-512/READ UNCOMMITTED-B.stdout.txt
+evidence/raw/EXP-06/20261018-215431-512/REPEATABLE READ-A.sql
+evidence/raw/EXP-06/20261018-215431-512/REPEATABLE READ-A.stderr.txt
+evidence/raw/EXP-06/20261018-215431-512/REPEATABLE READ-A.stdout.txt
+evidence/raw/EXP-06/20261018-215431-512/REPEATABLE READ-B.sql
+evidence/raw/EXP-06/20261018-215431-512/REPEATABLE READ-B.stderr.txt
+evidence/raw/EXP-06/20261018-215431-512/REPEATABLE READ-B.stdout.txt
+evidence/raw/EXP-06/20261018-215431-512/results.txt
+evidence/raw/EXP-06/20261018-215431-512/SERIALIZABLE-A.sql
+evidence/raw/EXP-06/20261018-215431-512/SERIALIZABLE-A.stderr.txt
+evidence/raw/EXP-06/20261018-215431-512/SERIALIZABLE-A.stdout.txt
+evidence/raw/EXP-06/20261018-215431-512/SERIALIZABLE-B.sql
+evidence/raw/EXP-06/20261018-215431-512/SERIALIZABLE-B.stderr.txt
+evidence/raw/EXP-06/20261018-215431-512/SERIALIZABLE-B.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/gap-A.sql
+evidence/raw/EXP-07/20261018-214432-153/gap-A.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/gap-A.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/gap-B.sql
+evidence/raw/EXP-07/20261018-214432-153/gap-B.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/gap-B.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/gap-locks.txt
+evidence/raw/EXP-07/20261018-214432-153/invariants.txt
+evidence/raw/EXP-07/20261018-214432-153/READ COMMITTED-A.sql
+evidence/raw/EXP-07/20261018-214432-153/READ COMMITTED-A.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/READ COMMITTED-A.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/READ COMMITTED-B.sql
+evidence/raw/EXP-07/20261018-214432-153/READ COMMITTED-B.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/READ COMMITTED-B.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/READ COMMITTED-locks.txt
+evidence/raw/EXP-07/20261018-214432-153/READ UNCOMMITTED-A.sql
+evidence/raw/EXP-07/20261018-214432-153/READ UNCOMMITTED-A.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/READ UNCOMMITTED-A.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/READ UNCOMMITTED-B.sql
+evidence/raw/EXP-07/20261018-214432-153/READ UNCOMMITTED-B.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/READ UNCOMMITTED-B.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/READ UNCOMMITTED-locks.txt
+evidence/raw/EXP-07/20261018-214432-153/REPEATABLE READ-A.sql
+evidence/raw/EXP-07/20261018-214432-153/REPEATABLE READ-A.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/REPEATABLE READ-A.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/REPEATABLE READ-B.sql
+evidence/raw/EXP-07/20261018-214432-153/REPEATABLE READ-B.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/REPEATABLE READ-B.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/REPEATABLE READ-locks.txt
+evidence/raw/EXP-07/20261018-214432-153/results.txt
+evidence/raw/EXP-07/20261018-214432-153/SERIALIZABLE-A.sql
+evidence/raw/EXP-07/20261018-214432-153/SERIALIZABLE-A.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/SERIALIZABLE-A.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/SERIALIZABLE-B.sql
+evidence/raw/EXP-07/20261018-214432-153/SERIALIZABLE-B.stderr.txt
+evidence/raw/EXP-07/20261018-214432-153/SERIALIZABLE-B.stdout.txt
+evidence/raw/EXP-07/20261018-214432-153/SERIALIZABLE-locks.txt
+evidence/raw/EXP-07/20261018-215504-624/gap-A.sql
+evidence/raw/EXP-07/20261018-215504-624/gap-A.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/gap-A.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/gap-B.sql
+evidence/raw/EXP-07/20261018-215504-624/gap-B.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/gap-B.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/gap-locks.txt
+evidence/raw/EXP-07/20261018-215504-624/invariants.txt
+evidence/raw/EXP-07/20261018-215504-624/READ COMMITTED-A.sql
+evidence/raw/EXP-07/20261018-215504-624/READ COMMITTED-A.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/READ COMMITTED-A.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/READ COMMITTED-B.sql
+evidence/raw/EXP-07/20261018-215504-624/READ COMMITTED-B.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/READ COMMITTED-B.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/READ COMMITTED-locks.txt
+evidence/raw/EXP-07/20261018-215504-624/READ UNCOMMITTED-A.sql
+evidence/raw/EXP-07/20261018-215504-624/READ UNCOMMITTED-A.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/READ UNCOMMITTED-A.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/READ UNCOMMITTED-B.sql
+evidence/raw/EXP-07/20261018-215504-624/READ UNCOMMITTED-B.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/READ UNCOMMITTED-B.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/READ UNCOMMITTED-locks.txt
+evidence/raw/EXP-07/20261018-215504-624/REPEATABLE READ-A.sql
+evidence/raw/EXP-07/20261018-215504-624/REPEATABLE READ-A.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/REPEATABLE READ-A.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/REPEATABLE READ-B.sql
+evidence/raw/EXP-07/20261018-215504-624/REPEATABLE READ-B.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/REPEATABLE READ-B.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/REPEATABLE READ-locks.txt
+evidence/raw/EXP-07/20261018-215504-624/results.txt
+evidence/raw/EXP-07/20261018-215504-624/SERIALIZABLE-A.sql
+evidence/raw/EXP-07/20261018-215504-624/SERIALIZABLE-A.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/SERIALIZABLE-A.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/SERIALIZABLE-B.sql
+evidence/raw/EXP-07/20261018-215504-624/SERIALIZABLE-B.stderr.txt
+evidence/raw/EXP-07/20261018-215504-624/SERIALIZABLE-B.stdout.txt
+evidence/raw/EXP-07/20261018-215504-624/SERIALIZABLE-locks.txt
+evidence/raw/EXP-08/20261018-215653-871/mysqlslap-help.txt
+evidence/raw/EXP-08/20261018-220050-215/config.txt
+evidence/raw/EXP-08/20261018-220050-215/globals-restored.txt
+evidence/raw/EXP-08/20261018-220050-215/mysqlslap-help.txt
+evidence/raw/EXP-08/20261018-220050-215/READ-COMMITTED-5.stderr.txt
+evidence/raw/EXP-08/20261018-220050-215/READ-COMMITTED-5.stdout.txt
+evidence/raw/EXP-08/20261018-220241-623/config.txt
+evidence/raw/EXP-08/20261018-220241-623/globals-restored.txt
+evidence/raw/EXP-08/20261018-220241-623/invariants.txt
+evidence/raw/EXP-08/20261018-220241-623/mysqlslap-help.txt
+evidence/raw/EXP-08/20261018-220241-623/READ-COMMITTED-25.stderr.txt
+evidence/raw/EXP-08/20261018-220241-623/READ-COMMITTED-25.stdout.txt
+evidence/raw/EXP-08/20261018-220241-623/READ-COMMITTED-5.stderr.txt
+evidence/raw/EXP-08/20261018-220241-623/READ-COMMITTED-5.stdout.txt
+evidence/raw/EXP-08/20261018-220241-623/REPEATABLE-READ-25.stderr.txt
+evidence/raw/EXP-08/20261018-220241-623/REPEATABLE-READ-25.stdout.txt
+evidence/raw/EXP-08/20261018-220241-623/REPEATABLE-READ-5.stderr.txt
+evidence/raw/EXP-08/20261018-220241-623/REPEATABLE-READ-5.stdout.txt
+evidence/raw/EXP-08/20261018-220241-623/throughput.csv
+evidence/raw/EXP-08/20261018-220241-623/throughput.md
+evidence/raw/EXP-08/20261018-220432-380/config.txt
+evidence/raw/EXP-08/20261018-220432-380/globals-restored.txt
+evidence/raw/EXP-08/20261018-220432-380/invariants.txt
+evidence/raw/EXP-08/20261018-220432-380/mysqlslap-help.txt
+evidence/raw/EXP-08/20261018-220432-380/READ-COMMITTED-25.stderr.txt
+evidence/raw/EXP-08/20261018-220432-380/READ-COMMITTED-25.stdout.txt
+evidence/raw/EXP-08/20261018-220432-380/READ-COMMITTED-5.stderr.txt
+evidence/raw/EXP-08/20261018-220432-380/READ-COMMITTED-5.stdout.txt
+evidence/raw/EXP-08/20261018-220432-380/REPEATABLE-READ-25.stderr.txt
+evidence/raw/EXP-08/20261018-220432-380/REPEATABLE-READ-25.stdout.txt
+evidence/raw/EXP-08/20261018-220432-380/REPEATABLE-READ-5.stderr.txt
+evidence/raw/EXP-08/20261018-220432-380/REPEATABLE-READ-5.stdout.txt
+evidence/raw/EXP-08/20261018-220432-380/throughput.csv
+evidence/raw/EXP-08/20261018-220432-380/throughput.md
+evidence/raw/EXP-08/20261018-220449-450/config.txt
+evidence/raw/EXP-08/20261018-220449-450/globals-restored.txt
+evidence/raw/EXP-08/20261018-220449-450/invariants.txt
+evidence/raw/EXP-08/20261018-220449-450/mysqlslap-help.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-COMMITTED-10.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-COMMITTED-10.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-COMMITTED-25.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-COMMITTED-25.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-COMMITTED-5.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-COMMITTED-5.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-COMMITTED-50.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-COMMITTED-50.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-UNCOMMITTED-10.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-UNCOMMITTED-10.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-UNCOMMITTED-25.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-UNCOMMITTED-25.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-UNCOMMITTED-5.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-UNCOMMITTED-5.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-UNCOMMITTED-50.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/READ-UNCOMMITTED-50.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/REPEATABLE-READ-10.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/REPEATABLE-READ-10.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/REPEATABLE-READ-25.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/REPEATABLE-READ-25.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/REPEATABLE-READ-5.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/REPEATABLE-READ-5.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/REPEATABLE-READ-50.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/REPEATABLE-READ-50.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/SERIALIZABLE-10.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/SERIALIZABLE-10.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/SERIALIZABLE-25.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/SERIALIZABLE-25.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/SERIALIZABLE-5.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/SERIALIZABLE-5.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/SERIALIZABLE-50.stderr.txt
+evidence/raw/EXP-08/20261018-220449-450/SERIALIZABLE-50.stdout.txt
+evidence/raw/EXP-08/20261018-220449-450/throughput.csv
+evidence/raw/EXP-08/20261018-220449-450/throughput.md
+evidence/raw/EXP-08/20261018-220649-150/config.txt
+evidence/raw/EXP-08/20261018-220649-150/globals-restored.txt
+evidence/raw/EXP-08/20261018-220649-150/invariants.txt
+evidence/raw/EXP-08/20261018-220649-150/mysqlslap-help.txt
+evidence/raw/EXP-08/20261018-220649-150/READ-COMMITTED-25-metrics-after.txt
+evidence/raw/EXP-08/20261018-220649-150/READ-COMMITTED-25-metrics-before.txt
+evidence/raw/EXP-08/20261018-220649-150/READ-COMMITTED-25.stderr.txt
+evidence/raw/EXP-08/20261018-220649-150/READ-COMMITTED-25.stdout.txt
+evidence/raw/EXP-08/20261018-220649-150/READ-COMMITTED-5-metrics-after.txt
+evidence/raw/EXP-08/20261018-220649-150/READ-COMMITTED-5-metrics-before.txt
+evidence/raw/EXP-08/20261018-220649-150/READ-COMMITTED-5.stderr.txt
+evidence/raw/EXP-08/20261018-220649-150/READ-COMMITTED-5.stdout.txt
+evidence/raw/EXP-08/20261018-220649-150/REPEATABLE-READ-25-metrics-after.txt
+evidence/raw/EXP-08/20261018-220649-150/REPEATABLE-READ-25-metrics-before.txt
+evidence/raw/EXP-08/20261018-220649-150/REPEATABLE-READ-25.stderr.txt
+evidence/raw/EXP-08/20261018-220649-150/REPEATABLE-READ-25.stdout.txt
+evidence/raw/EXP-08/20261018-220649-150/REPEATABLE-READ-5-metrics-after.txt
+evidence/raw/EXP-08/20261018-220649-150/REPEATABLE-READ-5-metrics-before.txt
+evidence/raw/EXP-08/20261018-220649-150/REPEATABLE-READ-5.stderr.txt
+evidence/raw/EXP-08/20261018-220649-150/REPEATABLE-READ-5.stdout.txt
+evidence/raw/EXP-08/20261018-220649-150/throughput.csv
+evidence/raw/EXP-08/20261018-220649-150/throughput.md
+evidence/raw/EXP-08/20261018-220704-145/config.txt
+evidence/raw/EXP-08/20261018-220704-145/globals-restored.txt
+evidence/raw/EXP-08/20261018-220704-145/invariants.txt
+evidence/raw/EXP-08/20261018-220704-145/mysqlslap-help.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-10-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-10-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-10.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-10.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-25-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-25-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-25.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-25.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-5-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-5-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-5.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-5.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-50-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-50-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-50.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-COMMITTED-50.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-10-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-10-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-10.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-10.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-25-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-25-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-25.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-25.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-5-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-5-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-5.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-5.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-50-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-50-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-50.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/READ-UNCOMMITTED-50.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-10-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-10-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-10.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-10.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-25-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-25-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-25.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-25.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-5-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-5-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-5.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-5.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-50-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-50-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-50.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/REPEATABLE-READ-50.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-10-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-10-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-10.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-10.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-25-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-25-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-25.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-25.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-5-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-5-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-5.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-5.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-50-metrics-after.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-50-metrics-before.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-50.stderr.txt
+evidence/raw/EXP-08/20261018-220704-145/SERIALIZABLE-50.stdout.txt
+evidence/raw/EXP-08/20261018-220704-145/throughput.csv
+evidence/raw/EXP-08/20261018-220704-145/throughput.md
+evidence/raw/EXP-08/20261018-220831-714/config.txt
+evidence/raw/EXP-08/20261018-220831-714/globals-restored.txt
+evidence/raw/EXP-08/20261018-220831-714/invariants.txt
+evidence/raw/EXP-08/20261018-220831-714/mysqlslap-help.txt
+evidence/raw/EXP-08/20261018-220831-714/READ-COMMITTED-25-metrics-after.txt
+evidence/raw/EXP-08/20261018-220831-714/READ-COMMITTED-25-metrics-before.txt
+evidence/raw/EXP-08/20261018-220831-714/READ-COMMITTED-25.stderr.txt
+evidence/raw/EXP-08/20261018-220831-714/READ-COMMITTED-25.stdout.txt
+evidence/raw/EXP-08/20261018-220831-714/READ-COMMITTED-5-metrics-after.txt
+evidence/raw/EXP-08/20261018-220831-714/READ-COMMITTED-5-metrics-before.txt
+evidence/raw/EXP-08/20261018-220831-714/READ-COMMITTED-5.stderr.txt
+evidence/raw/EXP-08/20261018-220831-714/READ-COMMITTED-5.stdout.txt
+evidence/raw/EXP-08/20261018-220831-714/REPEATABLE-READ-25-metrics-after.txt
+evidence/raw/EXP-08/20261018-220831-714/REPEATABLE-READ-25-metrics-before.txt
+evidence/raw/EXP-08/20261018-220831-714/REPEATABLE-READ-25.stderr.txt
+evidence/raw/EXP-08/20261018-220831-714/REPEATABLE-READ-25.stdout.txt
+evidence/raw/EXP-08/20261018-220831-714/REPEATABLE-READ-5-metrics-after.txt
+evidence/raw/EXP-08/20261018-220831-714/REPEATABLE-READ-5-metrics-before.txt
+evidence/raw/EXP-08/20261018-220831-714/REPEATABLE-READ-5.stderr.txt
+evidence/raw/EXP-08/20261018-220831-714/REPEATABLE-READ-5.stdout.txt
+evidence/raw/EXP-08/20261018-220831-714/throughput.csv
+evidence/raw/EXP-08/20261018-220831-714/throughput.md
+evidence/raw/EXP-09/20261018-214623-498/after.txt
+evidence/raw/EXP-09/20261018-214623-498/before.txt
+evidence/raw/EXP-09/20261018-214623-498/invariants.txt
+evidence/raw/EXP-09/20261018-214623-498/results.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-0.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-0.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-0.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-1.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-1.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-1.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-10.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-10.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-10.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-11.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-11.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-11.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-12.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-12.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-12.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-13.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-13.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-13.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-14.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-14.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-14.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-15.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-15.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-15.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-16.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-16.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-16.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-17.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-17.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-17.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-18.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-18.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-18.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-19.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-19.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-19.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-2.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-2.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-2.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-3.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-3.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-3.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-4.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-4.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-4.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-5.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-5.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-5.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-6.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-6.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-6.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-7.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-7.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-7.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-8.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-8.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-8.stdout.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-9.sql
+evidence/raw/EXP-09/20261018-214623-498/worker-9.stderr.txt
+evidence/raw/EXP-09/20261018-214623-498/worker-9.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/after.txt
+evidence/raw/EXP-09/20261018-214637-887/before.txt
+evidence/raw/EXP-09/20261018-214637-887/invariants.txt
+evidence/raw/EXP-09/20261018-214637-887/results.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-0.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-0.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-0.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-1.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-1.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-1.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-10.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-10.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-10.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-11.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-11.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-11.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-12.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-12.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-12.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-13.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-13.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-13.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-14.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-14.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-14.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-15.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-15.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-15.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-16.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-16.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-16.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-17.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-17.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-17.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-18.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-18.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-18.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-19.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-19.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-19.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-2.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-2.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-2.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-20.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-20.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-20.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-21.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-21.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-21.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-22.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-22.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-22.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-23.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-23.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-23.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-24.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-24.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-24.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-25.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-25.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-25.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-26.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-26.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-26.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-27.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-27.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-27.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-28.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-28.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-28.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-29.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-29.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-29.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-3.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-3.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-3.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-30.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-30.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-30.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-31.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-31.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-31.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-32.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-32.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-32.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-33.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-33.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-33.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-34.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-34.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-34.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-35.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-35.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-35.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-36.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-36.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-36.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-37.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-37.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-37.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-38.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-38.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-38.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-39.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-39.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-39.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-4.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-4.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-4.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-40.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-40.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-40.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-41.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-41.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-41.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-42.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-42.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-42.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-43.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-43.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-43.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-44.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-44.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-44.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-45.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-45.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-45.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-46.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-46.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-46.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-47.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-47.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-47.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-48.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-48.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-48.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-49.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-49.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-49.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-5.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-5.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-5.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-6.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-6.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-6.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-7.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-7.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-7.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-8.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-8.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-8.stdout.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-9.sql
+evidence/raw/EXP-09/20261018-214637-887/worker-9.stderr.txt
+evidence/raw/EXP-09/20261018-214637-887/worker-9.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/after.txt
+evidence/raw/EXP-09/20261018-215543-477/before.txt
+evidence/raw/EXP-09/20261018-215543-477/invariants.txt
+evidence/raw/EXP-09/20261018-215543-477/results.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-0.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-0.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-0.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-1.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-1.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-1.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-10.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-10.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-10.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-11.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-11.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-11.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-12.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-12.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-12.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-13.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-13.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-13.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-14.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-14.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-14.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-15.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-15.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-15.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-16.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-16.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-16.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-17.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-17.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-17.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-18.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-18.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-18.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-19.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-19.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-19.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-2.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-2.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-2.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-3.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-3.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-3.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-4.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-4.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-4.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-5.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-5.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-5.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-6.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-6.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-6.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-7.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-7.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-7.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-8.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-8.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-8.stdout.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-9.sql
+evidence/raw/EXP-09/20261018-215543-477/worker-9.stderr.txt
+evidence/raw/EXP-09/20261018-215543-477/worker-9.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/after.txt
+evidence/raw/EXP-09/20261018-215557-946/before.txt
+evidence/raw/EXP-09/20261018-215557-946/invariants.txt
+evidence/raw/EXP-09/20261018-215557-946/results.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-0.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-0.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-0.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-1.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-1.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-1.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-10.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-10.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-10.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-11.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-11.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-11.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-12.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-12.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-12.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-13.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-13.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-13.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-14.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-14.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-14.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-15.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-15.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-15.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-16.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-16.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-16.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-17.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-17.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-17.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-18.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-18.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-18.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-19.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-19.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-19.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-2.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-2.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-2.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-20.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-20.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-20.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-21.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-21.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-21.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-22.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-22.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-22.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-23.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-23.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-23.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-24.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-24.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-24.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-25.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-25.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-25.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-26.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-26.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-26.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-27.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-27.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-27.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-28.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-28.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-28.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-29.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-29.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-29.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-3.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-3.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-3.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-30.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-30.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-30.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-31.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-31.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-31.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-32.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-32.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-32.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-33.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-33.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-33.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-34.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-34.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-34.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-35.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-35.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-35.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-36.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-36.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-36.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-37.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-37.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-37.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-38.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-38.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-38.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-39.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-39.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-39.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-4.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-4.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-4.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-40.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-40.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-40.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-41.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-41.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-41.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-42.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-42.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-42.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-43.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-43.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-43.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-44.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-44.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-44.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-45.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-45.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-45.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-46.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-46.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-46.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-47.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-47.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-47.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-48.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-48.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-48.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-49.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-49.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-49.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-5.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-5.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-5.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-6.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-6.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-6.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-7.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-7.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-7.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-8.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-8.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-8.stdout.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-9.sql
+evidence/raw/EXP-09/20261018-215557-946/worker-9.stderr.txt
+evidence/raw/EXP-09/20261018-215557-946/worker-9.stdout.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/corrected-probe.sql
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/corrected-record-locks.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/corrected-state.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/corrected.sql
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/corrected.stderr.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/corrected.stdout.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/invariants.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/original-probe.sql
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/original-record-locks.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/original-state.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/original.sql
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/original.stderr.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/original.stdout.txt
+evidence/raw/EXP-10-lock-diagnosis/20261018-223254-712/results.txt
+evidence/raw/EXP-10/20261018-214426-550/contrast-locks.txt
+evidence/raw/EXP-10/20261018-214426-550/create-A.sql
+evidence/raw/EXP-10/20261018-214426-550/create-A.stderr.txt
+evidence/raw/EXP-10/20261018-214426-550/create-A.stdout.txt
+evidence/raw/EXP-10/20261018-214426-550/create-B.sql
+evidence/raw/EXP-10/20261018-214426-550/create-B.stderr.txt
+evidence/raw/EXP-10/20261018-214426-550/create-B.stdout.txt
+evidence/raw/EXP-10/20261018-214426-550/create-locks.txt
+evidence/raw/EXP-10/20261018-214426-550/error-log.txt
+evidence/raw/EXP-10/20261018-214426-550/global-restored.txt
+evidence/raw/EXP-10/20261018-214426-550/innodb-status.txt
+evidence/raw/EXP-10/20261018-214426-550/instrumentation.sql
+evidence/raw/EXP-10/20261018-214426-550/retry-mode3-A.sql
+evidence/raw/EXP-10/20261018-214426-550/retry-mode3-A.stderr.txt
+evidence/raw/EXP-10/20261018-214426-550/retry-mode3-A.stdout.txt
+evidence/raw/EXP-10/20261018-214426-550/retry-mode3-B.sql
+evidence/raw/EXP-10/20261018-214426-550/retry-mode3-B.stderr.txt
+evidence/raw/EXP-10/20261018-214426-550/retry-mode3-B.stdout.txt
+evidence/raw/EXP-10/20261018-214426-550/wait-A.sql
+evidence/raw/EXP-10/20261018-214426-550/wait-A.stderr.txt
+evidence/raw/EXP-10/20261018-214426-550/wait-A.stdout.txt
+evidence/raw/EXP-10/20261018-214426-550/wait-B.sql
+evidence/raw/EXP-10/20261018-214426-550/wait-B.stderr.txt
+evidence/raw/EXP-10/20261018-214426-550/wait-B.stdout.txt
+evidence/raw/EXP-10/20261018-214512-985/contrast-locks.txt
+evidence/raw/EXP-10/20261018-214512-985/create-A.sql
+evidence/raw/EXP-10/20261018-214512-985/create-A.stderr.txt
+evidence/raw/EXP-10/20261018-214512-985/create-A.stdout.txt
+evidence/raw/EXP-10/20261018-214512-985/create-B.sql
+evidence/raw/EXP-10/20261018-214512-985/create-B.stderr.txt
+evidence/raw/EXP-10/20261018-214512-985/create-B.stdout.txt
+evidence/raw/EXP-10/20261018-214512-985/create-locks.txt
+evidence/raw/EXP-10/20261018-214512-985/error-log.txt
+evidence/raw/EXP-10/20261018-214512-985/global-restored.txt
+evidence/raw/EXP-10/20261018-214512-985/innodb-status.txt
+evidence/raw/EXP-10/20261018-214512-985/instrumentation.sql
+evidence/raw/EXP-10/20261018-214512-985/retry-mode3-A.sql
+evidence/raw/EXP-10/20261018-214512-985/retry-mode3-A.stderr.txt
+evidence/raw/EXP-10/20261018-214512-985/retry-mode3-A.stdout.txt
+evidence/raw/EXP-10/20261018-214512-985/retry-mode3-B.sql
+evidence/raw/EXP-10/20261018-214512-985/retry-mode3-B.stderr.txt
+evidence/raw/EXP-10/20261018-214512-985/retry-mode3-B.stdout.txt
+evidence/raw/EXP-10/20261018-214512-985/wait-A.sql
+evidence/raw/EXP-10/20261018-214512-985/wait-A.stderr.txt
+evidence/raw/EXP-10/20261018-214512-985/wait-A.stdout.txt
+evidence/raw/EXP-10/20261018-214512-985/wait-B.sql
+evidence/raw/EXP-10/20261018-214512-985/wait-B.stderr.txt
+evidence/raw/EXP-10/20261018-214512-985/wait-B.stdout.txt
+evidence/raw/EXP-10/20261018-214610-916/contrast-locks.txt
+evidence/raw/EXP-10/20261018-214610-916/create-A.sql
+evidence/raw/EXP-10/20261018-214610-916/create-A.stderr.txt
+evidence/raw/EXP-10/20261018-214610-916/create-A.stdout.txt
+evidence/raw/EXP-10/20261018-214610-916/create-B.sql
+evidence/raw/EXP-10/20261018-214610-916/create-B.stderr.txt
+evidence/raw/EXP-10/20261018-214610-916/create-B.stdout.txt
+evidence/raw/EXP-10/20261018-214610-916/create-locks.txt
+evidence/raw/EXP-10/20261018-214610-916/error-log.txt
+evidence/raw/EXP-10/20261018-214610-916/global-restored.txt
+evidence/raw/EXP-10/20261018-214610-916/innodb-status.txt
+evidence/raw/EXP-10/20261018-214610-916/instrumentation.sql
+evidence/raw/EXP-10/20261018-214610-916/INVALID.md
+evidence/raw/EXP-10/20261018-214610-916/invariants.txt
+evidence/raw/EXP-10/20261018-214610-916/rejected-results.txt
+evidence/raw/EXP-10/20261018-214610-916/retries-mode2.txt
+evidence/raw/EXP-10/20261018-214610-916/retries-mode3.txt
+evidence/raw/EXP-10/20261018-214610-916/retry-mode2-A.sql
+evidence/raw/EXP-10/20261018-214610-916/retry-mode2-A.stderr.txt
+evidence/raw/EXP-10/20261018-214610-916/retry-mode2-A.stdout.txt
+evidence/raw/EXP-10/20261018-214610-916/retry-mode2-B.sql
+evidence/raw/EXP-10/20261018-214610-916/retry-mode2-B.stderr.txt
+evidence/raw/EXP-10/20261018-214610-916/retry-mode2-B.stdout.txt
+evidence/raw/EXP-10/20261018-214610-916/retry-mode3-A.sql
+evidence/raw/EXP-10/20261018-214610-916/retry-mode3-A.stderr.txt
+evidence/raw/EXP-10/20261018-214610-916/retry-mode3-A.stdout.txt
+evidence/raw/EXP-10/20261018-214610-916/retry-mode3-B.sql
+evidence/raw/EXP-10/20261018-214610-916/retry-mode3-B.stderr.txt
+evidence/raw/EXP-10/20261018-214610-916/retry-mode3-B.stdout.txt
+evidence/raw/EXP-10/20261018-214610-916/wait-A.sql
+evidence/raw/EXP-10/20261018-214610-916/wait-A.stderr.txt
+evidence/raw/EXP-10/20261018-214610-916/wait-A.stdout.txt
+evidence/raw/EXP-10/20261018-214610-916/wait-B.sql
+evidence/raw/EXP-10/20261018-214610-916/wait-B.stderr.txt
+evidence/raw/EXP-10/20261018-214610-916/wait-B.stdout.txt
+evidence/raw/EXP-10/20261018-215618-958/contrast-locks.txt
+evidence/raw/EXP-10/20261018-215618-958/create-A.sql
+evidence/raw/EXP-10/20261018-215618-958/create-A.stderr.txt
+evidence/raw/EXP-10/20261018-215618-958/create-A.stdout.txt
+evidence/raw/EXP-10/20261018-215618-958/create-B.sql
+evidence/raw/EXP-10/20261018-215618-958/create-B.stderr.txt
+evidence/raw/EXP-10/20261018-215618-958/create-B.stdout.txt
+evidence/raw/EXP-10/20261018-215618-958/create-locks.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-0.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-1.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-2.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-3.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-4.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-5.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-6.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-7.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-8.txt
+evidence/raw/EXP-10/20261018-215618-958/create-poll-9.txt
+evidence/raw/EXP-10/20261018-215618-958/error-log-unavailable.txt
+evidence/raw/EXP-10/20261018-215618-958/error-log.txt
+evidence/raw/EXP-10/20261018-215618-958/exhausted-mode2.txt
+evidence/raw/EXP-10/20261018-215618-958/exhausted-mode3.txt
+evidence/raw/EXP-10/20261018-215618-958/global-restored.txt
+evidence/raw/EXP-10/20261018-215618-958/innodb-status.txt
+evidence/raw/EXP-10/20261018-215618-958/instrumentation.sql
+evidence/raw/EXP-10/20261018-215618-958/invariants.txt
+evidence/raw/EXP-10/20261018-215618-958/latest-detected-deadlock.txt
+evidence/raw/EXP-10/20261018-215618-958/results.txt
+evidence/raw/EXP-10/20261018-215618-958/retries-mode2.txt
+evidence/raw/EXP-10/20261018-215618-958/retries-mode3.txt
+evidence/raw/EXP-10/20261018-215618-958/retry-mode2-A.sql
+evidence/raw/EXP-10/20261018-215618-958/retry-mode2-A.stderr.txt
+evidence/raw/EXP-10/20261018-215618-958/retry-mode2-A.stdout.txt
+evidence/raw/EXP-10/20261018-215618-958/retry-mode2-B.sql
+evidence/raw/EXP-10/20261018-215618-958/retry-mode2-B.stderr.txt
+evidence/raw/EXP-10/20261018-215618-958/retry-mode2-B.stdout.txt
+evidence/raw/EXP-10/20261018-215618-958/retry-mode3-A.sql
+evidence/raw/EXP-10/20261018-215618-958/retry-mode3-A.stderr.txt
+evidence/raw/EXP-10/20261018-215618-958/retry-mode3-A.stdout.txt
+evidence/raw/EXP-10/20261018-215618-958/retry-mode3-B.sql
+evidence/raw/EXP-10/20261018-215618-958/retry-mode3-B.stderr.txt
+evidence/raw/EXP-10/20261018-215618-958/retry-mode3-B.stdout.txt
+evidence/raw/EXP-10/20261018-215618-958/wait-A.sql
+evidence/raw/EXP-10/20261018-215618-958/wait-A.stderr.txt
+evidence/raw/EXP-10/20261018-215618-958/wait-A.stdout.txt
+evidence/raw/EXP-10/20261018-215618-958/wait-B.sql
+evidence/raw/EXP-10/20261018-215618-958/wait-B.stderr.txt
+evidence/raw/EXP-10/20261018-215618-958/wait-B.stdout.txt
+evidence/raw/EXP-10/20261018-221245-928/contrast-locks.txt
+evidence/raw/EXP-10/20261018-221245-928/create-A.sql
+evidence/raw/EXP-10/20261018-221245-928/create-A.stderr.txt
+evidence/raw/EXP-10/20261018-221245-928/create-A.stdout.txt
+evidence/raw/EXP-10/20261018-221245-928/create-B.sql
+evidence/raw/EXP-10/20261018-221245-928/create-B.stderr.txt
+evidence/raw/EXP-10/20261018-221245-928/create-B.stdout.txt
+evidence/raw/EXP-10/20261018-221245-928/create-locks.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-0.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-1.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-2.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-3.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-4.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-5.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-6.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-7.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-8.txt
+evidence/raw/EXP-10/20261018-221245-928/create-poll-9.txt
+evidence/raw/EXP-10/20261018-221245-928/error-log-unavailable.txt
+evidence/raw/EXP-10/20261018-221245-928/error-log.txt
+evidence/raw/EXP-10/20261018-221245-928/exhausted-mode2.txt
+evidence/raw/EXP-10/20261018-221245-928/exhausted-mode3.txt
+evidence/raw/EXP-10/20261018-221245-928/global-restored.txt
+evidence/raw/EXP-10/20261018-221245-928/innodb-status.txt
+evidence/raw/EXP-10/20261018-221245-928/instrumentation.sql
+evidence/raw/EXP-10/20261018-221245-928/invariants.txt
+evidence/raw/EXP-10/20261018-221245-928/latest-detected-deadlock.txt
+evidence/raw/EXP-10/20261018-221245-928/mode-2-innodb-status.txt
+evidence/raw/EXP-10/20261018-221245-928/mode-3-innodb-status.txt
+evidence/raw/EXP-10/20261018-221245-928/results.txt
+evidence/raw/EXP-10/20261018-221245-928/retries-mode2.txt
+evidence/raw/EXP-10/20261018-221245-928/retries-mode3.txt
+evidence/raw/EXP-10/20261018-221245-928/retry-mode2-A.sql
+evidence/raw/EXP-10/20261018-221245-928/retry-mode2-A.stderr.txt
+evidence/raw/EXP-10/20261018-221245-928/retry-mode2-A.stdout.txt
+evidence/raw/EXP-10/20261018-221245-928/retry-mode2-B.sql
+evidence/raw/EXP-10/20261018-221245-928/retry-mode2-B.stderr.txt
+evidence/raw/EXP-10/20261018-221245-928/retry-mode2-B.stdout.txt
+evidence/raw/EXP-10/20261018-221245-928/retry-mode3-A.sql
+evidence/raw/EXP-10/20261018-221245-928/retry-mode3-A.stderr.txt
+evidence/raw/EXP-10/20261018-221245-928/retry-mode3-A.stdout.txt
+evidence/raw/EXP-10/20261018-221245-928/retry-mode3-B.sql
+evidence/raw/EXP-10/20261018-221245-928/retry-mode3-B.stderr.txt
+evidence/raw/EXP-10/20261018-221245-928/retry-mode3-B.stdout.txt
+evidence/raw/EXP-10/20261018-221245-928/wait-A.sql
+evidence/raw/EXP-10/20261018-221245-928/wait-A.stderr.txt
+evidence/raw/EXP-10/20261018-221245-928/wait-A.stdout.txt
+evidence/raw/EXP-10/20261018-221245-928/wait-B.sql
+evidence/raw/EXP-10/20261018-221245-928/wait-B.stderr.txt
+evidence/raw/EXP-10/20261018-221245-928/wait-B.stdout.txt
+evidence/raw/EXP-10/20261018-223416-983/contrast-locks.txt
+evidence/raw/EXP-10/20261018-223416-983/create-A.sql
+evidence/raw/EXP-10/20261018-223416-983/create-A.stderr.txt
+evidence/raw/EXP-10/20261018-223416-983/create-A.stdout.txt
+evidence/raw/EXP-10/20261018-223416-983/create-B.sql
+evidence/raw/EXP-10/20261018-223416-983/create-B.stderr.txt
+evidence/raw/EXP-10/20261018-223416-983/create-B.stdout.txt
+evidence/raw/EXP-10/20261018-223416-983/create-locks.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-0.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-1.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-2.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-3.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-4.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-5.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-6.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-7.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-8.txt
+evidence/raw/EXP-10/20261018-223416-983/create-poll-9.txt
+evidence/raw/EXP-10/20261018-223416-983/error-log-unavailable.txt
+evidence/raw/EXP-10/20261018-223416-983/error-log.txt
+evidence/raw/EXP-10/20261018-223416-983/exhausted-mode2.txt
+evidence/raw/EXP-10/20261018-223416-983/exhausted-mode3.txt
+evidence/raw/EXP-10/20261018-223416-983/global-restored.txt
+evidence/raw/EXP-10/20261018-223416-983/innodb-status.txt
+evidence/raw/EXP-10/20261018-223416-983/instrumentation.sql
+evidence/raw/EXP-10/20261018-223416-983/invariants.txt
+evidence/raw/EXP-10/20261018-223416-983/latest-detected-deadlock.txt
+evidence/raw/EXP-10/20261018-223416-983/mode-3-innodb-status.txt
+evidence/raw/EXP-10/20261018-223416-983/results.txt
+evidence/raw/EXP-10/20261018-223416-983/retries-mode2.txt
+evidence/raw/EXP-10/20261018-223416-983/retries-mode3.txt
+evidence/raw/EXP-10/20261018-223416-983/retry-mode2-A.sql
+evidence/raw/EXP-10/20261018-223416-983/retry-mode2-A.stderr.txt
+evidence/raw/EXP-10/20261018-223416-983/retry-mode2-A.stdout.txt
+evidence/raw/EXP-10/20261018-223416-983/retry-mode2-B.sql
+evidence/raw/EXP-10/20261018-223416-983/retry-mode2-B.stderr.txt
+evidence/raw/EXP-10/20261018-223416-983/retry-mode2-B.stdout.txt
+evidence/raw/EXP-10/20261018-223416-983/retry-mode3-A.sql
+evidence/raw/EXP-10/20261018-223416-983/retry-mode3-A.stderr.txt
+evidence/raw/EXP-10/20261018-223416-983/retry-mode3-A.stdout.txt
+evidence/raw/EXP-10/20261018-223416-983/retry-mode3-B.sql
+evidence/raw/EXP-10/20261018-223416-983/retry-mode3-B.stderr.txt
+evidence/raw/EXP-10/20261018-223416-983/retry-mode3-B.stdout.txt
+evidence/raw/EXP-10/20261018-223416-983/wait-A.sql
+evidence/raw/EXP-10/20261018-223416-983/wait-A.stderr.txt
+evidence/raw/EXP-10/20261018-223416-983/wait-A.stdout.txt
+evidence/raw/EXP-10/20261018-223416-983/wait-B.sql
+evidence/raw/EXP-10/20261018-223416-983/wait-B.stderr.txt
+evidence/raw/EXP-10/20261018-223416-983/wait-B.stdout.txt
+evidence/raw/EXP-10/20261018-223504-859/contrast-locks.txt
+evidence/raw/EXP-10/20261018-223504-859/create-A.sql
+evidence/raw/EXP-10/20261018-223504-859/create-A.stderr.txt
+evidence/raw/EXP-10/20261018-223504-859/create-A.stdout.txt
+evidence/raw/EXP-10/20261018-223504-859/create-B.sql
+evidence/raw/EXP-10/20261018-223504-859/create-B.stderr.txt
+evidence/raw/EXP-10/20261018-223504-859/create-B.stdout.txt
+evidence/raw/EXP-10/20261018-223504-859/create-locks.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-0.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-1.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-2.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-3.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-4.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-5.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-6.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-7.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-8.txt
+evidence/raw/EXP-10/20261018-223504-859/create-poll-9.txt
+evidence/raw/EXP-10/20261018-223504-859/error-log-unavailable.txt
+evidence/raw/EXP-10/20261018-223504-859/error-log.txt
+evidence/raw/EXP-10/20261018-223504-859/exhausted-mode2.txt
+evidence/raw/EXP-10/20261018-223504-859/exhausted-mode3.txt
+evidence/raw/EXP-10/20261018-223504-859/global-restored.txt
+evidence/raw/EXP-10/20261018-223504-859/innodb-status.txt
+evidence/raw/EXP-10/20261018-223504-859/instrumentation.sql
+evidence/raw/EXP-10/20261018-223504-859/invariants.txt
+evidence/raw/EXP-10/20261018-223504-859/latest-detected-deadlock.txt
+evidence/raw/EXP-10/20261018-223504-859/mode-3-innodb-status.txt
+evidence/raw/EXP-10/20261018-223504-859/results.txt
+evidence/raw/EXP-10/20261018-223504-859/retries-mode2.txt
+evidence/raw/EXP-10/20261018-223504-859/retries-mode3.txt
+evidence/raw/EXP-10/20261018-223504-859/retry-mode2-A.sql
+evidence/raw/EXP-10/20261018-223504-859/retry-mode2-A.stderr.txt
+evidence/raw/EXP-10/20261018-223504-859/retry-mode2-A.stdout.txt
+evidence/raw/EXP-10/20261018-223504-859/retry-mode2-B.sql
+evidence/raw/EXP-10/20261018-223504-859/retry-mode2-B.stderr.txt
+evidence/raw/EXP-10/20261018-223504-859/retry-mode2-B.stdout.txt
+evidence/raw/EXP-10/20261018-223504-859/retry-mode3-A.sql
+evidence/raw/EXP-10/20261018-223504-859/retry-mode3-A.stderr.txt
+evidence/raw/EXP-10/20261018-223504-859/retry-mode3-A.stdout.txt
+evidence/raw/EXP-10/20261018-223504-859/retry-mode3-B.sql
+evidence/raw/EXP-10/20261018-223504-859/retry-mode3-B.stderr.txt
+evidence/raw/EXP-10/20261018-223504-859/retry-mode3-B.stdout.txt
+evidence/raw/EXP-10/20261018-223504-859/wait-A.sql
+evidence/raw/EXP-10/20261018-223504-859/wait-A.stderr.txt
+evidence/raw/EXP-10/20261018-223504-859/wait-A.stdout.txt
+evidence/raw/EXP-10/20261018-223504-859/wait-B.sql
+evidence/raw/EXP-10/20261018-223504-859/wait-B.stderr.txt
+evidence/raw/EXP-10/20261018-223504-859/wait-B.stdout.txt
+evidence/test-runs/20261018-213157-932.txt
+evidence/test-runs/20261018-220849-430.txt
+evidence/test-runs/20261018-223534-490.txt
+experiments/_template/README.md
+experiments/_template/RESULTS.md
+experiments/_template/sessionA.sql
+experiments/_template/sessionB.sql
+experiments/_template/setup.sql
+experiments/_template/teardown.sql
+experiments/EXP-01_atomicity/README.md
+experiments/EXP-01_atomicity/RESULTS.md
+experiments/EXP-01_atomicity/run_auto.ps1
+experiments/EXP-01_atomicity/sessionA.sql
+experiments/EXP-01_atomicity/sessionB.sql
+experiments/EXP-01_atomicity/setup.sql
+experiments/EXP-01_atomicity/teardown.sql
+experiments/EXP-02_consistency/README.md
+experiments/EXP-02_consistency/RESULTS.md
+experiments/EXP-02_consistency/run_auto.ps1
+experiments/EXP-02_consistency/sessionA.sql
+experiments/EXP-02_consistency/sessionB.sql
+experiments/EXP-02_consistency/setup.sql
+experiments/EXP-02_consistency/teardown.sql
+experiments/EXP-04_lost_update/README.md
+experiments/EXP-04_lost_update/RESULTS.md
+experiments/EXP-04_lost_update/run_auto.ps1
+experiments/EXP-04_lost_update/sessionA.sql
+experiments/EXP-04_lost_update/sessionB.sql
+experiments/EXP-04_lost_update/setup.sql
+experiments/EXP-04_lost_update/teardown.sql
+experiments/EXP-05_dirty_read/README.md
+experiments/EXP-05_dirty_read/RESULTS.md
+experiments/EXP-05_dirty_read/run_auto.ps1
+experiments/EXP-05_dirty_read/sessionA.sql
+experiments/EXP-05_dirty_read/sessionB.sql
+experiments/EXP-05_dirty_read/setup.sql
+experiments/EXP-05_dirty_read/teardown.sql
+experiments/EXP-06_nonrepeatable_read/README.md
+experiments/EXP-06_nonrepeatable_read/RESULTS.md
+experiments/EXP-06_nonrepeatable_read/run_auto.ps1
+experiments/EXP-06_nonrepeatable_read/sessionA.sql
+experiments/EXP-06_nonrepeatable_read/sessionB.sql
+experiments/EXP-06_nonrepeatable_read/setup.sql
+experiments/EXP-06_nonrepeatable_read/teardown.sql
+experiments/EXP-07_phantom_read/README.md
+experiments/EXP-07_phantom_read/RESULTS.md
+experiments/EXP-07_phantom_read/run_auto.ps1
+experiments/EXP-07_phantom_read/sessionA.sql
+experiments/EXP-07_phantom_read/sessionB.sql
+experiments/EXP-07_phantom_read/setup.sql
+experiments/EXP-07_phantom_read/teardown.sql
+experiments/EXP-08_isolation_matrix/build_matrix.ps1
+experiments/EXP-08_isolation_matrix/README.md
+experiments/EXP-08_isolation_matrix/RESULTS.md
+experiments/EXP-08_isolation_matrix/run_throughput.ps1
+experiments/EXP-08_isolation_matrix/sessionA.sql
+experiments/EXP-08_isolation_matrix/sessionB.sql
+experiments/EXP-08_isolation_matrix/setup.sql
+experiments/EXP-08_isolation_matrix/teardown.sql
+experiments/EXP-09_stress/README.md
+experiments/EXP-09_stress/RESULTS.md
+experiments/EXP-09_stress/run_stress.ps1
+experiments/EXP-09_stress/sessionA.sql
+experiments/EXP-09_stress/sessionB.sql
+experiments/EXP-09_stress/setup.sql
+experiments/EXP-09_stress/teardown.sql
+experiments/EXP-10_deadlocks/diagnose_ordered_lock.ps1
+experiments/EXP-10_deadlocks/README.md
+experiments/EXP-10_deadlocks/RESULTS.md
+experiments/EXP-10_deadlocks/run_auto.ps1
+experiments/EXP-10_deadlocks/sessionA.sql
+experiments/EXP-10_deadlocks/sessionB.sql
+experiments/EXP-10_deadlocks/setup.sql
+experiments/EXP-10_deadlocks/teardown.sql
+experiments/lab_objects/install.sql
+experiments/lab_objects/setup_lab_accounts.sql
+experiments/lab_objects/uninstall.sql
+experiments/lib/Common.ps1
+experiments/lib/MySqlSlapConnection.ps1
+experiments/lib/Run-Experiment.ps1
+experiments/README.md
+experiments/run_all_auto.ps1
+procedures/README.md
+procedures/sp_internal_post_transfer.sql
+tests/integration/03_exp02.sql
+tests/integration/04_after_experiments.sql
+tests/procedures/19_transfer_missing_second_lock.sql

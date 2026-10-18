@@ -1,0 +1,23 @@
+﻿I1	3	FAIL	2026-10-18 22:46:51.623
+I1b	2	FAIL	2026-10-18 22:46:51.623
+I2	1	FAIL	2026-10-18 22:46:51.623
+I3	1	FAIL	2026-10-18 22:46:51.623
+I4	7	FAIL	2026-10-18 22:46:51.623
+I5	2	FAIL	2026-10-18 22:46:51.623
+I1	NULL	TOTAL	aggregate balance differs from completed ledger
+I1	1	1	balance differs from completed ledger
+I1	10	10	balance differs from completed ledger
+I1b	9	24	balance_after chain break
+I1b	9	25	balance_after chain break
+I2	9	b592ed24-cb17-11f1-8bcd-1cce51263d67	invalid paired transfer
+I3	10	10	minimum or nonnegative balance violated
+I4	9	2	missing Loans INSERT audit
+I4	9	22	missing Transactions INSERT audit
+I4	9	23	missing Transactions INSERT audit
+I4	9	24	missing Transactions INSERT audit
+I4	9	25	missing Transactions INSERT audit
+I4	9	9	missing Accounts INSERT audit
+I4	10	10	missing Accounts INSERT audit
+I5	1	1	latest completed balance_after differs
+I5	9	9	latest completed balance_after differs
+CHECK|6
