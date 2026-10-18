@@ -1,4 +1,5 @@
-# Workbench order; select the banking schema first. Core + B tables (or stubs) + cross FKs + lab.
+# Workbench: select the banking schema first; B real tables replace test stand-ins.
+schema/04_lab/01_bank_lab.sql | A
 schema/01_tables/01_branches.sql | A
 schema/01_tables/02_employees.sql | A
 schema/01_tables/03_customers.sql | A
@@ -11,6 +12,29 @@ schema/01_tables/09_audit_log.sql | A
 schema/02_constraints/01_core_constraints.sql | A
 tests/stubs/member_b_interface_stubs.sql | A
 schema/02_constraints/02_cross_module_fks.sql | A
-schema/04_lab/01_bank_lab.sql | A
-# B real tables 10-16 replace tests/stubs/member_b_interface_stubs.sql before cross FKs.
-# B bank_lab.Benchmark_Results optional when supplied.
+functions/fn_approval_threshold.sql | A
+functions/fn_available_balance.sql | A
+functions/fn_calc_interest.sql | A
+functions/fn_generate_reference.sql | A
+functions/fn_get_balance.sql | A
+functions/fn_mask_id_proof.sql | A
+procedures/sp_resolve_actor.sql | A
+triggers/guards/trg_accounts_bu_minbal_guard.sql | A
+triggers/guards/trg_audit_log_bd_immutable.sql | A
+triggers/guards/trg_audit_log_bu_immutable.sql | A
+triggers/guards/trg_transactions_bd_immutable.sql | A
+triggers/guards/trg_transactions_bi_device_owner.sql | A
+triggers/guards/trg_transactions_bu_immutable.sql | A
+triggers/audit/trg_accounts_ad_audit.sql | A
+triggers/audit/trg_accounts_ai_audit.sql | A
+triggers/audit/trg_accounts_au_audit.sql | A
+triggers/audit/trg_loans_ad_audit.sql | A
+triggers/audit/trg_loans_ai_audit.sql | A
+triggers/audit/trg_loans_au_audit.sql | A
+triggers/audit/trg_transactions_ad_audit.sql | A
+triggers/audit/trg_transactions_ai_audit.sql | A
+triggers/audit/trg_transactions_au_audit.sql | A
+triggers/99_record_audit_install.sql | A
+data/seed/01_reference_data.sql | A
+# B real tables 10-16 precede cross FKs; B fraud trigger must FOLLOWS trg_transactions_ai_audit.
+# Optional B bank_lab.Benchmark_Results include when supplied.

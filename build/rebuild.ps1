@@ -12,7 +12,7 @@ try {
  $bTables=@(Get-ChildItem 'schema/01_tables' -Filter '*.sql' | Where-Object Name -Match '^(10|11|12|13|14|15|16)_')
  if (!$Mode) { $Mode=if ($bTables.Count -eq 7) {'Integrated'} else {'Standalone'} }
  if ($Mode -eq 'Integrated' -and $bTables.Count -ne 7) { throw 'Integrated build requires all seven real Member B table files.' }
- $seed=@(Get-ChildItem 'data/seed' -Filter '*.sql' | Sort-Object Name)
+ $seed=@(Get-ChildItem 'data/seed' -Filter '*.sql' | Where-Object Name -Match '^\d+_' | Sort-Object @{Expression={ [int]($_.BaseName -split '_')[0] }},Name)
  if ($WithSeed -and !$seed.Count) { throw '-WithSeed requested but no data/seed/*.sql loaders exist.' }
  Invoke-BankMysql -Sql "DROP DATABASE IF EXISTS $Database; CREATE DATABASE $Database CHARACTER SET utf8mb4;"
  $build=if ($Mode -eq 'Standalone') {'build/run_all_A_standalone.sql'} else {'build/run_all.sql'}

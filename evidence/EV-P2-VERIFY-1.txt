@@ -1,0 +1,15 @@
+Prompt 2 verification - 2026-10-18
+Branch: feature/A-functions-triggers
+MySQL 8.4.11; Windows PowerShell; option file supplied through BANK_MYSQL_CNF
+
+COMMAND: powershell -File build/rebuild.ps1 -Database bank_txn -Mode Standalone -WithSeed
+Rebuilt bank_txn (Standalone) in 3.89 seconds.
+COMMAND: powershell -File tests/run_tests.ps1 -Database bank_txn -NoRebuild
+LOG: 20261018-184547-243.txt
+TOTAL|PASS=332|FAIL=0
+COMMAND: powershell -File tests/run_tests.ps1 -Database bank_txn
+LOG: 20261018-184658-313.txt
+TOTAL|PASS=332|FAIL=0
+Trigger inventory: 15 rows; evidence/EV-TRIG-1.txt
+Toggle safety: 5 PASS / 0 FAIL; evidence/EV-P2-TOGGLE-1.txt
+Protected-path diff exit 0; original schema, SPEC, schema tests, and B paths unchanged.

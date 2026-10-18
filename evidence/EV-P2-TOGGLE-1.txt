@@ -1,0 +1,5 @@
+TEST|PASS|audit toggle denied on bank_txn|5017 and all 15 triggers retained
+TEST|PASS|scratch drop audit|Nine audits removed; all six guards retained
+TEST|PASS|scratch restore audit|All 15 triggers restored
+TEST|PASS|explicit session override|Drop and recreate allowed; all 15 restored
+TEST|PASS|dependent ordering guard|5017 when another Transactions AFTER INSERT trigger exists

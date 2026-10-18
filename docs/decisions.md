@@ -145,3 +145,14 @@ Reason: Model procedure commits and definer execution correctly.
 A17 Customer-actor check: if sp_resolve_actor(USER()) = Customer, the debited account must belong to that customer (5010). If Employee, p_employee_id must be NULL or equal the resolved employee. System: no actor restriction. Channel 'Branch' requires an active Teller whose branch = account's branch (from-account for transfers); other channels require p_employee_id NULL.
 
 Reason: Enforce actor and channel ownership.
+
+## 2026-10-18 — Prompt 2 implementation clarifications (owner: Member A)
+
+These clarify D5 and A1/A3/A4/A10/A14/A15 without replacing the frozen SPEC.
+
+- Actor fallback: compare logins case-sensitively; full login outranks bare user, which outranks host-specific fallback. Conflicting fallback identities resolve to System. Reason: avoid arbitrary actor attribution when multiple hosts map the same user differently.
+- Guard errors: a Closed account balance/status change is 5011; zero without simultaneous closure or a below-minimum decrease is 5015; a self-counterparty is 5005. Missing device references retain native FK 1452. Reason: preserve the established error table and separate transition, balance, ownership, and reference failures.
+- Reference suffix: six uppercase base36 characters from UUID_SHORT(), combined with NOW(6), with the existing unique reference_no constraint as final enforcement. Reason: no writes inside the reference function and uniqueness across the 1000-call shared-timestamp test.
+- Audit toggles: require scratch or an explicit same-session override, and refuse dependent Transactions AFTER INSERT triggers. B controls its own fraud trigger and reinstalls it FOLLOWS A's audit. Reason: preserve A14 without editing B's objects.
+- Constraint regression isolation: suspend only the ledger UPDATE guard around the unchanged Prompt 1 native-constraint fixture, restoring it in finally. Reason: native 1048 tests and unconditional 5012 guards cover different layers and must both remain tested.
+- Reference data loads after the watermark, using natural keys; -WithSeed runs numeric loaders and can harmlessly repeat the idempotent reference loader. Reason: standalone and integrated builds share the same required reference baseline.
