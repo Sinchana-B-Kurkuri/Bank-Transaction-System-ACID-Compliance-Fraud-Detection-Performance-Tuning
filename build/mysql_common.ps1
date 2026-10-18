@@ -34,13 +34,36 @@ function Invoke-BankMysql {
  if (!$env:BANK_MYSQL_CNF) { throw 'BANK_MYSQL_CNF is unset; configure a local MySQL option file (never commit credentials).' }
  if (!(Test-Path -LiteralPath $env:BANK_MYSQL_CNF -PathType Leaf)) { throw 'BANK_MYSQL_CNF does not name an existing file.' }
  $optionFile=(Resolve-Path -LiteralPath $env:BANK_MYSQL_CNF).ProviderPath
- $client=Get-Command mysql.exe -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
- $clientPath=if ($env:BANK_MYSQL_BIN) { (Resolve-Path -LiteralPath $env:BANK_MYSQL_BIN -ErrorAction Stop).ProviderPath } elseif ($client) { $client.Source } else { $null }
- if (!$clientPath -and $env:ProgramFiles) {
-  $candidates=@(Get-ChildItem -Path (Join-Path $env:ProgramFiles 'MySQL/MySQL Server */bin/mysql.exe') -File -ErrorAction SilentlyContinue)
-  if ($candidates.Count -eq 1) { $clientPath=$candidates[0].FullName }
- }
- if (!$clientPath) { throw 'mysql.exe was not found. Add the intended MySQL bin directory to PATH.' }
+ 
+$client = $null
+foreach ($name in @('mysql', 'mysql.exe')) {
+    $client = Get-Command $name -CommandType Application -ErrorAction SilentlyContinue |
+        Select-Object -First 1
+    if ($client) { break }
+}
+
+$clientPath = if ($env:BANK_MYSQL_BIN) {
+    (Resolve-Path -LiteralPath $env:BANK_MYSQL_BIN -ErrorAction Stop).ProviderPath
+} elseif ($client) {
+    $client.Source
+} else {
+    $null
+}
+
+if (!$clientPath -and $IsWindows -and $env:ProgramFiles) {
+    $candidates = @(
+        Get-ChildItem -Path (Join-Path $env:ProgramFiles 'MySQL/MySQL Server */bin/mysql.exe') `
+            -File -ErrorAction SilentlyContinue
+    )
+    if ($candidates.Count -eq 1) {
+        $clientPath = $candidates[0].FullName
+    }
+}
+
+if (!$clientPath) {
+    throw 'MySQL client not found. Add mysql (macOS) or mysql.exe (Windows) to PATH, or set BANK_MYSQL_BIN.'
+}
+
  # --abort-source-on-error is NOT an Oracle mysql option (8.4.11 exits 2).
  # Expand includes and feed stdin: batch mode without --force stops on the first SQL error.
  $inputSql=Expand-BankSqlSource -Sql $Sql

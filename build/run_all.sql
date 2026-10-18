@@ -10,14 +10,14 @@ SOURCE schema/01_tables/06_transactions.sql;
 SOURCE schema/01_tables/07_loans.sql;
 SOURCE schema/01_tables/08_fraud_flags.sql;
 SOURCE schema/01_tables/09_audit_log.sql;
+SOURCE schema/01_tables/10_devices.sql;
+SOURCE schema/01_tables/11_locations.sql;
+SOURCE schema/01_tables/12_fraud_rules.sql;
+SOURCE schema/01_tables/13_account_risk_profile.sql;
+SOURCE schema/01_tables/14_db_user_map.sql;
+SOURCE schema/01_tables/15_transaction_approvals.sql;
+SOURCE schema/01_tables/16_fraud_ground_truth.sql;
 SOURCE schema/02_constraints/01_core_constraints.sql;
--- B 10_devices.sql: add SOURCE when supplied.
--- B 11_locations.sql: add SOURCE when supplied.
--- B 12_fraud_rules.sql: add SOURCE when supplied.
--- B 13_account_risk_profile.sql: add SOURCE when supplied.
--- B 14_db_user_map.sql: add SOURCE when supplied.
--- B 15_transaction_approvals.sql: add SOURCE when supplied.
--- B 16_fraud_ground_truth.sql: add SOURCE when supplied.
 SOURCE schema/02_constraints/02_cross_module_fks.sql;
 -- SOURCE schema/04_lab/02_benchmark_results.sql; -- Optional B-owned file when supplied.
 SOURCE functions/fn_approval_threshold.sql;
