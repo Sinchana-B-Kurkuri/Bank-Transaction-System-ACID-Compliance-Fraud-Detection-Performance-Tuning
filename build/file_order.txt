@@ -19,6 +19,28 @@ functions/fn_generate_reference.sql | A
 functions/fn_get_balance.sql | A
 functions/fn_mask_id_proof.sql | A
 procedures/sp_resolve_actor.sql | A
+procedures/sp_internal_assert_staff.sql | A
+procedures/sp_internal_authorize.sql | A
+procedures/sp_internal_insert_ledger.sql | A
+procedures/sp_internal_post_single.sql | A
+procedures/sp_internal_post_transfer.sql | A
+procedures/sp_internal_record_failed.sql | A
+procedures/sp_close_account.sql | A
+procedures/sp_decide_approval.sql | A
+procedures/sp_deposit.sql | A
+procedures/sp_disburse_loan.sql | A
+procedures/sp_generate_statement.sql | A
+procedures/sp_open_account.sql | A
+procedures/sp_post_monthly_interest.sql | A
+procedures/sp_reconcile_balances.sql | A
+procedures/sp_register_customer.sql | A
+procedures/sp_request_approval.sql | A
+procedures/sp_review_fraud_flag.sql | A
+procedures/sp_set_account_status.sql | A
+procedures/sp_transfer_funds_retry.sql | A
+procedures/sp_transfer_funds.sql | A
+procedures/sp_update_customer.sql | A
+procedures/sp_withdraw.sql | A
 triggers/guards/trg_accounts_bu_minbal_guard.sql | A
 triggers/guards/trg_audit_log_bd_immutable.sql | A
 triggers/guards/trg_audit_log_bu_immutable.sql | A
@@ -38,3 +60,4 @@ triggers/99_record_audit_install.sql | A
 data/seed/01_reference_data.sql | A
 # B real tables 10-16 precede cross FKs; B fraud trigger must FOLLOWS trg_transactions_ai_audit.
 # Optional B bank_lab.Benchmark_Results include when supplied.
+data/seed/02_tiny_seed.sql | A
