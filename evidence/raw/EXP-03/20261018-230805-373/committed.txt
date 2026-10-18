@@ -1,0 +1,6 @@
+META|8.4.11|2026-10-18 23:08:05.499227
+1	1	ON	1
+bank_txn_scratch.accounts	1710400251
+bank_txn_scratch.transactions	1398618177
+108	100555938.00
+221

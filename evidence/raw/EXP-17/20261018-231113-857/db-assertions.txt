@@ -1,0 +1,9 @@
+TEST|PASS|EXP17 direct loan INSERT UPDATE DELETE count|expected=3; actual=3
+TEST|PASS|EXP17 direct loan JSON and actor|All three mutation snapshots and System attribution
+TEST|PASS|EXP17 direct account balance JSON|DBA +1 produces one exact before/after snapshot
+TEST|PASS|EXP17 direct transaction JSON|DBA direct deposit audited
+TEST|PASS|EXP17 guard rejected no mutation|expected errno=5015; actual errno=5015
+TEST|PASS|EXP17 rejected statement creates zero audit rows|expected=391; actual=391
+TEST|PASS|EXP17 audit UPDATE immutable|expected errno=5013; actual errno=5013
+TEST|PASS|EXP17 audit DELETE immutable|expected errno=5013; actual errno=5013
+TEST|PASS|EXP17 DBA total audit delta|expected=5; actual=5

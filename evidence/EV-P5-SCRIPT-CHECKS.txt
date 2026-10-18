@@ -1,0 +1,10 @@
+PARSE|PASS|Windows PowerShell 5.1.26100.9711|files=14
+SAFETY|PASS|backup/ps/take_full_backup.ps1|bank_txn rejected before mutation
+SAFETY|PASS|backup/ps/apply_workload.ps1|bank_txn rejected before mutation
+SAFETY|PASS|backup/ps/oops_delete.ps1|bank_txn rejected before mutation
+SAFETY|PASS|backup/ps/simulate_loss.ps1|bank_txn rejected before mutation
+SAFETY|PASS|backup/ps/restore_and_pitr.ps1|bank_txn rejected before mutation
+SAFETY|PASS|experiments/EXP-03_durability/setup.ps1|bank_txn rejected before mutation
+SAFETY|PASS|experiments/EXP-17_audit_completeness/run_auto.ps1|bank_txn rejected before mutation
+SAFETY|PASS|verify.ps1|refuses unexecuted crash outcome
+PARSE|PASS|final Windows PowerShell 5.1 syntax|files=14
