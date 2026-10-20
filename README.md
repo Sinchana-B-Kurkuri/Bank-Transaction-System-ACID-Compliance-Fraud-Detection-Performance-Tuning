@@ -72,3 +72,13 @@ Run from the repository root after configuring the two environment variables. Re
 Evidence navigation: docs/member-a/evidence_index.md; final acceptance: status_report.md and DOD_CHECKLIST.md; manual Workbench: WORKBENCH_RUNBOOK.md; review-document edits: docs/review1/CORRECTIONS_A.md. Each experiment retains its own instructions and limitations; preserve original measurements when making a new run.
 
 Known limits: D5 begins coverage at audit-trigger installation; DBA can drop triggers or TRUNCATE/DROP audit data; fraud flags written transactionally roll back on transfer failure; each account has one owner and the system models one currency. Public routines own transactions, so do not wrap committing calls in a caller ROLLBACK test. Opening deposits must be positive under the ledger CHECK. SQL text restore can change opaque Audit_Log JSON representation, so native checksum mismatch is reported separately from normalized JSON equality. Crash/PITR and original Review 1 binary edits remain manual where the status report says so. Berka P2 is deferred until P1 blockers clear; no real data or B generators were added.
+
+### Member A isolated integration checks — 2026-10-20
+
+PR7 now supplies real B fraud/view/index components. Their presence does not resolve the measured scoring/RBAC/interface defects in [the PR7 review](evidence/reviews/PR7_REVIEW_2026-10-20.md). Use a fresh disposable namespace to preserve both existing banking databases:
+
+```powershell
+powershell -NoProfile -File tests/run_regression.ps1 -IsolatedPrefix bank_a_ci_unique_run -VerifyOptimized
+```
+
+This runs both modes, nested tests, release checks, a bounded concurrent Quick smoke profile and six invariants, then removes only its owned isolated databases. Baseline is the default; Optimized explicitly sources B's unchanged performance indexes. Integrated B assertions remain enabled and currently fail; a nonzero acceptance result is expected until B resolves the review findings. Quick never invokes full experiment drivers or overwrites their historical reports. See [isolated-run instructions](docs/member-a/ISOLATED_REGRESSION.md) and [current delivery results](docs/member-a/PROMPT6_TOOLING_DELIVERY.md). Earlier dated Prompt 6 counts describe their original checkout, not current whole-system acceptance.

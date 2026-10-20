@@ -1,0 +1,2 @@
+﻿"Name","Status","Detail","Evidence"
+"Regression orchestration","FAIL","Isolated database already exists: bank_a_ci_20261020_tooling2_main",""

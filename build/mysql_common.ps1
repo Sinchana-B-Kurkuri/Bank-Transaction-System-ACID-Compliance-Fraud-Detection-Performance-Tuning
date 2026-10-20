@@ -1,6 +1,40 @@
 $ErrorActionPreference = 'Stop'
 function Assert-BankDatabase([string]$Database) {
+ if ($env:BANK_TEST_ISOLATED_PREFIX) {
+  Assert-BankIsolatedContext
+  if ($Database -notin @("$env:BANK_TEST_ISOLATED_PREFIX`_main","$env:BANK_TEST_ISOLATED_PREFIX`_scratch","$env:BANK_TEST_ISOLATED_PREFIX`_lab")) { throw "Isolated run refuses database: $Database" }
+  return
+ }
  if ($Database -notin @('bank_txn','bank_txn_scratch')) { throw 'Database must be bank_txn or bank_txn_scratch.' }
+}
+
+function Assert-BankIsolatedContext {
+ if ($env:BANK_TEST_ISOLATED_PREFIX -cnotmatch '^bank_a_ci_[a-z0-9_]{1,32}$') { throw 'Invalid isolated prefix: use bank_a_ci_<unique suffix>.' }
+ if ($env:BANK_TEST_OWNER_TOKEN -cnotmatch '^[a-f0-9]{32}$') { throw 'Isolated runs require a fresh owner token.' }
+ if (!$env:BANK_TEST_EVIDENCE_DIR) { throw 'Isolated runs require BANK_TEST_EVIDENCE_DIR.' }
+}
+function Get-BankScratchDatabase {
+ if ($env:BANK_TEST_ISOLATED_PREFIX) { Assert-BankIsolatedContext; return "$env:BANK_TEST_ISOLATED_PREFIX`_scratch" }
+ return 'bank_txn_scratch'
+}
+function Get-BankEvidencePath([string]$Path) {
+ if (!$env:BANK_TEST_EVIDENCE_DIR) { return $Path }
+ $relative=$Path -replace '^.*[/\\]evidence[/\\]','' -replace '^evidence[/\\]',''
+ if ([IO.Path]::IsPathRooted($relative) -or $relative -match '(^|[/\\])\.\.([/\\]|$)') { throw 'Invalid redirected evidence path.' }
+ $target=Join-Path $env:BANK_TEST_EVIDENCE_DIR $relative
+ [void][IO.Directory]::CreateDirectory((Split-Path ([IO.Path]::GetFullPath($target)) -Parent))
+ return $target
+}
+function ConvertTo-BankContextSql([string]$Sql) {
+ if (!$env:BANK_TEST_ISOLATED_PREFIX) { return $Sql }
+ Assert-BankIsolatedContext
+ $Sql=[regex]::Replace($Sql,'(?i)\bbank_lab\b',"$env:BANK_TEST_ISOLATED_PREFIX`_lab")
+ # The scratch-only toggle guard is retained with this run's scratch name.
+ $Sql=$Sql.Replace("'bank_txn_scratch'","'$(Get-BankScratchDatabase)'")
+ if ($Sql -match '(?i)\bbank_txn(?:_scratch)?\b|\bSET\s+GLOBAL\b|\bFLUSH\s+LOGS\b') { throw 'Isolated SQL references a protected database or global operation.' }
+ foreach ($m in [regex]::Matches($Sql,'(?i)\b(?:CREATE|DROP)\s+DATABASE\s+(?:IF\s+(?:NOT\s+)?EXISTS\s+)?`?(\w+)')) { Assert-BankDatabase $m.Groups[1].Value }
+ foreach ($m in [regex]::Matches($Sql,'(?im)^\s*USE\s+`?(\w+)')) { Assert-BankDatabase $m.Groups[1].Value }
+ return $Sql
 }
 
 function ConvertTo-BankNativeArgument([AllowEmptyString()][string]$Value) {
@@ -66,7 +100,7 @@ if (!$clientPath) {
 
  # --abort-source-on-error is NOT an Oracle mysql option (8.4.11 exits 2).
  # Expand includes and feed stdin: batch mode without --force stops on the first SQL error.
- $inputSql=Expand-BankSqlSource -Sql $Sql
+ $inputSql=ConvertTo-BankContextSql (Expand-BankSqlSource -Sql $Sql)
  $arguments=@("--defaults-extra-file=$optionFile",'--batch','--raw','--skip-column-names','--default-character-set=utf8mb4','--skip-force')
  if ($Database) { $arguments += "--database=$Database" }
  $start=[Diagnostics.ProcessStartInfo]::new()

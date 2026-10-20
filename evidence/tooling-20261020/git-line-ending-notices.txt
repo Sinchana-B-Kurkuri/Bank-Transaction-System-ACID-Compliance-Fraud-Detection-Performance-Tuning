@@ -1,0 +1,9 @@
+warning: in the working copy of 'build/file_order.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/member-a/INTEGRATION_FINDINGS.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/member-a/PROMPT6_DELIVERY.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/member-a/WORKBENCH_RUNBOOK.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/member-a/status_report.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/procedures/15_reconcile_scratch.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/procedures/18_release_strip.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/run_regression.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/run_release.ps1', LF will be replaced by CRLF the next time Git touches it

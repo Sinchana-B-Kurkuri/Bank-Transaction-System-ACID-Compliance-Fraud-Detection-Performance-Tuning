@@ -19,7 +19,7 @@ SOURCE schema/01_tables/15_transaction_approvals.sql;
 SOURCE schema/01_tables/16_fraud_ground_truth.sql;
 SOURCE schema/02_constraints/01_core_constraints.sql;
 SOURCE schema/02_constraints/02_cross_module_fks.sql;
-SOURCE indexes/01_performance_indexes.sql;
+-- Optimized indexes are opt-in through build/run_all_optimized.sql or rebuild -IndexProfile Optimized.
 -- SOURCE schema/04_lab/02_benchmark_results.sql; -- Optional B-owned file when supplied.
 SOURCE functions/fn_approval_threshold.sql;
 SOURCE functions/fn_available_balance.sql;
@@ -68,9 +68,9 @@ SOURCE triggers/audit/trg_transactions_ad_audit.sql;
 SOURCE triggers/audit/trg_transactions_ai_audit.sql;
 SOURCE triggers/audit/trg_transactions_au_audit.sql;
 SOURCE triggers/99_record_audit_install.sql;
+SOURCE data/seed/01_reference_data.sql;
 SOURCE data/seed/03_fraud_rules.sql;
 SOURCE triggers/fraud/trg_transactions_ai_fraud_evaluate.sql;
-SOURCE data/seed/01_reference_data.sql;
 SOURCE data/seed/02_tiny_seed.sql;
 SOURCE views/v_customer_account_summary.sql;
 SOURCE views/v_transaction_activity.sql;

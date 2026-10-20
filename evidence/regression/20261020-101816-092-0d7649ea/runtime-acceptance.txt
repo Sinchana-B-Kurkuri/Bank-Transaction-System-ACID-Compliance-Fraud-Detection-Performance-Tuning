@@ -1,0 +1,29 @@
+﻿ACCEPTANCE|PASS|Installed B routine fn_fraud_score|Installation inventory only; behavior reported separately
+ACCEPTANCE|PASS|Installed B routine sp_evaluate_fraud|Installation inventory only; behavior reported separately
+ACCEPTANCE|MISSING|Installed B routine fn_distance_km|Installation inventory only; behavior reported separately
+ACCEPTANCE|MISSING|Installed B routine fn_amount_zscore|Installation inventory only; behavior reported separately
+ACCEPTANCE|MISSING|Installed B routine fn_txn_count_window|Installation inventory only; behavior reported separately
+ACCEPTANCE|MISSING|Installed B routine fn_is_odd_hour|Installation inventory only; behavior reported separately
+ACCEPTANCE|MISSING|Installed B routine fn_account_age_days|Installation inventory only; behavior reported separately
+ACCEPTANCE|MISSING|Installed B routine fn_txn_risk_score|Installation inventory only; behavior reported separately
+ACCEPTANCE|MISSING|Installed B routine fn_risk_level|Installation inventory only; behavior reported separately
+ACCEPTANCE|PASS|Fraud trigger ordering|Installed ACTION_ORDER plus source FOLLOWS
+TEST|PASS|fraud score low risk|expected=0.00; actual=0.00
+TEST|FAIL|fraud score digital untrusted|expected=40.00; actual=30.00
+TEST|PASS|fraud score capped|expected=100.00; actual=100.00
+TEST|PASS|fraud_score|deterministic score cases passed
+ACCEPTANCE|FAIL|B scoring behavior|Unmodified B assertions; unconditional summary does not override FAIL
+PROBE|flags|3
+PROBE|audit|1
+TEST|PASS|integrated fraud transfer rollback|expected errno=5016; actual errno=5016
+PROBE|rollback|1
+PROBE|reevaluation|60.00|100.00|0
+ACCEPTANCE|PASS|Automatic fraud evaluation|Real deposit produced flags and exactly one INSERT audit
+ACCEPTANCE|PASS|Fraud rollback participation|Real 5016 rollback: balances, ledger, audit, flags and risk total unchanged
+ACCEPTANCE|FAIL|Fraud reevaluation stability|PROBE|reevaluation|60.00|100.00|0
+ACCEPTANCE|PASS|Installed B view v_customer_account_summary|Presence only; no permission certification
+ACCEPTANCE|PASS|Installed B view v_transaction_activity|Presence only; no permission certification
+ACCEPTANCE|PASS|Installed B view v_fraud_case_queue|Presence only; no permission certification
+ACCEPTANCE|MISSING|Target B role grants|Target grant records=0; restricted-role behavior requires B repaired target-aware acceptance suite; no global roles installed by this runner
+ACCEPTANCE|FAIL|B public EXECUTE source contract|Static check only: role source must grant agreed public APIs; never private helpers
+TOTAL|ACCEPTANCE_FAIL=3|MISSING_OR_BLOCKED=8

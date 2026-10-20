@@ -1,3 +1,5 @@
+> Historical report: the 2026-10-19 runtime-absence findings below describe the pre-PR7 checkout. For current PR7 failures and Member A tooling corrections, see PROMPT6_TOOLING_DELIVERY.md and ISOLATED_REGRESSION.md. Whole-system acceptance remains blocked.
+
 # Prompt 6 delivery — 2026-10-19
 
 The available A implementation integrates successfully with B's **actual seven table definitions**, with no changes to banking procedure contracts, corrected ordered locking, schema, functions or triggers. Whole-system acceptance is **BLOCKED**, because this checkout/develop does not contain B's fraud/security runtime or its tests. No stubs were used for the Integrated build, and no substitute B fraud/security implementation was invented.

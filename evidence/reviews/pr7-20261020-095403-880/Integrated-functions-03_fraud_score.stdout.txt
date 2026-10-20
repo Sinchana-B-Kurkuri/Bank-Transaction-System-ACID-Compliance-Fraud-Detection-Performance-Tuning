@@ -1,0 +1,4 @@
+TEST|PASS|fraud score low risk|expected=0.00; actual=0.00
+TEST|FAIL|fraud score digital untrusted|expected=40.00; actual=30.00
+TEST|PASS|fraud score capped|expected=100.00; actual=100.00
+TEST|PASS|fraud_score|deterministic score cases passed

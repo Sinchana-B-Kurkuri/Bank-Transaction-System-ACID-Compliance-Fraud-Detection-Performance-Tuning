@@ -1,0 +1,14 @@
+TEST|PASS|isolated context scratch propagation|No database statement executed by this safety test
+TEST|PASS|isolated context bank_txn target refused|No database statement executed by this safety test
+TEST|PASS|isolated context bank_txn_scratch target refused|No database statement executed by this safety test
+TEST|PASS|isolated context other isolated prefix refused|No database statement executed by this safety test
+TEST|PASS|isolated context hardcoded qualified SQL refused|No database statement executed by this safety test
+TEST|PASS|isolated context unapproved CREATE refused|No database statement executed by this safety test
+TEST|PASS|isolated context unapproved DROP refused|No database statement executed by this safety test
+TEST|PASS|isolated context unapproved USE refused|No database statement executed by this safety test
+TEST|PASS|isolated context GLOBAL change refused|No database statement executed by this safety test
+TEST|PASS|isolated context helper namespace rewritten|No database statement executed by this safety test
+TEST|PASS|isolated context unsafe prefix refused|No database statement executed by this safety test
+TEST|PASS|isolated context default scratch unchanged|No database statement executed by this safety test
+TEST|PASS|isolated context default banking targets unchanged|No database statement executed by this safety test
+TEST|PASS|isolated context default arbitrary target refused|No database statement executed by this safety test

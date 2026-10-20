@@ -1,0 +1,38 @@
+TEST|PASS|balance normal|expected=1000.00; actual=1000.00
+TEST|PASS|balance NULL|expected=NULL; actual=NULL
+TEST|PASS|available NULL|expected=0.00; actual=0.00
+TEST|PASS|interest NULL|expected=0.00; actual=0.00
+TEST|PASS|balance -1|expected=NULL; actual=NULL
+TEST|PASS|available -1|expected=0.00; actual=0.00
+TEST|PASS|interest -1|expected=0.00; actual=0.00
+TEST|PASS|available active|expected=900.00; actual=900.00
+TEST|PASS|monthly interest active|expected=5.00; actual=5.00
+TEST|PASS|available Frozen|expected=0.00; actual=0.00
+TEST|PASS|interest Frozen|expected=0.00; actual=0.00
+TEST|PASS|stored balance Frozen|expected=0.00; actual=0.00
+TEST|PASS|available Closed|expected=0.00; actual=0.00
+TEST|PASS|interest Closed|expected=0.00; actual=0.00
+TEST|PASS|stored balance Closed|expected=0.00; actual=0.00
+TEST|PASS|interest half-cent rounds up|expected=0.01; actual=0.01
+TEST|PASS|available below minimum clipped|expected=0.00; actual=0.00
+TEST|PASS|interest below half-cent rounds down|expected=0.00; actual=0.00
+TEST|PASS|interest zero rate|expected=0.00; actual=0.00
+TEST|PASS|mask NULL|expected=NULL; actual=NULL
+TEST|PASS|mask |expected=; actual=
+TEST|PASS|mask ABC|expected=ABC; actual=ABC
+TEST|PASS|mask 1234|expected=1234; actual=1234
+TEST|PASS|mask SYNTHETIC1234|expected=XXXXXXXXX1234; actual=XXXXXXXXX1234
+TEST|PASS|approval threshold|expected=100000.00; actual=100000.00
+TEST|PASS|reference 1000 unique|1000 separate evaluations must be unique
+TEST|PASS|reference length and format|Timestamp plus six base36 characters
+TEST|PASS|actor NULL|expected=System; actual=System
+TEST|PASS|actor unmapped|expected=System; actual=System
+TEST|PASS|actor exact|expected=Employee; actual=Employee
+TEST|PASS|actor employee id|expected=10; actual=10
+TEST|PASS|actor employee excludes customer|expected=NULL; actual=NULL
+TEST|PASS|actor host fallback|expected=Employee; actual=Employee
+TEST|PASS|actor conflicting fallback is System|expected=System; actual=System
+TEST|PASS|actor bare key fallback|expected=Customer; actual=Customer
+TEST|PASS|actor customer id|expected=11; actual=11
+TEST|PASS|actor customer excludes employee|expected=NULL; actual=NULL
+TEST|PASS|actor exact outranks bare fallback|expected=Employee; actual=Employee

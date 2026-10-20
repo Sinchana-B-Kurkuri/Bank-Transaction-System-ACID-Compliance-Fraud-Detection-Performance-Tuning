@@ -1,0 +1,9 @@
+I1	0	PASS	2026-10-20 09:54:14.122
+I1b	0	PASS	2026-10-20 09:54:14.122
+I2	0	PASS	2026-10-20 09:54:14.122
+I3	0	PASS	2026-10-20 09:54:14.122
+I4	0	PASS	2026-10-20 09:54:14.122
+I5	0	PASS	2026-10-20 09:54:14.122
+TEST|PASS|reconcile one account|actual errno=0
+TEST|PASS|reconcile six summaries|Expected procedure contract
+TEST|PASS|reconcile missing account|expected errno=5002; actual errno=5002

@@ -1,0 +1,14 @@
+TEST|PASS|status freeze|actual errno=0
+TEST|PASS|status Frozen stored|Expected procedure contract
+TEST|PASS|status same transition|expected errno=5011; actual errno=5011
+TEST|PASS|status unfreeze|actual errno=0
+TEST|PASS|status missing account|expected errno=5002; actual errno=5002
+TEST|PASS|status invalid Closed|expected errno=5011; actual errno=5011
+TEST|PASS|status invalid Other|expected errno=5011; actual errno=5011
+TEST|PASS|status invalid NULL|expected errno=5011; actual errno=5011
+TEST|PASS|status unauthorized NULL|expected errno=5010; actual errno=5010
+TEST|PASS|status unauthorized @p3_t2|expected errno=5010; actual errno=5010
+TEST|PASS|status unauthorized @p3_dba|expected errno=5010; actual errno=5010
+TEST|PASS|status unauthorized -1|expected errno=5010; actual errno=5010
+TEST|PASS|status Closed is terminal|expected errno=5011; actual errno=5011
+TEST|PASS|status inactive employee|expected errno=5010; actual errno=5010

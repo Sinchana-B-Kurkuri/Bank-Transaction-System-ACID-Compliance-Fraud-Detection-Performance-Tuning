@@ -1,0 +1,1 @@
+ERROR 1142 (42000) at line 1: SELECT command denied to user 'zz_a_r7_1020095404_auditor'@'localhost' for table 'accounts'

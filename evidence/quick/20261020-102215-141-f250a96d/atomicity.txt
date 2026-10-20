@@ -1,0 +1,3 @@
+TEST|PASS|Quick atomicity 0|expected errno=5016; actual errno=5016
+TEST|PASS|Quick atomicity 1|expected errno=5016; actual errno=5016
+TEST|PASS|Quick atomicity 2|expected errno=5016; actual errno=5016

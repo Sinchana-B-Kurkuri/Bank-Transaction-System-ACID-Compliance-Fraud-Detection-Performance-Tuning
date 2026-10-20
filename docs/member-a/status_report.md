@@ -1,3 +1,5 @@
+> Historical report: the 2026-10-19 runtime-absence findings below describe the pre-PR7 checkout. For current PR7 failures and Member A tooling corrections, see PROMPT6_TOOLING_DELIVERY.md and ISOLATED_REGRESSION.md. Whole-system acceptance remains blocked.
+
 # Member A status report — 2026-10-19
 
 Source of rows: explicit Prompts 1–6 and frozen SPEC. A separate coverage matrix/Section 6 plan was not supplied; this is not a verbatim crosswalk to an unavailable plan. “Locally tested” distinguishes current Prompt 6 runs from historical native measurements. No human/GUI/crash/PITR demonstration is marked manually verified without observed evidence.

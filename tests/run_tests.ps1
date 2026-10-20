@@ -1,4 +1,5 @@
-param([string]$Database='bank_txn',[switch]$NoRebuild,[string]$Filter='*')
+param([string]$Database='bank_txn',[switch]$NoRebuild,[string]$Filter='*',
+ [ValidateSet('Auto','Standalone','Integrated')][string]$Mode='Auto')
 . "$PSScriptRoot/../build/mysql_common.ps1"
 Assert-BankDatabase $Database
 $root=Split-Path $PSScriptRoot -Parent
@@ -8,18 +9,30 @@ $log=[Collections.Generic.List[string]]::new()
 $pass=0; $fail=0
 try {
  Push-Location $root
+ if ($Mode -eq 'Auto' -and $env:BANK_TEST_BUILD_MODE) { $Mode=$env:BANK_TEST_BUILD_MODE }
  [void][IO.Directory]::CreateDirectory((Join-Path $root 'evidence/test-runs'))
  if (!$NoRebuild) {
   $ErrorActionPreference='Continue'
-  $output=@(& powershell -NoProfile -File build/rebuild.ps1 -Database $Database 2>&1 | ForEach-Object { "$_" })
+  $buildArgs=@('-Database',$Database)
+  if ($Mode -ne 'Auto') { $buildArgs+=@('-Mode',$Mode) }
+  $output=@(& powershell -NoProfile -File build/rebuild.ps1 @buildArgs 2>&1 | ForEach-Object { "$_" })
   $ErrorActionPreference='Stop'
   $log.AddRange([string[]]$output)
   if ($LASTEXITCODE -ne 0) { throw 'Rebuild failed; tests not executed.' }
  }
+ # Detect installed real B schema, not merely files or the stand-in interfaces.
+ $real=@(Invoke-BankMysql -Database $Database -Sql "SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='Account_Risk_Profile';")[0] -eq '1'
+ if ($Mode -eq 'Auto') { $Mode=if($real){'Integrated'}else{'Standalone'} }
+ if (($Mode -eq 'Integrated') -ne $real) { throw 'Requested test mode disagrees with installed schema.' }
+ $manifest=Import-Csv tests/component_tests.csv
  foreach ($folder in @('schema','functions','triggers','procedures','invariants','integration')) {
   $files=Get-ChildItem "tests/$folder" -File | Where-Object { $_.Name -match '^\d\d_.*\.(sql|ps1)$' -and $_.BaseName -like $Filter } | Sort-Object Name
   foreach ($file in $files) {
    $relative=$file.FullName.Substring($root.Length+1).Replace('\','/')
+   if ($Mode -eq 'Standalone' -and @($manifest | Where-Object { $_.Path -eq $relative -and $_.Mode -eq 'Integrated' }).Count) {
+    $line="SKIP|$relative|Integrated component test; Standalone has interface stubs only"
+    $log.Add($line); Write-Output $line; continue
+   }
    try {
     if ($file.Extension -eq '.sql') {
      $restoreLedgerGuard=$false
@@ -64,7 +77,7 @@ try {
 finally {
  $summary="TOTAL|PASS=$pass|FAIL=$fail"
  $log.Add($summary); Write-Output $summary
- $log | Set-Content (Join-Path $root "evidence/test-runs/$stamp.txt") -Encoding UTF8
+ $log | Set-Content (Get-BankEvidencePath (Join-Path $root "evidence/test-runs/$stamp.txt")) -Encoding UTF8
  Pop-Location
 }
 if ($fail) { exit 1 }

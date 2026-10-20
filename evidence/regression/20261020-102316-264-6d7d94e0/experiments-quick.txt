@@ -1,0 +1,11 @@
+﻿TEST|PASS|Quick atomicity 0|expected errno=5016; actual errno=5016
+TEST|PASS|Quick atomicity 1|expected errno=5016; actual errno=5016
+TEST|PASS|Quick atomicity 2|expected errno=5016; actual errno=5016
+TEST|PASS|Quick ordered concurrency|2 real sessions, 5 transfers each, 20 ledger rows
+TEST|PASS|after experiments I1|violations=0
+TEST|PASS|after experiments I1b|violations=0
+TEST|PASS|after experiments I2|violations=0
+TEST|PASS|after experiments I3|violations=0
+TEST|PASS|after experiments I4|violations=0
+TEST|PASS|after experiments I5|violations=0
+QUICK|evidence=C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\evidence\quick\20261020-102631-743-301a7bca

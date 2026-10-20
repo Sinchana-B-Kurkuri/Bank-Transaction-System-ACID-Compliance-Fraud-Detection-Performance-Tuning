@@ -1,0 +1,2 @@
+trg_transactions_ai_audit	1
+trg_transactions_ai_fraud_evaluate	2

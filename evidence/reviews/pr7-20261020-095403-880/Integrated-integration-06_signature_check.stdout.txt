@@ -1,0 +1,34 @@
+TEST|PASS|SPEC signature sp_close_account|Expected exact name/mode/type/count; parameters=3
+TEST|PASS|SPEC signature sp_decide_approval|Expected exact name/mode/type/count; parameters=4
+TEST|PASS|SPEC signature sp_deposit|Expected exact name/mode/type/count; parameters=8
+TEST|PASS|SPEC signature sp_disburse_loan|Expected exact name/mode/type/count; parameters=7
+TEST|PASS|SPEC signature sp_generate_statement|Expected exact name/mode/type/count; parameters=3
+TEST|PASS|SPEC signature sp_open_account|Expected exact name/mode/type/count; parameters=8
+TEST|PASS|SPEC signature sp_post_monthly_interest|Expected exact name/mode/type/count; parameters=4
+TEST|PASS|SPEC signature sp_reconcile_balances|Expected exact name/mode/type/count; parameters=1
+TEST|PASS|SPEC signature sp_register_customer|Expected exact name/mode/type/count; parameters=9
+TEST|PASS|SPEC signature sp_request_approval|Expected exact name/mode/type/count; parameters=6
+TEST|PASS|SPEC signature sp_resolve_actor|Expected exact name/mode/type/count; parameters=4
+TEST|PASS|SPEC signature sp_review_fraud_flag|Expected exact name/mode/type/count; parameters=3
+TEST|PASS|SPEC signature sp_set_account_status|Expected exact name/mode/type/count; parameters=3
+TEST|PASS|SPEC signature sp_transfer_funds|Expected exact name/mode/type/count; parameters=11
+TEST|PASS|SPEC signature sp_transfer_funds_retry|Expected exact name/mode/type/count; parameters=13
+TEST|PASS|SPEC signature sp_update_customer|Expected exact name/mode/type/count; parameters=7
+TEST|PASS|SPEC signature sp_withdraw|Expected exact name/mode/type/count; parameters=8
+TEST|PASS|public DEFINER sp_close_account|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_decide_approval|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_deposit|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_disburse_loan|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_generate_statement|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_open_account|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_post_monthly_interest|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_reconcile_balances|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_register_customer|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_request_approval|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_resolve_actor|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_review_fraud_flag|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_set_account_status|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_transfer_funds|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_transfer_funds_retry|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_update_customer|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_withdraw|Routine exists and SQL SECURITY DEFINER

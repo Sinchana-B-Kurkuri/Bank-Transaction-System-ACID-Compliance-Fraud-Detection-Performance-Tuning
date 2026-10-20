@@ -1,0 +1,16 @@
+TEST|PASS|update NULL fields unchanged|actual errno=0
+TEST|PASS|update attributes|actual errno=0
+TEST|PASS|update stored attributes|Expected procedure contract
+TEST|PASS|update missing customer|expected errno=5007; actual errno=5007
+TEST|PASS|update invalid name|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid address|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid email|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid phone|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid kyc|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid active flag|expected errno=5018; actual errno=5018
+TEST|PASS|update cannot deactivate active account owner|expected errno=5011; actual errno=5011
+TEST|PASS|update duplicate identity sanitized|expected errno=5018; actual errno=5018
+TEST|PASS|update deactivate after closure|actual errno=0
+TEST|PASS|update reactivate|actual errno=0
+TEST|PASS|update reactivated|Expected procedure contract
+TEST|PASS|update other customer forbidden|expected errno=5010; actual errno=5010

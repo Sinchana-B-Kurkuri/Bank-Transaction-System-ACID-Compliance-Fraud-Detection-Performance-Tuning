@@ -1,0 +1,1 @@
+ERROR 1370 (42000) at line 1: execute command denied to user 'zz_a_r7_1020095404_teller'@'localhost' for routine 'bank_review_b_1020095404.sp_deposit'

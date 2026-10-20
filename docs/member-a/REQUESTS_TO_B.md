@@ -14,3 +14,11 @@ Please supply the claimed implementations/tests for indexes, benchmarks/Benchmar
 
 The missing -Quick parameter is an A experiment-orchestrator scope gap, not a request for B to change A's files.
 
+## 2026-10-20 — PR7 follow-up and index-profile coordination
+
+PR7 supplies fn_fraud_score, sp_evaluate_fraud, the correctly ordered fraud trigger, three views, role SQL and performance indexes. Earlier absence statements above are historical. See evidence/reviews/PR7_REVIEW_2026-10-20.md for measured failures; presence is no longer reported as missing for these installed objects.
+
+A's build now defaults to Baseline and sources the unchanged B index file only through explicit Integrated Optimized selection. Please coordinate benchmark setup with this profile rather than assuming every Integrated build is optimized. No change to B's index definitions is requested or made by A. Future B component-only tests need registration in tests/component_tests.csv for Standalone discovery; Integrated assertions stay enabled unchanged.
+
+Still required from B: resolve the 30-versus-40 scoring assertion, reevaluation feedback, identity/view privilege and public EXECUTE defects; provide target-aware RBAC installation/behavior tests without bank_txn hardcoding or unrestricted base-table grants; implement the seven SPEC functions or agree an explicit interface revision. Clarify param_json and NULL transfer-credit policy. Missing Benchmark_Results/generators/EXP-11..15 remain scope decisions. A's new bounded Quick does not substitute for them or certify B role behavior.
+

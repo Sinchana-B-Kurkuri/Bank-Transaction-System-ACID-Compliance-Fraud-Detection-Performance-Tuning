@@ -1,0 +1,21 @@
+TEST|PASS|loan routed|actual errno=0
+TEST|PASS|loan Deposit credit|Expected procedure contract
+TEST|PASS|loan unrouted|actual errno=0
+TEST|PASS|loan NULL route|Expected procedure contract
+TEST|PASS|loan principal 0|expected errno=5001; actual errno=5001
+TEST|PASS|loan principal -1|expected errno=5001; actual errno=5001
+TEST|PASS|loan principal NULL|expected errno=5001; actual errno=5001
+TEST|PASS|loan negative rate|expected errno=5018; actual errno=5018
+TEST|PASS|loan NULL rate|expected errno=5018; actual errno=5018
+TEST|PASS|loan zero tenure|expected errno=5018; actual errno=5018
+TEST|PASS|loan NULL tenure|expected errno=5018; actual errno=5018
+TEST|PASS|loan missing customer|expected errno=5007; actual errno=5007
+TEST|PASS|loan missing route|expected errno=5007; actual errno=5007
+TEST|PASS|loan wrong owner|expected errno=5010; actual errno=5010
+TEST|PASS|loan wrong branch employee|expected errno=5010; actual errno=5010
+TEST|PASS|loan Branch teller|actual errno=0
+TEST|PASS|loan Frozen route|expected errno=5003; actual errno=5003
+TEST|PASS|loan inactive customer|expected errno=5011; actual errno=5011
+TEST|PASS|loan unrouted Manager|actual errno=0
+TEST|PASS|loan Customer cannot borrow as another owner|expected errno=5010; actual errno=5010
+TEST|PASS|loan unrouted employee spoof|expected errno=5010; actual errno=5010

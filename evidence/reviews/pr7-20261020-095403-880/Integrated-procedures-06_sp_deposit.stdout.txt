@@ -1,0 +1,26 @@
+TEST|PASS|deposit Online|actual errno=0
+TEST|PASS|deposit return values|Expected procedure contract
+TEST|PASS|deposit Branch Teller|actual errno=0
+TEST|PASS|deposit amount 0|expected errno=5001; actual errno=5001
+TEST|PASS|deposit amount -1|expected errno=5001; actual errno=5001
+TEST|PASS|deposit amount NULL|expected errno=5001; actual errno=5001
+TEST|PASS|deposit missing account|expected errno=5002; actual errno=5002
+TEST|PASS|deposit missing account no Failed|Expected procedure contract
+TEST|PASS|deposit invalid channel|expected errno=5018; actual errno=5018
+TEST|PASS|deposit wrong branch|expected errno=5010; actual errno=5010
+TEST|PASS|deposit Branch NULL|expected errno=5010; actual errno=5010
+TEST|PASS|deposit Branch Manager|expected errno=5010; actual errno=5010
+TEST|PASS|deposit Online employee|expected errno=5010; actual errno=5010
+TEST|PASS|deposit device owner mismatch|expected errno=5014; actual errno=5014
+TEST|PASS|deposit mismatch rolls back balance|Expected procedure contract
+TEST|PASS|deposit missing device|expected errno=1452; actual errno=1452
+TEST|PASS|deposit missing location|expected errno=1452; actual errno=1452
+TEST|PASS|deposit reference collision retries|actual errno=0
+TEST|PASS|deposit exactly one credit after retries|Expected procedure contract
+TEST|PASS|deposit collision retry exhausted|expected errno=1062; actual errno=1062
+TEST|PASS|deposit collision exhaustion rolls back|Expected procedure contract
+TEST|PASS|deposit Frozen|expected errno=5003; actual errno=5003
+TEST|PASS|deposit Frozen records one Failed|Expected procedure contract
+TEST|PASS|deposit Closed|expected errno=5003; actual errno=5003
+TEST|PASS|deposit stores context|actual errno=0
+TEST|PASS|deposit context columns|Expected procedure contract

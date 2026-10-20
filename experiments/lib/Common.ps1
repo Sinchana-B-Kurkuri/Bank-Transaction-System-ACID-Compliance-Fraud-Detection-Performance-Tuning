@@ -33,7 +33,7 @@ function Start-MySqlSession {
  $inputFile=Join-Path $Directory "$Name.sql"
  $stdout=Join-Path $Directory "$Name.stdout.txt"; $stderr=Join-Path $Directory "$Name.stderr.txt"
  $meta="SELECT CONCAT('META|',VERSION(),'|',NOW(6),'|',CONNECTION_ID()); SELECT CONCAT('CONNECTION|',CONNECTION_ID());`n"
- Save-Text $inputFile (Expand-BankSqlSource -Sql ($meta+$Sql))
+ Save-Text $inputFile (ConvertTo-BankContextSql (Expand-BankSqlSource -Sql ($meta+$Sql)))
  $args=@("--defaults-extra-file=$env:BANK_MYSQL_CNF",'--batch','--raw','--unbuffered','--skip-column-names','--default-character-set=utf8mb4','--skip-force',"--database=$Database")
  $p=Start-Process -FilePath (Get-MySqlPath) -ArgumentList (($args | ForEach-Object { ConvertTo-BankNativeArgument $_ }) -join ' ') -WorkingDirectory $script:RepoRoot -WindowStyle Hidden -RedirectStandardInput $inputFile -RedirectStandardOutput $stdout -RedirectStandardError $stderr -PassThru
  # Cache the native handle before exit; Windows PowerShell Start-Process otherwise

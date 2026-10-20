@@ -19,12 +19,11 @@ schema/01_tables/16_fraud_ground_truth.sql | B (Integrated only)
 schema/02_constraints/01_core_constraints.sql | A
 tests/stubs/member_b_interface_stubs.sql | A (Standalone only; never run with B tables)
 schema/02_constraints/02_cross_module_fks.sql | A
-indexes/01_performance_indexes.sql | A
 functions/fn_approval_threshold.sql | A
 functions/fn_available_balance.sql | A
 functions/fn_calc_interest.sql | A
 functions/fn_generate_reference.sql | A
-functions/fn_fraud_score.sql | A
+functions/fn_fraud_score.sql | B (Integrated only)
 functions/fn_get_balance.sql | A
 functions/fn_mask_id_proof.sql | A
 procedures/sp_resolve_actor.sql | A
@@ -45,7 +44,7 @@ procedures/sp_reconcile_balances.sql | A
 procedures/sp_register_customer.sql | A
 procedures/sp_request_approval.sql | A
 procedures/sp_review_fraud_flag.sql | A
-procedures/sp_evaluate_fraud.sql | A
+procedures/sp_evaluate_fraud.sql | B (Integrated only)
 procedures/sp_set_account_status.sql | A
 procedures/sp_transfer_funds_retry.sql | A
 procedures/sp_transfer_funds.sql | A
@@ -68,11 +67,13 @@ triggers/audit/trg_transactions_ai_audit.sql | A
 triggers/audit/trg_transactions_au_audit.sql | A
 triggers/99_record_audit_install.sql | A
 data/seed/01_reference_data.sql | A
-data/seed/03_fraud_rules.sql | A
-triggers/fraud/trg_transactions_ai_fraud_evaluate.sql | A
+data/seed/03_fraud_rules.sql | B (Integrated only)
+triggers/fraud/trg_transactions_ai_fraud_evaluate.sql | B (Integrated only)
 # B real tables 10-16 precede cross FKs; B fraud trigger must FOLLOWS trg_transactions_ai_audit.
 # Optional B bank_lab.Benchmark_Results include when supplied.
 data/seed/02_tiny_seed.sql | A
-views/v_customer_account_summary.sql | A
-views/v_transaction_activity.sql | A
-views/v_fraud_case_queue.sql | A
+views/v_customer_account_summary.sql | B (Integrated only)
+views/v_transaction_activity.sql | B (Integrated only)
+views/v_fraud_case_queue.sql | B (Integrated only)
+build/run_all.sql | A (CLI nested baseline entry; not a second Workbench installation)
+indexes/01_performance_indexes.sql | B (Integrated Optimized only; after baseline build)

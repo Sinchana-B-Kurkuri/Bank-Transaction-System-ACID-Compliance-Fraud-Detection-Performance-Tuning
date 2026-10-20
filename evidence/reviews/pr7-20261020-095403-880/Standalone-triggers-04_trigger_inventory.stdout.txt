@@ -1,0 +1,30 @@
+trg_accounts_ad_audit	DELETE	AFTER
+trg_accounts_ai_audit	INSERT	AFTER
+trg_accounts_au_audit	UPDATE	AFTER
+trg_accounts_bu_minbal_guard	UPDATE	BEFORE
+trg_audit_log_bd_immutable	DELETE	BEFORE
+trg_audit_log_bu_immutable	UPDATE	BEFORE
+trg_loans_ad_audit	DELETE	AFTER
+trg_loans_ai_audit	INSERT	AFTER
+trg_loans_au_audit	UPDATE	AFTER
+trg_transactions_ad_audit	DELETE	AFTER
+trg_transactions_ai_audit	INSERT	AFTER
+trg_transactions_au_audit	UPDATE	AFTER
+trg_transactions_bd_immutable	DELETE	BEFORE
+trg_transactions_bi_device_owner	INSERT	BEFORE
+trg_transactions_bu_immutable	UPDATE	BEFORE
+TEST|PASS|inventory trg_accounts_ai_audit|Expected audit contract
+TEST|PASS|inventory trg_accounts_au_audit|Expected audit contract
+TEST|PASS|inventory trg_accounts_ad_audit|Expected audit contract
+TEST|PASS|inventory trg_transactions_ai_audit|Expected audit contract
+TEST|PASS|inventory trg_transactions_au_audit|Expected audit contract
+TEST|PASS|inventory trg_transactions_ad_audit|Expected audit contract
+TEST|PASS|inventory trg_loans_ai_audit|Expected audit contract
+TEST|PASS|inventory trg_loans_au_audit|Expected audit contract
+TEST|PASS|inventory trg_loans_ad_audit|Expected audit contract
+TEST|PASS|inventory trg_accounts_bu_minbal_guard|Expected audit contract
+TEST|PASS|inventory trg_transactions_bu_immutable|Expected audit contract
+TEST|PASS|inventory trg_transactions_bd_immutable|Expected audit contract
+TEST|PASS|inventory trg_audit_log_bu_immutable|Expected audit contract
+TEST|PASS|inventory trg_audit_log_bd_immutable|Expected audit contract
+TEST|PASS|inventory trg_transactions_bi_device_owner|Expected audit contract

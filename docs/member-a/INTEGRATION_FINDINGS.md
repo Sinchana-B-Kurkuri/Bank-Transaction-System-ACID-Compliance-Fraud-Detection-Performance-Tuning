@@ -1,3 +1,5 @@
+> Historical report: the 2026-10-19 runtime-absence findings below describe the pre-PR7 checkout. For current PR7 failures and Member A tooling corrections, see PROMPT6_TOOLING_DELIVERY.md and ISOLATED_REGRESSION.md. Whole-system acceptance remains blocked.
+
 # Pre-change integration inspection — 2026-10-19
 
 Branch feature/A-integration-docs; clean working tree; HEAD 7c50b73. develop contains B commit 0641a61 and seven real table definitions 10–16. No B fraud functions/evaluator/trigger, views, RBAC, optimized indexes, benchmarks, generators, EXP-11–15 or B test files exist in this checkout or develop. The user-reported completion of B's whole implementation is not supported by the available files. Real-schema integration can be executed; whole-system fraud/security acceptance cannot.
