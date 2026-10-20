@@ -1,0 +1,733 @@
+fn_approval_threshold	BEGIN
+ RETURN 100000.00;
+END
+fn_generate_reference	BEGIN
+ -- 28 characters. UUID_SHORT supplies a server-wide advancing suffix; no table writes.
+ RETURN CONCAT('T',DATE_FORMAT(NOW(6),'%Y%m%d%H%i%s%f'),'-',
+ LPAD(CONV(MOD(UUID_SHORT(),2176782336),10,36),6,'0'));
+END
+fn_risk_level	BEGIN
+  IF p_score IS NULL OR p_score < 30 THEN RETURN 'Low'; END IF;
+  IF p_score < 60 THEN RETURN 'Medium'; END IF;
+  IF p_score < 85 THEN RETURN 'High'; END IF;
+  RETURN 'Critical';
+END
+fn_txn_count_window	BEGIN
+  DECLARE v_count INT DEFAULT 0;
+  IF p_account_id IS NULL OR p_as_of IS NULL OR p_window_minutes IS NULL OR p_window_minutes < 1 THEN
+    RETURN 0;
+  END IF;
+  SELECT COUNT(*) INTO v_count
+    FROM Transactions t
+   WHERE t.account_id=p_account_id
+     AND t.status='Completed'
+     AND t.transaction_timestamp > DATE_SUB(p_as_of, INTERVAL p_window_minutes MINUTE)
+     AND t.transaction_timestamp <= p_as_of;
+  RETURN v_count;
+END
+fn_txn_risk_score	BEGIN
+  DECLARE v_score DECIMAL(7,2) DEFAULT 0;
+  IF p_amount >= 10000 THEN SET v_score=v_score+35;
+  ELSEIF p_amount >= 5000 THEN SET v_score=v_score+20;
+  END IF;
+  IF p_channel IN ('Online','Mobile') THEN SET v_score=v_score+10; END IF;
+  IF p_device_trusted=FALSE OR p_device_trusted IS NULL THEN SET v_score=v_score+20; END IF;
+  SET v_score=v_score+LEAST(35,GREATEST(0,COALESCE(p_account_risk,0)*0.35));
+  RETURN LEAST(100,GREATEST(0,v_score));
+END
+p3_load_tiny_seed	BEGIN
+ DECLARE v_i INT DEFAULT 1;
+ DECLARE v_customer INT; DECLARE v_branch INT; DECLARE v_type INT; DECLARE v_employee INT;
+ DECLARE v_account INT; DECLARE v_number VARCHAR(20); DECLARE v_email VARCHAR(100); DECLARE v_proof VARCHAR(20);
+ DECLARE v_initial DECIMAL(14,2); DECLARE v_tx BIGINT; DECLARE v_balance DECIMAL(14,2);
+ DECLARE v_from INT; DECLARE v_to INT; DECLARE v_group CHAR(36); DECLARE v_debit BIGINT; DECLARE v_credit BIGINT; DECLARE v_loan INT;
+ WHILE v_i<=6 DO
+  SET v_email=CONCAT('seed.customer.',v_i,'@example.invalid');
+  IF NOT EXISTS(SELECT 1 FROM Customers WHERE email=v_email) THEN
+   SET v_proof=ELT(v_i,'Aadhaar','PAN','Passport','DrivingLicense','VoterID','PAN');
+   CALL sp_register_customer(CONCAT('Synthetic Seed Customer ',v_i),'1990-01-01',NULL,v_email,CONCAT('900000000',v_i),'Synthetic seed address',CONCAT('SYN-',v_proof,'-',LPAD(v_i,6,'0')),v_proof,v_customer);
+  END IF;
+  SET v_i=v_i+1;
+ END WHILE;
+ SET v_i=1;
+ WHILE v_i<=8 DO
+  SET v_number=CONCAT('SEED-',LPAD(v_i,4,'0'));
+  IF NOT EXISTS(SELECT 1 FROM Accounts WHERE account_number=v_number) THEN
+   SET v_customer=(SELECT customer_id FROM Customers WHERE email=CONCAT('seed.customer.',IF(v_i<=6,v_i,v_i-6),'@example.invalid'));
+   SET v_branch=(SELECT branch_id FROM Branches WHERE ifsc_code=IF(MOD(v_i,2)=1,'SYNB0000001','SYNB0000002'));
+   SET v_type=(SELECT account_type_id FROM Account_Types WHERE type_name=IF(v_i=7,'Fixed Deposit',IF(v_i=8,'Current','Savings')));
+   SET v_employee=(SELECT employee_id FROM Employees WHERE branch_id=v_branch AND role='Teller' AND is_active ORDER BY employee_id LIMIT 1);
+   SET v_initial=CASE v_i WHEN 1 THEN 300000 WHEN 2 THEN 200000 WHEN 7 THEN 15000 WHEN 8 THEN 10000 ELSE 5000 END;
+   CALL sp_open_account(v_customer,v_branch,v_type,v_initial,v_employee,v_number,v_account,v_number);
+  END IF;
+  SET v_i=v_i+1;
+ END WHILE;
+ SET v_from=(SELECT account_id FROM Accounts WHERE account_number='SEED-0003');
+ SET v_customer=(SELECT customer_id FROM Accounts WHERE account_id=v_from);
+ IF NOT EXISTS(SELECT 1 FROM Loans WHERE customer_id=v_customer AND disbursement_account_id=v_from AND principal_amount=10000) THEN
+  CALL sp_disburse_loan(v_customer,v_from,10000,8.00,12,NULL,v_loan);
+ END IF;
+ SET v_i=1;
+ WHILE v_i<=6 DO
+  SET v_from=(SELECT account_id FROM Accounts WHERE account_number=CONCAT('SEED-',LPAD(IF(v_i<=5,v_i,1),4,'0')));
+  IF NOT EXISTS(SELECT 1 FROM Transactions WHERE account_id=v_from AND transaction_type='Deposit' AND status='Completed' AND amount=110+v_i) THEN
+   CALL sp_deposit(v_from,110+v_i,'Online',NULL,NULL,NULL,v_tx,v_balance);
+  END IF;
+  SET v_i=v_i+1;
+ END WHILE;
+ SET v_i=1;
+ WHILE v_i<=2 DO
+  SET v_from=(SELECT account_id FROM Accounts WHERE account_number=CONCAT('SEED-',LPAD(v_i,4,'0')));
+  IF NOT EXISTS(SELECT 1 FROM Transactions WHERE account_id=v_from AND transaction_type='Withdrawal' AND status='Completed' AND amount=20+v_i) THEN
+   CALL sp_withdraw(v_from,20+v_i,'Online',NULL,NULL,NULL,v_tx,v_balance);
+  END IF;
+  SET v_to=(SELECT account_id FROM Accounts WHERE account_number=CONCAT('SEED-',LPAD(3-v_i,4,'0')));
+  IF NOT EXISTS(SELECT 1 FROM Transactions WHERE account_id=v_from AND related_account_id=v_to AND transaction_type='TransferOut' AND status='Completed' AND amount=200+v_i) THEN
+   CALL sp_transfer_funds(v_from,v_to,200+v_i,'Online',NULL,NULL,NULL,0,v_group,v_debit,v_credit);
+  END IF;
+  SET v_i=v_i+1;
+ END WHILE;
+ SET v_account=(SELECT account_id FROM Accounts WHERE account_number='SEED-0006');
+ IF (SELECT status FROM Accounts WHERE account_id=v_account)='Active' THEN
+  SET v_employee=(SELECT e.employee_id FROM Employees e JOIN Accounts a ON a.branch_id=e.branch_id WHERE a.account_id=v_account AND e.role='Teller' AND e.is_active ORDER BY e.employee_id LIMIT 1);
+  CALL sp_set_account_status(v_account,'Frozen',v_employee);
+ END IF;
+END
+sp_assert_equal	BEGIN
+ DECLARE v_status VARCHAR(4);
+ DECLARE v_detail VARCHAR(500);
+ SET v_status=IF(BINARY p_expected <=> BINARY p_actual,'PASS','FAIL');
+ SET v_detail=LEFT(CONCAT('expected=',COALESCE(p_expected,'NULL'),'; actual=',COALESCE(p_actual,'NULL')),500);
+ INSERT INTO bank_b_1222_99291cc5eb2d45339bec1be511d0c743_after.Test_Results(run_id,db_name,test_name,status,detail) VALUES(COALESCE(@test_run_id,'adhoc'),p_db,p_test,v_status,v_detail);
+ SELECT CONCAT('TEST|',v_status,'|',p_test,'|',v_detail) AS result;
+END
+sp_assert_true	BEGIN
+ DECLARE v_status VARCHAR(4);
+ SET v_status=IF(COALESCE(p_condition,0)<>0,'PASS','FAIL');
+ INSERT INTO bank_b_1222_99291cc5eb2d45339bec1be511d0c743_after.Test_Results(run_id,db_name,test_name,status,detail) VALUES(COALESCE(@test_run_id,'adhoc'),p_db,p_test,v_status,p_detail);
+ SELECT CONCAT('TEST|',v_status,'|',p_test,'|',COALESCE(p_detail,'')) AS result;
+END
+sp_deposit	BEGIN
+
+ DECLARE v_errno INT;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION
+ BEGIN
+  GET DIAGNOSTICS CONDITION 1 v_errno=MYSQL_ERRNO;
+  ROLLBACK;
+  SET p_transaction_id=NULL,p_balance_after=NULL;
+  IF v_errno IN (5003,5004,5005,5006,5010) THEN
+   BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; END;
+    START TRANSACTION;
+    CALL sp_internal_record_failed(p_account_id,p_amount,'Deposit',p_channel);
+    COMMIT;
+   END;
+  END IF;
+  RESIGNAL;
+ END;
+ SET p_transaction_id=NULL,p_balance_after=NULL;
+ IF p_amount IS NULL OR p_amount<=0 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5001,MESSAGE_TEXT='E_INVALID_AMOUNT: amount must be positive'; END IF;
+ START TRANSACTION;
+ CALL sp_internal_post_single(p_account_id,p_amount,'Deposit',p_channel,p_employee_id,p_device_id,p_location_id,p_transaction_id,p_balance_after);
+ COMMIT;
+END
+sp_disburse_loan	BEGIN
+ DECLARE v_active BOOLEAN; DECLARE v_owner INT; DECLARE v_state VARCHAR(10); DECLARE v_tx BIGINT; DECLARE v_bal DECIMAL(14,2); DECLARE v_actor VARCHAR(10); DECLARE v_e INT; DECLARE v_c INT;
+ DECLARE v_errno INT;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN
+  GET DIAGNOSTICS CONDITION 1 v_errno=MYSQL_ERRNO;
+  ROLLBACK; SET p_loan_id=NULL;
+  IF v_errno IN (5003,5004,5005,5006,5010) THEN BEGIN
+   DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; END;
+   START TRANSACTION; CALL sp_internal_record_failed(p_disbursement_account_id,p_principal,'Deposit',IF(p_employee_id IS NULL,'Online','Branch')); COMMIT;
+  END; END IF;
+  RESIGNAL;
+ END;
+ SET p_loan_id=NULL;
+ IF p_principal IS NULL OR p_principal<=0 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5001,MESSAGE_TEXT='E_INVALID_AMOUNT: principal must be positive'; END IF;
+ IF p_interest_rate IS NULL OR p_interest_rate<0 OR p_tenure_months IS NULL OR p_tenure_months<=0 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5018,MESSAGE_TEXT='E_INVALID_ARGUMENT: invalid loan rate or tenure'; END IF;
+ START TRANSACTION;
+ IF p_customer_id IS NULL OR NOT EXISTS(SELECT 1 FROM Customers WHERE customer_id=p_customer_id) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5007,MESSAGE_TEXT='E_INVALID_REFERENCE: customer does not exist'; END IF;
+ SELECT is_active INTO v_active FROM Customers WHERE customer_id=p_customer_id FOR UPDATE;
+ IF NOT v_active THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5011,MESSAGE_TEXT='E_INVALID_TRANSITION: customer must be active'; END IF;
+ CALL sp_resolve_actor(USER(),v_actor,v_e,v_c);
+ IF v_actor='Customer' AND v_c<>p_customer_id THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5010,MESSAGE_TEXT='E_NOT_AUTHORIZED: loan customer mismatch'; END IF;
+ IF p_disbursement_account_id IS NOT NULL THEN
+  IF NOT EXISTS(SELECT 1 FROM Accounts WHERE account_id=p_disbursement_account_id) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5007,MESSAGE_TEXT='E_INVALID_REFERENCE: disbursement account does not exist'; END IF;
+  SELECT customer_id,status INTO v_owner,v_state FROM Accounts WHERE account_id=p_disbursement_account_id FOR UPDATE;
+  IF v_owner<>p_customer_id THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5010,MESSAGE_TEXT='E_NOT_AUTHORIZED: disbursement account owner mismatch'; END IF;
+  IF v_state<>'Active' THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5003,MESSAGE_TEXT='E_ACCOUNT_NOT_ACTIVE: disbursement account must be active'; END IF;
+ ELSEIF p_employee_id IS NOT NULL THEN CALL sp_internal_assert_staff(p_employee_id,NULL,'Teller,Manager,DBA');
+ END IF;
+ INSERT INTO Loans(customer_id,disbursement_account_id,principal_amount,interest_rate,tenure_months,status,disbursed_date) VALUES(p_customer_id,p_disbursement_account_id,p_principal,p_interest_rate,p_tenure_months,'Active',CURDATE());
+ SET p_loan_id=LAST_INSERT_ID();
+ IF p_disbursement_account_id IS NOT NULL THEN CALL sp_internal_post_single(p_disbursement_account_id,p_principal,'Deposit',IF(p_employee_id IS NULL,'Online','Branch'),p_employee_id,NULL,NULL,v_tx,v_bal); END IF;
+ COMMIT;
+END
+sp_evaluate_fraud	BEGIN
+  DECLARE v_account INT;
+  DECLARE v_amount DECIMAL(14,2);
+  DECLARE v_channel VARCHAR(10);
+  DECLARE v_device INT;
+  DECLARE v_txn_ts DATETIME;
+  DECLARE v_trusted BOOLEAN DEFAULT FALSE;
+  DECLARE v_profile_risk DECIMAL(5,2) DEFAULT 0;
+  DECLARE v_score DECIMAL(5,2) DEFAULT 0;
+  DECLARE v_rule_id INT;
+  DECLARE v_weight DECIMAL(5,2);
+  DECLARE v_code VARCHAR(40);
+  DECLARE v_params JSON;
+  DECLARE v_min_amount DECIMAL(14,2);
+  DECLARE v_min_risk DECIMAL(5,2);
+  DECLARE v_window INT;
+  DECLARE v_min_count INT;
+  DECLARE v_matches BOOLEAN;
+  DECLARE v_done INT DEFAULT 0;
+  DECLARE c_rules CURSOR FOR
+    SELECT rule_id,rule_code,weight,param_json
+      FROM Fraud_Rules WHERE is_active=TRUE ORDER BY rule_id;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_done=1;
+
+  IF NOT EXISTS(SELECT 1 FROM Transactions WHERE transaction_id=p_transaction_id AND status='Completed') THEN
+    SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='E_FRAUD_TXN_NOT_FOUND_OR_NOT_COMPLETED';
+  END IF;
+
+  SELECT t.account_id,t.amount,t.channel,t.device_id,t.transaction_timestamp
+    INTO v_account,v_amount,v_channel,v_device,v_txn_ts
+    FROM Transactions t JOIN Accounts a ON a.account_id=t.account_id
+   WHERE t.transaction_id=p_transaction_id;
+  SET v_profile_risk=COALESCE((SELECT risk_score FROM Account_Risk_Profile WHERE account_id=v_account),0);
+  SET v_trusted=COALESCE((SELECT d.is_trusted FROM Devices d WHERE d.device_id=v_device),FALSE);
+
+  -- Stable transaction-local base; stored profile is evidence only, never a scoring input.
+  -- HIGH_ACCOUNT_RISK uses the accumulated transaction-local score in rule_id order.
+  SET v_score=fn_txn_risk_score(v_amount,v_channel,v_trusted,0);
+  OPEN c_rules;
+  rule_loop: LOOP
+    FETCH c_rules INTO v_rule_id,v_code,v_weight,v_params;
+    IF v_done=1 THEN LEAVE rule_loop; END IF;
+    SET v_matches=FALSE;
+    SET v_min_amount=COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(v_params,'$.minimum_amount')) AS DECIMAL(14,2)),5000);
+    SET v_min_risk=COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(v_params,'$.minimum_risk')) AS DECIMAL(5,2)),60);
+    SET v_window=COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(v_params,'$.window_minutes')) AS UNSIGNED),10);
+    SET v_min_count=COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(v_params,'$.minimum_count')) AS UNSIGNED),3);
+
+    IF v_code='HIGH_AMOUNT' THEN SET v_matches=(v_amount>=v_min_amount);
+    ELSEIF v_code='UNTRUSTED_DEVICE' THEN SET v_matches=(v_device IS NULL OR v_trusted=FALSE);
+    ELSEIF v_code='DIGITAL_CHANNEL' THEN SET v_matches=(v_channel IN ('Online','Mobile'));
+    ELSEIF v_code='HIGH_ACCOUNT_RISK' THEN SET v_matches=(v_score>=v_min_risk);
+    ELSEIF v_code='RAPID_ACTIVITY' THEN
+      SET v_matches=(fn_txn_count_window(v_account,v_txn_ts,v_window)>=v_min_count);
+    END IF;
+
+    IF v_matches THEN
+      SET v_score=LEAST(100,v_score+v_weight);
+      INSERT INTO Fraud_Flags(transaction_id,rule_id,risk_score,evidence)
+      VALUES(p_transaction_id,v_rule_id,v_score,
+        JSON_OBJECT('rule_code',v_code,'amount',v_amount,'channel',v_channel,
+                    'device_id',v_device,'device_trusted',v_trusted,
+                    'account_profile_risk',v_profile_risk,'evaluated_transaction_timestamp',v_txn_ts))
+      ON DUPLICATE KEY UPDATE risk_score=VALUES(risk_score),evidence=VALUES(evidence);
+    END IF;
+  END LOOP;
+  CLOSE c_rules;
+
+  INSERT INTO Account_Risk_Profile(account_id,risk_score,risk_level,last_evaluated_at)
+  VALUES(v_account,v_score,fn_risk_level(v_score),NOW())
+  ON DUPLICATE KEY UPDATE
+    risk_score=GREATEST(Account_Risk_Profile.risk_score,VALUES(risk_score)),
+    risk_level=fn_risk_level(GREATEST(Account_Risk_Profile.risk_score,VALUES(risk_score))),
+    last_evaluated_at=VALUES(last_evaluated_at);
+END
+sp_expect_error	BEGIN
+ DECLARE v_errno INT DEFAULT 0;
+ DECLARE v_prepared BOOLEAN DEFAULT FALSE;
+ DECLARE v_status VARCHAR(4);
+ DECLARE v_detail VARCHAR(500);
+ BEGIN
+  -- Strict enum conversion can report errno 1265 with SQLSTATE class 01.
+  DECLARE EXIT HANDLER FOR SQLEXCEPTION, SQLWARNING
+  BEGIN
+   GET DIAGNOSTICS CONDITION 1 v_errno = MYSQL_ERRNO;
+  END;
+  SET @lab_sql = REPLACE(p_sql,'{db}',REPLACE(p_db,'`','``'));
+  PREPARE lab_stmt FROM @lab_sql;
+  SET v_prepared=TRUE;
+  EXECUTE lab_stmt;
+ END;
+ IF v_prepared THEN DEALLOCATE PREPARE lab_stmt; END IF;
+ SET v_status=IF(v_errno<>0 AND (p_expected_errno IS NULL OR p_expected_errno=v_errno),'PASS','FAIL');
+ SET v_detail=CONCAT('expected errno=',COALESCE(p_expected_errno,'any'),'; actual errno=',v_errno);
+ INSERT INTO bank_b_1222_99291cc5eb2d45339bec1be511d0c743_after.Test_Results(run_id,db_name,test_name,status,detail) VALUES(COALESCE(@test_run_id,'adhoc'),p_db,p_test,v_status,v_detail);
+ SELECT CONCAT('TEST|',v_status,'|',p_test,'|',v_detail) AS result;
+END
+sp_expect_ok	BEGIN
+ DECLARE v_errno INT DEFAULT 0;
+ DECLARE v_prepared BOOLEAN DEFAULT FALSE;
+ DECLARE v_status VARCHAR(4);
+ DECLARE v_detail VARCHAR(500);
+ BEGIN
+  DECLARE EXIT HANDLER FOR SQLEXCEPTION, SQLWARNING BEGIN GET DIAGNOSTICS CONDITION 1 v_errno=MYSQL_ERRNO; END;
+  SET @lab_sql=REPLACE(p_sql,'{db}',REPLACE(p_db,'`','``'));
+  PREPARE lab_stmt FROM @lab_sql;
+  SET v_prepared=TRUE;
+  EXECUTE lab_stmt;
+ END;
+ IF v_prepared THEN DEALLOCATE PREPARE lab_stmt; END IF;
+ SET v_status=IF(v_errno=0,'PASS','FAIL');
+ SET v_detail=CONCAT('actual errno=',v_errno);
+ INSERT INTO bank_b_1222_99291cc5eb2d45339bec1be511d0c743_after.Test_Results(run_id,db_name,test_name,status,detail) VALUES(COALESCE(@test_run_id,'adhoc'),p_db,p_test,v_status,v_detail);
+ SELECT CONCAT('TEST|',v_status,'|',p_test,'|',v_detail) AS result;
+END
+sp_internal_assert_staff	BEGIN
+ DECLARE v_actor VARCHAR(10); DECLARE v_e INT; DECLARE v_c INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_e,v_c);
+ IF v_actor='Customer' OR (v_actor='Employee' AND NOT (p_employee_id <=> v_e)) OR p_employee_id IS NULL OR NOT EXISTS(SELECT 1 FROM Employees e WHERE e.employee_id=p_employee_id AND e.is_active AND FIND_IN_SET(e.role,p_roles)>0 AND (p_account_id IS NULL OR e.branch_id=(SELECT branch_id FROM Accounts WHERE account_id=p_account_id))) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5010,MESSAGE_TEXT='E_NOT_AUTHORIZED: active authorized staff required'; END IF;
+END
+sp_internal_authorize	BEGIN
+ DECLARE v_actor VARCHAR(10); DECLARE v_e INT; DECLARE v_c INT; DECLARE v_owner INT; DECLARE v_branch INT;
+ IF p_channel IS NULL OR p_channel NOT IN ('ATM','Branch','Online','Mobile') THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5018,MESSAGE_TEXT='E_INVALID_ARGUMENT: invalid channel'; END IF;
+ SELECT customer_id,branch_id INTO v_owner,v_branch FROM Accounts WHERE account_id=p_account_id;
+ CALL sp_resolve_actor(USER(),v_actor,v_e,v_c);
+ IF (v_actor='Customer' AND p_is_debit=1 AND NOT (v_c <=> v_owner)) OR (v_actor='Employee' AND p_employee_id IS NOT NULL AND NOT (p_employee_id <=> v_e)) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5010,MESSAGE_TEXT='E_NOT_AUTHORIZED: actor does not match operation'; END IF;
+ IF p_channel='Branch' THEN
+  IF p_employee_id IS NULL OR NOT EXISTS(SELECT 1 FROM Employees WHERE employee_id=p_employee_id AND is_active AND branch_id=v_branch AND (role='Teller' OR (p_allow_manager=1 AND role='Manager'))) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5010,MESSAGE_TEXT='E_NOT_AUTHORIZED: branch staff mismatch'; END IF;
+ ELSEIF p_employee_id IS NOT NULL THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5010,MESSAGE_TEXT='E_NOT_AUTHORIZED: non-branch channel requires no employee'; END IF;
+END
+sp_internal_insert_ledger	BEGIN
+ DECLARE v_attempt INT DEFAULT 0; DECLARE v_duplicate BOOLEAN;
+ SET p_transaction_id=NULL;
+ reference_retry: LOOP
+  SET v_attempt=v_attempt+1,v_duplicate=FALSE;
+  BEGIN
+   DECLARE CONTINUE HANDLER FOR 1062 SET v_duplicate=TRUE;
+   INSERT INTO Transactions(account_id,related_account_id,employee_id,transfer_group_id,device_id,location_id,transaction_type,amount,balance_after,channel,status,transaction_timestamp,reference_no)
+   VALUES(p_account_id,p_related,p_employee,p_group,p_device,p_location,p_type,p_amount,p_balance,p_channel,p_status,COALESCE(p_timestamp,NOW()),fn_generate_reference());
+  END;
+  IF NOT v_duplicate THEN SET p_transaction_id=LAST_INSERT_ID(); LEAVE reference_retry; END IF;
+  IF v_attempt>=5 THEN SIGNAL SQLSTATE '23000' SET MYSQL_ERRNO=1062,MESSAGE_TEXT='E_INVALID_REFERENCE: reference collision retry exhausted'; END IF;
+ END LOOP;
+END
+sp_internal_post_single	BEGIN
+ DECLARE v_balance DECIMAL(14,2); DECLARE v_min DECIMAL(12,2); DECLARE v_status VARCHAR(10);
+ IF p_amount IS NULL OR p_amount<=0 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5001,MESSAGE_TEXT='E_INVALID_AMOUNT: amount must be positive'; END IF;
+ IF p_account_id IS NULL OR NOT EXISTS(SELECT 1 FROM Accounts WHERE account_id=p_account_id) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: account does not exist'; END IF;
+ SELECT a.balance,a.status,t.min_balance INTO v_balance,v_status,v_min FROM Accounts a JOIN Account_Types t USING(account_type_id) WHERE a.account_id=p_account_id FOR UPDATE OF a;
+ IF v_status<>'Active' THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5003,MESSAGE_TEXT='E_ACCOUNT_NOT_ACTIVE: active account required'; END IF;
+ CALL sp_internal_authorize(p_account_id,p_channel,p_employee_id,p_type='Withdrawal',0);
+ IF p_type='Withdrawal' AND v_balance-p_amount<v_min THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5004,MESSAGE_TEXT='E_INSUFFICIENT_FUNDS: minimum balance would be breached'; END IF;
+ IF p_type='Deposit' THEN UPDATE Accounts SET balance=balance+p_amount WHERE account_id=p_account_id; SET p_balance_after=v_balance+p_amount;
+ ELSEIF p_type='Withdrawal' THEN UPDATE Accounts SET balance=balance-p_amount WHERE account_id=p_account_id; SET p_balance_after=v_balance-p_amount;
+ ELSE SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5018,MESSAGE_TEXT='E_INVALID_ARGUMENT: unsupported single-leg posting'; END IF;
+ CALL sp_internal_insert_ledger(p_account_id,NULL,p_employee_id,NULL,p_device_id,p_location_id,p_type,p_amount,p_balance_after,p_channel,'Completed',NULL,p_transaction_id);
+END
+sp_internal_post_transfer	BEGIN
+ DECLARE v_first INT; DECLARE v_second INT; DECLARE v_lock INT; DECLARE v_fb DECIMAL(14,2); DECLARE v_tb DECIMAL(14,2); DECLARE v_min DECIMAL(12,2); DECLARE v_fs VARCHAR(10); DECLARE v_ts VARCHAR(10); DECLARE v_sleep INT;
+ IF p_amount IS NULL OR p_amount<=0 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5001,MESSAGE_TEXT='E_INVALID_AMOUNT: amount must be positive'; END IF;
+ IF p_lab_mode IS NULL OR p_lab_mode NOT IN (0,1,2,3) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5018,MESSAGE_TEXT='E_INVALID_ARGUMENT: invalid lab mode'; END IF;
+ -- RELEASE_GUARD_PLACEHOLDER
+ IF p_from_account_id IS NULL OR p_to_account_id IS NULL THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: transfer account does not exist'; END IF;
+ -- LAB_NAIVE_BEGIN
+ IF p_lab_mode=3 THEN
+  SET v_first=p_from_account_id,v_second=p_to_account_id;
+ ELSE
+ -- LAB_NAIVE_END
+  SET v_first=LEAST(p_from_account_id,p_to_account_id),v_second=GREATEST(p_from_account_id,p_to_account_id);
+ -- LAB_NAIVE_BEGIN
+ END IF;
+ -- LAB_NAIVE_END
+ -- The locking reads also validate existence: no shared lookup locks may precede
+ -- the canonical exclusive-lock order. The local handler cannot mask later reads.
+ BEGIN
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_lock=NULL;
+  SET v_lock=NULL;
+  SELECT account_id INTO v_lock FROM Accounts WHERE account_id=v_first FOR UPDATE;
+  IF v_lock IS NULL THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: transfer account does not exist'; END IF;
+  SET v_lock=NULL;
+  SELECT account_id INTO v_lock FROM Accounts WHERE account_id=v_second FOR UPDATE;
+  IF v_lock IS NULL THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: transfer account does not exist'; END IF;
+ END;
+ IF p_from_account_id=p_to_account_id THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5005,MESSAGE_TEXT='E_SAME_ACCOUNT: accounts must differ'; END IF;
+ IF p_allow_approval=0 AND p_amount>=fn_approval_threshold() THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5006,MESSAGE_TEXT='E_APPROVAL_REQUIRED: approval threshold reached'; END IF;
+ SELECT a.balance,a.status,t.min_balance INTO v_fb,v_fs,v_min FROM Accounts a JOIN Account_Types t USING(account_type_id) WHERE a.account_id=p_from_account_id;
+ SELECT balance,status INTO v_tb,v_ts FROM Accounts WHERE account_id=p_to_account_id;
+ IF v_fs<>'Active' OR v_ts<>'Active' THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5003,MESSAGE_TEXT='E_ACCOUNT_NOT_ACTIVE: both accounts must be active'; END IF;
+ CALL sp_internal_authorize(p_from_account_id,p_channel,p_employee_id,1,p_allow_approval);
+ IF v_fb-p_amount<v_min THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5004,MESSAGE_TEXT='E_INSUFFICIENT_FUNDS: transfer would breach minimum balance'; END IF;
+ SET p_transfer_group_id=UUID();
+ UPDATE Accounts SET balance=balance-p_amount WHERE account_id=p_from_account_id;
+ CALL sp_internal_insert_ledger(p_from_account_id,p_to_account_id,p_employee_id,p_transfer_group_id,p_device_id,p_location_id,'TransferOut',p_amount,v_fb-p_amount,p_channel,'Completed',NULL,p_debit_txn_id);
+ -- LAB_HOOK_BEGIN
+ IF p_lab_mode=1 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5016,MESSAGE_TEXT='E_LAB_INJECTED_FAILURE: failure after debit'; END IF;
+ IF p_lab_mode IN (2,3) THEN SELECT SLEEP(IFNULL(@lab_sleep_seconds,5)) INTO v_sleep; END IF;
+ -- LAB_HOOK_END
+ UPDATE Accounts SET balance=balance+p_amount WHERE account_id=p_to_account_id;
+ CALL sp_internal_insert_ledger(p_to_account_id,p_from_account_id,p_employee_id,p_transfer_group_id,NULL,NULL,'TransferIn',p_amount,v_tb+p_amount,p_channel,'Completed',NULL,p_credit_txn_id);
+END
+sp_internal_record_failed	BEGIN
+ DECLARE v_balance DECIMAL(14,2); DECLARE v_tx BIGINT;
+ -- No transaction control: the public handler owns this separate small transaction.
+ IF p_amount IS NOT NULL AND p_amount>0 AND EXISTS(SELECT 1 FROM Accounts WHERE account_id=p_account_id) THEN
+  SELECT balance INTO v_balance FROM Accounts WHERE account_id=p_account_id FOR UPDATE;
+  CALL sp_internal_insert_ledger(p_account_id,NULL,NULL,NULL,NULL,NULL,p_type,p_amount,v_balance,IF(p_channel IN ('ATM','Branch','Online','Mobile'),p_channel,'Online'),'Failed',NULL,v_tx);
+ END IF;
+END
+sp_open_account	BEGIN
+ DECLARE v_active BOOLEAN; DECLARE v_min DECIMAL(12,2); DECLARE v_attempt INT DEFAULT 0; DECLARE v_dup BOOLEAN; DECLARE v_tx BIGINT; DECLARE v_bal DECIMAL(14,2); DECLARE v_actor VARCHAR(10); DECLARE v_e INT; DECLARE v_c INT;
+ DECLARE v_errno INT;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION
+ BEGIN
+  GET DIAGNOSTICS CONDITION 1 v_errno=MYSQL_ERRNO;
+  ROLLBACK;
+  SET p_account_id=NULL,p_account_number_out=NULL;
+  
+  RESIGNAL;
+ END;
+ SET p_account_id=NULL,p_account_number_out=NULL;
+ IF p_initial_deposit IS NULL OR p_initial_deposit<=0 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5001,MESSAGE_TEXT='E_INVALID_AMOUNT: opening deposit must be positive'; END IF;
+ IF p_account_number IS NOT NULL AND TRIM(p_account_number)='' THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5018,MESSAGE_TEXT='E_INVALID_ARGUMENT: account number cannot be empty'; END IF;
+ START TRANSACTION;
+ IF p_customer_id IS NULL OR NOT EXISTS(SELECT 1 FROM Customers WHERE customer_id=p_customer_id) OR p_branch_id IS NULL OR NOT EXISTS(SELECT 1 FROM Branches WHERE branch_id=p_branch_id) OR p_account_type_id IS NULL OR NOT EXISTS(SELECT 1 FROM Account_Types WHERE account_type_id=p_account_type_id) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5007,MESSAGE_TEXT='E_INVALID_REFERENCE: opening reference does not exist'; END IF;
+ SELECT is_active INTO v_active FROM Customers WHERE customer_id=p_customer_id FOR UPDATE;
+ IF NOT v_active THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5011,MESSAGE_TEXT='E_INVALID_TRANSITION: inactive customer cannot open account'; END IF;
+ CALL sp_resolve_actor(USER(),v_actor,v_e,v_c);
+ IF v_actor='Customer' AND v_c<>p_customer_id THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5010,MESSAGE_TEXT='E_NOT_AUTHORIZED: customer identity mismatch'; END IF;
+ SELECT min_balance INTO v_min FROM Account_Types WHERE account_type_id=p_account_type_id;
+ IF p_initial_deposit<v_min THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5004,MESSAGE_TEXT='E_INSUFFICIENT_FUNDS: opening deposit below minimum'; END IF;
+ account_number_retry: LOOP
+  SET v_attempt=v_attempt+1,v_dup=FALSE;
+  SET p_account_number_out=COALESCE(p_account_number,CONCAT('AC',LPAD(FLOOR(RAND()*10000000000),10,'0')));
+  BEGIN
+   DECLARE CONTINUE HANDLER FOR 1062 SET v_dup=TRUE;
+   INSERT INTO Accounts(customer_id,branch_id,account_type_id,account_number,balance,status,opened_date) VALUES(p_customer_id,p_branch_id,p_account_type_id,p_account_number_out,0,'Active',CURDATE());
+  END;
+  IF NOT v_dup THEN SET p_account_id=LAST_INSERT_ID(); LEAVE account_number_retry; END IF;
+  IF p_account_number IS NOT NULL OR v_attempt>=5 THEN SIGNAL SQLSTATE '23000' SET MYSQL_ERRNO=1062,MESSAGE_TEXT='E_INVALID_REFERENCE: duplicate account number'; END IF;
+ END LOOP;
+ CALL sp_internal_post_single(p_account_id,p_initial_deposit,'Deposit',IF(p_employee_id IS NULL,'Online','Branch'),p_employee_id,NULL,NULL,v_tx,v_bal);
+ COMMIT;
+END
+sp_reconcile_balances	BEGIN
+ DECLARE v_checked DATETIME(3);
+ IF p_account_id IS NOT NULL AND NOT EXISTS(SELECT 1 FROM Accounts WHERE account_id=p_account_id) THEN
+ SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: account does not exist'; END IF;
+ SET v_checked=NOW(3);
+ WITH
+ ledger AS (SELECT account_id,transaction_id,transaction_type,amount,balance_after,
+ CASE WHEN transaction_type IN ('Deposit','TransferIn','InterestCredit') THEN amount ELSE -amount END AS signed_amount
+ FROM Transactions WHERE status='Completed'),
+ totals AS (SELECT account_id,SUM(signed_amount) AS net,MAX(transaction_id) AS last_id FROM ledger GROUP BY account_id),
+ chain AS (SELECT *,LAG(balance_after,1,0) OVER(PARTITION BY account_id ORDER BY transaction_id) AS prior_balance FROM ledger),
+ wm AS (SELECT COALESCE((SELECT detail FROM bank_b_1222_99291cc5eb2d45339bec1be511d0c743_after.Experiment_Log WHERE db_name=DATABASE() AND event_type='AUDIT_TRIGGERS_INSTALLED' ORDER BY log_id DESC LIMIT 1),JSON_OBJECT()) AS j),
+ latest_audit AS (SELECT record_pk,new_value,ROW_NUMBER() OVER(PARTITION BY record_pk ORDER BY audit_id DESC) AS rn FROM Audit_Log,wm WHERE table_name='Accounts' AND action_type='UPDATE' AND audit_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.audit_max_id')) AS UNSIGNED),0)),
+ problems AS (
+ SELECT 'I1' AS invariant,a.account_id,CAST(a.account_id AS CHAR(64)) AS record_pk,'balance differs from completed ledger' AS detail
+ FROM Accounts a LEFT JOIN totals t USING(account_id) WHERE (p_account_id IS NULL OR a.account_id=p_account_id) AND a.balance<>COALESCE(t.net,0)
+ UNION ALL
+ SELECT 'I1',NULL,'TOTAL','aggregate balance differs from completed ledger' FROM Accounts a LEFT JOIN totals t USING(account_id) WHERE p_account_id IS NULL OR a.account_id=p_account_id HAVING COALESCE(SUM(a.balance),0)<>COALESCE(SUM(t.net),0)
+ UNION ALL
+ SELECT 'I1b',account_id,CAST(transaction_id AS CHAR(64)),'balance_after chain break' FROM chain WHERE (p_account_id IS NULL OR account_id=p_account_id) AND balance_after<>prior_balance+signed_amount
+ UNION ALL
+ SELECT 'I2',MIN(account_id),transfer_group_id,'invalid paired transfer' FROM Transactions WHERE transfer_group_id IS NOT NULL GROUP BY transfer_group_id
+ HAVING NOT (COUNT(*)=2 AND SUM(status='Completed')=2 AND SUM(transaction_type='TransferOut')=1 AND SUM(transaction_type='TransferIn')=1 AND MIN(amount)=MAX(amount)
+ AND (MAX(CASE WHEN transaction_type='TransferOut' THEN account_id END) <=> MAX(CASE WHEN transaction_type='TransferIn' THEN related_account_id END))
+ AND (MAX(CASE WHEN transaction_type='TransferIn' THEN account_id END) <=> MAX(CASE WHEN transaction_type='TransferOut' THEN related_account_id END)))
+ UNION ALL
+ SELECT 'I3',a.account_id,CAST(a.account_id AS CHAR(64)),'minimum or nonnegative balance violated' FROM Accounts a JOIN Account_Types t USING(account_type_id) WHERE (p_account_id IS NULL OR a.account_id=p_account_id) AND (a.balance<0 OR (a.status<>'Closed' AND a.balance<t.min_balance))
+ UNION ALL
+ SELECT 'I5',a.account_id,CAST(a.account_id AS CHAR(64)),'latest completed balance_after differs' FROM Accounts a JOIN totals t USING(account_id) JOIN ledger l ON l.transaction_id=t.last_id WHERE (p_account_id IS NULL OR a.account_id=p_account_id) AND a.balance<>l.balance_after
+ UNION ALL
+ SELECT 'I4',a.account_id,CAST(a.account_id AS CHAR(64)),'missing Accounts INSERT audit' FROM Accounts a CROSS JOIN wm WHERE a.account_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.accounts_max_id')) AS UNSIGNED),0)
+ AND NOT EXISTS(SELECT 1 FROM Audit_Log x WHERE x.table_name='Accounts' AND x.record_pk=CAST(a.account_id AS CHAR) AND x.action_type='INSERT' AND x.audit_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.audit_max_id')) AS UNSIGNED),0))
+ UNION ALL
+ SELECT 'I4',t.account_id,CAST(t.transaction_id AS CHAR(64)),'missing Transactions INSERT audit' FROM Transactions t CROSS JOIN wm WHERE t.transaction_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.transactions_max_id')) AS UNSIGNED),0)
+ AND NOT EXISTS(SELECT 1 FROM Audit_Log x WHERE x.table_name='Transactions' AND x.record_pk=CAST(t.transaction_id AS CHAR) AND x.action_type='INSERT' AND x.audit_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.audit_max_id')) AS UNSIGNED),0))
+ UNION ALL
+ SELECT 'I4',l.disbursement_account_id,CAST(l.loan_id AS CHAR(64)),'missing Loans INSERT audit' FROM Loans l CROSS JOIN wm WHERE l.loan_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.loans_max_id')) AS UNSIGNED),0)
+ AND NOT EXISTS(SELECT 1 FROM Audit_Log x WHERE x.table_name='Loans' AND x.record_pk=CAST(l.loan_id AS CHAR) AND x.action_type='INSERT' AND x.audit_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.audit_max_id')) AS UNSIGNED),0))
+ UNION ALL
+ SELECT 'I4',a.account_id,CAST(a.account_id AS CHAR(64)),'newest UPDATE audit balance differs' FROM Accounts a JOIN latest_audit x ON x.record_pk=CAST(a.account_id AS CHAR) AND x.rn=1 WHERE NOT (CAST(JSON_UNQUOTE(JSON_EXTRACT(x.new_value,'$.balance')) AS DECIMAL(14,2)) <=> a.balance)
+),
+ ids AS (SELECT 'I1' AS invariant UNION ALL SELECT 'I1b' UNION ALL SELECT 'I2' UNION ALL SELECT 'I3' UNION ALL SELECT 'I4' UNION ALL SELECT 'I5'),
+ counts AS (SELECT ids.invariant,COUNT(p.invariant) AS violations FROM ids LEFT JOIN problems p USING(invariant) GROUP BY ids.invariant)
+ SELECT JSON_ARRAYAGG(JSON_OBJECT('invariant',invariant,'violations',violations,'status',IF(violations=0,'PASS','FAIL'))) INTO @reconcile_results FROM counts;
+ SELECT invariant,violations,status,v_checked AS checked_at FROM JSON_TABLE(@reconcile_results,'$[*]' COLUMNS(invariant VARCHAR(4) PATH '$.invariant',violations BIGINT PATH '$.violations',status VARCHAR(4) PATH '$.status')) j ORDER BY invariant;
+ WITH
+ ledger AS (SELECT account_id,transaction_id,transaction_type,amount,balance_after,
+ CASE WHEN transaction_type IN ('Deposit','TransferIn','InterestCredit') THEN amount ELSE -amount END AS signed_amount
+ FROM Transactions WHERE status='Completed'),
+ totals AS (SELECT account_id,SUM(signed_amount) AS net,MAX(transaction_id) AS last_id FROM ledger GROUP BY account_id),
+ chain AS (SELECT *,LAG(balance_after,1,0) OVER(PARTITION BY account_id ORDER BY transaction_id) AS prior_balance FROM ledger),
+ wm AS (SELECT COALESCE((SELECT detail FROM bank_b_1222_99291cc5eb2d45339bec1be511d0c743_after.Experiment_Log WHERE db_name=DATABASE() AND event_type='AUDIT_TRIGGERS_INSTALLED' ORDER BY log_id DESC LIMIT 1),JSON_OBJECT()) AS j),
+ latest_audit AS (SELECT record_pk,new_value,ROW_NUMBER() OVER(PARTITION BY record_pk ORDER BY audit_id DESC) AS rn FROM Audit_Log,wm WHERE table_name='Accounts' AND action_type='UPDATE' AND audit_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.audit_max_id')) AS UNSIGNED),0)),
+ problems AS (
+ SELECT 'I1' AS invariant,a.account_id,CAST(a.account_id AS CHAR(64)) AS record_pk,'balance differs from completed ledger' AS detail
+ FROM Accounts a LEFT JOIN totals t USING(account_id) WHERE (p_account_id IS NULL OR a.account_id=p_account_id) AND a.balance<>COALESCE(t.net,0)
+ UNION ALL
+ SELECT 'I1',NULL,'TOTAL','aggregate balance differs from completed ledger' FROM Accounts a LEFT JOIN totals t USING(account_id) WHERE p_account_id IS NULL OR a.account_id=p_account_id HAVING COALESCE(SUM(a.balance),0)<>COALESCE(SUM(t.net),0)
+ UNION ALL
+ SELECT 'I1b',account_id,CAST(transaction_id AS CHAR(64)),'balance_after chain break' FROM chain WHERE (p_account_id IS NULL OR account_id=p_account_id) AND balance_after<>prior_balance+signed_amount
+ UNION ALL
+ SELECT 'I2',MIN(account_id),transfer_group_id,'invalid paired transfer' FROM Transactions WHERE transfer_group_id IS NOT NULL GROUP BY transfer_group_id
+ HAVING NOT (COUNT(*)=2 AND SUM(status='Completed')=2 AND SUM(transaction_type='TransferOut')=1 AND SUM(transaction_type='TransferIn')=1 AND MIN(amount)=MAX(amount)
+ AND (MAX(CASE WHEN transaction_type='TransferOut' THEN account_id END) <=> MAX(CASE WHEN transaction_type='TransferIn' THEN related_account_id END))
+ AND (MAX(CASE WHEN transaction_type='TransferIn' THEN account_id END) <=> MAX(CASE WHEN transaction_type='TransferOut' THEN related_account_id END)))
+ UNION ALL
+ SELECT 'I3',a.account_id,CAST(a.account_id AS CHAR(64)),'minimum or nonnegative balance violated' FROM Accounts a JOIN Account_Types t USING(account_type_id) WHERE (p_account_id IS NULL OR a.account_id=p_account_id) AND (a.balance<0 OR (a.status<>'Closed' AND a.balance<t.min_balance))
+ UNION ALL
+ SELECT 'I5',a.account_id,CAST(a.account_id AS CHAR(64)),'latest completed balance_after differs' FROM Accounts a JOIN totals t USING(account_id) JOIN ledger l ON l.transaction_id=t.last_id WHERE (p_account_id IS NULL OR a.account_id=p_account_id) AND a.balance<>l.balance_after
+ UNION ALL
+ SELECT 'I4',a.account_id,CAST(a.account_id AS CHAR(64)),'missing Accounts INSERT audit' FROM Accounts a CROSS JOIN wm WHERE a.account_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.accounts_max_id')) AS UNSIGNED),0)
+ AND NOT EXISTS(SELECT 1 FROM Audit_Log x WHERE x.table_name='Accounts' AND x.record_pk=CAST(a.account_id AS CHAR) AND x.action_type='INSERT' AND x.audit_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.audit_max_id')) AS UNSIGNED),0))
+ UNION ALL
+ SELECT 'I4',t.account_id,CAST(t.transaction_id AS CHAR(64)),'missing Transactions INSERT audit' FROM Transactions t CROSS JOIN wm WHERE t.transaction_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.transactions_max_id')) AS UNSIGNED),0)
+ AND NOT EXISTS(SELECT 1 FROM Audit_Log x WHERE x.table_name='Transactions' AND x.record_pk=CAST(t.transaction_id AS CHAR) AND x.action_type='INSERT' AND x.audit_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.audit_max_id')) AS UNSIGNED),0))
+ UNION ALL
+ SELECT 'I4',l.disbursement_account_id,CAST(l.loan_id AS CHAR(64)),'missing Loans INSERT audit' FROM Loans l CROSS JOIN wm WHERE l.loan_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.loans_max_id')) AS UNSIGNED),0)
+ AND NOT EXISTS(SELECT 1 FROM Audit_Log x WHERE x.table_name='Loans' AND x.record_pk=CAST(l.loan_id AS CHAR) AND x.action_type='INSERT' AND x.audit_id>COALESCE(CAST(JSON_UNQUOTE(JSON_EXTRACT(j,'$.audit_max_id')) AS UNSIGNED),0))
+ UNION ALL
+ SELECT 'I4',a.account_id,CAST(a.account_id AS CHAR(64)),'newest UPDATE audit balance differs' FROM Accounts a JOIN latest_audit x ON x.record_pk=CAST(a.account_id AS CHAR) AND x.rn=1 WHERE NOT (CAST(JSON_UNQUOTE(JSON_EXTRACT(x.new_value,'$.balance')) AS DECIMAL(14,2)) <=> a.balance)
+)
+ SELECT invariant,account_id,record_pk,detail FROM problems ORDER BY invariant,account_id,record_pk LIMIT 100;
+END
+sp_register_customer	BEGIN
+ DECLARE v_errno INT;
+ DECLARE EXIT HANDLER FOR 1062 BEGIN ROLLBACK; SET p_customer_id=NULL; SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5018,MESSAGE_TEXT='E_INVALID_ARGUMENT: duplicate identity attribute'; END;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION
+ BEGIN
+  GET DIAGNOSTICS CONDITION 1 v_errno=MYSQL_ERRNO;
+  ROLLBACK;
+  SET p_customer_id=NULL;
+  
+  RESIGNAL;
+ END;
+ SET p_customer_id=NULL;
+ IF NULLIF(TRIM(p_full_name),'') IS NULL OR p_dob IS NULL OR p_dob>CURDATE() OR p_email IS NULL OR p_email NOT LIKE '%_@_%._%' OR p_phone IS NULL OR NOT REGEXP_LIKE(p_phone,'^[+]?[0-9]{7,19}$','c') OR NULLIF(TRIM(p_address),'') IS NULL OR NULLIF(TRIM(p_id_proof_number),'') IS NULL OR p_id_proof_type IS NULL OR p_id_proof_type NOT IN ('Aadhaar','PAN','Passport','DrivingLicense','VoterID') THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5018,MESSAGE_TEXT='E_INVALID_ARGUMENT: invalid customer attributes'; END IF;
+ START TRANSACTION;
+ INSERT INTO Customers(full_name,dob,gender,email,phone,address,id_proof_number,id_proof_type,kyc_status,is_active) VALUES(TRIM(p_full_name),p_dob,p_gender,p_email,p_phone,p_address,p_id_proof_number,p_id_proof_type,'Pending',TRUE);
+ SET p_customer_id=LAST_INSERT_ID();
+ COMMIT;
+END
+sp_resolve_actor	BEGIN
+ DECLARE v_matches INT DEFAULT 0;
+ DECLARE v_user VARCHAR(100);
+ SET p_actor_type='System',p_employee_id=NULL,p_customer_id=NULL;
+ IF p_db_login IS NOT NULL THEN
+  SET v_user=SUBSTRING_INDEX(p_db_login,'@',1);
+  SELECT COUNT(*) INTO v_matches FROM DB_User_Map WHERE BINARY db_login=BINARY p_db_login;
+  IF v_matches=1 THEN
+   SELECT actor_type,employee_id,customer_id INTO p_actor_type,p_employee_id,p_customer_id
+   FROM DB_User_Map WHERE BINARY db_login=BINARY p_db_login;
+  ELSE
+   -- Prefer an explicit host-independent user key. Conflicting host mappings remain unattributed.
+   SELECT COUNT(*) INTO v_matches FROM DB_User_Map WHERE BINARY db_login=BINARY v_user;
+   IF v_matches=1 THEN
+    SELECT actor_type,employee_id,customer_id INTO p_actor_type,p_employee_id,p_customer_id
+    FROM DB_User_Map WHERE BINARY db_login=BINARY v_user;
+   ELSE
+    SELECT COUNT(DISTINCT CONCAT(actor_type,':',COALESCE(employee_id,0),':',COALESCE(customer_id,0)))
+    INTO v_matches FROM DB_User_Map WHERE BINARY SUBSTRING_INDEX(db_login,'@',1)=BINARY v_user;
+    IF v_matches=1 THEN
+     SELECT actor_type,employee_id,customer_id INTO p_actor_type,p_employee_id,p_customer_id
+     FROM DB_User_Map WHERE BINARY SUBSTRING_INDEX(db_login,'@',1)=BINARY v_user
+     ORDER BY BINARY db_login LIMIT 1;
+    END IF;
+   END IF;
+  END IF;
+ END IF;
+END
+sp_set_account_status	BEGIN
+ DECLARE v_status VARCHAR(10);
+ DECLARE v_errno INT;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION
+ BEGIN
+  GET DIAGNOSTICS CONDITION 1 v_errno=MYSQL_ERRNO;
+  ROLLBACK;
+  
+  
+  RESIGNAL;
+ END;
+ IF p_new_status IS NULL OR p_new_status NOT IN ('Active','Frozen') THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5011,MESSAGE_TEXT='E_INVALID_TRANSITION: only Active and Frozen transitions allowed'; END IF;
+ START TRANSACTION;
+ IF p_account_id IS NULL OR NOT EXISTS(SELECT 1 FROM Accounts WHERE account_id=p_account_id) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5002,MESSAGE_TEXT='E_ACCOUNT_NOT_FOUND: account does not exist'; END IF;
+ SELECT status INTO v_status FROM Accounts WHERE account_id=p_account_id FOR UPDATE;
+ IF v_status='Closed' OR v_status=p_new_status THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5011,MESSAGE_TEXT='E_INVALID_TRANSITION: invalid status transition'; END IF;
+ CALL sp_internal_assert_staff(p_employee_id,p_account_id,'Teller,Manager');
+ UPDATE Accounts SET status=p_new_status WHERE account_id=p_account_id;
+ COMMIT;
+END
+sp_transfer_funds	BEGIN
+
+ DECLARE v_errno INT;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION
+ BEGIN
+  GET DIAGNOSTICS CONDITION 1 v_errno=MYSQL_ERRNO;
+  ROLLBACK;
+  SET p_transfer_group_id=NULL,p_debit_txn_id=NULL,p_credit_txn_id=NULL;
+  IF v_errno IN (5003,5004,5005,5006,5010) THEN
+   BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; END;
+    START TRANSACTION;
+    CALL sp_internal_record_failed(p_from_account_id,p_amount,'TransferOut',p_channel);
+    COMMIT;
+   END;
+  END IF;
+  RESIGNAL;
+ END;
+ SET p_transfer_group_id=NULL,p_debit_txn_id=NULL,p_credit_txn_id=NULL;
+ IF p_amount IS NULL OR p_amount<=0 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5001,MESSAGE_TEXT='E_INVALID_AMOUNT: amount must be positive'; END IF;
+ IF p_lab_mode IS NULL OR p_lab_mode NOT IN (0,1,2,3) THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5018,MESSAGE_TEXT='E_INVALID_ARGUMENT: invalid lab mode'; END IF;
+ IF p_from_account_id=p_to_account_id THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5005,MESSAGE_TEXT='E_SAME_ACCOUNT: accounts must differ'; END IF;
+ IF p_amount>=fn_approval_threshold() THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5006,MESSAGE_TEXT='E_APPROVAL_REQUIRED: approval threshold reached'; END IF;
+ -- RELEASE_GUARD_PLACEHOLDER
+ START TRANSACTION;
+ -- LAB_HOOK_BEGIN
+ -- The hook executes in the private helper within this public transaction.
+ -- LAB_HOOK_END
+ -- LAB_NAIVE_BEGIN
+ -- Lab lock-order selection is delegated to the same private helper.
+ -- LAB_NAIVE_END
+ CALL sp_internal_post_transfer(p_from_account_id,p_to_account_id,p_amount,p_channel,p_employee_id,p_device_id,p_location_id,p_lab_mode,0,p_transfer_group_id,p_debit_txn_id,p_credit_txn_id);
+ COMMIT;
+END
+sp_withdraw	BEGIN
+
+ DECLARE v_errno INT;
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION
+ BEGIN
+  GET DIAGNOSTICS CONDITION 1 v_errno=MYSQL_ERRNO;
+  ROLLBACK;
+  SET p_transaction_id=NULL,p_balance_after=NULL;
+  IF v_errno IN (5003,5004,5005,5006,5010) THEN
+   BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION BEGIN ROLLBACK; END;
+    START TRANSACTION;
+    CALL sp_internal_record_failed(p_account_id,p_amount,'Withdrawal',p_channel);
+    COMMIT;
+   END;
+  END IF;
+  RESIGNAL;
+ END;
+ SET p_transaction_id=NULL,p_balance_after=NULL;
+ IF p_amount IS NULL OR p_amount<=0 THEN SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5001,MESSAGE_TEXT='E_INVALID_AMOUNT: amount must be positive'; END IF;
+ START TRANSACTION;
+ CALL sp_internal_post_single(p_account_id,p_amount,'Withdrawal',p_channel,p_employee_id,p_device_id,p_location_id,p_transaction_id,p_balance_after);
+ COMMIT;
+END
+trg_accounts_ad_audit	1	BEGIN
+ DECLARE v_actor VARCHAR(10);
+ DECLARE v_employee INT;
+ DECLARE v_customer INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_employee,v_customer);
+ INSERT INTO Audit_Log(table_name,record_pk,action_type,old_value,new_value,db_session_user,actor_type,actor_employee_id,actor_customer_id)
+ VALUES('Accounts',CAST(OLD.account_id AS CHAR),'DELETE',JSON_OBJECT('account_id',OLD.account_id,'customer_id',OLD.customer_id,'branch_id',OLD.branch_id,'account_type_id',OLD.account_type_id,'account_number',OLD.account_number,'balance',OLD.balance,'status',OLD.status,'opened_date',OLD.opened_date),NULL,USER(),v_actor,v_employee,v_customer);
+END
+trg_accounts_ai_audit	1	BEGIN
+ DECLARE v_actor VARCHAR(10);
+ DECLARE v_employee INT;
+ DECLARE v_customer INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_employee,v_customer);
+ INSERT INTO Audit_Log(table_name,record_pk,action_type,old_value,new_value,db_session_user,actor_type,actor_employee_id,actor_customer_id)
+ VALUES('Accounts',CAST(NEW.account_id AS CHAR),'INSERT',NULL,JSON_OBJECT('account_id',NEW.account_id,'customer_id',NEW.customer_id,'branch_id',NEW.branch_id,'account_type_id',NEW.account_type_id,'account_number',NEW.account_number,'balance',NEW.balance,'status',NEW.status,'opened_date',NEW.opened_date),USER(),v_actor,v_employee,v_customer);
+END
+trg_accounts_au_audit	1	BEGIN
+ DECLARE v_actor VARCHAR(10);
+ DECLARE v_employee INT;
+ DECLARE v_customer INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_employee,v_customer);
+ INSERT INTO Audit_Log(table_name,record_pk,action_type,old_value,new_value,db_session_user,actor_type,actor_employee_id,actor_customer_id)
+ VALUES('Accounts',CAST(NEW.account_id AS CHAR),'UPDATE',JSON_OBJECT('account_id',OLD.account_id,'customer_id',OLD.customer_id,'branch_id',OLD.branch_id,'account_type_id',OLD.account_type_id,'account_number',OLD.account_number,'balance',OLD.balance,'status',OLD.status,'opened_date',OLD.opened_date),JSON_OBJECT('account_id',NEW.account_id,'customer_id',NEW.customer_id,'branch_id',NEW.branch_id,'account_type_id',NEW.account_type_id,'account_number',NEW.account_number,'balance',NEW.balance,'status',NEW.status,'opened_date',NEW.opened_date),USER(),v_actor,v_employee,v_customer);
+END
+trg_loans_ad_audit	1	BEGIN
+ DECLARE v_actor VARCHAR(10);
+ DECLARE v_employee INT;
+ DECLARE v_customer INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_employee,v_customer);
+ INSERT INTO Audit_Log(table_name,record_pk,action_type,old_value,new_value,db_session_user,actor_type,actor_employee_id,actor_customer_id)
+ VALUES('Loans',CAST(OLD.loan_id AS CHAR),'DELETE',JSON_OBJECT('loan_id',OLD.loan_id,'customer_id',OLD.customer_id,'disbursement_account_id',OLD.disbursement_account_id,'principal_amount',OLD.principal_amount,'interest_rate',OLD.interest_rate,'tenure_months',OLD.tenure_months,'status',OLD.status,'disbursed_date',OLD.disbursed_date),NULL,USER(),v_actor,v_employee,v_customer);
+END
+trg_loans_ai_audit	1	BEGIN
+ DECLARE v_actor VARCHAR(10);
+ DECLARE v_employee INT;
+ DECLARE v_customer INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_employee,v_customer);
+ INSERT INTO Audit_Log(table_name,record_pk,action_type,old_value,new_value,db_session_user,actor_type,actor_employee_id,actor_customer_id)
+ VALUES('Loans',CAST(NEW.loan_id AS CHAR),'INSERT',NULL,JSON_OBJECT('loan_id',NEW.loan_id,'customer_id',NEW.customer_id,'disbursement_account_id',NEW.disbursement_account_id,'principal_amount',NEW.principal_amount,'interest_rate',NEW.interest_rate,'tenure_months',NEW.tenure_months,'status',NEW.status,'disbursed_date',NEW.disbursed_date),USER(),v_actor,v_employee,v_customer);
+END
+trg_loans_au_audit	1	BEGIN
+ DECLARE v_actor VARCHAR(10);
+ DECLARE v_employee INT;
+ DECLARE v_customer INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_employee,v_customer);
+ INSERT INTO Audit_Log(table_name,record_pk,action_type,old_value,new_value,db_session_user,actor_type,actor_employee_id,actor_customer_id)
+ VALUES('Loans',CAST(NEW.loan_id AS CHAR),'UPDATE',JSON_OBJECT('loan_id',OLD.loan_id,'customer_id',OLD.customer_id,'disbursement_account_id',OLD.disbursement_account_id,'principal_amount',OLD.principal_amount,'interest_rate',OLD.interest_rate,'tenure_months',OLD.tenure_months,'status',OLD.status,'disbursed_date',OLD.disbursed_date),JSON_OBJECT('loan_id',NEW.loan_id,'customer_id',NEW.customer_id,'disbursement_account_id',NEW.disbursement_account_id,'principal_amount',NEW.principal_amount,'interest_rate',NEW.interest_rate,'tenure_months',NEW.tenure_months,'status',NEW.status,'disbursed_date',NEW.disbursed_date),USER(),v_actor,v_employee,v_customer);
+END
+trg_transactions_ad_audit	1	BEGIN
+ DECLARE v_actor VARCHAR(10);
+ DECLARE v_employee INT;
+ DECLARE v_customer INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_employee,v_customer);
+ INSERT INTO Audit_Log(table_name,record_pk,action_type,old_value,new_value,db_session_user,actor_type,actor_employee_id,actor_customer_id)
+ VALUES('Transactions',CAST(OLD.transaction_id AS CHAR),'DELETE',JSON_OBJECT('transaction_id',OLD.transaction_id,'account_id',OLD.account_id,'related_account_id',OLD.related_account_id,'employee_id',OLD.employee_id,'transfer_group_id',OLD.transfer_group_id,'device_id',OLD.device_id,'location_id',OLD.location_id,'transaction_type',OLD.transaction_type,'amount',OLD.amount,'balance_after',OLD.balance_after,'channel',OLD.channel,'status',OLD.status,'transaction_timestamp',OLD.transaction_timestamp,'reference_no',OLD.reference_no),NULL,USER(),v_actor,v_employee,v_customer);
+END
+trg_transactions_ai_audit	1	BEGIN
+ DECLARE v_actor VARCHAR(10);
+ DECLARE v_employee INT;
+ DECLARE v_customer INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_employee,v_customer);
+ INSERT INTO Audit_Log(table_name,record_pk,action_type,old_value,new_value,db_session_user,actor_type,actor_employee_id,actor_customer_id)
+ VALUES('Transactions',CAST(NEW.transaction_id AS CHAR),'INSERT',NULL,JSON_OBJECT('transaction_id',NEW.transaction_id,'account_id',NEW.account_id,'related_account_id',NEW.related_account_id,'employee_id',NEW.employee_id,'transfer_group_id',NEW.transfer_group_id,'device_id',NEW.device_id,'location_id',NEW.location_id,'transaction_type',NEW.transaction_type,'amount',NEW.amount,'balance_after',NEW.balance_after,'channel',NEW.channel,'status',NEW.status,'transaction_timestamp',NEW.transaction_timestamp,'reference_no',NEW.reference_no),USER(),v_actor,v_employee,v_customer);
+END
+trg_transactions_au_audit	1	BEGIN
+ DECLARE v_actor VARCHAR(10);
+ DECLARE v_employee INT;
+ DECLARE v_customer INT;
+ CALL sp_resolve_actor(USER(),v_actor,v_employee,v_customer);
+ INSERT INTO Audit_Log(table_name,record_pk,action_type,old_value,new_value,db_session_user,actor_type,actor_employee_id,actor_customer_id)
+ VALUES('Transactions',CAST(NEW.transaction_id AS CHAR),'UPDATE',JSON_OBJECT('transaction_id',OLD.transaction_id,'account_id',OLD.account_id,'related_account_id',OLD.related_account_id,'employee_id',OLD.employee_id,'transfer_group_id',OLD.transfer_group_id,'device_id',OLD.device_id,'location_id',OLD.location_id,'transaction_type',OLD.transaction_type,'amount',OLD.amount,'balance_after',OLD.balance_after,'channel',OLD.channel,'status',OLD.status,'transaction_timestamp',OLD.transaction_timestamp,'reference_no',OLD.reference_no),JSON_OBJECT('transaction_id',NEW.transaction_id,'account_id',NEW.account_id,'related_account_id',NEW.related_account_id,'employee_id',NEW.employee_id,'transfer_group_id',NEW.transfer_group_id,'device_id',NEW.device_id,'location_id',NEW.location_id,'transaction_type',NEW.transaction_type,'amount',NEW.amount,'balance_after',NEW.balance_after,'channel',NEW.channel,'status',NEW.status,'transaction_timestamp',NEW.transaction_timestamp,'reference_no',NEW.reference_no),USER(),v_actor,v_employee,v_customer);
+END
+trg_accounts_bu_minbal_guard	1	BEGIN
+ DECLARE v_min DECIMAL(12,2);
+ IF OLD.status='Closed' AND (NOT (NEW.balance <=> OLD.balance) OR NEW.status<>'Closed') THEN
+  SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5011,MESSAGE_TEXT='E_INVALID_TRANSITION: closed account cannot change balance or status';
+ END IF;
+ SELECT min_balance INTO v_min FROM Account_Types WHERE account_type_id=NEW.account_type_id;
+ IF NOT (NEW.balance <=> OLD.balance) AND NEW.balance=0 AND NEW.status<>'Closed' THEN
+  SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5015,MESSAGE_TEXT='E_MINBAL_GUARD: zero balance requires closure';
+ END IF;
+ IF NEW.balance<OLD.balance AND NEW.balance<v_min AND NOT (NEW.balance=0 AND NEW.status='Closed') THEN
+  SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5015,MESSAGE_TEXT='E_MINBAL_GUARD: decrease would breach minimum balance';
+ END IF;
+END
+trg_audit_log_bd_immutable	1	BEGIN
+ SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5013,MESSAGE_TEXT='E_AUDIT_IMMUTABLE: audit rows cannot be deleted';
+END
+trg_audit_log_bu_immutable	1	BEGIN
+ SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5013,MESSAGE_TEXT='E_AUDIT_IMMUTABLE: audit rows cannot be updated';
+END
+trg_transactions_bd_immutable	1	BEGIN
+ SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5012,MESSAGE_TEXT='E_LEDGER_IMMUTABLE: ledger rows cannot be deleted';
+END
+trg_transactions_bi_device_owner	1	BEGIN
+ DECLARE v_account_owner INT;
+ DECLARE v_device_owner INT;
+ IF NEW.related_account_id=NEW.account_id THEN
+  SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5005,MESSAGE_TEXT='E_SAME_ACCOUNT: counterparty must be a different account';
+ END IF;
+ IF NEW.device_id IS NOT NULL THEN
+  SET v_account_owner=(SELECT customer_id FROM Accounts WHERE account_id=NEW.account_id);
+  SET v_device_owner=(SELECT customer_id FROM Devices WHERE device_id=NEW.device_id);
+  -- A missing reference is left to the FK (1452); an existing mismatched device is 5014.
+  IF v_account_owner IS NOT NULL AND v_device_owner IS NOT NULL AND v_account_owner<>v_device_owner THEN
+   SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5014,MESSAGE_TEXT='E_DEVICE_OWNER_MISMATCH: device belongs to another customer';
+  END IF;
+ END IF;
+END
+trg_transactions_bu_immutable	1	BEGIN
+ SIGNAL SQLSTATE '45000' SET MYSQL_ERRNO=5012,MESSAGE_TEXT='E_LEDGER_IMMUTABLE: ledger rows cannot be updated';
+END
+trg_transactions_ai_fraud_evaluate	2	BEGIN
+  IF NEW.status='Completed' THEN
+    CALL sp_evaluate_fraud(NEW.transaction_id);
+  END IF;
+END
