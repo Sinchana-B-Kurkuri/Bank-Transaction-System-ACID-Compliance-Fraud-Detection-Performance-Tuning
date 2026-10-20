@@ -19,12 +19,22 @@ SOURCE schema/01_tables/15_transaction_approvals.sql;
 SOURCE schema/01_tables/16_fraud_ground_truth.sql;
 SOURCE schema/02_constraints/01_core_constraints.sql;
 SOURCE schema/02_constraints/02_cross_module_fks.sql;
--- Optimized indexes are opt-in through build/run_all_optimized.sql or rebuild -IndexProfile Optimized.
+-- Baseline B0: no optional secondary indexes.
+-- Optimized is explicit: build/run_all_optimized.sql or rebuild -IndexProfile Optimized.
 -- SOURCE schema/04_lab/02_benchmark_results.sql; -- Optional B-owned file when supplied.
 SOURCE functions/fn_approval_threshold.sql;
 SOURCE functions/fn_available_balance.sql;
 SOURCE functions/fn_calc_interest.sql;
 SOURCE functions/fn_generate_reference.sql;
+SOURCE functions/fn_distance_km.sql;
+SOURCE functions/fn_amount_zscore.sql;
+SOURCE functions/fn_txn_count_window.sql;
+SOURCE functions/fn_is_odd_hour.sql;
+SOURCE functions/fn_account_age_days.sql;
+SOURCE functions/fn_txn_risk_score.sql;
+SOURCE functions/fn_risk_level.sql;
+SOURCE functions/fn_resolved_customer_id.sql;
+SOURCE functions/fn_resolved_employee_id.sql;
 SOURCE functions/fn_fraud_score.sql;
 SOURCE functions/fn_get_balance.sql;
 SOURCE functions/fn_mask_id_proof.sql;

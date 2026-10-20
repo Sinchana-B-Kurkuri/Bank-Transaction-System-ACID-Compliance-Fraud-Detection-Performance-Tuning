@@ -1,3 +1,4 @@
 Path,Mode,Owner
 tests/functions/03_fraud_score.sql,Integrated,B
+tests/functions/04_fraud_spec_functions.sql,Integrated,B
 tests/integration/06_fraud_security_objects.sql,Integrated,B

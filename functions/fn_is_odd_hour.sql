@@ -1,0 +1,9 @@
+DELIMITER $$
+CREATE FUNCTION fn_is_odd_hour(p_timestamp DATETIME)
+RETURNS TINYINT
+DETERMINISTIC NO SQL
+BEGIN
+  IF p_timestamp IS NULL THEN RETURN 0; END IF;
+  RETURN IF(HOUR(p_timestamp) < 6 OR HOUR(p_timestamp) >= 22,1,0);
+END$$
+DELIMITER ;

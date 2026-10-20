@@ -2,18 +2,17 @@
 
 ## Member A — build & test
 
-Requires MySQL 8.0.16+ (enforced CHECK constraints), the mysql CLI on PATH, and PowerShell. Set `BANK_MYSQL_CNF` to a local MySQL option file; never commit credentials. Run from the repository root:
+Requires MySQL 8.0.16+ (enforced CHECK constraints), the native mysql CLI and PowerShell (measured environment: Windows PowerShell5.1 / MySQL8.4.11). Set `BANK_MYSQL_CNF` to a private option file; never commit credentials. For safe integration verification from the repository root:
 
 ```powershell
 $env:BANK_MYSQL_CNF = Join-Path $HOME '.bank_mysql.cnf'
-powershell -File build/env_check.ps1
-powershell -File build/rebuild.ps1 -Database bank_txn -Mode Integrated -WithSeed
-powershell -File tests/run_regression.ps1
+powershell -NoProfile -File tests/regression/pr9_acceptance.ps1
+powershell -NoProfile -File tests/regression/error1222_seed.ps1
 ```
 
-Rebuild drops only `bank_txn` or `bank_txn_scratch`. The default test run rebuilds first. `-NoRebuild` is for an already disposable schema; procedure tests cannot rely on rollback. `-Filter` matches test file basenames with a PowerShell wildcard. Logs are saved under evidence/test-runs. B0 is saved by rebuild in evidence/EV-B0-1.txt.
+The default rebuild/test entry points retain their historical bank_txn/bank_txn_scratch targets; do not run them against databases you need to preserve. A's isolated context restricts operations to fresh owned names and redirects helper/evidence namespaces. The dedicated PR9 runners above allocate and clean their own disposable targets and do not create roles/users by default. Public procedures commit, so tests cannot rely on caller rollback. -Filter matches test file basenames; -NoRebuild only skips the initial rebuild, not every nested test's work.
 
-Standalone uses interface stand-ins under tests/stubs; Integrated uses the seven real B table files now merged in develop. Their extra constraints are tested separately; the two modes are not equivalent. B runtime fraud/security/views/benchmark files are absent in this checkout. Workbench users follow the mode annotations in build/file_order.txt and docs/member-a/WORKBENCH_RUNBOOK.md. Optional `-WithSeed` loads sorted data/seed/*.sql files; it fails before dropping anything if no seed loader exists. Raw bulk loaders run before triggers and must supply opening Completed Deposit rows. Procedure-based tiny seed runs after installation and generates its ledger/audit normally.
+Standalone uses interface stand-ins under tests/stubs; Integrated uses all seven real B tables, seven fraud functions, identity helpers, evaluator, fraud trigger and DEFINER views. Their extra constraints/runtime behavior are tested separately; the modes are not equivalent. RBAC is a separate preview/approved deployment step; optimized indexes are explicit, not part of B0. The optional Benchmark_Results include remains commented when unavailable. Workbench users follow build/file_order.txt mode annotations and docs/member-a/WORKBENCH_RUNBOOK.md. -WithSeed reruns numeric loaders idempotently; raw bulk loaders precede triggers and supply opening Completed Deposits. Procedure-based tiny seed follows triggers and generates normal ledger/audit rows.
 
 A schema, functions, procedures and triggers are implemented. docs/member-a/SPEC.md remains authoritative; docs/member-a/status_report.md records final tested/blocked/manual status. Earlier DELIVERY/PROMPT reports are historical evidence, not a blanket current full-system acceptance claim.
 
@@ -21,7 +20,7 @@ The wrapper supports Windows PowerShell 5.1 and paths containing spaces. It capt
 
 ### Member A — final integration and reruns
 
-Prerequisites: MySQL 8.0.16+ with InnoDB/CHECK/window/JSON support (measured here: 8.4.11), Windows PowerShell 5.1 or compatible PowerShell, native mysql client and optional mysqldump/mysqlbinlog/mysqlslap tools. Tests need a disposable permitted database plus local administrative privileges to create/drop reserved zz_a_* users and grant temporary access. Crash/service actions remain operator-only. Credentials must be configured privately; no repository credential file exists. A minimal local file template without secrets is:
+Prerequisites: MySQL with InnoDB/CHECK/window/JSON support, PowerShell, native mysql and optional backup/benchmark tools. Full legacy regression includes tests that create/drop reserved zz_a_* users and grants, so it requires separate explicit authorization even in an isolated database context. Database isolation alone does not isolate global MySQL accounts. Crash/service actions remain operator-only. Credentials stay private; a local template without secrets is:
 
 ```ini
 [client]
@@ -33,8 +32,8 @@ port=3306
 Set `$env:BANK_MYSQL_CNF` to that complete private file. `$env:BANK_MYSQL_BIN` optionally names the exact mysql.exe path (including spaces); it overrides PATH. No credentials belong in commands, Git or evidence. A copied normal `$env` variable does not propagate to child PowerShell processes. The wrapper probes explicitly isolate both environment settings and test Windows installation fallback.
 
 ```powershell
-# Both modes and release, with real components available in this checkout:
-powershell -NoProfile -File tests/run_regression.ps1
+# Both modes, release and bounded Quick; only AFTER approval for its temporary account tests:
+powershell -NoProfile -File tests/run_regression.ps1 -IsolatedPrefix bank_a_ci_unique_run -VerifyOptimized
 # One existing disposable schema, without an implicit rebuild:
 powershell -NoProfile -File tests/run_tests.ps1 -Database bank_txn -NoRebuild
 # Explicit standalone development build:
@@ -44,9 +43,9 @@ powershell -NoProfile -File build/release_strip_lab_hook.ps1
 powershell -NoProfile -File tests/run_release.ps1 -Mode Integrated
 ```
 
-Build order is lab helpers → nine A tables → real B tables (or standalone stubs) → core/cross FKs → functions → resolver/private/public procedures → guards/audits → installation watermark → reference/tiny seed. file_order.txt and both CLI build files are checked together. No optimized B indexes are silently installed into B0. The release directory is ignored; signatures stay fixed, nonzero lab modes become 5017. tests/run_release.ps1 leaves scratch with release objects and checks that tests do not replace them. The development suite's two self-rebuilding scratch harnesses are reported not applicable inside that release run; they are exercised by both full development suites.
+Integrated build order is lab helpers → nine A tables → seven real B tables → core/cross FKs → A/B functions (risk heuristic before legacy wrapper) → resolver/private/public/evaluator procedures → guards/audits → watermark → reference/rule seed → fraud trigger FOLLOWS audit → tiny seed → views. Standalone uses its six interface stubs and omits B runtime. RBAC is a separate manual preview/approved deployment after views. file_order.txt and both CLI build files are checked together. No optimized B indexes are silently installed into B0. The release directory is ignored; signatures stay fixed, nonzero lab modes become 5017. tests/run_release.ps1 leaves scratch with release objects and checks that tests do not replace them. The development suite's two self-rebuilding scratch harnesses are reported not applicable inside that release run; they are exercised by both full development suites.
 
-tests/run_regression.ps1 saves evidence/regression/<timestamp>.md plus raw stage logs. Exit 0 means all acceptance checks passed; 1 means an executed failure; 2 means remaining blockers. Missing B runtime/security and unsupported experiment -Quick are explicitly BLOCKED, even if both SQL suites pass. No full throughput grid is rerun as a substitute. New generated evidence is archived and tracked historical evidence restored; manually inspecting an old EV file alone does not identify the latest run.
+tests/run_regression.ps1 saves raw stage logs and a summary. Exit0 means its acceptance checks passed;1 means an executed failure;2 means remaining missing/blocked/not-run checks. The merged checkout supplies B runtime and a bounded -Quick branch, but installed files do not prove deployed privileges. RBAC preview/actor-map checks are separate from authenticated restricted-role tests, which require new approval. Historical evidence is not replaced by a fresh passing summary; inspect each run's paths and limits.
 
 ### Member A experiment index (bus-factor instructions)
 
@@ -75,10 +74,23 @@ Known limits: D5 begins coverage at audit-trigger installation; DBA can drop tri
 
 ### Member A isolated integration checks — 2026-10-20
 
-PR7 now supplies real B fraud/view/index components. Their presence does not resolve the measured scoring/RBAC/interface defects in [the PR7 review](evidence/reviews/PR7_REVIEW_2026-10-20.md). Use a fresh disposable namespace to preserve both existing banking databases:
+The merged PR9 corrections reconcile scoring/RBAC/views with Member A contracts. Older PR7/Prompt6 reports describe earlier commits and their blockers. To exercise A's complete orchestration, use a fresh disposable namespace and obtain approval for its reserved temporary-account tests first:
 
 ```powershell
 powershell -NoProfile -File tests/run_regression.ps1 -IsolatedPrefix bank_a_ci_unique_run -VerifyOptimized
 ```
 
-This runs both modes, nested tests, release checks, a bounded concurrent Quick smoke profile and six invariants, then removes only its owned isolated databases. Baseline is the default; Optimized explicitly sources B's unchanged performance indexes. Integrated B assertions remain enabled and currently fail; a nonzero acceptance result is expected until B resolves the review findings. Quick never invokes full experiment drivers or overwrites their historical reports. See [isolated-run instructions](docs/member-a/ISOLATED_REGRESSION.md) and [current delivery results](docs/member-a/PROMPT6_TOOLING_DELIVERY.md). Earlier dated Prompt 6 counts describe their original checkout, not current whole-system acceptance.
+This preserves both-mode discovery, nested/release checks, bounded concurrent Quick and six invariants; cleanup is limited to owned isolated databases. Baseline remains default; Optimized explicitly sources B's unchanged index definitions. Integrated B assertions remain enabled. The component manifest excludes B runtime tests only in Standalone, emitting SKIP rather than PASS. Quick never invokes full drivers or overwrites historical reports. See docs/member-a/ISOLATED_REGRESSION.md for the tooling contract and evidence/reviews/A-B-merge-resolution/REPORT.md for actual merge verification. Earlier delivery counts remain historical; no complete current orchestration/role acceptance is inferred from them.
+
+### Member A — safe PR9 acceptance
+
+For acceptance without touching existing banking/helper schemas, use the dedicated isolated runner rather than the historical rebuild/test commands above:
+
+```powershell
+$env:BANK_MYSQL_CNF = Join-Path $HOME '.bank_mysql.cnf'
+$env:BANK_MYSQL_BIN = 'C:\Program Files\MySQL\MySQL Server 8.4\bin\mysql.exe'
+powershell -NoProfile -File tests/regression/pr9_acceptance.ps1
+powershell -NoProfile -File tests/regression/error1222_seed.ps1
+```
+
+The PR9 runner creates a fresh random marked disposable schema, installs actual Integrated A+B components with helper references relocated only in executed SQL, runs numbered SQL tests and targeted diagnostics, previews RBAC, compares baseline/optimized index inventories, reconciles six invariants, then verifies ownership before cleanup. It fails on SQL errors, failed assertions or missing TEST output. Logs are unique per run under evidence/reviews/PR9-final-fixes/. By default it never provisions global roles/users/grants. After explicit approval of security/README.md, -WithRestrictedRoles applies only fresh suffixed test roles and loopback users, runs native restricted-login assertions and cleans them up in finally. It never invokes the original nested PowerShell tests that rebuild fixed banking schemas. See the delivery report for measured results and remaining limits.

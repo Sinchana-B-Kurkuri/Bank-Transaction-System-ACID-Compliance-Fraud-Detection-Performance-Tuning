@@ -2,7 +2,7 @@
 
 ## Member A public interface
 
-IMPLEMENTED: A schema and transaction engine. Prompt 6 tests the seven merged real B tables separately from standalone stand-ins; B fraud/security runtime sources are absent. Historical implementation notes below retain their original scope; the final integration section records current acceptance limits.
+IMPLEMENTED: A schema/transaction engine plus the real B schema, seven fraud functions, identity helpers, evaluator, ordered fraud trigger, DEFINER views and separate RBAC installer. Standalone remains a distinct A-only interface build. Historical dated implementation notes retain their original scope; current acceptance is recorded per run, not inferred from source presence.
 
 ### Public procedure signatures
 
@@ -165,7 +165,7 @@ sp_transfer_funds_retry(IN p_from_account_id INT, IN p_to_account_id INT, IN p_a
 
 ### B RBAC EXECUTE allowlist (public procedures only)
 
-The following is the complete A public surface, not permission to grant every item to every role. B must map the least-privilege subset to its approved role matrix and provide negative privilege tests. B RBAC is absent here, so no deployment of these grants is claimed.
+The following is the complete A public surface, not permission to grant every item to every role. The merged B installer maps explicit least-privilege subsets to the customer/teller/manager roles; the auditor has no banking EXECUTE. The public surface includes resolver, but the actual role lists intentionally do not grant it. RBAC is preview-only by default and actual role/grant deployment requires separate approval.
 
 ```text
 sp_register_customer
@@ -187,13 +187,13 @@ sp_reconcile_balances
 sp_post_monthly_interest
 ```
 
-Never grant any sp_internal_* procedure to roles. The existing private helpers are sp_internal_assert_staff, sp_internal_authorize, sp_internal_insert_ledger, sp_internal_post_single, sp_internal_post_transfer and sp_internal_record_failed. A public mutation owns START/COMMIT/ROLLBACK; a caller must not expect its existing transaction to survive that boundary. No direct private routine grants were found in the tested database; this does not certify absent B role definitions.
+Never grant any sp_internal_* procedure to roles. The existing private helpers are sp_internal_assert_staff, sp_internal_authorize, sp_internal_insert_ledger, sp_internal_post_single, sp_internal_post_transfer and sp_internal_record_failed. A public mutation owns START/COMMIT/ROLLBACK; a caller must not expect its existing transaction to survive that boundary. No direct private routine grants were found in the tested database; this does not certify deployed B role permissions.
 
 ### Real B schema versus standalone interface
 
 The six dependent table column/type contracts above are unchanged. Real B adds Account_Risk_Profile and extra CHECK/FK constraints: Locations coordinate ranges, Fraud_Rules weight 0..100, approval different accounts/exact requester and requester FKs. tests/integration/07_real_b_schema.ps1 executes those constraints only when the real risk-profile table exists. Standalone reports its boundary explicitly. No real B schema file is replaced with or modified to resemble a stub. Transaction_Approvals now has a concrete merged implementation matching the outlined column contract; B confirmation of final policy is requested without rewriting the frozen SPEC.
 
-A14 remains FOLLOWS trg_transactions_ai_audit; installed ACTION_ORDER and the source clause must both be checked once B supplies its fraud trigger. A5 NULL context and rollback of flag writes remain mandatory. Fraud-rule/risk/role behavior is BLOCKED by absent B runtime files, not established by a schema build. Existing audit-toggle refusal of dependent B triggers is retained.
+A14 remains FOLLOWS trg_transactions_ai_audit; check both installed ACTION_ORDER and the merged source clause. A5 NULL context and rollback of flag writes remain mandatory. The real evaluator/rules/views now exist and require runtime assertions, not a presence-only PASS. Role deployment/authenticated login checks still require explicit approval. Existing audit-toggle refusal of dependent B triggers is retained.
 
 ### Load, baseline and release obligations
 
@@ -201,4 +201,16 @@ Raw loaders run before triggers (A15); every positive opening account balance ha
 
 Release retains p_lab_mode for signature compatibility, removes all lab hook/naive/sleep logic and rejects every validated nonzero mode with 5017. NULL remains invalid argument 5018; amount/reference validation still precedes the guard as designed. tests/run_release.ps1 preserves business assertions and explicitly changes only lab-mode expectations, excluding two development harnesses that rebuild the release target. Modes 1/2/3/4 and a negative mode are tested, and both release routines are checked after every procedure file to prevent an accidental development-object replacement.
 
-tests/run_regression.ps1 selects Standalone then Integrated explicitly. Its temporary BANK_TEST_BUILD_MODE environment override makes nested scratch rebuilds use the same mode; it restores the prior setting in finally. Without that test-only override, rebuild retains automatic Integrated selection when all seven real table files exist. Runner exit 0 means all checks passed, 1 means failures, 2 means no failing executed checks but remaining BLOCKED acceptance items. Historical tracked evidence is restored byte-for-byte after saving new generated output under the timestamped regression directory.
+tests/run_regression.ps1 selects Standalone then Integrated explicitly. Its temporary BANK_TEST_BUILD_MODE environment override makes nested scratch rebuilds use the same mode; it restores the prior setting in finally. Without that test-only override, rebuild retains automatic Integrated selection when all seven real table files exist. Runner exit 0 means all checks passed, 1 means failures, 2 means no failing executed checks but remaining BLOCKED acceptance items. Isolated evidence writers are redirected into the fresh run directory; preserve all historical evidence and identify the current run explicitly.
+
+### PR9 final integration corrections — 2026-10-20
+
+sp_generate_statement retains its three IN parameters, two result sets, date validation and SQL SECURITY DEFINER. It resolves USER() with sp_resolve_actor: Customer owns the requested account; Employee must be an active Teller/Manager at that account's branch; an inactive, wrong-branch or mapped DBA employee is denied with existing 5010 E_NOT_AUTHORIZED. Trusted System remains permitted under A1/A17. Every role-bearing application login must be mapped before receiving EXECUTE; unmapped System is an intentional trusted administrative assumption, not an authentication mechanism.
+
+Member A explicitly approved retaining the transaction heuristic's +20 untrusted/missing-device weight: digital +10 yields30 when amount/profile contribute zero. fn_fraud_score is a compatibility wrapper delegating to fn_txn_risk_score, preserving both existing four-argument signatures. Amount >=5000 adds20, >=10000 adds35; Online/Mobile adds10; untrusted/NULL trust adds20; profile contribution clamps 0.35*input to [0,35]; total clamps to [0,100]. Evaluator passes profile input0 to avoid feedback; rule weights remain separately configurable and additive. HIGH_ACCOUNT_RISK retains its approved transaction-local accumulated-score comparison immediately before that rule, in rule_id order. The stored account profile appears in evidence only and retains its existing maximum-risk update semantics. Changing rule order/configuration/activity can change scores; stability is only claimed for unchanged facts/configuration/activity.
+
+RBAC is an explicit separate deployment, preview-only by default (@rbac_apply=0). The complete plan restores four roles, nine SELECT grants and32 explicit public EXECUTE grants; no private helpers/evaluator or wildcard privileges. @rbac_apply=1 requires operator approval; optional _pr9_<8hex> suffixes isolate test roles. See security/README.md for exact role/API lists, trusted-System provisioning requirement, native CLI steps and the isolated restricted-login cleanup plan (approval is required for each new run). Preview does not prove actual grant application or authentication. The safe tests/regression/pr9_acceptance.ps1 defaults to no role/user provisioning, never changes global settings or targets existing banking/helper databases, and relocates only helper qualifications in executed SQL into its own fresh marked disposable database. Explicitly approved -WithRestrictedRoles adds only the documented fresh suffixed roles/loopback users and verifies their cleanup; it does not change existing accounts or roles.
+
+### Native restricted-view correction — 2026-10-20
+
+The activity view keeps SQL SECURITY DEFINER, its existing output columns, identity precedence and same-branch/active employee filtering. Native MySQL8.4.11 restricted sessions reproduced1370 when fn_resolved_employee_id(USER()) appeared as the LEFT JOIN key, despite SELECT on the view. ALGORITHM=TEMPTABLE alone did not fix it. A correlated employee EXISTS predicate eliminated the failing JOIN evaluation path in actual restricted tests. No raw identity-function EXECUTE or base-table privileges were added; direct identity-function calls remain denied1370. See the PR9 final-fixes report for the measured native matrix and cleanup results. No performance measurement is claimed for this query-shape correction.
