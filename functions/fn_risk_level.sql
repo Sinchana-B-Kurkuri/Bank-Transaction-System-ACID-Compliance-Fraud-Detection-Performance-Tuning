@@ -1,0 +1,11 @@
+DELIMITER $$
+CREATE FUNCTION fn_risk_level(p_score DECIMAL(5,2))
+RETURNS VARCHAR(10)
+DETERMINISTIC NO SQL
+BEGIN
+  IF p_score IS NULL OR p_score < 30 THEN RETURN 'Low'; END IF;
+  IF p_score < 60 THEN RETURN 'Medium'; END IF;
+  IF p_score < 85 THEN RETURN 'High'; END IF;
+  RETURN 'Critical';
+END$$
+DELIMITER ;
