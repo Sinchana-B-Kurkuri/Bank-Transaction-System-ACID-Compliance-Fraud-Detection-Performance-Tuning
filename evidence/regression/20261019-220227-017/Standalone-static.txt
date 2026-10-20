@@ -1,0 +1,18 @@
+﻿TEST|PASS|run_all.sql source inventory|66 existing, ordered SOURCE targets
+TEST|PASS|run_all_A_standalone.sql source inventory|60 existing, ordered SOURCE targets
+TEST|PASS|audit source session identity|No CURRENT_USER() in installed A audit bodies
+TEST|PASS|audit installed session identity|Installed trigger bodies checked
+TEST|PASS|release lab regions absent|Generated release SQL examined, not development sources
+TEST|PASS|obsolete tables absent|Final schema only
+TEST|PASS|core B0 snapshot unchanged|Compared 36 index-column records to C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\evidence\regression\20261019-220227-017\Standalone-B0.txt
+TEST|PASS|core secondary indexes FK-required only|Nonunique indexes must be one-column FK support with no duplicate support indexes
+mysql exited 1:
+ERROR 1109 (42S02) at line 1: Unknown table 'ROUTINE_PRIVILEGES' in information_schema
+At C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\mysql_common.ps1:113 char:4
++    throw $failure
++    ~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (:) [], Exception
+    + FullyQualifiedErrorId : mysql exited 1:
+ERROR 1109 (42S02) at line 1: Unknown table 'ROUTINE_PRIVILEGES' in information_schema
+ 

@@ -165,3 +165,36 @@ These clarify D5 and A1/A3/A4/A10/A14/A15 without replacing the frozen SPEC.
 - Statement ranges are limited to 366 inclusive days. Reconciliation exposes the same six summaries in session JSON for automated tests; its two public result sets and input signature are unchanged. Reason: permit direct observation of real reconciliation output without duplicating its SQL in tests.
 - Interest keeps actual posting timestamps and atomically labels periods in the existing A-owned Experiment_Log using the generated transaction reference. Unmarked legacy credits retain timestamp-month handling. Reason: backdating a new ledger row would make transaction-id running balances disagree with date-window opening balances; reference-linked markers also avoid stale idempotency across rebuilds. No frozen schema change is needed.
 - Signal-based 1213/1205 and duplicate-key probes are test-only objects that are removed after use. They verify control flow, not real concurrent deadlock scheduling. Real contention remains EXP-10 scope. Reason: distinguish demonstrated rollback/retry behavior from unperformed concurrency experiments.
+
+## 2026-10-19 — Member A final decision status (append-only)
+
+Owner: Member A. Reason: reconcile the frozen decisions with actual integration evidence, without changing their text or representing missing B runtime as tested. “Tested” refers to recorded A/real-B-schema regression or explicitly identified historical native-session evidence. See status_report.md for run paths and manual limits.
+
+| Decision | Status | Verification / limit |
+|---|---|---|
+| D1 | Implemented / Tested | Approval request/approve/reject lifecycle on the real B approval table |
+| D2 | Implemented / Tested | Nonzero balance / Active loan blocks default close |
+| D3 | Implemented / Tested | Routed loan creates Deposit |
+| D4 | Implemented / Tested | Eligible post-rollback Failed rows; original errors preserved |
+| D5 | Implemented / Tested | EXP-17 gap/watermark and I4; no claim of retroactive audit |
+| D6 | Implemented / Tested | Development hooks; historical real EXP-10; release removes hooks |
+| D7 | Contract retained / Deferred B runtime | Detective policy specified; real B evaluator/trigger absent |
+| A1 | Implemented / Tested | Exact session USER() attribution and resolver fallback |
+| A2 | Implemented / Tested | Seed opening deposits and I1/I1b |
+| A3 | Implemented / Tested | Atomic settle-and-close under guard |
+| A4 | Implemented / Tested | Threshold 100000.00; boundary assertions |
+| A5 | Implemented / Tested | Debit-only device/location and NULL Failed metadata |
+| A6 | Implemented / Tested | Corrected ordered/naive contrast and release guard |
+| A7 | Implemented / Tested (A); B role acceptance deferred | Public transaction ownership; private execute rejection; no private routine grants |
+| A8 | Implemented / Tested | Eligible business errors only; no Failed rows for 1213/1205/5016/5017 |
+| A9 | Implemented / Tested | A statement procedure, two result sets and running balance |
+| A10 | Implemented / Tested | Stable 5001..5018 and native error assertions, no PII in messages |
+| A11 | Implemented / Tested | Active-customer opening and non-Closed-account deactivation block |
+| A12 | Implemented / Tested | Distinct Standalone/Integrated builds, real extra B constraints |
+| A13 | Implemented / Tested | Per-mode core B0 metadata comparison and FK-only secondary check |
+| A14 | A ordering prerequisite implemented; B runtime Deferred | Actual fraud trigger absent; FOLLOWS/rollback acceptance BLOCKED |
+| A15 | Implemented / Tested | Ledger UPDATE/DELETE guards; optional raw-data loader deferred |
+| A16 | Implemented / Tested | Public DEFINER signatures/security type; disposable DB tests |
+| A17 | Implemented / Tested | Real restricted Customer/Teller authorization; B role deployment absent |
+
+No banking routine, corrected lock sequence, core table, B-owned object or error/signature contract is modified by Prompt 6. Full-system completion and P2 loading remain deferred until missing integration components and manual evidence are supplied.

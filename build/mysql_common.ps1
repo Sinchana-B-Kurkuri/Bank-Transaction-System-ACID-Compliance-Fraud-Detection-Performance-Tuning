@@ -50,7 +50,7 @@ $clientPath = if ($env:BANK_MYSQL_BIN) {
     $null
 }
 
-if (!$clientPath -and $IsWindows -and $env:ProgramFiles) {
+if (!$clientPath -and [Environment]::OSVersion.Platform -eq [PlatformID]::Win32NT -and $env:ProgramFiles) {
     $candidates = @(
         Get-ChildItem -Path (Join-Path $env:ProgramFiles 'MySQL/MySQL Server */bin/mysql.exe') `
             -File -ErrorAction SilentlyContinue

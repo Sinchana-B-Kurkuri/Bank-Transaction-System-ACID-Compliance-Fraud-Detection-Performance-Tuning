@@ -10,6 +10,10 @@ $watch=[Diagnostics.Stopwatch]::StartNew()
 try {
  Push-Location $root
  $bTables=@(Get-ChildItem 'schema/01_tables' -Filter '*.sql' | Where-Object Name -Match '^(10|11|12|13|14|15|16)_')
+ if (!$Mode -and $env:BANK_TEST_BUILD_MODE) {
+  if($env:BANK_TEST_BUILD_MODE -notin @('Standalone','Integrated')){throw 'Invalid BANK_TEST_BUILD_MODE test override.'}
+  $Mode=$env:BANK_TEST_BUILD_MODE
+ }
  if (!$Mode) { $Mode=if ($bTables.Count -eq 7) {'Integrated'} else {'Standalone'} }
  if ($Mode -eq 'Integrated' -and $bTables.Count -ne 7) { throw 'Integrated build requires all seven real Member B table files.' }
  $seed=@(Get-ChildItem 'data/seed' -Filter '*.sql' | Where-Object Name -Match '^\d+_' | Sort-Object @{Expression={ [int]($_.BaseName -split '_')[0] }},Name)

@@ -9,15 +9,15 @@ schema/01_tables/06_transactions.sql | A
 schema/01_tables/07_loans.sql | A
 schema/01_tables/08_fraud_flags.sql | A
 schema/01_tables/09_audit_log.sql | A
-schema/01_tables/10_devices.sql | A
-schema/01_tables/11_locations.sql | A
-schema/01_tables/12_fraud_rules.sql | A
-schema/01_tables/13_account_risk_profile.sql | A
-schema/01_tables/14_db_user_map.sql | A
-schema/01_tables/15_transaction_approvals.sql | A
-schema/01_tables/16_fraud_ground_truth.sql | A
+schema/01_tables/10_devices.sql | B (Integrated only)
+schema/01_tables/11_locations.sql | B (Integrated only)
+schema/01_tables/12_fraud_rules.sql | B (Integrated only)
+schema/01_tables/13_account_risk_profile.sql | B (Integrated only)
+schema/01_tables/14_db_user_map.sql | B (Integrated only)
+schema/01_tables/15_transaction_approvals.sql | B (Integrated only)
+schema/01_tables/16_fraud_ground_truth.sql | B (Integrated only)
 schema/02_constraints/01_core_constraints.sql | A
-tests/stubs/member_b_interface_stubs.sql | A
+tests/stubs/member_b_interface_stubs.sql | A (Standalone only; never run with B tables)
 schema/02_constraints/02_cross_module_fks.sql | A
 functions/fn_approval_threshold.sql | A
 functions/fn_available_balance.sql | A

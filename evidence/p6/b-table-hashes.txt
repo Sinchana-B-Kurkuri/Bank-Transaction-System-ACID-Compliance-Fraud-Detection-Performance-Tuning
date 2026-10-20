@@ -1,0 +1,7 @@
+4458711BCAE5823A522089D9EE8377CF92FCB96F184B22B55B325150F4258A08 C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\schema\01_tables\10_devices.sql
+93D4F92C912099FBD55BE73566390A3BC03F5DD6DD167436FE7D7B5C7232048B C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\schema\01_tables\11_locations.sql
+792ECE921FDCD43ADFD1F1C897ACE7FD2BDFC9A1247B9E40DC5DD33CFB6CE328 C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\schema\01_tables\12_fraud_rules.sql
+ACA3980E5AD6CDFC0F268FFCA67B4623CF9C2D07B3CF1BA995ABC5E3D38EE4B0 C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\schema\01_tables\13_account_risk_profile.sql
+6EDB40EB1AC2CABC631D16A4CB69BE475C241948390DE1A76C3EB8A482B7BE7E C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\schema\01_tables\14_db_user_map.sql
+8EDEB38DDF8EAC2250C7DEDCC0F303123AFC3E730E9E5046D6D9795B1238B7A0 C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\schema\01_tables\15_transaction_approvals.sql
+8DDFB8D37F9D585ED1FE44C5325659FEAF74660D2272F9E1FBA248992B2BD314 C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\schema\01_tables\16_fraud_ground_truth.sql
