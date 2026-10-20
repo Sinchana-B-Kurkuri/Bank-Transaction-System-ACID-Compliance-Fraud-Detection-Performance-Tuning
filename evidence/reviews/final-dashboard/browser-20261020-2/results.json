@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "test": "live overview rendered",
+      "status": "PASS"
+    },
+    {
+      "test": "twelve navigation destinations",
+      "status": "PASS"
+    },
+    {
+      "test": "visible non-security banner",
+      "status": "PASS"
+    },
+    {
+      "test": "guided navigation reaches customer forms",
+      "status": "PASS"
+    },
+    {
+      "test": "stored markup escaped",
+      "status": "PASS"
+    },
+    {
+      "test": "browser registration propagates real customer ID",
+      "status": "PASS"
+    },
+    {
+      "test": "browser account opening returns actual ID",
+      "status": "PASS"
+    },
+    {
+      "test": "banking view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "new account selected without fixed IDs",
+      "status": "PASS"
+    },
+    {
+      "test": "fraud view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "review view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "acid view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "concurrency view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "audit view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "performance view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "security view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "architecture view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "verification view renders",
+      "status": "PASS"
+    },
+    {
+      "test": "six live invariant rows in browser",
+      "status": "PASS"
+    },
+    {
+      "test": "all live invariant badges PASS",
+      "status": "PASS"
+    },
+    {
+      "test": "live deposit submitted through browser",
+      "status": "PASS"
+    },
+    {
+      "test": "mobile layout has no horizontal page overflow",
+      "status": "PASS"
+    },
+    {
+      "test": "no uncaught JavaScript errors",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

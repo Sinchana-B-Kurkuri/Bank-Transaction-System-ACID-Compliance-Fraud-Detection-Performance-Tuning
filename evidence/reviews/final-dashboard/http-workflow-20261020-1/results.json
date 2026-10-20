@@ -1,0 +1,162 @@
+[
+  {
+    "test": "live bootstrap",
+    "status": "PASS",
+    "detail": "owned session / explicit mode"
+  },
+  {
+    "test": "real overview",
+    "status": "PASS",
+    "detail": "statistics from seeded MySQL"
+  },
+  {
+    "test": "CSRF rejects missing token",
+    "status": "PASS",
+    "detail": "no mutation"
+  },
+  {
+    "test": "arbitrary SQL rejected",
+    "status": "PASS",
+    "detail": "fixed public actions only"
+  },
+  {
+    "test": "registration",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "opening",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "deposit",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "withdrawal",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "transfer",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "financial balance",
+    "status": "PASS",
+    "detail": "20000+100-25-50=20025"
+  },
+  {
+    "test": "statement",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "statement running balance",
+    "status": "PASS",
+    "detail": "actual window result returned"
+  },
+  {
+    "test": "history",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "invalid money rejected",
+    "status": "PASS",
+    "detail": "no SQL mutation"
+  },
+  {
+    "test": "native business error",
+    "status": "PASS",
+    "detail": "native errno visible; D4 Failed row allowed"
+  },
+  {
+    "test": "suspicious",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "automatic fraud integration",
+    "status": "PASS",
+    "detail": "observed controlled suspicious score100; UI does not assume it"
+  },
+  {
+    "test": "review-underreview",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "review-confirmed",
+    "status": "PASS",
+    "detail": "real native MySQL public API via HTTP"
+  },
+  {
+    "test": "real5016 atomic rollback",
+    "status": "PASS",
+    "detail": "balances/ledger/audit/flags/profile snapshot unchanged"
+  },
+  {
+    "test": "audit observed",
+    "status": "PASS",
+    "detail": "actual session audit rows"
+  },
+  {
+    "test": "live invariant I1",
+    "status": "PASS",
+    "detail": "actual reconciliation"
+  },
+  {
+    "test": "live invariant I1b",
+    "status": "PASS",
+    "detail": "actual reconciliation"
+  },
+  {
+    "test": "live invariant I2",
+    "status": "PASS",
+    "detail": "actual reconciliation"
+  },
+  {
+    "test": "live invariant I3",
+    "status": "PASS",
+    "detail": "actual reconciliation"
+  },
+  {
+    "test": "live invariant I4",
+    "status": "PASS",
+    "detail": "actual reconciliation"
+  },
+  {
+    "test": "live invariant I5",
+    "status": "PASS",
+    "detail": "actual reconciliation"
+  },
+  {
+    "test": "exact six invariants",
+    "status": "PASS",
+    "detail": "I1/I1b/I2/I3/I4/I5"
+  },
+  {
+    "test": "installed schema architecture",
+    "status": "PASS",
+    "detail": "information_schema, real A+B"
+  },
+  {
+    "test": "audit before fraud",
+    "status": "PASS",
+    "detail": "installed trigger order"
+  },
+  {
+    "test": "measured performance evidence",
+    "status": "PASS",
+    "detail": "six actual CSV groups; no fabricated timing"
+  },
+  {
+    "test": "previous verification counts",
+    "status": "PASS",
+    "detail": "loaded per-file CSV, historical not live"
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "status": "PASS",
+      "invariant": "I1",
+      "violations": 0
+    },
+    {
+      "status": "PASS",
+      "invariant": "I1b",
+      "violations": 0
+    },
+    {
+      "status": "PASS",
+      "invariant": "I2",
+      "violations": 0
+    },
+    {
+      "status": "PASS",
+      "invariant": "I3",
+      "violations": 0
+    },
+    {
+      "status": "PASS",
+      "invariant": "I4",
+      "violations": 0
+    },
+    {
+      "status": "PASS",
+      "invariant": "I5",
+      "violations": 0
+    }
+  ]
+}
