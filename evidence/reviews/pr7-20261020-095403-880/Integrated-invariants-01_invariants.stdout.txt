@@ -1,0 +1,12 @@
+I1	0	PASS	2026-10-20 09:54:24.975
+I1b	0	PASS	2026-10-20 09:54:24.975
+I2	0	PASS	2026-10-20 09:54:24.975
+I3	0	PASS	2026-10-20 09:54:24.975
+I4	0	PASS	2026-10-20 09:54:24.975
+I5	0	PASS	2026-10-20 09:54:24.975
+TEST|PASS|invariant I1|violations=0
+TEST|PASS|invariant I1b|violations=0
+TEST|PASS|invariant I2|violations=0
+TEST|PASS|invariant I3|violations=0
+TEST|PASS|invariant I4|violations=0
+TEST|PASS|invariant I5|violations=0

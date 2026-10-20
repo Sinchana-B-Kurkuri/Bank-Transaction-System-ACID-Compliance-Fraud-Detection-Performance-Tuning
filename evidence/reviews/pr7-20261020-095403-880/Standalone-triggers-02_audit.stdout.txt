@@ -1,0 +1,11 @@
+TEST|PASS|audit root initially unmapped|Disposable tests require an unmapped administrative login
+TEST|PASS|Accounts INSERT audit|Expected audit contract
+TEST|PASS|Accounts UPDATE audit|Expected audit contract
+TEST|PASS|Loans INSERT audit|Expected audit contract
+TEST|PASS|Loans UPDATE audit|Expected audit contract
+TEST|PASS|Loans DELETE audit|Expected audit contract
+TEST|PASS|Accounts DELETE audit|Expected audit contract
+TEST|PASS|Transactions INSERT audit|Expected audit contract
+TEST|PASS|mapped employee audit|Expected audit contract
+TEST|PASS|mapping removed becomes System|Expected audit contract
+TEST|PASS|watermark scoped to selected database|Coverage begins at installation, not before

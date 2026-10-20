@@ -1,0 +1,674 @@
+[
+    {
+        "Name":  "Standalone actual SQL installation",
+        "Status":  "PASS",
+        "Detail":  "SQL_EXIT=0; "
+    },
+    {
+        "Name":  "Standalone-schema-00_interface_contract",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=38; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  38,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-schema-01_negative_constraints",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=57; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  57,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-schema-02_structure",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=62; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  62,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-functions-01_functions",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=38; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  38,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-functions-02_reference_data",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-functions-03_fraud_score",
+        "Status":  "FAIL",
+        "Detail":  "TEST_PASS=0; TEST_FAIL=0; SQL_EXIT=1",
+        "TestPass":  0,
+        "TestFail":  0,
+        "SqlExit":  1
+    },
+    {
+        "Name":  "Standalone-triggers-01_guards",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=17; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  17,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-triggers-02_audit",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=11; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  11,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-triggers-04_trigger_inventory",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=15; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  15,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-01_sp_register_customer",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=20; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  20,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-02_sp_update_customer",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=16; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  16,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-03_sp_open_account",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=25; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  25,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-04_sp_close_account",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=10; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  10,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-05_sp_set_account_status",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=14; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  14,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-06_sp_deposit",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=26; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  26,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-07_sp_withdraw",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=18; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  18,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-08_sp_transfer_funds",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=40; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  40,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-09_sp_transfer_funds_retry",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=12; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  12,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-10_sp_request_approval",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=15; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  15,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-11_sp_decide_approval",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=16; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  16,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-12_sp_disburse_loan",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=21; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  21,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-13_sp_review_fraud_flag",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=10; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  10,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-14_sp_generate_statement",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-15_sp_reconcile_balances",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=3; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  3,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-16_sp_post_monthly_interest",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=12; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  12,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-procedures-19_transfer_missing_second_lock",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=3; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  3,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-invariants-01_invariants",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-integration-02_interface_contract_b",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=38; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  38,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-integration-03_exp02",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=18; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  18,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-integration-04_after_experiments",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-integration-05_exp17",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=9; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  9,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-integration-06_fraud_security_objects",
+        "Status":  "FAIL",
+        "Detail":  "TEST_PASS=1; TEST_FAIL=4; SQL_EXIT=0",
+        "TestPass":  1,
+        "TestFail":  4,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-integration-06_signature_check",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=34; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  34,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Standalone-final-invariants",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated actual SQL installation",
+        "Status":  "PASS",
+        "Detail":  "SQL_EXIT=0; "
+    },
+    {
+        "Name":  "Integrated-schema-00_interface_contract",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=38; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  38,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-schema-01_negative_constraints",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=57; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  57,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-schema-02_structure",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=62; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  62,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-functions-01_functions",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=38; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  38,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-functions-02_reference_data",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-functions-03_fraud_score",
+        "Status":  "FAIL",
+        "Detail":  "TEST_PASS=3; TEST_FAIL=1; SQL_EXIT=0",
+        "TestPass":  3,
+        "TestFail":  1,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-triggers-01_guards",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=17; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  17,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-triggers-02_audit",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=11; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  11,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-triggers-04_trigger_inventory",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=15; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  15,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-01_sp_register_customer",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=20; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  20,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-02_sp_update_customer",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=16; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  16,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-03_sp_open_account",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=25; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  25,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-04_sp_close_account",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=10; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  10,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-05_sp_set_account_status",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=14; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  14,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-06_sp_deposit",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=26; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  26,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-07_sp_withdraw",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=18; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  18,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-08_sp_transfer_funds",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=40; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  40,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-09_sp_transfer_funds_retry",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=12; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  12,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-10_sp_request_approval",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=15; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  15,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-11_sp_decide_approval",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=16; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  16,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-12_sp_disburse_loan",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=21; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  21,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-13_sp_review_fraud_flag",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=10; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  10,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-14_sp_generate_statement",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-15_sp_reconcile_balances",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=3; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  3,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-16_sp_post_monthly_interest",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=12; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  12,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-procedures-19_transfer_missing_second_lock",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=3; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  3,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-invariants-01_invariants",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-integration-02_interface_contract_b",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=38; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  38,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-integration-03_exp02",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=18; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  18,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-integration-04_after_experiments",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-integration-05_exp17",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=9; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  9,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-integration-06_fraud_security_objects",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=5; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  5,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-integration-06_signature_check",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=34; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  34,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "Integrated-final-invariants",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "actual base score digital/untrusted",
+        "Status":  "PASS",
+        "Detail":  "Actual arithmetic 10 digital + 20 untrusted"
+    },
+    {
+        "Name":  "fraud trigger actually follows audit",
+        "Status":  "PASS",
+        "Detail":  "trg_transactions_ai_audit\t1;trg_transactions_ai_fraud_evaluate\t2"
+    },
+    {
+        "Name":  "automatic fraud flags and audit on committed posting",
+        "Status":  "PASS",
+        "Detail":  "247|3|1"
+    },
+    {
+        "Name":  "reevaluation preserves risk score",
+        "Status":  "FAIL",
+        "Detail":  "60.00 -\u003e 100.00 -\u003e 100.00"
+    },
+    {
+        "Name":  "fraud flags/risk/audit/ledger roll back atomically",
+        "Status":  "PASS",
+        "Detail":  "TEST|PASS|PR7 rollback original 5016|expected errno=5016; actual errno=5016;1|1|1|1|1"
+    },
+    {
+        "Name":  "namespace-isolated actual RBAC SQL installs",
+        "Status":  "PASS",
+        "Detail":  "SQL_EXIT=0"
+    },
+    {
+        "Name":  "customer role can read its granted view",
+        "Status":  "FAIL",
+        "Detail":  "ERROR 1356 (HY000) at line 1: View \u0027bank_review_b_1020095404.v_customer_account_summary\u0027 references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them"
+    },
+    {
+        "Name":  "customer role denied Accounts direct SELECT",
+        "Status":  "PASS",
+        "Detail":  "ERROR 1142 (42000) at line 1: SELECT command denied to user \u0027zz_a_r7_1020095404_customer\u0027@\u0027localhost\u0027 for table \u0027accounts\u0027"
+    },
+    {
+        "Name":  "customer role denied private helper",
+        "Status":  "PASS",
+        "Detail":  "ERROR 1370 (42000) at line 1: execute command denied to user \u0027zz_a_r7_1020095404_customer\u0027@\u0027localhost\u0027 for routine \u0027bank_review_b_1020095404.sp_internal_record_failed\u0027"
+    },
+    {
+        "Name":  "customer role can execute public posting API",
+        "Status":  "FAIL",
+        "Detail":  "ERROR 1370 (42000) at line 1: execute command denied to user \u0027zz_a_r7_1020095404_customer\u0027@\u0027localhost\u0027 for routine \u0027bank_review_b_1020095404.sp_deposit\u0027"
+    },
+    {
+        "Name":  "teller role can read its granted view",
+        "Status":  "FAIL",
+        "Detail":  "ERROR 1356 (HY000) at line 1: View \u0027bank_review_b_1020095404.v_transaction_activity\u0027 references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them"
+    },
+    {
+        "Name":  "teller role denied Accounts direct SELECT",
+        "Status":  "PASS",
+        "Detail":  "ERROR 1142 (42000) at line 1: SELECT command denied to user \u0027zz_a_r7_1020095404_teller\u0027@\u0027localhost\u0027 for table \u0027accounts\u0027"
+    },
+    {
+        "Name":  "teller role denied private helper",
+        "Status":  "PASS",
+        "Detail":  "ERROR 1370 (42000) at line 1: execute command denied to user \u0027zz_a_r7_1020095404_teller\u0027@\u0027localhost\u0027 for routine \u0027bank_review_b_1020095404.sp_internal_record_failed\u0027"
+    },
+    {
+        "Name":  "teller role can execute public posting API",
+        "Status":  "FAIL",
+        "Detail":  "ERROR 1370 (42000) at line 1: execute command denied to user \u0027zz_a_r7_1020095404_teller\u0027@\u0027localhost\u0027 for routine \u0027bank_review_b_1020095404.sp_deposit\u0027"
+    },
+    {
+        "Name":  "manager role can read its granted view",
+        "Status":  "FAIL",
+        "Detail":  "ERROR 1356 (HY000) at line 1: View \u0027bank_review_b_1020095404.v_fraud_case_queue\u0027 references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them"
+    },
+    {
+        "Name":  "manager role denied Accounts direct SELECT",
+        "Status":  "PASS",
+        "Detail":  "ERROR 1142 (42000) at line 1: SELECT command denied to user \u0027zz_a_r7_1020095404_manager\u0027@\u0027localhost\u0027 for table \u0027accounts\u0027"
+    },
+    {
+        "Name":  "manager role denied private helper",
+        "Status":  "PASS",
+        "Detail":  "ERROR 1370 (42000) at line 1: execute command denied to user \u0027zz_a_r7_1020095404_manager\u0027@\u0027localhost\u0027 for routine \u0027bank_review_b_1020095404.sp_internal_record_failed\u0027"
+    },
+    {
+        "Name":  "auditor role can read its granted view",
+        "Status":  "FAIL",
+        "Detail":  "ERROR 1356 (HY000) at line 1: View \u0027bank_review_b_1020095404.v_fraud_case_queue\u0027 references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them"
+    },
+    {
+        "Name":  "auditor role denied Accounts direct SELECT",
+        "Status":  "PASS",
+        "Detail":  "ERROR 1142 (42000) at line 1: SELECT command denied to user \u0027zz_a_r7_1020095404_auditor\u0027@\u0027localhost\u0027 for table \u0027accounts\u0027"
+    },
+    {
+        "Name":  "auditor role denied private helper",
+        "Status":  "PASS",
+        "Detail":  "ERROR 1370 (42000) at line 1: execute command denied to user \u0027zz_a_r7_1020095404_auditor\u0027@\u0027localhost\u0027 for routine \u0027bank_review_b_1020095404.sp_internal_record_failed\u0027"
+    },
+    {
+        "Name":  "auditor direct Audit_Log read",
+        "Status":  "PASS",
+        "Detail":  "485"
+    },
+    {
+        "Name":  "focused-final-invariants",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "protected banking table checksums unchanged",
+        "Status":  "PASS",
+        "Detail":  "Read-only sensors; no payload targeted protected DBs"
+    }
+]

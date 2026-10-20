@@ -19,8 +19,8 @@ SOURCE schema/01_tables/15_transaction_approvals.sql;
 SOURCE schema/01_tables/16_fraud_ground_truth.sql;
 SOURCE schema/02_constraints/01_core_constraints.sql;
 SOURCE schema/02_constraints/02_cross_module_fks.sql;
--- Baseline B0 is default: no optional secondary indexes are installed here.
--- Install indexes/01_performance_indexes.sql only for the optimized profile.
+-- Baseline B0: no optional secondary indexes.
+-- Optimized is explicit: build/run_all_optimized.sql or rebuild -IndexProfile Optimized.
 -- SOURCE schema/04_lab/02_benchmark_results.sql; -- Optional B-owned file when supplied.
 SOURCE functions/fn_approval_threshold.sql;
 SOURCE functions/fn_available_balance.sql;

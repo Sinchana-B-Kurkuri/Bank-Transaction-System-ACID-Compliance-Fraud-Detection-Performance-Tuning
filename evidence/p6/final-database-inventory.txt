@@ -1,0 +1,128 @@
+DATABASE=bank_txn
+8.4.11	2026-10-19 23:03:34.182555
+account_risk_profile	InnoDB
+account_types	InnoDB
+accounts	InnoDB
+audit_log	InnoDB
+branches	InnoDB
+customers	InnoDB
+db_user_map	InnoDB
+devices	InnoDB
+employees	InnoDB
+fraud_flags	InnoDB
+fraud_ground_truth	InnoDB
+fraud_rules	InnoDB
+loans	InnoDB
+locations	InnoDB
+transaction_approvals	InnoDB
+transactions	InnoDB
+fn_approval_threshold	FUNCTION	DEFINER
+fn_available_balance	FUNCTION	DEFINER
+fn_calc_interest	FUNCTION	DEFINER
+fn_generate_reference	FUNCTION	DEFINER
+fn_get_balance	FUNCTION	DEFINER
+fn_mask_id_proof	FUNCTION	DEFINER
+sp_close_account	PROCEDURE	DEFINER
+sp_decide_approval	PROCEDURE	DEFINER
+sp_deposit	PROCEDURE	DEFINER
+sp_disburse_loan	PROCEDURE	DEFINER
+sp_generate_statement	PROCEDURE	DEFINER
+sp_internal_assert_staff	PROCEDURE	DEFINER
+sp_internal_authorize	PROCEDURE	DEFINER
+sp_internal_insert_ledger	PROCEDURE	DEFINER
+sp_internal_post_single	PROCEDURE	DEFINER
+sp_internal_post_transfer	PROCEDURE	DEFINER
+sp_internal_record_failed	PROCEDURE	DEFINER
+sp_open_account	PROCEDURE	DEFINER
+sp_post_monthly_interest	PROCEDURE	DEFINER
+sp_reconcile_balances	PROCEDURE	DEFINER
+sp_register_customer	PROCEDURE	DEFINER
+sp_request_approval	PROCEDURE	DEFINER
+sp_resolve_actor	PROCEDURE	DEFINER
+sp_review_fraud_flag	PROCEDURE	DEFINER
+sp_set_account_status	PROCEDURE	DEFINER
+sp_transfer_funds	PROCEDURE	DEFINER
+sp_transfer_funds_retry	PROCEDURE	DEFINER
+sp_update_customer	PROCEDURE	DEFINER
+sp_withdraw	PROCEDURE	DEFINER
+trg_accounts_ad_audit	DELETE	AFTER	1
+trg_accounts_ai_audit	INSERT	AFTER	1
+trg_accounts_au_audit	UPDATE	AFTER	1
+trg_accounts_bu_minbal_guard	UPDATE	BEFORE	1
+trg_audit_log_bd_immutable	DELETE	BEFORE	1
+trg_audit_log_bu_immutable	UPDATE	BEFORE	1
+trg_loans_ad_audit	DELETE	AFTER	1
+trg_loans_ai_audit	INSERT	AFTER	1
+trg_loans_au_audit	UPDATE	AFTER	1
+trg_transactions_ad_audit	DELETE	AFTER	1
+trg_transactions_ai_audit	INSERT	AFTER	1
+trg_transactions_au_audit	UPDATE	AFTER	1
+trg_transactions_bd_immutable	DELETE	BEFORE	1
+trg_transactions_bi_device_owner	INSERT	BEFORE	1
+trg_transactions_bu_immutable	UPDATE	BEFORE	1
+remaining_lab_routines=0
+DATABASE=bank_txn_scratch
+8.4.11	2026-10-19 23:03:34.408271
+account_risk_profile	InnoDB
+account_types	InnoDB
+accounts	InnoDB
+audit_log	InnoDB
+branches	InnoDB
+customers	InnoDB
+db_user_map	InnoDB
+devices	InnoDB
+employees	InnoDB
+fraud_flags	InnoDB
+fraud_ground_truth	InnoDB
+fraud_rules	InnoDB
+loans	InnoDB
+locations	InnoDB
+transaction_approvals	InnoDB
+transactions	InnoDB
+fn_approval_threshold	FUNCTION	DEFINER
+fn_available_balance	FUNCTION	DEFINER
+fn_calc_interest	FUNCTION	DEFINER
+fn_generate_reference	FUNCTION	DEFINER
+fn_get_balance	FUNCTION	DEFINER
+fn_mask_id_proof	FUNCTION	DEFINER
+sp_close_account	PROCEDURE	DEFINER
+sp_decide_approval	PROCEDURE	DEFINER
+sp_deposit	PROCEDURE	DEFINER
+sp_disburse_loan	PROCEDURE	DEFINER
+sp_generate_statement	PROCEDURE	DEFINER
+sp_internal_assert_staff	PROCEDURE	DEFINER
+sp_internal_authorize	PROCEDURE	DEFINER
+sp_internal_insert_ledger	PROCEDURE	DEFINER
+sp_internal_post_single	PROCEDURE	DEFINER
+sp_internal_post_transfer	PROCEDURE	DEFINER
+sp_internal_record_failed	PROCEDURE	DEFINER
+sp_open_account	PROCEDURE	DEFINER
+sp_post_monthly_interest	PROCEDURE	DEFINER
+sp_reconcile_balances	PROCEDURE	DEFINER
+sp_register_customer	PROCEDURE	DEFINER
+sp_request_approval	PROCEDURE	DEFINER
+sp_resolve_actor	PROCEDURE	DEFINER
+sp_review_fraud_flag	PROCEDURE	DEFINER
+sp_set_account_status	PROCEDURE	DEFINER
+sp_transfer_funds	PROCEDURE	DEFINER
+sp_transfer_funds_retry	PROCEDURE	DEFINER
+sp_update_customer	PROCEDURE	DEFINER
+sp_withdraw	PROCEDURE	DEFINER
+trg_accounts_ad_audit	DELETE	AFTER	1
+trg_accounts_ai_audit	INSERT	AFTER	1
+trg_accounts_au_audit	UPDATE	AFTER	1
+trg_accounts_bu_minbal_guard	UPDATE	BEFORE	1
+trg_audit_log_bd_immutable	DELETE	BEFORE	1
+trg_audit_log_bu_immutable	UPDATE	BEFORE	1
+trg_loans_ad_audit	DELETE	AFTER	1
+trg_loans_ai_audit	INSERT	AFTER	1
+trg_loans_au_audit	UPDATE	AFTER	1
+trg_transactions_ad_audit	DELETE	AFTER	1
+trg_transactions_ai_audit	INSERT	AFTER	1
+trg_transactions_au_audit	UPDATE	AFTER	1
+trg_transactions_bd_immutable	DELETE	BEFORE	1
+trg_transactions_bi_device_owner	INSERT	BEFORE	1
+trg_transactions_bu_immutable	UPDATE	BEFORE	1
+remaining_lab_routines=0
+temporary_users_remaining=0
+REPEATABLE-READ	0	1	1

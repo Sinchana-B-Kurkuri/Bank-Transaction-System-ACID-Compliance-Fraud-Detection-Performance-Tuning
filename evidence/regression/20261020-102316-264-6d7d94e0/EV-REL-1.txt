@@ -1,0 +1,338 @@
+﻿RELEASE|sp_transfer_funds|signature retained; guard added; lab regions removed
+ ...-Tuning\\build\\release\\procedures\\sp_transfer_funds.sql" | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+RELEASE|sp_internal_post_transfer|signature retained; guard added; lab regions removed
+ ...release\\procedures\\sp_internal_post_transfer.sql" | 18 +++---------------
+ 1 file changed, 3 insertions(+), 15 deletions(-)
+Rebuilt bank_a_ci_20261020_tooling2_scratch (Integrated/Baseline) in 6.06 seconds.
+TEST|PASS|register success|actual errno=0
+TEST|PASS|register defaults|Expected procedure contract
+TEST|PASS|register empty name|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL name|expected errno=5018; actual errno=5018
+TEST|PASS|register future dob|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL dob|expected errno=5018; actual errno=5018
+TEST|PASS|register bad email|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL email|expected errno=5018; actual errno=5018
+TEST|PASS|register bad phone|expected errno=5018; actual errno=5018
+TEST|PASS|register empty address|expected errno=5018; actual errno=5018
+TEST|PASS|register empty proof|expected errno=5018; actual errno=5018
+TEST|PASS|register bad proof type|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL proof type|expected errno=5018; actual errno=5018
+TEST|PASS|register duplicate email|expected errno=5018; actual errno=5018
+TEST|PASS|register duplicate phone|expected errno=5018; actual errno=5018
+TEST|PASS|register duplicate proof|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL phone|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL address|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL proof|expected errno=5018; actual errno=5018
+TEST|PASS|register plus phone accepted|actual errno=0
+TEST|PASS|update NULL fields unchanged|actual errno=0
+TEST|PASS|update attributes|actual errno=0
+TEST|PASS|update stored attributes|Expected procedure contract
+TEST|PASS|update missing customer|expected errno=5007; actual errno=5007
+TEST|PASS|update invalid name|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid address|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid email|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid phone|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid kyc|expected errno=5018; actual errno=5018
+TEST|PASS|update invalid active flag|expected errno=5018; actual errno=5018
+TEST|PASS|update cannot deactivate active account owner|expected errno=5011; actual errno=5011
+TEST|PASS|update duplicate identity sanitized|expected errno=5018; actual errno=5018
+TEST|PASS|update deactivate after closure|actual errno=0
+TEST|PASS|update reactivate|actual errno=0
+TEST|PASS|update reactivated|Expected procedure contract
+TEST|PASS|update other customer forbidden|expected errno=5010; actual errno=5010
+TEST|PASS|open automatic number|Expected procedure contract
+TEST|PASS|open ledger balance|Expected procedure contract
+TEST|PASS|open minimum boundary|actual errno=0
+TEST|PASS|open explicit account number|actual errno=0
+TEST|PASS|open duplicate account number|expected errno=1062; actual errno=1062
+TEST|PASS|open invalid amount 0|expected errno=5001; actual errno=5001
+TEST|PASS|open invalid amount -1|expected errno=5001; actual errno=5001
+TEST|PASS|open invalid amount NULL|expected errno=5001; actual errno=5001
+TEST|PASS|open below minimum|expected errno=5004; actual errno=5004
+TEST|PASS|open missing customer|expected errno=5007; actual errno=5007
+TEST|PASS|open missing branch|expected errno=5007; actual errno=5007
+TEST|PASS|open missing type|expected errno=5007; actual errno=5007
+TEST|PASS|open empty account number|expected errno=5018; actual errno=5018
+TEST|PASS|open wrong branch teller|expected errno=5010; actual errno=5010
+TEST|PASS|open manager is not teller|expected errno=5010; actual errno=5010
+TEST|PASS|open inactive customer|expected errno=5011; actual errno=5011
+TEST|PASS|open other customer forbidden|expected errno=5010; actual errno=5010
+TEST|PASS|open NULL customer|expected errno=5007; actual errno=5007
+TEST|PASS|open NULL branch|expected errno=5007; actual errno=5007
+TEST|PASS|open NULL type|expected errno=5007; actual errno=5007
+TEST|PASS|open inactive employee|expected errno=5010; actual errno=5010
+TEST|PASS|open random number collision retries|actual errno=0
+TEST|PASS|open collision retry complete|Expected procedure contract
+TEST|PASS|open random collision exhaustion|expected errno=1062; actual errno=1062
+TEST|PASS|open collision exhaustion atomic|Expected procedure contract
+TEST|PASS|close nonzero default|expected errno=5008; actual errno=5008
+TEST|PASS|close nonexistent|expected errno=5002; actual errno=5002
+TEST|PASS|close invalid flag|expected errno=5018; actual errno=5018
+TEST|PASS|close wrong branch teller|expected errno=5010; actual errno=5010
+TEST|PASS|close active loan blocks settlement|expected errno=5008; actual errno=5008
+TEST|PASS|close settle atomically|actual errno=0
+TEST|PASS|close final withdrawal and zero|Expected procedure contract
+TEST|PASS|close already closed|expected errno=5011; actual errno=5011
+TEST|PASS|close NULL settlement|expected errno=5018; actual errno=5018
+TEST|PASS|close Frozen settlement|actual errno=0
+TEST|PASS|status freeze|actual errno=0
+TEST|PASS|status Frozen stored|Expected procedure contract
+TEST|PASS|status same transition|expected errno=5011; actual errno=5011
+TEST|PASS|status unfreeze|actual errno=0
+TEST|PASS|status missing account|expected errno=5002; actual errno=5002
+TEST|PASS|status invalid Closed|expected errno=5011; actual errno=5011
+TEST|PASS|status invalid Other|expected errno=5011; actual errno=5011
+TEST|PASS|status invalid NULL|expected errno=5011; actual errno=5011
+TEST|PASS|status unauthorized NULL|expected errno=5010; actual errno=5010
+TEST|PASS|status unauthorized @p3_t2|expected errno=5010; actual errno=5010
+TEST|PASS|status unauthorized @p3_dba|expected errno=5010; actual errno=5010
+TEST|PASS|status unauthorized -1|expected errno=5010; actual errno=5010
+TEST|PASS|status Closed is terminal|expected errno=5011; actual errno=5011
+TEST|PASS|status inactive employee|expected errno=5010; actual errno=5010
+TEST|PASS|deposit Online|actual errno=0
+TEST|PASS|deposit return values|Expected procedure contract
+TEST|PASS|deposit Branch Teller|actual errno=0
+TEST|PASS|deposit amount 0|expected errno=5001; actual errno=5001
+TEST|PASS|deposit amount -1|expected errno=5001; actual errno=5001
+TEST|PASS|deposit amount NULL|expected errno=5001; actual errno=5001
+TEST|PASS|deposit missing account|expected errno=5002; actual errno=5002
+TEST|PASS|deposit missing account no Failed|Expected procedure contract
+TEST|PASS|deposit invalid channel|expected errno=5018; actual errno=5018
+TEST|PASS|deposit wrong branch|expected errno=5010; actual errno=5010
+TEST|PASS|deposit Branch NULL|expected errno=5010; actual errno=5010
+TEST|PASS|deposit Branch Manager|expected errno=5010; actual errno=5010
+TEST|PASS|deposit Online employee|expected errno=5010; actual errno=5010
+TEST|PASS|deposit device owner mismatch|expected errno=5014; actual errno=5014
+TEST|PASS|deposit mismatch rolls back balance|Expected procedure contract
+TEST|PASS|deposit missing device|expected errno=1452; actual errno=1452
+TEST|PASS|deposit missing location|expected errno=1452; actual errno=1452
+TEST|PASS|deposit reference collision retries|actual errno=0
+TEST|PASS|deposit exactly one credit after retries|Expected procedure contract
+TEST|PASS|deposit collision retry exhausted|expected errno=1062; actual errno=1062
+TEST|PASS|deposit collision exhaustion rolls back|Expected procedure contract
+TEST|PASS|deposit Frozen|expected errno=5003; actual errno=5003
+TEST|PASS|deposit Frozen records one Failed|Expected procedure contract
+TEST|PASS|deposit Closed|expected errno=5003; actual errno=5003
+TEST|PASS|deposit stores context|actual errno=0
+TEST|PASS|deposit context columns|Expected procedure contract
+TEST|PASS|withdraw success|actual errno=0
+TEST|PASS|withdraw output and ledger|Expected procedure contract
+TEST|PASS|withdraw Branch|actual errno=0
+TEST|PASS|withdraw amount 0|expected errno=5001; actual errno=5001
+TEST|PASS|withdraw amount -1|expected errno=5001; actual errno=5001
+TEST|PASS|withdraw amount NULL|expected errno=5001; actual errno=5001
+TEST|PASS|withdraw missing account|expected errno=5002; actual errno=5002
+TEST|PASS|withdraw insufficient funds|expected errno=5004; actual errno=5004
+TEST|PASS|withdraw exact minimum boundary|actual errno=0
+TEST|PASS|withdraw retained minimum|Expected procedure contract
+TEST|PASS|withdraw below minimum|expected errno=5004; actual errno=5004
+TEST|PASS|withdraw exactly one Failed|Expected procedure contract
+TEST|PASS|withdraw wrong branch|expected errno=5010; actual errno=5010
+TEST|PASS|withdraw non-branch employee|expected errno=5010; actual errno=5010
+TEST|PASS|withdraw invalid channel|expected errno=5018; actual errno=5018
+TEST|PASS|withdraw Frozen|expected errno=5003; actual errno=5003
+TEST|PASS|withdraw spoofed employee|expected errno=5010; actual errno=5010
+TEST|PASS|withdraw Closed|expected errno=5003; actual errno=5003
+RELEASE_EXPECTATIONS|Only nonzero lab modes change to 5017; all business assertions retained. Development suite tests 5016/naive/sleep behavior separately.
+TEST|PASS|transfer ordered forward|actual errno=0
+TEST|PASS|transfer paired legs|Expected procedure contract
+TEST|PASS|transfer ordered reverse|actual errno=0
+TEST|PASS|transfer threshold minus cent|actual errno=0
+TEST|PASS|transfer threshold boundary|expected errno=5006; actual errno=5006
+TEST|PASS|transfer threshold one Failed|Expected procedure contract
+TEST|PASS|transfer same account|expected errno=5005; actual errno=5005
+TEST|PASS|transfer same account one Failed|Expected procedure contract
+TEST|PASS|transfer amount 0|expected errno=5001; actual errno=5001
+TEST|PASS|transfer amount -1|expected errno=5001; actual errno=5001
+TEST|PASS|transfer amount NULL|expected errno=5001; actual errno=5001
+TEST|PASS|transfer missing from|expected errno=5002; actual errno=5002
+TEST|PASS|transfer missing to|expected errno=5002; actual errno=5002
+TEST|PASS|transfer missing references no Failed|Expected procedure contract
+TEST|PASS|transfer insufficient funds|expected errno=5004; actual errno=5004
+TEST|PASS|transfer wrong branch|expected errno=5010; actual errno=5010
+TEST|PASS|transfer unauthorized exactly one Failed|D4/A8 failure recorded after rollback
+TEST|PASS|Failed logger cannot mask original authorization error|expected errno=5010; actual errno=5010
+TEST|PASS|transfer manager direct disallowed|expected errno=5010; actual errno=5010
+TEST|PASS|transfer Online employee disallowed|expected errno=5010; actual errno=5010
+TEST|PASS|transfer invalid channel|expected errno=5018; actual errno=5018
+TEST|PASS|transfer invalid lab mode|expected errno=5017; actual errno=5017
+TEST|PASS|release mode 1 forbidden|expected errno=5017; actual errno=5017
+TEST|PASS|transfer failure atomic balances and rows|Expected procedure contract
+TEST|PASS|transfer synthetic 1213|expected errno=1213; actual errno=1213
+TEST|PASS|transfer 1213 no Failed|Expected procedure contract
+TEST|PASS|transfer synthetic 1205|expected errno=1205; actual errno=1205
+TEST|PASS|transfer 1205 no Failed|Expected procedure contract
+TEST|PASS|transfer lab sleep mode|expected errno=5017; actual errno=5017
+TEST|PASS|transfer naive lab direction|expected errno=5017; actual errno=5017
+TEST|PASS|transfer Frozen destination|expected errno=5003; actual errno=5003
+TEST|PASS|transfer Closed destination|expected errno=5003; actual errno=5003
+TEST|PASS|Failed metadata remains empty|Expected procedure contract
+TEST|PASS|transfer device context debit only|actual errno=0
+TEST|PASS|transfer credit context NULL|Expected procedure contract
+TEST|PASS|transfer NULL from|expected errno=5002; actual errno=5002
+TEST|PASS|transfer NULL to|expected errno=5002; actual errno=5002
+TEST|PASS|transfer NULL lab mode|expected errno=5018; actual errno=5018
+TEST|PASS|transfer Frozen source|expected errno=5003; actual errno=5003
+TEST|PASS|transfer Closed source|expected errno=5003; actual errno=5003
+TEST|PASS|retry default success|actual errno=0
+TEST|PASS|retry default attempts|Expected procedure contract
+TEST|PASS|retry explicit success|actual errno=0
+TEST|PASS|retry invalid limit 0|expected errno=5018; actual errno=5018
+TEST|PASS|retry invalid limit -1|expected errno=5018; actual errno=5018
+TEST|PASS|retry large positive limit|actual errno=0
+TEST|PASS|retry synthetic transient 1213|actual errno=0
+TEST|PASS|retry 1213 whole transaction second attempt|Expected procedure contract
+TEST|PASS|retry synthetic transient 1205|actual errno=0
+TEST|PASS|retry 1205 event|Expected procedure contract
+TEST|PASS|retry exhausted retains 1213|expected errno=1213; actual errno=1213
+TEST|PASS|retry exhausted event no Failed|Expected procedure contract
+TEST|PASS|request unmapped System denied|expected errno=5010; actual errno=5010
+TEST|PASS|request Customer success|actual errno=0
+TEST|PASS|request no money moves|Expected procedure contract
+TEST|PASS|request amount 0|expected errno=5001; actual errno=5001
+TEST|PASS|request amount -1|expected errno=5001; actual errno=5001
+TEST|PASS|request amount NULL|expected errno=5001; actual errno=5001
+TEST|PASS|request missing account|expected errno=5002; actual errno=5002
+TEST|PASS|request same account|expected errno=5005; actual errno=5005
+TEST|PASS|request mismatched actor id|expected errno=5010; actual errno=5010
+TEST|PASS|request both actors|expected errno=5010; actual errno=5010
+TEST|PASS|request Frozen account|expected errno=5003; actual errno=5003
+TEST|PASS|request Employee success|actual errno=0
+TEST|PASS|request employee identity|Expected procedure contract
+TEST|PASS|request employee wrong branch|expected errno=5010; actual errno=5010
+TEST|PASS|request Closed account|expected errno=5003; actual errno=5003
+TEST|PASS|decide invalid decision|expected errno=5018; actual errno=5018
+TEST|PASS|decide missing approval|expected errno=5007; actual errno=5007
+TEST|PASS|decide wrong branch manager|expected errno=5010; actual errno=5010
+TEST|PASS|decide failure stays Requested|Expected procedure contract
+TEST|PASS|decide Teller unauthorized|expected errno=5010; actual errno=5010
+TEST|PASS|decide approved moves funds|actual errno=0
+TEST|PASS|decide links group and money|Expected procedure contract
+TEST|PASS|decide twice|expected errno=5009; actual errno=5009
+TEST|PASS|decide rejected|actual errno=0
+TEST|PASS|reject no movement|Expected procedure contract
+TEST|PASS|decide requester cannot approve|expected errno=5010; actual errno=5010
+TEST|PASS|decide frozen destination rolls back|expected errno=5003; actual errno=5003
+TEST|PASS|decide failed transfer preserves approval|Expected procedure contract
+TEST|PASS|decide NULL manager|expected errno=5010; actual errno=5010
+TEST|PASS|decide approval insufficient funds|expected errno=5004; actual errno=5004
+TEST|PASS|decide insufficient leaves Requested|Expected procedure contract
+TEST|PASS|loan routed|actual errno=0
+TEST|PASS|loan Deposit credit|Expected procedure contract
+TEST|PASS|loan unrouted|actual errno=0
+TEST|PASS|loan NULL route|Expected procedure contract
+TEST|PASS|loan principal 0|expected errno=5001; actual errno=5001
+TEST|PASS|loan principal -1|expected errno=5001; actual errno=5001
+TEST|PASS|loan principal NULL|expected errno=5001; actual errno=5001
+TEST|PASS|loan negative rate|expected errno=5018; actual errno=5018
+TEST|PASS|loan NULL rate|expected errno=5018; actual errno=5018
+TEST|PASS|loan zero tenure|expected errno=5018; actual errno=5018
+TEST|PASS|loan NULL tenure|expected errno=5018; actual errno=5018
+TEST|PASS|loan missing customer|expected errno=5007; actual errno=5007
+TEST|PASS|loan missing route|expected errno=5007; actual errno=5007
+TEST|PASS|loan wrong owner|expected errno=5010; actual errno=5010
+TEST|PASS|loan wrong branch employee|expected errno=5010; actual errno=5010
+TEST|PASS|loan Branch teller|actual errno=0
+TEST|PASS|loan Frozen route|expected errno=5003; actual errno=5003
+TEST|PASS|loan inactive customer|expected errno=5011; actual errno=5011
+TEST|PASS|loan unrouted Manager|actual errno=0
+TEST|PASS|loan Customer cannot borrow as another owner|expected errno=5010; actual errno=5010
+TEST|PASS|loan unrouted employee spoof|expected errno=5010; actual errno=5010
+TEST|PASS|flag missing|expected errno=5007; actual errno=5007
+TEST|PASS|flag Teller denied|expected errno=5010; actual errno=5010
+TEST|PASS|flag cannot confirm Open|expected errno=5011; actual errno=5011
+TEST|PASS|flag cannot return Open|expected errno=5011; actual errno=5011
+TEST|PASS|flag UnderReview|actual errno=0
+TEST|PASS|flag Confirmed|actual errno=0
+TEST|PASS|flag reviewer stored|Expected procedure contract
+TEST|PASS|flag terminal immutable|expected errno=5011; actual errno=5011
+TEST|PASS|flag Dismissed|actual errno=0
+TEST|PASS|flag dismissed terminal|expected errno=5011; actual errno=5011
+52	2026-10-20	0.00
+145	2026-10-20 10:26:59	Deposit	500000.00	500000.00	NULL	T20261020102659058110-M27928	500000.00
+TEST|PASS|statement success|actual errno=0
+52	2025-10-20	0.00
+145	2026-10-20 10:26:59	Deposit	500000.00	500000.00	NULL	T20261020102659058110-M27928	500000.00
+TEST|PASS|statement 366 inclusive days|actual errno=0
+TEST|PASS|statement too long|expected errno=5018; actual errno=5018
+TEST|PASS|statement reversed dates|expected errno=5018; actual errno=5018
+TEST|PASS|statement NULL date|expected errno=5018; actual errno=5018
+TEST|PASS|statement missing account|expected errno=5002; actual errno=5002
+TEST|PASS|statement actual running balances|Parsed both actual result sets; compared every returned running_balance to balance_after
+NOT_APPLICABLE|15_reconcile_scratch.ps1|Already exercised by development regression; rebuilds the release target
+I1	0	PASS	2026-10-20 10:27:02.781
+I1b	0	PASS	2026-10-20 10:27:02.781
+I2	0	PASS	2026-10-20 10:27:02.781
+I3	0	PASS	2026-10-20 10:27:02.781
+I4	0	PASS	2026-10-20 10:27:02.781
+I5	0	PASS	2026-10-20 10:27:02.781
+TEST|PASS|reconcile one account|actual errno=0
+TEST|PASS|reconcile six summaries|Expected procedure contract
+TEST|PASS|reconcile missing account|expected errno=5002; actual errno=5002
+TEST|PASS|interest NULL period|expected errno=5018; actual errno=5018
+TEST|PASS|interest Teller denied|expected errno=5010; actual errno=5010
+TEST|PASS|interest Manager success|actual errno=0
+TEST|PASS|interest count total and errors|Expected procedure contract
+TEST|PASS|interest second run idempotent|actual errno=0
+TEST|PASS|interest second run zero|Expected procedure contract
+TEST|PASS|interest skips zero amounts|actual errno=0
+TEST|PASS|interest zero-rate results|Expected procedure contract
+TEST|PASS|interest per-account error continues|actual errno=0
+TEST|PASS|interest counts one isolated error|Expected procedure contract
+TEST|PASS|interest retries only previously failed account|actual errno=0
+TEST|PASS|interest one missed account recovered|Expected procedure contract
+TEST|PASS|statement after historical interest|Parsed both actual result sets; compared every returned running_balance to balance_after
+NOT_APPLICABLE|18_release_strip.ps1|Already exercised by development regression; rebuilds the release target
+TEST|PASS|ordered locking missing high destination|expected errno=5002; actual errno=5002
+TEST|PASS|ordered locking missing high source|expected errno=5002; actual errno=5002
+TEST|PASS|missing second lock rolls back without ledger or audit writes|5002 preserves balances, ledger (including Failed rows) and audit counts
+TEST|PASS|release mode negative forbidden|expected errno=5017; actual errno=5017
+TEST|PASS|release internal mode forbidden|expected errno=5017; actual errno=5017
+TEST|PASS|SPEC signature sp_close_account|Expected exact name/mode/type/count; parameters=3
+TEST|PASS|SPEC signature sp_decide_approval|Expected exact name/mode/type/count; parameters=4
+TEST|PASS|SPEC signature sp_deposit|Expected exact name/mode/type/count; parameters=8
+TEST|PASS|SPEC signature sp_disburse_loan|Expected exact name/mode/type/count; parameters=7
+TEST|PASS|SPEC signature sp_generate_statement|Expected exact name/mode/type/count; parameters=3
+TEST|PASS|SPEC signature sp_open_account|Expected exact name/mode/type/count; parameters=8
+TEST|PASS|SPEC signature sp_post_monthly_interest|Expected exact name/mode/type/count; parameters=4
+TEST|PASS|SPEC signature sp_reconcile_balances|Expected exact name/mode/type/count; parameters=1
+TEST|PASS|SPEC signature sp_register_customer|Expected exact name/mode/type/count; parameters=9
+TEST|PASS|SPEC signature sp_request_approval|Expected exact name/mode/type/count; parameters=6
+TEST|PASS|SPEC signature sp_resolve_actor|Expected exact name/mode/type/count; parameters=4
+TEST|PASS|SPEC signature sp_review_fraud_flag|Expected exact name/mode/type/count; parameters=3
+TEST|PASS|SPEC signature sp_set_account_status|Expected exact name/mode/type/count; parameters=3
+TEST|PASS|SPEC signature sp_transfer_funds|Expected exact name/mode/type/count; parameters=11
+TEST|PASS|SPEC signature sp_transfer_funds_retry|Expected exact name/mode/type/count; parameters=13
+TEST|PASS|SPEC signature sp_update_customer|Expected exact name/mode/type/count; parameters=7
+TEST|PASS|SPEC signature sp_withdraw|Expected exact name/mode/type/count; parameters=8
+TEST|PASS|public DEFINER sp_close_account|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_decide_approval|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_deposit|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_disburse_loan|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_generate_statement|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_open_account|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_post_monthly_interest|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_reconcile_balances|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_register_customer|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_request_approval|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_resolve_actor|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_review_fraud_flag|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_set_account_status|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_transfer_funds|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_transfer_funds_retry|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_update_customer|Routine exists and SQL SECURITY DEFINER
+TEST|PASS|public DEFINER sp_withdraw|Routine exists and SQL SECURITY DEFINER
+I1	0	PASS	2026-10-20 10:27:09.007
+I1b	0	PASS	2026-10-20 10:27:09.007
+I2	0	PASS	2026-10-20 10:27:09.007
+I3	0	PASS	2026-10-20 10:27:09.007
+I4	0	PASS	2026-10-20 10:27:09.007
+I5	0	PASS	2026-10-20 10:27:09.007
+TEST|PASS|after experiments I1|violations=0
+TEST|PASS|after experiments I1b|violations=0
+TEST|PASS|after experiments I2|violations=0
+TEST|PASS|after experiments I3|violations=0
+TEST|PASS|after experiments I4|violations=0
+TEST|PASS|after experiments I5|violations=0
+TOTAL|RELEASE_PASS=311|FAIL=0

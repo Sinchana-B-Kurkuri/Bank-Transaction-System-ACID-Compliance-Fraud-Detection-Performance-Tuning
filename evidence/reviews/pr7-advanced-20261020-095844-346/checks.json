@@ -1,0 +1,35 @@
+[
+    {
+        "Name":  "transaction view exact mapping wins over bare fallback",
+        "Status":  "FAIL",
+        "Detail":  "RESOLVER|Customer|7;SUMMARY_CUSTOMERS|7;TRANSACTION_OTHER_ACCOUNT_ROWS|1"
+    },
+    {
+        "Name":  "view preserves resolver case-sensitive identity",
+        "Status":  "FAIL",
+        "Detail":  "RESOLVER|System;VIEW_ROWS|1"
+    },
+    {
+        "Name":  "rule param_json minimum_amount honored",
+        "Status":  "FAIL",
+        "Detail":  "HIGH_AMOUNT_FLAGS|1"
+    },
+    {
+        "Name":  "two real ordered-lock sessions complete ten transfers",
+        "Status":  "PASS",
+        "Detail":  "Two independently started mysql processes; 5 opposite-direction calls each; ledger_delta=20"
+    },
+    {
+        "Name":  "advanced-final-invariants",
+        "Status":  "PASS",
+        "Detail":  "TEST_PASS=6; TEST_FAIL=0; SQL_EXIT=0",
+        "TestPass":  6,
+        "TestFail":  0,
+        "SqlExit":  0
+    },
+    {
+        "Name":  "protected banking table checksums unchanged",
+        "Status":  "PASS",
+        "Detail":  "Read-only sensors; no payload targeted protected DBs"
+    }
+]

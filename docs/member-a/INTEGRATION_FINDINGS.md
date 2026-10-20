@@ -1,0 +1,13 @@
+> Historical report: the 2026-10-19 runtime-absence findings below describe the pre-PR7 checkout. For current PR7 failures and Member A tooling corrections, see PROMPT6_TOOLING_DELIVERY.md and ISOLATED_REGRESSION.md. Whole-system acceptance remains blocked.
+
+# Pre-change integration inspection — 2026-10-19
+
+Branch feature/A-integration-docs; clean working tree; HEAD 7c50b73. develop contains B commit 0641a61 and seven real table definitions 10–16. No B fraud functions/evaluator/trigger, views, RBAC, optimized indexes, benchmarks, generators, EXP-11–15 or B test files exist in this checkout or develop. The user-reported completion of B's whole implementation is not supported by the available files. Real-schema integration can be executed; whole-system fraud/security acceptance cannot.
+
+Inspected before modification: tree, status, last 20 commits, branches, SPEC, decisions/interfaces/README, all build/tests source, actual seven B definitions and experiment summary. No original Review 1 DOCX/PPTX, coverage matrix, Section 6 plan or separate Definition-of-Done source is present. Exact slide numbers and an exact copy of the unavailable plan cannot be fabricated.
+
+Real B schema differences from standalone: Account_Risk_Profile is added; Locations checks geographic bounds; Fraud_Rules checks weight 0..100; Transaction_Approvals adds different-account/requester checks and real requester FKs. The six A-dependent table column contracts appear compatible by source inspection, subject to execution. These stubs are not asserted equivalent to real tables.
+
+Other mismatches: Workbench list labels all B tables as A; the experiment aggregate has no Quick parameter (PowerShell may silently ignore unknown arguments), so blindly passing -Quick can run the full workload. Its drivers also rebuild Standalone and write existing experiment RESULTS; they cannot establish real-B Quick integration. Scope does not permit editing experiments/** in Prompt 6, so this gap is recorded rather than silently running a different workload. Windows PowerShell 5.1 has no built-in IsWindows variable; B's cross-platform change made the standard-install fallback conditional on an undefined value. Explicit BANK_MYSQL_BIN works; the A-owned wrapper needs a platform-compatible detection correction.
+
+Planned A-only changes: mode-aware regression orchestration, SPEC-driven signature expectations, real-B schema constraint probes, release-specific expectations without lab hooks, static/B0/ER verification and final documentation. No banking procedures or B source will be edited. Missing B functionality is BLOCKED, not replaced by stand-ins or a newly invented fraud/security implementation. Part B P2 is deferred while P1 integration blockers remain.

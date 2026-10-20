@@ -1,0 +1,10 @@
+TEST|PASS|flag missing|expected errno=5007; actual errno=5007
+TEST|PASS|flag Teller denied|expected errno=5010; actual errno=5010
+TEST|PASS|flag cannot confirm Open|expected errno=5011; actual errno=5011
+TEST|PASS|flag cannot return Open|expected errno=5011; actual errno=5011
+TEST|PASS|flag UnderReview|actual errno=0
+TEST|PASS|flag Confirmed|actual errno=0
+TEST|PASS|flag reviewer stored|Expected procedure contract
+TEST|PASS|flag terminal immutable|expected errno=5011; actual errno=5011
+TEST|PASS|flag Dismissed|actual errno=0
+TEST|PASS|flag dismissed terminal|expected errno=5011; actual errno=5011

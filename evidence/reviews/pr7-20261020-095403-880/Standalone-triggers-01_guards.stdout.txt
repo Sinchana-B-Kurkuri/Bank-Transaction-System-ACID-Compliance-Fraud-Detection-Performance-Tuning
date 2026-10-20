@@ -1,0 +1,17 @@
+TEST|PASS|minimum decrease rejected|expected errno=5015; actual errno=5015
+TEST|PASS|minimum boundary allowed|actual errno=0
+TEST|PASS|zero active rejected|expected errno=5015; actual errno=5015
+TEST|PASS|increase below minimum allowed|actual errno=0
+TEST|PASS|decrease while already below minimum|expected errno=5015; actual errno=5015
+TEST|PASS|settle zero and close together|actual errno=0
+TEST|PASS|closed balance immutable|expected errno=5011; actual errno=5011
+TEST|PASS|closed status terminal|expected errno=5011; actual errno=5011
+TEST|PASS|closed no-op balance allowed|actual errno=0
+TEST|PASS|device belongs to other customer|expected errno=5014; actual errno=5014
+TEST|PASS|device belongs to account owner|actual errno=0
+TEST|PASS|ledger UPDATE immutable|expected errno=5012; actual errno=5012
+TEST|PASS|ledger DELETE immutable|expected errno=5012; actual errno=5012
+TEST|PASS|self counterparty|expected errno=5005; actual errno=5005
+TEST|PASS|NULL device accepted|actual errno=0
+TEST|PASS|audit UPDATE immutable|expected errno=5013; actual errno=5013
+TEST|PASS|audit DELETE immutable|expected errno=5013; actual errno=5013

@@ -1,0 +1,16 @@
+CHECK|PASS|Standalone rebuild|PASS=0; FAIL=0
+CHECK|PASS|Standalone full suite|TOTAL|PASS=787|FAIL=0
+CHECK|PASS|Standalone invariants|Six summaries (I1,I1b,I2,I3,I4,I5)
+CHECK|FAIL|Standalone static and B0|PASS=8; FAIL=0
+CHECK|PASS|Integrated rebuild|PASS=0; FAIL=0
+CHECK|PASS|Integrated full suite|TOTAL|PASS=796|FAIL=0
+CHECK|PASS|Integrated invariants|Six summaries (I1,I1b,I2,I3,I4,I5)
+CHECK|FAIL|Integrated static and B0|PASS=8; FAIL=0
+CHECK|PASS|Release procedure suite|TOTAL|RELEASE_PASS=311|FAIL=0
+CHECK|BLOCKED|B fraud runtime|Missing: fn_distance_km, fn_amount_zscore, fn_txn_count_window, fn_is_odd_hour, fn_account_age_days, fn_txn_risk_score, fn_risk_level, sp_evaluate_fraud
+CHECK|BLOCKED|Fraud trigger ordering/rollback integration|No B fraud trigger exists; absence is not an ordering pass
+CHECK|BLOCKED|B RBAC integration|No executable B RBAC acceptance suite available; A restricted-login tests do not certify B roles
+CHECK|BLOCKED|Quick experiments|Aggregate does not implement -Quick; not invoking an argument it would silently ignore. Existing drivers rebuild Standalone; out of Prompt 6 edit scope.
+CHECK|PASS|Final bank_txn invariants|Six actual summaries; Quick not executed unless separately reported PASS
+CHECK|PASS|Final bank_txn_scratch invariants|Six actual summaries; Quick not executed unless separately reported PASS
+REGRESSION|FAIL=2|BLOCKED=4|report=evidence/regression/20261019-220227-017.md

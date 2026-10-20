@@ -8,6 +8,7 @@ $directory=Join-Path ([IO.Path]::GetTempPath()) ('bank wrapper probe ' + [guid]:
 $savedPath=$env:PATH
 $savedCnf=$env:BANK_MYSQL_CNF
 $savedBin=$env:BANK_MYSQL_BIN
+$savedProgramFiles=$env:ProgramFiles
 $savedLocation=Get-Location
 $failures=0
 function Report-Probe([string]$Name,[bool]$Condition,[string]$Detail) {
@@ -55,6 +56,14 @@ public class MysqlWrapperProbe {
  Report-Probe 'include expansion' ($expanded.Contains("SELECT 'nested';") -and !$expanded.Contains('SOURCE nested file.sql')) 'Nested include with spaces expanded before batch execution'
  $output=@(Invoke-BankMysql -Sql $sql)
  Report-Probe 'paths with spaces' ($output -contains 'probe success') 'Executable and first option-file argument survived Windows PowerShell quoting; SQL used stdin'
+ $fallback=Join-Path $directory 'MySQL/MySQL Server Probe/bin'
+ [void][IO.Directory]::CreateDirectory($fallback)
+ [IO.File]::Copy((Join-Path $directory 'mysql.exe'),(Join-Path $fallback 'mysql.exe'))
+ try {
+  $env:BANK_MYSQL_BIN=$null; $env:PATH=''; $env:ProgramFiles=$directory
+  $output=@(Invoke-BankMysql -Sql $sql)
+  Report-Probe 'Windows installation fallback' ($output -contains 'probe success') 'No PATH or override; standard-install lookup works in Windows PowerShell 5.1'
+ } finally {$env:PATH=$directory + [IO.Path]::PathSeparator + $savedPath;$env:BANK_MYSQL_BIN=Join-Path $directory 'mysql.exe';$env:ProgramFiles=$savedProgramFiles}
  try {
   Invoke-BankMysql -Sql 'PROBE_FAILURE'
   Report-Probe 'stderr and exit code' $false 'Expected process failure was not thrown'
@@ -77,6 +86,11 @@ public class MysqlWrapperProbe {
  $env:PATH=$savedPath
  $env:BANK_MYSQL_CNF=$savedCnf
  $env:BANK_MYSQL_BIN=$savedBin
+ $env:ProgramFiles=$savedProgramFiles
+ if($fallback -and [IO.Directory]::Exists($fallback)) {
+  $path=Join-Path $fallback 'mysql.exe';if([IO.File]::Exists($path)){[IO.File]::Delete($path)}
+  foreach($folder in @($fallback,(Split-Path $fallback -Parent),(Join-Path $directory 'MySQL'))){if([IO.Directory]::Exists($folder) -and [IO.Directory]::GetFileSystemEntries($folder).Length -eq 0){[IO.Directory]::Delete($folder)}}
+ }
  # Only the exact temporary files created above are removed; no recursive deletion.
  foreach ($name in @('mysql.exe','client settings.cnf','nested file.sql','recursive.sql')) {
   $path=Join-Path $directory $name

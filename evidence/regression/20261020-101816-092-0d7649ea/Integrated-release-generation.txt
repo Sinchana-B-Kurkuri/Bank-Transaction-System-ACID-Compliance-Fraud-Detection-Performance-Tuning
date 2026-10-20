@@ -1,0 +1,6 @@
+﻿RELEASE|sp_transfer_funds|signature retained; guard added; lab regions removed
+ ...-Tuning\\build\\release\\procedures\\sp_transfer_funds.sql" | 10 ++--------
+ 1 file changed, 2 insertions(+), 8 deletions(-)
+RELEASE|sp_internal_post_transfer|signature retained; guard added; lab regions removed
+ ...release\\procedures\\sp_internal_post_transfer.sql" | 18 +++---------------
+ 1 file changed, 3 insertions(+), 15 deletions(-)

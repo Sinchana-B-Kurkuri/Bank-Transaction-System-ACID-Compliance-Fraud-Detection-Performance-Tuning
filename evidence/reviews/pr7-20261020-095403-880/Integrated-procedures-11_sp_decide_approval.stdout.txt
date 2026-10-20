@@ -1,0 +1,16 @@
+TEST|PASS|decide invalid decision|expected errno=5018; actual errno=5018
+TEST|PASS|decide missing approval|expected errno=5007; actual errno=5007
+TEST|PASS|decide wrong branch manager|expected errno=5010; actual errno=5010
+TEST|PASS|decide failure stays Requested|Expected procedure contract
+TEST|PASS|decide Teller unauthorized|expected errno=5010; actual errno=5010
+TEST|PASS|decide approved moves funds|actual errno=0
+TEST|PASS|decide links group and money|Expected procedure contract
+TEST|PASS|decide twice|expected errno=5009; actual errno=5009
+TEST|PASS|decide rejected|actual errno=0
+TEST|PASS|reject no movement|Expected procedure contract
+TEST|PASS|decide requester cannot approve|expected errno=5010; actual errno=5010
+TEST|PASS|decide frozen destination rolls back|expected errno=5003; actual errno=5003
+TEST|PASS|decide failed transfer preserves approval|Expected procedure contract
+TEST|PASS|decide NULL manager|expected errno=5010; actual errno=5010
+TEST|PASS|decide approval insufficient funds|expected errno=5004; actual errno=5004
+TEST|PASS|decide insufficient leaves Requested|Expected procedure contract

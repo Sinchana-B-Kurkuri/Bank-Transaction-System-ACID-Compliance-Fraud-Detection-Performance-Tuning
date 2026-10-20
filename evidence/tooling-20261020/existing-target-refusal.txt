@@ -1,0 +1,2 @@
+CHECK|FAIL|Regression orchestration|Isolated database already exists: bank_a_ci_20261020_tooling2_main
+REGRESSION|FAIL=1|BLOCKED=0|report=C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\evidence\regression\20261020-102354-565-b3391083/summary.md

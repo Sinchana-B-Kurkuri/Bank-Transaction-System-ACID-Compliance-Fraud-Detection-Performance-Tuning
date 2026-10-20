@@ -3,7 +3,7 @@ $ErrorActionPreference='Stop'
 $root=Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
 $order=@(Get-Content "$root/build/file_order.txt" | Where-Object {$_ -notmatch '^#' -and $_.Trim()} | ForEach-Object {($_ -split '\|')[0].Trim()})
 $fails=0
-foreach ($build in @('run_all.sql','run_all_A_standalone.sql')) {
+foreach ($build in @('run_all.sql','run_all_A_standalone.sql','run_all_optimized.sql')) {
  $last=-1
  foreach ($line in Get-Content "$root/build/$build") {
   if ($line -match '^\s*SOURCE\s+([^;]+);?\s*$') {

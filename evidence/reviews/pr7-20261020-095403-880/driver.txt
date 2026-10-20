@@ -1,0 +1,25 @@
+REVIEW|PASS|Standalone actual SQL installation|SQL_EXIT=0; 
+REVIEW|PASS|Integrated actual SQL installation|SQL_EXIT=0; 
+REVIEW|PASS|actual base score digital/untrusted|Actual arithmetic 10 digital + 20 untrusted
+REVIEW|PASS|fraud trigger actually follows audit|trg_transactions_ai_audit	1;trg_transactions_ai_fraud_evaluate	2
+REVIEW|PASS|automatic fraud flags and audit on committed posting|247|3|1
+REVIEW|FAIL|reevaluation preserves risk score|60.00 -> 100.00 -> 100.00
+REVIEW|PASS|fraud flags/risk/audit/ledger roll back atomically|TEST|PASS|PR7 rollback original 5016|expected errno=5016; actual errno=5016;1|1|1|1|1
+REVIEW|PASS|namespace-isolated actual RBAC SQL installs|SQL_EXIT=0
+REVIEW|FAIL|customer role can read its granted view|ERROR 1356 (HY000) at line 1: View 'bank_review_b_1020095404.v_customer_account_summary' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them
+REVIEW|PASS|customer role denied Accounts direct SELECT|ERROR 1142 (42000) at line 1: SELECT command denied to user 'zz_a_r7_1020095404_customer'@'localhost' for table 'accounts'
+REVIEW|PASS|customer role denied private helper|ERROR 1370 (42000) at line 1: execute command denied to user 'zz_a_r7_1020095404_customer'@'localhost' for routine 'bank_review_b_1020095404.sp_internal_record_failed'
+REVIEW|FAIL|customer role can execute public posting API|ERROR 1370 (42000) at line 1: execute command denied to user 'zz_a_r7_1020095404_customer'@'localhost' for routine 'bank_review_b_1020095404.sp_deposit'
+REVIEW|FAIL|teller role can read its granted view|ERROR 1356 (HY000) at line 1: View 'bank_review_b_1020095404.v_transaction_activity' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them
+REVIEW|PASS|teller role denied Accounts direct SELECT|ERROR 1142 (42000) at line 1: SELECT command denied to user 'zz_a_r7_1020095404_teller'@'localhost' for table 'accounts'
+REVIEW|PASS|teller role denied private helper|ERROR 1370 (42000) at line 1: execute command denied to user 'zz_a_r7_1020095404_teller'@'localhost' for routine 'bank_review_b_1020095404.sp_internal_record_failed'
+REVIEW|FAIL|teller role can execute public posting API|ERROR 1370 (42000) at line 1: execute command denied to user 'zz_a_r7_1020095404_teller'@'localhost' for routine 'bank_review_b_1020095404.sp_deposit'
+REVIEW|FAIL|manager role can read its granted view|ERROR 1356 (HY000) at line 1: View 'bank_review_b_1020095404.v_fraud_case_queue' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them
+REVIEW|PASS|manager role denied Accounts direct SELECT|ERROR 1142 (42000) at line 1: SELECT command denied to user 'zz_a_r7_1020095404_manager'@'localhost' for table 'accounts'
+REVIEW|PASS|manager role denied private helper|ERROR 1370 (42000) at line 1: execute command denied to user 'zz_a_r7_1020095404_manager'@'localhost' for routine 'bank_review_b_1020095404.sp_internal_record_failed'
+REVIEW|FAIL|auditor role can read its granted view|ERROR 1356 (HY000) at line 1: View 'bank_review_b_1020095404.v_fraud_case_queue' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them
+REVIEW|PASS|auditor role denied Accounts direct SELECT|ERROR 1142 (42000) at line 1: SELECT command denied to user 'zz_a_r7_1020095404_auditor'@'localhost' for table 'accounts'
+REVIEW|PASS|auditor role denied private helper|ERROR 1370 (42000) at line 1: execute command denied to user 'zz_a_r7_1020095404_auditor'@'localhost' for routine 'bank_review_b_1020095404.sp_internal_record_failed'
+REVIEW|PASS|auditor direct Audit_Log read|485
+REVIEW|PASS|protected banking table checksums unchanged|Read-only sensors; no payload targeted protected DBs
+REVIEW_CHECKS|PASS=83|FAIL=10

@@ -1,0 +1,4 @@
+REVIEW|FAIL|review harness execution|mysql: [ERROR] Failed to open required defaults file: C:\Users\sinch\.bank_mysql.cnf--batch --raw --skip-column-names --default-character-set=utf8mb4 --skip-force
+mysql: [ERROR] Fatal error in defaults handling. Program aborted!
+
+REVIEW_CHECKS|PASS=0|FAIL=1

@@ -1,0 +1,1 @@
+﻿Rebuilt bank_txn (Standalone) in 8.38 seconds.

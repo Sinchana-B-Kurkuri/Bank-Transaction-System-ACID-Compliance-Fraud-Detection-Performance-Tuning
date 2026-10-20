@@ -1,0 +1,12 @@
+TEST|PASS|interest NULL period|expected errno=5018; actual errno=5018
+TEST|PASS|interest Teller denied|expected errno=5010; actual errno=5010
+TEST|PASS|interest Manager success|actual errno=0
+TEST|PASS|interest count total and errors|Expected procedure contract
+TEST|PASS|interest second run idempotent|actual errno=0
+TEST|PASS|interest second run zero|Expected procedure contract
+TEST|PASS|interest skips zero amounts|actual errno=0
+TEST|PASS|interest zero-rate results|Expected procedure contract
+TEST|PASS|interest per-account error continues|actual errno=0
+TEST|PASS|interest counts one isolated error|Expected procedure contract
+TEST|PASS|interest retries only previously failed account|actual errno=0
+TEST|PASS|interest one missed account recovered|Expected procedure contract

@@ -1,0 +1,7 @@
+﻿idx_approvals_status_requested
+idx_audit_log_table_time
+idx_devices_customer_trusted
+idx_fraud_flags_rule_created
+idx_fraud_flags_status_score
+idx_transactions_account_time
+idx_transactions_status_time

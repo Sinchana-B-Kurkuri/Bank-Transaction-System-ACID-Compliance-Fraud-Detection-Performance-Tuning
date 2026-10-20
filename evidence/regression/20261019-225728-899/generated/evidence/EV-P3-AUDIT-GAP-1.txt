@@ -1,0 +1,13 @@
+﻿I1	2	FAIL	2026-10-19 23:00:48.228
+I1b	0	PASS	2026-10-19 23:00:48.228
+I2	0	PASS	2026-10-19 23:00:48.228
+I3	0	PASS	2026-10-19 23:00:48.228
+I4	4	FAIL	2026-10-19 23:00:48.228
+I5	1	FAIL	2026-10-19 23:00:48.228
+I1	NULL	TOTAL	aggregate balance differs from completed ledger
+I1	1	1	balance differs from completed ledger
+I4	9	2	missing Loans INSERT audit
+I4	9	22	missing Transactions INSERT audit
+I4	9	23	missing Transactions INSERT audit
+I4	9	9	missing Accounts INSERT audit
+I5	1	1	latest completed balance_after differs

@@ -1,0 +1,11 @@
+﻿TEST|PASS|run_all.sql source inventory|73 existing, ordered SOURCE targets
+TEST|PASS|run_all_A_standalone.sql source inventory|60 existing, ordered SOURCE targets
+TEST|PASS|run_all_optimized.sql source inventory|2 existing, ordered SOURCE targets
+TEST|PASS|audit source session identity|No CURRENT_USER() in installed A audit bodies
+TEST|PASS|audit installed session identity|Installed trigger bodies checked
+TEST|PASS|release lab regions absent|Generated release SQL examined, not development sources
+TEST|PASS|obsolete tables absent|Final schema only
+TEST|PASS|core B0 snapshot unchanged|Compared 36 index-column records to C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\evidence\regression\20261020-102316-264-6d7d94e0/Standalone-B0.txt
+TEST|PASS|core secondary indexes FK-required only|Nonunique indexes must be one-column FK support with no duplicate support indexes
+TEST|PASS|no direct private routine grants|Does not certify absent B roles; administrative global privileges excluded
+TEST|PASS|SPEC signature fixture provenance|Generated expectations match current SPEC

@@ -1,0 +1,39 @@
+BRANCH=feature/A-integration-docs
+HEAD=7c50b73912565e12335799eb9883a6f724082ffc
+AUTHORIZED_PATH_AUDIT=PASS
+BANKING_AND_B_SOURCE_DIFF=EMPTY
+ M README.md
+ M build/file_order.txt
+ M build/mysql_common.ps1
+ M build/rebuild.ps1
+ M docs/decisions.md
+ M docs/interfaces.md
+ M docs/member-a/REQUESTS_TO_B.md
+ M tests/schema/04_mysql_wrapper.ps1
+?? build/write_er_core.ps1
+?? docs/er/er_core.mmd
+?? docs/member-a/DOD_CHECKLIST.md
+?? docs/member-a/INTEGRATION_CHECKLIST.md
+?? docs/member-a/INTEGRATION_FINDINGS.md
+?? docs/member-a/P2_CUTS.md
+?? docs/member-a/PROMPT6_DELIVERY.md
+?? docs/member-a/VIVA_QUESTIONS.md
+?? docs/member-a/WORKBENCH_RUNBOOK.md
+?? docs/member-a/evidence_index.md
+?? docs/member-a/status_report.md
+?? docs/review1/CORRECTIONS_A.md
+?? evidence/EV-REL-1.txt
+?? evidence/p6/
+?? evidence/regression/
+?? evidence/test-runs/20261019-215637-853.txt
+?? evidence/test-runs/20261019-220259-591.txt
+?? evidence/test-runs/20261019-220513-421.txt
+?? evidence/test-runs/20261019-225738-970.txt
+?? evidence/test-runs/20261019-225955-614.txt
+?? tests/integration/06_signature_check.sql
+?? tests/integration/07_real_b_schema.ps1
+?? tests/integration/08_er_contract.ps1
+?? tests/integration/support/
+?? tests/p6_static.ps1
+?? tests/run_regression.ps1
+?? tests/run_release.ps1

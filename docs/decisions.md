@@ -166,6 +166,39 @@ These clarify D5 and A1/A3/A4/A10/A14/A15 without replacing the frozen SPEC.
 - Interest keeps actual posting timestamps and atomically labels periods in the existing A-owned Experiment_Log using the generated transaction reference. Unmarked legacy credits retain timestamp-month handling. Reason: backdating a new ledger row would make transaction-id running balances disagree with date-window opening balances; reference-linked markers also avoid stale idempotency across rebuilds. No frozen schema change is needed.
 - Signal-based 1213/1205 and duplicate-key probes are test-only objects that are removed after use. They verify control flow, not real concurrent deadlock scheduling. Real contention remains EXP-10 scope. Reason: distinguish demonstrated rollback/retry behavior from unperformed concurrency experiments.
 
+## 2026-10-19 — Member A final decision status (historical snapshot, append-only)
+
+Owner: Member A. Reason: reconcile the frozen decisions with actual integration evidence, without changing their text or representing missing B runtime as tested. “Tested” refers to recorded A/real-B-schema regression or explicitly identified historical native-session evidence. See status_report.md for run paths and manual limits.
+
+| Decision | Status | Verification / limit |
+|---|---|---|
+| D1 | Implemented / Tested | Approval request/approve/reject lifecycle on the real B approval table |
+| D2 | Implemented / Tested | Nonzero balance / Active loan blocks default close |
+| D3 | Implemented / Tested | Routed loan creates Deposit |
+| D4 | Implemented / Tested | Eligible post-rollback Failed rows; original errors preserved |
+| D5 | Implemented / Tested | EXP-17 gap/watermark and I4; no claim of retroactive audit |
+| D6 | Implemented / Tested | Development hooks; historical real EXP-10; release removes hooks |
+| D7 | Contract retained / Deferred B runtime | Detective policy specified; real B evaluator/trigger absent |
+| A1 | Implemented / Tested | Exact session USER() attribution and resolver fallback |
+| A2 | Implemented / Tested | Seed opening deposits and I1/I1b |
+| A3 | Implemented / Tested | Atomic settle-and-close under guard |
+| A4 | Implemented / Tested | Threshold 100000.00; boundary assertions |
+| A5 | Implemented / Tested | Debit-only device/location and NULL Failed metadata |
+| A6 | Implemented / Tested | Corrected ordered/naive contrast and release guard |
+| A7 | Implemented / Tested (A); B role acceptance deferred | Public transaction ownership; private execute rejection; no private routine grants |
+| A8 | Implemented / Tested | Eligible business errors only; no Failed rows for 1213/1205/5016/5017 |
+| A9 | Implemented / Tested | A statement procedure, two result sets and running balance |
+| A10 | Implemented / Tested | Stable 5001..5018 and native error assertions, no PII in messages |
+| A11 | Implemented / Tested | Active-customer opening and non-Closed-account deactivation block |
+| A12 | Implemented / Tested | Distinct Standalone/Integrated builds, real extra B constraints |
+| A13 | Implemented / Tested | Per-mode core B0 metadata comparison and FK-only secondary check |
+| A14 | A ordering prerequisite implemented; B runtime Deferred | Actual fraud trigger absent; FOLLOWS/rollback acceptance BLOCKED |
+| A15 | Implemented / Tested | Ledger UPDATE/DELETE guards; optional raw-data loader deferred |
+| A16 | Implemented / Tested | Public DEFINER signatures/security type; disposable DB tests |
+| A17 | Implemented / Tested | Real restricted Customer/Teller authorization; B role deployment absent |
+
+No banking routine, corrected lock sequence, core table, B-owned object or error/signature contract is modified by Prompt 6. Full-system completion and P2 loading remain deferred until missing integration components and manual evidence are supplied.
+
 ## 2026-10-20 — PR9 final corrections (owner: Member A)
 
 - Approved by Member A in this session: keep the evaluator's +20 untrusted-device heuristic (digital low-value total30). Make legacy fn_fraud_score delegate to fn_txn_risk_score rather than maintain inconsistent weights. Reason: one formula, not changing weights to satisfy a stale assertion. Rule weights/configuration remain unchanged.
@@ -174,3 +207,11 @@ These clarify D5 and A1/A3/A4/A10/A14/A15 without replacing the frozen SPEC.
 - RBAC installer is preview-only by default; actual global role/grant application and real restricted-login tests require explicit approval of security/README.md's isolated plan. Reason: role accounts are server-wide even when their grants target a disposable schema. Historical evidence is preserved and safe acceptance never weakens Assert-BankDatabase.
 
 - Member A explicitly approved the fresh suffixed-role/loopback-user test and finally cleanup plan on2026-10-20. Only that isolated path may execute global account/grant statements in this task; standard deployment and existing accounts remain untouched. Native CLI testing found an additional1370 activity-view failure; replace its function-valued JOIN key with a correlated predicate, preserving filters and denying raw-function EXECUTE. Reason: restore intended definer-view access without widening privileges.
+
+## 2026-10-20 — A/B merge reconciliation (owner: Member A)
+
+The historical2026-10-19 statuses above describe their original checkout; they are not a current missing-component inventory. The merged develop sources now provide all seven fraud interfaces, identity helpers, evaluator, ordered fraud trigger, DEFINER views and a separate preview-first RBAC installer. Preserve both the A integration tooling and the PR9 corrections; do not replace real B components with stubs.
+
+D7/A14 remain detective, transaction-participating fraud after audit. A13 remains baseline PK/UNIQUE/FK-support only, with explicit Optimized installation. A1/A7/A17 and all public signatures/error codes remain unchanged. The accepted statement policy is owner-only Customer, active same-branch Teller/Manager and trusted System, with5010 denials. The approved scoring policy remains untrusted20 +digital10 =30, with HIGH_ACCOUNT_RISK transaction-local and no profile feedback.
+
+Earlier account/grant approvals were scoped to their prior runs. This merge verification does not inherit them: do not create users/roles/grants or change global settings without separate fresh approval. Tests/actual results and remaining manual limits are recorded in evidence/reviews/A-B-merge-resolution/REPORT.md; historical delivery reports are retained unchanged.

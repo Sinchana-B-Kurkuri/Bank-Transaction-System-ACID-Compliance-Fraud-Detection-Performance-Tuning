@@ -1,0 +1,12 @@
+TEST|PASS|retry default success|actual errno=0
+TEST|PASS|retry default attempts|Expected procedure contract
+TEST|PASS|retry explicit success|actual errno=0
+TEST|PASS|retry invalid limit 0|expected errno=5018; actual errno=5018
+TEST|PASS|retry invalid limit -1|expected errno=5018; actual errno=5018
+TEST|PASS|retry large positive limit|actual errno=0
+TEST|PASS|retry synthetic transient 1213|actual errno=0
+TEST|PASS|retry 1213 whole transaction second attempt|Expected procedure contract
+TEST|PASS|retry synthetic transient 1205|actual errno=0
+TEST|PASS|retry 1205 event|Expected procedure contract
+TEST|PASS|retry exhausted retains 1213|expected errno=1213; actual errno=1213
+TEST|PASS|retry exhausted event no Failed|Expected procedure contract

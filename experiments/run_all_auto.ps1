@@ -1,4 +1,11 @@
-param([string]$Database='bank_txn_scratch',[switch]$SkipThroughput,[switch]$ResumeThroughput)
+param([string]$Database='bank_txn_scratch',[switch]$SkipThroughput,[switch]$ResumeThroughput,[switch]$Quick)
+if ($args.Count) { throw 'Unknown experiment arguments; refusing to select a workload.' }
+if ($Quick) {
+ if ($SkipThroughput -or $ResumeThroughput) { throw 'Quick is an exclusive bounded profile; no throughput/resume options allowed.' }
+ & powershell -NoProfile -File "$PSScriptRoot/run_quick.ps1" -Database $Database
+ exit $LASTEXITCODE
+}
+if ($env:BANK_TEST_ISOLATED_PREFIX) { throw 'Isolated aggregate runs require -Quick; full drivers are not isolated-target certified.' }
 . "$PSScriptRoot/lib/Common.ps1"
 $summary=[Collections.Generic.List[string]]::new()
 $summary.Add("# Measured experiment summary`n`nStarted $(Get-Date -Format o), database $Database. Raw files contain version/time/connection IDs.`n`n| Experiment | Status | Detail |`n|---|---|---|")

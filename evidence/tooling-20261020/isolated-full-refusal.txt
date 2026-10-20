@@ -1,0 +1,9 @@
+Isolated aggregate runs require -Quick; full drivers are not isolated-target certified.
+At C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\experiments\run_all_auto.ps1:8 
+char:39
++ ... D_PREFIX) { throw 'Isolated aggregate runs require -Quick; full drive ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Isolated aggreg...rget certified.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Isolated aggregate runs require -Quick; full drivers are not isolated-target certified.
+ 

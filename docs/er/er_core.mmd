@@ -1,0 +1,200 @@
+erDiagram
+    %% Generated from real merged schema; A core + six B interfaces.
+    %% Account_Risk_Profile is B-owned and outside this core/interface diagram.
+    Branches {
+        int branch_id PK "int; nullable=NO"
+        varchar branch_name "varchar(100); nullable=NO"
+        varchar ifsc_code UK "varchar(15); nullable=NO"
+        varchar address "varchar(200); nullable=NO"
+        varchar city "varchar(50); nullable=NO"
+        varchar state "varchar(50); nullable=NO"
+        varchar phone "varchar(20); nullable=NO"
+    }
+    Employees {
+        int employee_id PK "int; nullable=NO"
+        int branch_id FK "int; nullable=NO"
+        varchar full_name "varchar(100); nullable=NO"
+        enum role "enum('Teller','Manager','DBA'); nullable=NO"
+        varchar email UK "varchar(100); nullable=NO"
+        date hire_date "date; nullable=NO"
+        tinyint is_active "tinyint(1); nullable=NO"
+    }
+    Customers {
+        int customer_id PK "int; nullable=NO"
+        varchar full_name "varchar(100); nullable=NO"
+        date dob "date; nullable=NO"
+        varchar gender "varchar(15); nullable=YES"
+        varchar email UK "varchar(100); nullable=NO"
+        varchar phone UK "varchar(20); nullable=NO"
+        varchar address "varchar(200); nullable=NO"
+        varchar id_proof_number UK "varchar(30); nullable=NO"
+        enum id_proof_type "enum('Aadhaar','PAN','Passport','DrivingLicense','VoterID'); nullable=NO"
+        enum kyc_status "enum('Pending','Verified','Rejected'); nullable=NO"
+        tinyint is_active "tinyint(1); nullable=NO"
+        datetime created_at "datetime; nullable=NO"
+    }
+    Account_Types {
+        int account_type_id PK "int; nullable=NO"
+        varchar type_name UK "varchar(30); nullable=NO"
+        decimal interest_rate "decimal(5,2); nullable=NO"
+        decimal min_balance "decimal(12,2); nullable=NO"
+    }
+    Accounts {
+        int account_id PK "int; nullable=NO"
+        int customer_id FK "int; nullable=NO"
+        int branch_id FK "int; nullable=NO"
+        int account_type_id FK "int; nullable=NO"
+        varchar account_number UK "varchar(20); nullable=NO"
+        decimal balance "decimal(14,2); nullable=NO"
+        enum status "enum('Active','Frozen','Closed'); nullable=NO"
+        date opened_date "date; nullable=NO"
+    }
+    Transactions {
+        bigint transaction_id PK "bigint; nullable=NO"
+        int account_id FK "int; nullable=NO"
+        int related_account_id FK "int; nullable=YES"
+        int employee_id FK "int; nullable=YES"
+        char transfer_group_id "char(36); nullable=YES"
+        int device_id FK "int; nullable=YES"
+        int location_id FK "int; nullable=YES"
+        enum transaction_type "enum('Deposit','Withdrawal','TransferIn','TransferOut','InterestCredit','Fee'); nullable=NO"
+        decimal amount "decimal(14,2); nullable=NO"
+        decimal balance_after "decimal(14,2); nullable=NO"
+        enum channel "enum('ATM','Branch','Online','Mobile'); nullable=NO"
+        enum status "enum('Pending','Completed','Failed','RolledBack'); nullable=NO"
+        datetime transaction_timestamp "datetime; nullable=NO"
+        varchar reference_no UK "varchar(30); nullable=NO"
+    }
+    Loans {
+        int loan_id PK "int; nullable=NO"
+        int customer_id FK "int; nullable=NO"
+        int disbursement_account_id FK "int; nullable=YES"
+        decimal principal_amount "decimal(14,2); nullable=NO"
+        decimal interest_rate "decimal(5,2); nullable=NO"
+        int tenure_months "int; nullable=NO"
+        enum status "enum('Active','Closed','Defaulted'); nullable=NO"
+        date disbursed_date "date; nullable=NO"
+    }
+    Fraud_Flags {
+        int flag_id PK "int; nullable=NO"
+        bigint transaction_id FK "bigint; nullable=NO"
+        int rule_id FK "int; nullable=NO"
+        decimal risk_score "decimal(5,2); nullable=NO"
+        json evidence "json; nullable=YES"
+        enum flag_status "enum('Open','UnderReview','Confirmed','Dismissed'); nullable=NO"
+        int reviewed_by FK "int; nullable=YES"
+        datetime created_at "datetime; nullable=NO"
+    }
+    Audit_Log {
+        bigint audit_id PK "bigint; nullable=NO"
+        varchar table_name "varchar(50); nullable=NO"
+        varchar record_pk "varchar(50); nullable=NO"
+        enum action_type "enum('INSERT','UPDATE','DELETE'); nullable=NO"
+        json old_value "json; nullable=YES"
+        json new_value "json; nullable=YES"
+        varchar db_session_user "varchar(100); nullable=NO"
+        enum actor_type "enum('Customer','Employee','System'); nullable=NO"
+        int actor_employee_id FK "int; nullable=YES"
+        int actor_customer_id FK "int; nullable=YES"
+        datetime performed_at "datetime; nullable=NO"
+    }
+    Devices {
+        int device_id PK "int; nullable=NO"
+        int customer_id FK "int; nullable=NO"
+        char device_fingerprint UK "char(64); nullable=NO"
+        varchar device_type "varchar(20); nullable=NO"
+        datetime first_seen_at "datetime; nullable=NO"
+        datetime last_seen_at "datetime; nullable=NO"
+        tinyint is_trusted "tinyint(1); nullable=NO"
+    }
+    Locations {
+        int location_id PK "int; nullable=NO"
+        varchar city "varchar(50); nullable=NO"
+        varchar state "varchar(50); nullable=YES"
+        varchar country "varchar(50); nullable=NO"
+        decimal latitude "decimal(9,6); nullable=NO"
+        decimal longitude "decimal(9,6); nullable=NO"
+    }
+    Fraud_Rules {
+        int rule_id PK "int; nullable=NO"
+        varchar rule_code UK "varchar(40); nullable=NO"
+        varchar description "varchar(200); nullable=YES"
+        decimal weight "decimal(5,2); nullable=NO"
+        json param_json "json; nullable=YES"
+        tinyint is_active "tinyint(1); nullable=NO"
+    }
+    DB_User_Map {
+        varchar db_login PK "varchar(100); nullable=NO"
+        enum actor_type "enum('Customer','Employee'); nullable=NO"
+        int employee_id FK "int; nullable=YES"
+        int customer_id FK "int; nullable=YES"
+    }
+    Transaction_Approvals {
+        int approval_id PK "int; nullable=NO"
+        enum requested_by_actor_type "enum('Customer','Employee'); nullable=NO"
+        int requested_by_employee_id FK "int; nullable=YES"
+        int requested_by_customer_id FK "int; nullable=YES"
+        datetime requested_at "datetime; nullable=NO"
+        int from_account_id FK "int; nullable=NO"
+        int to_account_id FK "int; nullable=NO"
+        decimal amount "decimal(14,2); nullable=NO"
+        enum status "enum('Requested','Approved','Rejected'); nullable=NO"
+        int decided_by FK "int; nullable=YES"
+        datetime decided_at "datetime; nullable=YES"
+        char resulting_transfer_group_id "char(36); nullable=YES"
+    }
+    Fraud_Ground_Truth {
+        bigint transaction_id PK,FK "bigint; nullable=NO"
+        tinyint is_fraud "tinyint(1); nullable=NO"
+        varchar scenario_label "varchar(40); nullable=YES"
+    }
+    Account_Types ||--o{ Accounts : account_type_id
+    %% FK: Accounts.account_type_id -> Account_Types.account_type_id
+    Branches ||--o{ Accounts : branch_id
+    %% FK: Accounts.branch_id -> Branches.branch_id
+    Customers ||--o{ Accounts : customer_id
+    %% FK: Accounts.customer_id -> Customers.customer_id
+    Customers |o--o{ Audit_Log : actor_customer_id
+    %% FK: Audit_Log.actor_customer_id -> Customers.customer_id
+    Employees |o--o{ Audit_Log : actor_employee_id
+    %% FK: Audit_Log.actor_employee_id -> Employees.employee_id
+    Customers |o--o{ DB_User_Map : customer_id
+    %% FK: DB_User_Map.customer_id -> Customers.customer_id
+    Employees |o--o{ DB_User_Map : employee_id
+    %% FK: DB_User_Map.employee_id -> Employees.employee_id
+    Customers ||--o{ Devices : customer_id
+    %% FK: Devices.customer_id -> Customers.customer_id
+    Branches ||--o{ Employees : branch_id
+    %% FK: Employees.branch_id -> Branches.branch_id
+    Employees |o--o{ Fraud_Flags : reviewed_by
+    %% FK: Fraud_Flags.reviewed_by -> Employees.employee_id
+    Fraud_Rules ||--o{ Fraud_Flags : rule_id
+    %% FK: Fraud_Flags.rule_id -> Fraud_Rules.rule_id
+    Transactions ||--o{ Fraud_Flags : transaction_id
+    %% FK: Fraud_Flags.transaction_id -> Transactions.transaction_id
+    Transactions ||--o| Fraud_Ground_Truth : transaction_id
+    %% FK: Fraud_Ground_Truth.transaction_id -> Transactions.transaction_id
+    Customers ||--o{ Loans : customer_id
+    %% FK: Loans.customer_id -> Customers.customer_id
+    Accounts |o--o{ Loans : disbursement_account_id
+    %% FK: Loans.disbursement_account_id -> Accounts.account_id
+    Employees |o--o{ Transaction_Approvals : decided_by
+    %% FK: Transaction_Approvals.decided_by -> Employees.employee_id
+    Accounts ||--o{ Transaction_Approvals : from_account_id
+    %% FK: Transaction_Approvals.from_account_id -> Accounts.account_id
+    Customers |o--o{ Transaction_Approvals : requested_by_customer_id
+    %% FK: Transaction_Approvals.requested_by_customer_id -> Customers.customer_id
+    Employees |o--o{ Transaction_Approvals : requested_by_employee_id
+    %% FK: Transaction_Approvals.requested_by_employee_id -> Employees.employee_id
+    Accounts ||--o{ Transaction_Approvals : to_account_id
+    %% FK: Transaction_Approvals.to_account_id -> Accounts.account_id
+    Accounts ||--o{ Transactions : account_id
+    %% FK: Transactions.account_id -> Accounts.account_id
+    Devices |o--o{ Transactions : device_id
+    %% FK: Transactions.device_id -> Devices.device_id
+    Employees |o--o{ Transactions : employee_id
+    %% FK: Transactions.employee_id -> Employees.employee_id
+    Locations |o--o{ Transactions : location_id
+    %% FK: Transactions.location_id -> Locations.location_id
+    Accounts |o--o{ Transactions : related_account_id
+    %% FK: Transactions.related_account_id -> Accounts.account_id

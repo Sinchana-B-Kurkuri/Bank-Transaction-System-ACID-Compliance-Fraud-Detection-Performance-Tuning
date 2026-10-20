@@ -1,0 +1,1 @@
+ERROR 1305 (42000) at line 2: FUNCTION bank_review_a_1020095404.fn_fraud_score does not exist

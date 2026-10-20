@@ -1,0 +1,21 @@
+bank_txn.branches	3820862213
+bank_txn.employees	129382500
+bank_txn.customers	325731320
+bank_txn.account_types	3543379354
+bank_txn.accounts	1409684756
+bank_txn.transactions	1120650870
+bank_txn.loans	288489843
+bank_txn.fraud_flags	1595936826
+bank_txn.audit_log	2967885967
+bank_txn_scratch.branches	3820862213
+bank_txn_scratch.employees	330955086
+bank_txn_scratch.customers	212936721
+bank_txn_scratch.account_types	3543379354
+bank_txn_scratch.accounts	1091485484
+bank_txn_scratch.transactions	1476135014
+bank_txn_scratch.loans	2388492391
+bank_txn_scratch.fraud_flags	2585686667
+bank_txn_scratch.audit_log	3514193871
+3944
+11452
+REPEATABLE-READ	0	NULL

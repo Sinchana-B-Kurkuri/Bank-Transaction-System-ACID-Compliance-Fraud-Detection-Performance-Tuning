@@ -1,0 +1,10 @@
+C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\rebuild.ps1 : Refusing to 
+rebuild a database not owned by this isolated run.
+At C:\Users\sinch\Desktop\DBS\DBS 
+Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\build\rebuild.ps1:46 char:11
++ } catch { Write-Error $_; exit 1 } finally { Pop-Location }
++           ~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,rebuild.ps1
+ 
