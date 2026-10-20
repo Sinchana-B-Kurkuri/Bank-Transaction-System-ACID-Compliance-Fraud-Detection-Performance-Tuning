@@ -31,7 +31,7 @@ BEGIN
     SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT='E_FRAUD_TXN_NOT_FOUND_OR_NOT_COMPLETED';
   END IF;
 
-  SELECT t.account_id,t.amount,t.channel,t.device_id,a.customer_id,t.transaction_timestamp
+  SELECT t.account_id,t.amount,t.channel,t.device_id,t.transaction_timestamp
     INTO v_account,v_amount,v_channel,v_device,v_txn_ts
     FROM Transactions t JOIN Accounts a ON a.account_id=t.account_id
    WHERE t.transaction_id=p_transaction_id;
