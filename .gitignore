@@ -29,3 +29,4 @@ data/raw/
 evidence/**/*.large
 experiments/**/raw_large/
 build/release/
+demo/out/
