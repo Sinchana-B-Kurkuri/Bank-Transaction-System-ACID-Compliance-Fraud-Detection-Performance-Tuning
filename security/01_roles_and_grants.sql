@@ -46,6 +46,7 @@ BEGIN
             ''''
         );
 
+        SET @rbac_grant_sql = @rbac_grant_sql;
         PREPARE rbac_grant_stmt FROM @rbac_grant_sql;
         EXECUTE rbac_grant_stmt;
         DEALLOCATE PREPARE rbac_grant_stmt;
