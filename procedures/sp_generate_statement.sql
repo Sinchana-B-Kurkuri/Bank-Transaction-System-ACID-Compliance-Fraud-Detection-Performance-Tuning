@@ -56,16 +56,34 @@ BEGIN
               AND a.customer_id = v_customer_id
        ) THEN
         SIGNAL SQLSTATE '45000'
-            SET MYSQL_ERRNO = 5019,
+            SET MYSQL_ERRNO = 5010,
                 MESSAGE_TEXT =
                     'E_NOT_AUTHORIZED: account does not belong to customer';
     END IF;
 
-    -- Do not allow unresolved or unsupported callers.
-    IF v_actor IS NULL
-       OR v_actor NOT IN ('Customer', 'Employee') THEN
+    -- Match the activity view policy: active Tellers/Managers, own branch only.
+    IF v_actor = 'Employee'
+       AND NOT EXISTS (
+            SELECT 1
+            FROM Employees e
+            JOIN Accounts a ON a.branch_id = e.branch_id
+            WHERE e.employee_id = v_employee_id
+              AND e.is_active = TRUE
+              AND e.role IN ('Teller', 'Manager')
+              AND a.account_id = p_account_id
+       ) THEN
         SIGNAL SQLSTATE '45000'
-            SET MYSQL_ERRNO = 5019,
+            SET MYSQL_ERRNO = 5010,
+                MESSAGE_TEXT =
+                    'E_NOT_AUTHORIZED: active same-branch staff required';
+    END IF;
+
+    -- Preserve A1/A17: unmapped trusted administrative workflows resolve to System.
+    -- Application roles must always be provisioned with an explicit DB_User_Map row.
+    IF v_actor IS NULL
+       OR v_actor NOT IN ('Customer', 'Employee', 'System') THEN
+        SIGNAL SQLSTATE '45000'
+            SET MYSQL_ERRNO = 5010,
                 MESSAGE_TEXT =
                     'E_NOT_AUTHORIZED: caller is not authorized';
     END IF;

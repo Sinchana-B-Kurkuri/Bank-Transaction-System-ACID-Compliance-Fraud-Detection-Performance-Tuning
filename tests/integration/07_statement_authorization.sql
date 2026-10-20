@@ -1,0 +1,23 @@
+-- Actor-map diagnostics, not restricted-login privilege proof. Public fixtures commit first.
+SOURCE tests/procedures/support/fixture.sql;
+START TRANSACTION;
+DELETE FROM DB_User_Map WHERE BINARY SUBSTRING_INDEX(db_login,'@',1)=BINARY SUBSTRING_INDEX(USER(),'@',1);
+CALL bank_lab.sp_expect_ok(DATABASE(),'statement trusted System','CALL {db}.sp_generate_statement(@p3_a,CURDATE(),CURDATE())');
+INSERT INTO DB_User_Map(db_login,actor_type,customer_id) VALUES(USER(),'Customer',@p3_c1);
+CALL bank_lab.sp_expect_ok(DATABASE(),'statement customer own','CALL {db}.sp_generate_statement(@p3_a,CURDATE(),CURDATE())');
+CALL bank_lab.sp_expect_error(DATABASE(),'statement customer foreign','CALL {db}.sp_generate_statement(@p3_b,CURDATE(),CURDATE())',5010);
+DELETE FROM DB_User_Map WHERE BINARY db_login=BINARY USER();
+INSERT INTO DB_User_Map(db_login,actor_type,employee_id) VALUES(USER(),'Employee',@p3_t1);
+CALL bank_lab.sp_expect_ok(DATABASE(),'statement teller own branch','CALL {db}.sp_generate_statement(@p3_a,CURDATE(),CURDATE())');
+CALL bank_lab.sp_expect_error(DATABASE(),'statement teller foreign branch','CALL {db}.sp_generate_statement(@p3_b,CURDATE(),CURDATE())',5010);
+UPDATE Employees SET is_active=FALSE WHERE employee_id=@p3_t1;
+CALL bank_lab.sp_expect_error(DATABASE(),'statement inactive teller','CALL {db}.sp_generate_statement(@p3_a,CURDATE(),CURDATE())',5010);
+UPDATE Employees SET is_active=TRUE WHERE employee_id=@p3_t1;
+UPDATE DB_User_Map SET employee_id=@p3_m1 WHERE BINARY db_login=BINARY USER();
+CALL bank_lab.sp_expect_ok(DATABASE(),'statement manager own branch','CALL {db}.sp_generate_statement(@p3_a,CURDATE(),CURDATE())');
+CALL bank_lab.sp_expect_error(DATABASE(),'statement manager foreign branch','CALL {db}.sp_generate_statement(@p3_b,CURDATE(),CURDATE())',5010);
+UPDATE Employees SET is_active=FALSE WHERE employee_id=@p3_m1;
+CALL bank_lab.sp_expect_error(DATABASE(),'statement inactive manager','CALL {db}.sp_generate_statement(@p3_a,CURDATE(),CURDATE())',5010);
+UPDATE DB_User_Map SET employee_id=@p3_dba WHERE BINARY db_login=BINARY USER();
+CALL bank_lab.sp_expect_error(DATABASE(),'statement mapped DBA not servicing staff','CALL {db}.sp_generate_statement(@p3_a,CURDATE(),CURDATE())',5010);
+ROLLBACK;

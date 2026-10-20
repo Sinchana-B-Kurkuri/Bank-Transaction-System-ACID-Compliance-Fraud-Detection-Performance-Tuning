@@ -38,7 +38,8 @@ BEGIN
   SET v_profile_risk=COALESCE((SELECT risk_score FROM Account_Risk_Profile WHERE account_id=v_account),0);
   SET v_trusted=COALESCE((SELECT d.is_trusted FROM Devices d WHERE d.device_id=v_device),FALSE);
 
-  -- Use a stable transaction-local base. Account profile is used for the explicit risk rule only.
+  -- Stable transaction-local base; stored profile is evidence only, never a scoring input.
+  -- HIGH_ACCOUNT_RISK uses the accumulated transaction-local score in rule_id order.
   SET v_score=fn_txn_risk_score(v_amount,v_channel,v_trusted,0);
   OPEN c_rules;
   rule_loop: LOOP
