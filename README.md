@@ -1,5 +1,23 @@
 # Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning
 
+## Local final demo
+
+The [web dashboard guide](demo/DASHBOARD_GUIDE.md) starts the live localhost
+banking/fraud/audit interface and twelve-step professor walkthrough. The complete
+[academic project report](docs/FINAL_PROJECT_REPORT.md) includes actual results,
+screenshots, schema, concurrency, performance and disclosed limitations.
+
+The [Windows CLI guide](demo/README.md) starts a fresh owned disposable Integrated
+database, runs public banking APIs through Python's standard library and the native
+MySQL client, and stops with ownership-checked cleanup. No extra Python packages
+are required. Use `powershell -NoProfile -File demo/start_demo.ps1` after setting
+the external MySQL configuration variables. The initial walkthrough is explicitly
+a **privileged non-security demo**; authenticated role provisioning requires
+separate approval. `powershell -NoProfile -File tests/demo/verify_all.ps1` runs the
+audited safe regression and actual CLI/concurrency/performance smoke workflow.
+See [measured final demo report](evidence/reviews/final-demo/REPORT.md) for results
+and limitations; protected banking databases are never demo targets.
+
 ## Member A — build & test
 
 Requires MySQL 8.0.16+ (enforced CHECK constraints), the native mysql CLI and PowerShell (measured environment: Windows PowerShell5.1 / MySQL8.4.11). Set `BANK_MYSQL_CNF` to a private option file; never commit credentials. For safe integration verification from the repository root:
