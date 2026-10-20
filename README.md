@@ -18,3 +18,16 @@ Standalone uses interface stand-ins under tests/stubs; Integrated requires all s
 Prompt 1 implements schema and test infrastructure. Business procedures, functions and triggers listed in docs/member-a/SPEC.md are public contracts for subsequent prompts. See docs/member-a/DELIVERY.md for actual verification status.
 
 The wrapper supports Windows PowerShell 5.1 and paths containing spaces. It captures MySQL stdout and stderr separately and saves original errors in the environment evidence file. Oracle MySQL does not support `--abort-source-on-error`; the wrapper expands standalone `SOURCE` lines (relative to the working directory) into UTF-8 batch input and disables `--force`, so execution stops on the first SQL error. A normal PowerShell variable such as `$env` is not inherited by child processes; set `$env:BANK_MYSQL_CNF` as shown above. If mysql.exe is absent from PATH, the wrapper also detects a single standard installation under Program Files/MySQL.
+
+### Member A — safe PR9 acceptance
+
+For acceptance without touching existing banking/helper schemas, use the dedicated isolated runner rather than the historical rebuild/test commands above:
+
+```powershell
+$env:BANK_MYSQL_CNF = Join-Path $HOME '.bank_mysql.cnf'
+$env:BANK_MYSQL_BIN = 'C:\Program Files\MySQL\MySQL Server 8.4\bin\mysql.exe'
+powershell -NoProfile -File tests/regression/pr9_acceptance.ps1
+powershell -NoProfile -File tests/regression/error1222_seed.ps1
+```
+
+The PR9 runner creates a fresh random marked disposable schema, installs actual Integrated A+B components with helper references relocated only in executed SQL, runs numbered SQL tests and targeted diagnostics, previews RBAC, compares baseline/optimized index inventories, reconciles six invariants, then verifies ownership before cleanup. It fails on SQL errors, failed assertions or missing TEST output. Logs are unique per run under evidence/reviews/PR9-final-fixes/. By default it never provisions global roles/users/grants. After explicit approval of security/README.md, -WithRestrictedRoles applies only fresh suffixed test roles and loopback users, runs native restricted-login assertions and cleans them up in finally. It never invokes the original nested PowerShell tests that rebuild fixed banking schemas. See the delivery report for measured results and remaining limits.
