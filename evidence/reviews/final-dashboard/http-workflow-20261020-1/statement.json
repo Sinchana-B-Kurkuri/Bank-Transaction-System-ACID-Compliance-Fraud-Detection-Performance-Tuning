@@ -1,0 +1,114 @@
+{
+  "ok": true,
+  "procedure_output": "account_id\tperiod_start\topening_balance\n9\t2026-10-20\t0.00\ntransaction_id\ttimestamp\ttype\tamount\tbalance_after\trelated_account_id\treference_no\trunning_balance\n22\t2026-10-20 21:39:20\tDeposit\t20000.00\t20000.00\tNULL\tT20261020213920223160-M27TN8\t20000.00\n23\t2026-10-20 21:39:21\tDeposit\t100.00\t20100.00\tNULL\tT20261020213921870263-M27TN9\t20100.00\n24\t2026-10-20 21:39:22\tWithdrawal\t25.00\t20075.00\tNULL\tT20261020213922226175-M27TNA\t20075.00\n25\t2026-10-20 21:39:22\tTransferOut\t50.00\t20025.00\t1\tT20261020213922596269-M27TNB\t20025.00\n",
+  "before": {
+    "balances": [
+      {
+        "status": "Active",
+        "balance": 300257.0,
+        "account_id": 1
+      },
+      {
+        "status": "Active",
+        "balance": 200089.0,
+        "account_id": 2
+      },
+      {
+        "status": "Active",
+        "balance": 15113.0,
+        "account_id": 3
+      },
+      {
+        "status": "Active",
+        "balance": 5114.0,
+        "account_id": 4
+      },
+      {
+        "status": "Active",
+        "balance": 5115.0,
+        "account_id": 5
+      },
+      {
+        "status": "Frozen",
+        "balance": 5000.0,
+        "account_id": 6
+      },
+      {
+        "status": "Active",
+        "balance": 15000.0,
+        "account_id": 7
+      },
+      {
+        "status": "Active",
+        "balance": 10000.0,
+        "account_id": 8
+      },
+      {
+        "status": "Active",
+        "balance": 20025.0,
+        "account_id": 9
+      }
+    ],
+    "counts": {
+      "audit": 63,
+      "flags": 90,
+      "ledger": 26,
+      "risk_sum": 900.0
+    }
+  },
+  "after": {
+    "balances": [
+      {
+        "status": "Active",
+        "balance": 300257.0,
+        "account_id": 1
+      },
+      {
+        "status": "Active",
+        "balance": 200089.0,
+        "account_id": 2
+      },
+      {
+        "status": "Active",
+        "balance": 15113.0,
+        "account_id": 3
+      },
+      {
+        "status": "Active",
+        "balance": 5114.0,
+        "account_id": 4
+      },
+      {
+        "status": "Active",
+        "balance": 5115.0,
+        "account_id": 5
+      },
+      {
+        "status": "Frozen",
+        "balance": 5000.0,
+        "account_id": 6
+      },
+      {
+        "status": "Active",
+        "balance": 15000.0,
+        "account_id": 7
+      },
+      {
+        "status": "Active",
+        "balance": 10000.0,
+        "account_id": 8
+      },
+      {
+        "status": "Active",
+        "balance": 20025.0,
+        "account_id": 9
+      }
+    ],
+    "counts": {
+      "audit": 63,
+      "flags": 90,
+      "ledger": 26,
+      "risk_sum": 900.0
+    }
+  }
+}

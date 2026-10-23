@@ -1,0 +1,4 @@
+TEST|PASS|demo owned cleanup bank_a_ci_demo_095d068cb3cf_main|zero remaining schema
+TEST|PASS|demo owned cleanup bank_a_ci_demo_095d068cb3cf_scratch|zero remaining schema
+TEST|PASS|demo owned cleanup bank_a_ci_demo_095d068cb3cf_lab|zero remaining schema
+remaining=0

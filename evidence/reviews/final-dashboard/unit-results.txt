@@ -1,0 +1,13 @@
+.........
+HTTP POST /api/operate
+HTTP GET /api/bootstrap
+HTTP POST /api/operate
+HTTP POST /api/operate
+HTTP GET /
+HTTP POST /api/operate
+HTTP GET /api/sql
+HTTP GET /../../README.md
+----------------------------------------------------------------------
+Ran 9 tests in 0.649s
+
+OK
