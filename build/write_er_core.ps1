@@ -28,5 +28,5 @@ foreach($line in $fks) {
  $lines+="    $parent $left--$right $child : $($v[1])"
  $lines+="    %% FK: $child.$($v[1]) -> $parent.$($v[3])"
 }
-[IO.File]::WriteAllText((Join-Path $root 'docs/er/er_core.mmd'),($lines -join "`n")+"`n",[Text.UTF8Encoding]::new($false))
+[IO.File]::WriteAllText((Join-Path $root 'schema/er_core.mmd'),($lines -join "`n")+"`n",[Text.UTF8Encoding]::new($false))
 Write-Output "ER|GENERATED|tables=$($names.Count)|FKs=$($fks.Count)|database=$Database"

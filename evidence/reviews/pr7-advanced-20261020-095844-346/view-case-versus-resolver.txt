@@ -1,2 +1,0 @@
-RESOLVER|System
-VIEW_ROWS|1

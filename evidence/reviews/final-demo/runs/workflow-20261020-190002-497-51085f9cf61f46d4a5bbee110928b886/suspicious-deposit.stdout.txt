@@ -1,0 +1,2 @@
+transaction_id	balance_after
+33	8100.00

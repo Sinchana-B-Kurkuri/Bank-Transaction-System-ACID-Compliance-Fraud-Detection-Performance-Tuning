@@ -11,7 +11,7 @@ try {
  $output | Set-Content $destination -Encoding UTF8
  $output | Write-Output
  $record = "# Environment`n`nLOCALLY TESTED - measured on $(Get-Date -Format yyyy-MM-dd)`n`n``````text`n$($output -join "`n")`n```````n"
- $record | Set-Content (Join-Path $root 'docs/member-a/environment.md') -Encoding UTF8
+ $record | Set-Content (Join-Path $root 'evidence/environment.md') -Encoding UTF8
 } catch {
  $failure=$_
  $record=@("BLOCKED - $(Get-Date -Format yyyy-MM-dd): $($failure.Exception.Message)")

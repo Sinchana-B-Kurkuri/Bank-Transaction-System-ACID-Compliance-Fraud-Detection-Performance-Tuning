@@ -1,0 +1,41 @@
+﻿TEST|PASS|CLI launch|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI restricted-mode-refuses-admin|exit=1 expected=1; actual stdout/stderr retained
+TEST|PASS|restricted CLI refuses role simulation|unprovisioned administrative session needs explicit non-security flag
+TEST|PASS|CLI accounts|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI registration|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI opening|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI deposit|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI withdraw|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI transfer|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI workflow balance|opening200000 +100 -25 -200 =199875
+TEST|PASS|CLI invalid-overdraft|exit=1 expected=1; actual stdout/stderr retained
+TEST|PASS|original MySQL error visible|native insufficient-funds errno preserved
+TEST|PASS|CLI statement|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI statement running balance|last Completed balance_after equals returned window running_balance
+TEST|PASS|CLI history|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI fraud-queue|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI fraud-review|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI fraud-confirm|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|fraud review committed|real public manager-review API, privileged demo caller
+TEST|PASS|CLI loan|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI approval-request|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI approval-decide|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|approved money movement|loan+500 and approved100000; paired ledger transaction
+TEST|PASS|CLI audit|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI reconcile|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|opening audit coverage|one actual account INSERT audit with session USER
+TEST|PASS|CLI normal-account|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|CLI normal-deposit|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|normal transaction no flags|trusted Branch100, count2 below velocity3; final transaction score0
+TEST|PASS|approved helper probe30|+20 untrusted +10 digital
+TEST|PASS|CLI suspicious-deposit|exit=0 expected=0; actual stdout/stderr retained
+TEST|PASS|suspicious transaction score100|base50 + amount20 + untrusted20 + digital10 capped100; local-risk/velocity flags follow
+TEST|PASS|reevaluation stable|two actual calls; no new transaction or profile feedback
+TEST|PASS|real isolation READ UNCOMMITTED|writer rollback; reader errno/block/read retained; expected SERIALIZABLE1205 only
+TEST|PASS|real isolation READ COMMITTED|writer rollback; reader errno/block/read retained; expected SERIALIZABLE1205 only
+TEST|PASS|real isolation REPEATABLE READ|writer rollback; reader errno/block/read retained; expected SERIALIZABLE1205 only
+TEST|PASS|real isolation SERIALIZABLE|writer rollback; reader errno/block/read retained; expected SERIALIZABLE1205 only
+TEST|PASS|real naive deadlock victim|one real MySQL1213 victim; no simulated errno
+TEST|PASS|real deadlock retry completes|two native sessions success; new retry log rows=1
+TEST|PASS|measured baseline optimized queries|3 fixed queries x20 measured samples x2 profiles; two warmups each; no speedup claim on tiny data
+TEST|PASS|six final invariants|after CLI, fraud, isolation, real deadlock/retry and indexes

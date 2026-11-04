@@ -8,7 +8,14 @@
 # Python
 __pycache__/
 *.pyc
+*.pyo
 .venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 
 # Database backups and dumps
 *.sql.gz
@@ -18,11 +25,21 @@ backup/out/
 # Temporary files
 *.log
 *.tmp
+*.temp
+*.bak
+~$*
+.cache/
+
+# Optional browser-test dependencies and output
+node_modules/
+playwright-report/
+test-results/
 
 # OS and editor files
 .DS_Store
 Thumbs.db
 .vscode/
+.idea/
 
 # Member A generated or sensitive inputs
 data/raw/
@@ -30,3 +47,14 @@ evidence/**/*.large
 experiments/**/raw_large/
 build/release/
 demo/out/
+
+# Reproducible local test output (recorded project evidence stays tracked)
+evidence/test-runs/
+evidence/regression/
+evidence/quick/
+evidence/tooling-*/
+evidence/wrapper-fix/
+
+# Local review checkouts and copied evidence backups
+/DBS-B-review/
+/DBS-Evidence-Backup-*/

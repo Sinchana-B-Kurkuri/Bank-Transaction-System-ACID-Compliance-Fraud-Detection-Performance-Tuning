@@ -1,0 +1,2 @@
+NON-SECURITY DEMO: privileged connection; no least-privilege claim
+ERROR 5004 (45000) at line 2: E_INSUFFICIENT_FUNDS: minimum balance would be breached

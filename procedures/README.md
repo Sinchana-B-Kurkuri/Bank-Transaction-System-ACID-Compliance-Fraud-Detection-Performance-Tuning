@@ -1,6 +1,6 @@
 # Member A procedure engine
 
-All public signatures are those in docs/member-a/SPEC.md. Execute with SQL SECURITY DEFINER; install through the build lists while the banking schema is selected. No banking database name is hard-coded. The existing sp_resolve_actor remains unchanged.
+All public signatures are those in tests/integration/support/procedure_contract.md. Execute with SQL SECURITY DEFINER; install through the build lists while the banking schema is selected. No banking database name is hard-coded. The existing sp_resolve_actor remains unchanged.
 
 ## Installation and dependencies
 
@@ -30,7 +30,7 @@ MySQL START TRANSACTION commits an existing caller transaction. Do not wrap thes
 
 The public exception handler first captures errno and rolls back. Only 5003/5004/5005/5006/5010 can request a Failed row. A nested handler protects the original error if recording itself fails. No row is possible when its account was rolled back/not found or the amount is invalid. A validation error with no monetary/account context (customer/status/flag operations) likewise has no Failed ledger representation. Deadlocks, timeouts, lab failures and other errors never generate Failed rows.
 
-Account existence in sp_internal_post_transfer is validated by its two SELECT ... FOR UPDATE reads, not preliminary EXISTS subqueries. On the measured MySQL 8.4.11 configuration, those subqueries acquired shared record locks before the ordered exclusive reads, enabling S-to-X conversion deadlocks. Modes 0/1/2 now begin account locking with X locks in LEAST/GREATEST order; mode 3 intentionally retains from/to order. A block-local NOT FOUND handler and a reset NULL sentinel return 5002 for either missing row without masking later reads. Public signatures, validation outcomes, transaction ownership, authorization and posting logic are unchanged. See docs/member-a/EXP10_ORDERED_LOCK_FIX.md for measured before/after evidence.
+Account existence in sp_internal_post_transfer is validated by its two SELECT ... FOR UPDATE reads, not preliminary EXISTS subqueries. On the measured MySQL 8.4.11 configuration, those subqueries acquired shared record locks before the ordered exclusive reads, enabling S-to-X conversion deadlocks. Modes 0/1/2 now begin account locking with X locks in LEAST/GREATEST order; mode 3 intentionally retains from/to order. A block-local NOT FOUND handler and a reset NULL sentinel return 5002 for either missing row without masking later reads. Public signatures, validation outcomes, transaction ownership, authorization and posting logic are unchanged. See evidence/EXP10-lock-fix/ for measured before/after evidence.
 
 ## Authorization and reporting
 

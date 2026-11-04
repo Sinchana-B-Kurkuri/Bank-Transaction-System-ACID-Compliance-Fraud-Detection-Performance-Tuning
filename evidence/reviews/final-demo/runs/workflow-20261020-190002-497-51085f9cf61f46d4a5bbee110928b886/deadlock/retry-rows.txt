@@ -1,0 +1,1 @@
+DEADLOCK_RETRY	{"attempt": 1, "to_account": 2, "from_account": 1}

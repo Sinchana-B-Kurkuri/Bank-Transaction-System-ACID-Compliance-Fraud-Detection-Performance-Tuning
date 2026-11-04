@@ -1,0 +1,18 @@
+77	2026-10-20	0.00
+245	2026-10-20 18:58:26	Deposit	500000.00	500000.00	NULL	T20261020185826826163-M27RI4	500000.00
+TEST|PASS|statement trusted System|actual errno=0
+77	2026-10-20	0.00
+245	2026-10-20 18:58:26	Deposit	500000.00	500000.00	NULL	T20261020185826826163-M27RI4	500000.00
+TEST|PASS|statement customer own|actual errno=0
+TEST|PASS|statement customer foreign|expected errno=5010; actual errno=5010
+77	2026-10-20	0.00
+245	2026-10-20 18:58:26	Deposit	500000.00	500000.00	NULL	T20261020185826826163-M27RI4	500000.00
+TEST|PASS|statement teller own branch|actual errno=0
+TEST|PASS|statement teller foreign branch|expected errno=5010; actual errno=5010
+TEST|PASS|statement inactive teller|expected errno=5010; actual errno=5010
+77	2026-10-20	0.00
+245	2026-10-20 18:58:26	Deposit	500000.00	500000.00	NULL	T20261020185826826163-M27RI4	500000.00
+TEST|PASS|statement manager own branch|actual errno=0
+TEST|PASS|statement manager foreign branch|expected errno=5010; actual errno=5010
+TEST|PASS|statement inactive manager|expected errno=5010; actual errno=5010
+TEST|PASS|statement mapped DBA not servicing staff|expected errno=5010; actual errno=5010

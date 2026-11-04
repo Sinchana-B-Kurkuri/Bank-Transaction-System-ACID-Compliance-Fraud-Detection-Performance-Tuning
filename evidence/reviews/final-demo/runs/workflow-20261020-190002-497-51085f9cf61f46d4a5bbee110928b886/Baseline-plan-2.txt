@@ -1,0 +1,1 @@
+1	SIMPLE	Transaction_Approvals	NULL	ALL	NULL	NULL	NULL	NULL	1	100.00	Using where; Using filesort

@@ -1,0 +1,10 @@
+66	2026-10-20	0.00
+163	2026-10-20 18:58:56	Deposit	500000.00	500000.00	NULL	T20261020185856885016-M27SFA	500000.00
+TEST|PASS|statement success|actual errno=0
+66	2025-10-20	0.00
+163	2026-10-20 18:58:56	Deposit	500000.00	500000.00	NULL	T20261020185856885016-M27SFA	500000.00
+TEST|PASS|statement 366 inclusive days|actual errno=0
+TEST|PASS|statement too long|expected errno=5018; actual errno=5018
+TEST|PASS|statement reversed dates|expected errno=5018; actual errno=5018
+TEST|PASS|statement NULL date|expected errno=5018; actual errno=5018
+TEST|PASS|statement missing account|expected errno=5002; actual errno=5002

@@ -4,6 +4,7 @@ import datetime as dt
 import json
 from pathlib import Path
 import time
+from urllib.parse import urlparse
 from urllib import request, error
 
 
@@ -12,8 +13,9 @@ def main():
     p.add_argument("--url", default="http://127.0.0.1:5000")
     p.add_argument("--evidence-dir", required=True)
     a = p.parse_args()
-    if a.url != "http://127.0.0.1:5000":
-        p.error("This live runner uses the documented localhost5000 server only")
+    parsed = urlparse(a.url)
+    if parsed.scheme != "http" or parsed.hostname != "127.0.0.1" or parsed.username or parsed.password or parsed.path or parsed.query or parsed.fragment or not parsed.port or not 1024 <= parsed.port <= 65535:
+        p.error("Use an explicit unprivileged http://127.0.0.1:<port> owned dashboard")
     directory = Path(a.evidence_dir)
     directory.mkdir(parents=True, exist_ok=False)
     results = []

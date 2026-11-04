@@ -1,0 +1,2 @@
+NON-SECURITY DEMO: privileged connection; no least-privilege claim
+Use synthetic example.invalid identities and SYN- proof numbers only

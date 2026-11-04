@@ -1,0 +1,47 @@
+TEST|PASS|distance normal|equatorial degree
+TEST|PASS|distance same point|expected=0.000; actual=0.000
+TEST|PASS|distance NULL|missing coordinate
+TEST|PASS|distance antipodal|finite boundary
+TEST|PASS|zscore normal|expected=2.0000; actual=2.0000
+TEST|PASS|zscore negative|expected=-2.0000; actual=-2.0000
+TEST|PASS|zscore zero deviation|expected=0.0000; actual=0.0000
+TEST|PASS|zscore negative deviation|expected=0.0000; actual=0.0000
+TEST|PASS|zscore NULL|expected=0.0000; actual=0.0000
+TEST|PASS|odd hour 0559|expected=1; actual=1
+TEST|PASS|odd hour 0600|expected=0; actual=0
+TEST|PASS|odd hour 2159|expected=0; actual=0
+TEST|PASS|odd hour 2200|expected=1; actual=1
+TEST|PASS|odd hour NULL|expected=0; actual=0
+TEST|PASS|risk Low boundary|expected=Low; actual=Low
+TEST|PASS|risk Medium boundary|expected=Medium; actual=Medium
+TEST|PASS|risk High boundary|expected=High; actual=High
+TEST|PASS|risk Critical boundary|expected=Critical; actual=Critical
+TEST|PASS|risk NULL|expected=Low; actual=Low
+TEST|PASS|txn risk below 5000|expected=0.00; actual=0.00
+TEST|PASS|txn risk at 5000|expected=20.00; actual=20.00
+TEST|PASS|txn risk below 10000|expected=20.00; actual=20.00
+TEST|PASS|txn risk at 10000|expected=35.00; actual=35.00
+TEST|PASS|txn risk approved untrusted digital|expected=30.00; actual=30.00
+TEST|PASS|txn risk NULL inputs|expected=20.00; actual=20.00
+TEST|PASS|txn risk cap|expected=100.00; actual=100.00
+TEST|PASS|txn risk negative profile|expected=0.00; actual=0.00
+TEST|PASS|window NULL account|expected=0; actual=0
+TEST|PASS|window missing account|expected=0; actual=0
+TEST|PASS|window NULL time|expected=0; actual=0
+TEST|PASS|window zero minutes|expected=0; actual=0
+TEST|PASS|window NULL minutes|expected=0; actual=0
+TEST|PASS|age missing account|missing account
+TEST|PASS|age NULL account|NULL account
+TEST|PASS|age NULL time|NULL timestamp
+TEST|PASS|window exclusive start inclusive end|expected=2; actual=2
+TEST|PASS|window excludes future|expected=1; actual=1
+TEST|PASS|age same day|expected=0; actual=0
+TEST|PASS|age next day|expected=1; actual=1
+TEST|PASS|age before opening|expected=0; actual=0
+TEST|PASS|fraud signature fn_account_age_days|expected=int,int,datetime; actual=int,int,datetime
+TEST|PASS|fraud signature fn_amount_zscore|expected=decimal(10,4),decimal(14,2),decimal(14,4),decimal(14,4); actual=decimal(10,4),decimal(14,2),decimal(14,4),decimal(14,4)
+TEST|PASS|fraud signature fn_distance_km|expected=decimal(10,3),decimal(9,6),decimal(9,6),decimal(9,6),decimal(9,6); actual=decimal(10,3),decimal(9,6),decimal(9,6),decimal(9,6),decimal(9,6)
+TEST|PASS|fraud signature fn_is_odd_hour|expected=tinyint,datetime; actual=tinyint,datetime
+TEST|PASS|fraud signature fn_risk_level|expected=varchar(10),decimal(5,2); actual=varchar(10),decimal(5,2)
+TEST|PASS|fraud signature fn_txn_count_window|expected=int,int,datetime,int; actual=int,int,datetime,int
+TEST|PASS|fraud signature fn_txn_risk_score|expected=decimal(5,2),decimal(14,2),varchar(10),tinyint(1),decimal(5,2); actual=decimal(5,2),decimal(14,2),varchar(10),tinyint(1),decimal(5,2)
