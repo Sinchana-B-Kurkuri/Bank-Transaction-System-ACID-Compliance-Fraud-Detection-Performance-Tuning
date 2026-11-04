@@ -1,0 +1,25 @@
+TEST|PASS|open automatic number|Expected procedure contract
+TEST|PASS|open ledger balance|Expected procedure contract
+TEST|PASS|open minimum boundary|actual errno=0
+TEST|PASS|open explicit account number|actual errno=0
+TEST|PASS|open duplicate account number|expected errno=1062; actual errno=1062
+TEST|PASS|open invalid amount 0|expected errno=5001; actual errno=5001
+TEST|PASS|open invalid amount -1|expected errno=5001; actual errno=5001
+TEST|PASS|open invalid amount NULL|expected errno=5001; actual errno=5001
+TEST|PASS|open below minimum|expected errno=5004; actual errno=5004
+TEST|PASS|open missing customer|expected errno=5007; actual errno=5007
+TEST|PASS|open missing branch|expected errno=5007; actual errno=5007
+TEST|PASS|open missing type|expected errno=5007; actual errno=5007
+TEST|PASS|open empty account number|expected errno=5018; actual errno=5018
+TEST|PASS|open wrong branch teller|expected errno=5010; actual errno=5010
+TEST|PASS|open manager is not teller|expected errno=5010; actual errno=5010
+TEST|PASS|open inactive customer|expected errno=5011; actual errno=5011
+TEST|PASS|open other customer forbidden|expected errno=5010; actual errno=5010
+TEST|PASS|open NULL customer|expected errno=5007; actual errno=5007
+TEST|PASS|open NULL branch|expected errno=5007; actual errno=5007
+TEST|PASS|open NULL type|expected errno=5007; actual errno=5007
+TEST|PASS|open inactive employee|expected errno=5010; actual errno=5010
+TEST|PASS|open random number collision retries|actual errno=0
+TEST|PASS|open collision retry complete|Expected procedure contract
+TEST|PASS|open random collision exhaustion|expected errno=1062; actual errno=1062
+TEST|PASS|open collision exhaustion atomic|Expected procedure contract

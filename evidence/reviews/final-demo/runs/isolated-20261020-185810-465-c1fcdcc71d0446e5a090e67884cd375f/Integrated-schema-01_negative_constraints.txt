@@ -1,0 +1,57 @@
+TEST|PASS|duplicate customer email|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate customer phone|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate customer id proof|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate ifsc|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate employee email|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate account type|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate account number|expected errno=1062; actual errno=1062
+TEST|PASS|negative balance|expected errno=3819; actual errno=3819
+TEST|PASS|missing customer FK|expected errno=1452; actual errno=1452
+TEST|PASS|missing branch FK|expected errno=1452; actual errno=1452
+TEST|PASS|missing account type FK|expected errno=1452; actual errno=1452
+TEST|PASS|delete customer owning account|expected errno=1451; actual errno=1451
+TEST|PASS|duplicate reference|expected errno=1062; actual errno=1062
+TEST|PASS|invalid amount 0|expected errno=3819; actual errno=3819
+TEST|PASS|invalid amount -1|expected errno=3819; actual errno=3819
+TEST|PASS|duplicate transfer group type|expected errno=1062; actual errno=1062
+TEST|PASS|duplicate transaction rule|expected errno=1062; actual errno=1062
+TEST|PASS|risk score above 100|expected errno=3819; actual errno=3819
+TEST|PASS|invalid loan principal|expected errno=3819; actual errno=3819
+TEST|PASS|invalid loan principal negative|expected errno=3819; actual errno=3819
+TEST|PASS|invalid loan tenure|expected errno=3819; actual errno=3819
+TEST|PASS|invalid loan tenure negative|expected errno=3819; actual errno=3819
+TEST|PASS|invalid enum Employees.role|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Customers.id_proof_type|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Customers.kyc_status|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Accounts.status|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Transactions.transaction_type|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Transactions.channel|expected errno=1265; actual errno=1265
+TEST|PASS|invalid enum Transactions.status|expected errno=1265; actual errno=1265
+TEST|PASS|invalid loan enum|expected errno=1265; actual errno=1265
+TEST|PASS|invalid flag enum|expected errno=1265; actual errno=1265
+TEST|PASS|invalid audit action enum|expected errno=1265; actual errno=1265
+TEST|PASS|invalid audit actor enum|expected errno=1265; actual errno=1265
+TEST|PASS|audit actor CHECK Employee-NULL-NULL|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK Customer-NULL-NULL|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK System-@employee-NULL|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK System-NULL-@customer|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK Employee-@employee-@customer|expected errno=3819; actual errno=3819
+TEST|PASS|audit actor CHECK Customer-@employee-@customer|expected errno=3819; actual errno=3819
+TEST|PASS|missing device_id FK|expected errno=1452; actual errno=1452
+TEST|PASS|missing location_id FK|expected errno=1452; actual errno=1452
+TEST|PASS|NULL Accounts.customer_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Accounts.branch_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Accounts.account_type_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Accounts.balance|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Employees.branch_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Transactions.account_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Transactions.amount|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Transactions.balance_after|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Fraud_Flags.transaction_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Fraud_Flags.rule_id|expected errno=1048; actual errno=1048
+TEST|PASS|NULL Fraud_Flags.risk_score|expected errno=1048; actual errno=1048
+TEST|PASS|NULL loan customer|expected errno=1048; actual errno=1048
+TEST|PASS|NULL loan principal|expected errno=1048; actual errno=1048
+TEST|PASS|NULL loan interest rate|expected errno=1048; actual errno=1048
+TEST|PASS|NULL account type minimum|expected errno=1048; actual errno=1048
+TEST|PASS|NULL account type interest rate|expected errno=1048; actual errno=1048

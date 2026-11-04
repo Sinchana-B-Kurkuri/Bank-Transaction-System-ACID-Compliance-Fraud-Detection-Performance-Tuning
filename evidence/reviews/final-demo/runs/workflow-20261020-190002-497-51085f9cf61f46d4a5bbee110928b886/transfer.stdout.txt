@@ -1,0 +1,2 @@
+transfer_group_id	debit_txn_id	credit_txn_id
+6372ecc1-cc8a-11f1-8bcd-1cce51263d67	25	26

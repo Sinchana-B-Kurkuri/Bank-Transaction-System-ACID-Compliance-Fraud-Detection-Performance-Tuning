@@ -1,0 +1,1 @@
+SELECT owner_token FROM _error1222_owner;

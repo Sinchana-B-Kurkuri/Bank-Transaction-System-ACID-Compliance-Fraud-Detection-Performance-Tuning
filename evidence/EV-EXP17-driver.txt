@@ -1,0 +1,77 @@
+TEST|PASS|EXP17 total zz_a_audit_teller open|expected=3;actual=3
+TEST|PASS|EXP17 zz_a_audit_teller open Transactions|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_teller open Accounts|UPDATE|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_teller open Loans|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 zz_a_audit_teller open Accounts|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 actor zz_a_audit_teller open|mismatches=0
+TEST|PASS|EXP17 total zz_a_audit_teller deposit|expected=2;actual=2
+TEST|PASS|EXP17 zz_a_audit_teller deposit Transactions|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_teller deposit Accounts|UPDATE|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_teller deposit Loans|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 zz_a_audit_teller deposit Accounts|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 actor zz_a_audit_teller deposit|mismatches=0
+TEST|PASS|EXP17 total zz_a_audit_teller withdraw|expected=2;actual=2
+TEST|PASS|EXP17 zz_a_audit_teller withdraw Transactions|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_teller withdraw Accounts|UPDATE|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_teller withdraw Loans|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 zz_a_audit_teller withdraw Accounts|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 actor zz_a_audit_teller withdraw|mismatches=0
+TEST|PASS|EXP17 total zz_a_audit_teller transfer|expected=4;actual=4
+TEST|PASS|EXP17 zz_a_audit_teller transfer Transactions|INSERT|expected=2;actual=2
+TEST|PASS|EXP17 zz_a_audit_teller transfer Accounts|UPDATE|expected=2;actual=2
+TEST|PASS|EXP17 zz_a_audit_teller transfer Loans|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 zz_a_audit_teller transfer Accounts|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 actor zz_a_audit_teller transfer|mismatches=0
+TEST|PASS|EXP17 total zz_a_audit_teller loan|expected=3;actual=3
+TEST|PASS|EXP17 zz_a_audit_teller loan Transactions|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_teller loan Accounts|UPDATE|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_teller loan Loans|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_teller loan Accounts|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 actor zz_a_audit_teller loan|mismatches=0
+TEST|PASS|EXP17 total zz_a_audit_customer open|expected=3;actual=3
+TEST|PASS|EXP17 zz_a_audit_customer open Transactions|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_customer open Accounts|UPDATE|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_customer open Loans|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 zz_a_audit_customer open Accounts|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 actor zz_a_audit_customer open|mismatches=0
+TEST|PASS|EXP17 total zz_a_audit_customer deposit|expected=2;actual=2
+TEST|PASS|EXP17 zz_a_audit_customer deposit Transactions|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_customer deposit Accounts|UPDATE|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_customer deposit Loans|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 zz_a_audit_customer deposit Accounts|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 actor zz_a_audit_customer deposit|mismatches=0
+TEST|PASS|EXP17 total zz_a_audit_customer withdraw|expected=2;actual=2
+TEST|PASS|EXP17 zz_a_audit_customer withdraw Transactions|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_customer withdraw Accounts|UPDATE|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_customer withdraw Loans|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 zz_a_audit_customer withdraw Accounts|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 actor zz_a_audit_customer withdraw|mismatches=0
+TEST|PASS|EXP17 total zz_a_audit_customer transfer|expected=4;actual=4
+TEST|PASS|EXP17 zz_a_audit_customer transfer Transactions|INSERT|expected=2;actual=2
+TEST|PASS|EXP17 zz_a_audit_customer transfer Accounts|UPDATE|expected=2;actual=2
+TEST|PASS|EXP17 zz_a_audit_customer transfer Loans|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 zz_a_audit_customer transfer Accounts|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 actor zz_a_audit_customer transfer|mismatches=0
+TEST|PASS|EXP17 total zz_a_audit_customer loan|expected=3;actual=3
+TEST|PASS|EXP17 zz_a_audit_customer loan Transactions|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_customer loan Accounts|UPDATE|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_customer loan Loans|INSERT|expected=1;actual=1
+TEST|PASS|EXP17 zz_a_audit_customer loan Accounts|INSERT|expected=0;actual=0
+TEST|PASS|EXP17 actor zz_a_audit_customer loan|mismatches=0
+TEST|PASS|EXP17 transaction JSON snapshots|expected=0; actual=0
+TEST|PASS|EXP17 account JSON chain|expected=0; actual=0
+TEST|PASS|EXP17 direct loan INSERT UPDATE DELETE count|expected=3; actual=3
+TEST|PASS|EXP17 direct loan JSON and actor|All three mutation snapshots and System attribution
+TEST|PASS|EXP17 direct account balance JSON|DBA +1 produces one exact before/after snapshot
+TEST|PASS|EXP17 direct transaction JSON|DBA direct deposit audited
+TEST|PASS|EXP17 guard rejected no mutation|expected errno=5015; actual errno=5015
+TEST|PASS|EXP17 rejected statement creates zero audit rows|expected=391; actual=391
+TEST|PASS|EXP17 audit UPDATE immutable|expected errno=5013; actual errno=5013
+TEST|PASS|EXP17 audit DELETE immutable|expected errno=5013; actual errno=5013
+TEST|PASS|EXP17 DBA total audit delta|expected=5; actual=5
+TEST|PASS|EXP17 pre-watermark row has no audit|expected=0; actual=0
+TEST|PASS|EXP17 honest limit and D5|Missing audit proved; recreated triggers; all six invariants PASS with new watermark
+TEST|PASS|EXP17 identity cleanup|users=0;maps=0
+LOCALLY TESTED: procedure audit counts, JSON, identities, rejected DML and immutability assertions passed.
+LOCALLY TESTED: DBA-disabled trigger gap demonstrated; D5 watermark respected; six invariants PASS.
+Temporary users and mappings removed in finally. See EV-EXP17-counts.md and EV-EXP17-json.txt.

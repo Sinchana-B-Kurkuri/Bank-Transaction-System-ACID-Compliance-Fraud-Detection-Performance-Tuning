@@ -1,0 +1,15 @@
+TEST|PASS|request unmapped System denied|expected errno=5010; actual errno=5010
+TEST|PASS|request Customer success|actual errno=0
+TEST|PASS|request no money moves|Expected procedure contract
+TEST|PASS|request amount 0|expected errno=5001; actual errno=5001
+TEST|PASS|request amount -1|expected errno=5001; actual errno=5001
+TEST|PASS|request amount NULL|expected errno=5001; actual errno=5001
+TEST|PASS|request missing account|expected errno=5002; actual errno=5002
+TEST|PASS|request same account|expected errno=5005; actual errno=5005
+TEST|PASS|request mismatched actor id|expected errno=5010; actual errno=5010
+TEST|PASS|request both actors|expected errno=5010; actual errno=5010
+TEST|PASS|request Frozen account|expected errno=5003; actual errno=5003
+TEST|PASS|request Employee success|actual errno=0
+TEST|PASS|request employee identity|Expected procedure contract
+TEST|PASS|request employee wrong branch|expected errno=5010; actual errno=5010
+TEST|PASS|request Closed account|expected errno=5003; actual errno=5003

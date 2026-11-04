@@ -1,0 +1,19 @@
+TEST|PASS|EXP17 direct loan INSERT UPDATE DELETE count|expected=3; actual=3
+TEST|PASS|EXP17 direct loan JSON and actor|All three mutation snapshots and System attribution
+TEST|PASS|EXP17 direct account balance JSON|DBA +1 produces one exact before/after snapshot
+TEST|PASS|EXP17 direct transaction JSON|DBA direct deposit audited
+TEST|PASS|EXP17 guard rejected no mutation|expected errno=5015; actual errno=5015
+TEST|PASS|EXP17 rejected statement creates zero audit rows|expected=391; actual=391
+TEST|PASS|EXP17 audit UPDATE immutable|expected errno=5013; actual errno=5013
+TEST|PASS|EXP17 audit DELETE immutable|expected errno=5013; actual errno=5013
+TEST|PASS|EXP17 DBA total audit delta|expected=5; actual=5
+AUDIT_COUNT|Accounts|UPDATE|1
+AUDIT_COUNT|Loans|INSERT|1
+AUDIT_COUNT|Loans|UPDATE|1
+AUDIT_COUNT|Loans|DELETE|1
+AUDIT_COUNT|Transactions|INSERT|1
+AUDIT_JSON|{"audit_id": 387, "new_value": {"status": "Active", "loan_id": 4, "customer_id": 8, "interest_rate": 1.00, "tenure_months": 12, "disbursed_date": "2026-10-18", "principal_amount": 100.00, "disbursement_account_id": null}, "old_value": null, "actor_type": "System", "table_name": "Loans", "action_type": "INSERT", "db_session_user": "root@localhost"}
+AUDIT_JSON|{"audit_id": 388, "new_value": {"status": "Closed", "loan_id": 4, "customer_id": 8, "interest_rate": 1.00, "tenure_months": 12, "disbursed_date": "2026-10-18", "principal_amount": 100.00, "disbursement_account_id": null}, "old_value": {"status": "Active", "loan_id": 4, "customer_id": 8, "interest_rate": 1.00, "tenure_months": 12, "disbursed_date": "2026-10-18", "principal_amount": 100.00, "disbursement_account_id": null}, "actor_type": "System", "table_name": "Loans", "action_type": "UPDATE", "db_session_user": "root@localhost"}
+AUDIT_JSON|{"audit_id": 389, "new_value": null, "old_value": {"status": "Closed", "loan_id": 4, "customer_id": 8, "interest_rate": 1.00, "tenure_months": 12, "disbursed_date": "2026-10-18", "principal_amount": 100.00, "disbursement_account_id": null}, "actor_type": "System", "table_name": "Loans", "action_type": "DELETE", "db_session_user": "root@localhost"}
+AUDIT_JSON|{"audit_id": 390, "new_value": {"status": "Active", "balance": 500001.00, "branch_id": 1, "account_id": 111, "customer_id": 8, "opened_date": "2026-10-18", "account_number": "AC5055523053", "account_type_id": 1}, "old_value": {"status": "Active", "balance": 500000.00, "branch_id": 1, "account_id": 111, "customer_id": 8, "opened_date": "2026-10-18", "account_number": "AC5055523053", "account_type_id": 1}, "actor_type": "System", "table_name": "Accounts", "action_type": "UPDATE", "db_session_user": "root@localhost"}
+AUDIT_JSON|{"audit_id": 391, "new_value": {"amount": 1.00, "status": "Completed", "channel": "Online", "device_id": null, "account_id": 111, "employee_id": null, "location_id": null, "reference_no": "T20261018231818759552-M26U97", "balance_after": 500001.00, "transaction_id": 136, "transaction_type": "Deposit", "transfer_group_id": null, "related_account_id": null, "transaction_timestamp": "2026-10-18 23:18:18.000000"}, "old_value": null, "actor_type": "System", "table_name": "Transactions", "action_type": "INSERT", "db_session_user": "root@localhost"}

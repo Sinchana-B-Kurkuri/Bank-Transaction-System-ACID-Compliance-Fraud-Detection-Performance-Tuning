@@ -1,0 +1,9 @@
+account_id	account_number	customer_id	branch_id	balance	status
+1	SEED-0001	1	1	300207.00	Active
+2	SEED-0002	2	2	200089.00	Active
+3	SEED-0003	3	1	15113.00	Active
+4	SEED-0004	4	2	5114.00	Active
+5	SEED-0005	5	1	5115.00	Active
+6	SEED-0006	6	2	5000.00	Frozen
+7	SEED-0007	1	1	15000.00	Active
+8	SEED-0008	2	2	10000.00	Active

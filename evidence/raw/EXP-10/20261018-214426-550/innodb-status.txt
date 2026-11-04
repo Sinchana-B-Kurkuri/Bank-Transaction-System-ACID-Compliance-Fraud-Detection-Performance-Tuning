@@ -1,0 +1,229 @@
+InnoDB		
+=====================================
+2026-10-18 21:44:33 0x4eb0 INNODB MONITOR OUTPUT
+=====================================
+Per second averages calculated from the last 17 seconds
+-----------------
+BACKGROUND THREAD
+-----------------
+srv_master_thread loops: 705 srv_active, 0 srv_shutdown, 31007 srv_idle
+srv_master_thread log flush and writes: 0
+----------
+SEMAPHORES
+----------
+OS WAIT ARRAY INFO: reservation count 15115
+OS WAIT ARRAY INFO: signal count 14664
+RW-shared spins 0, rounds 0, OS waits 0
+RW-excl spins 0, rounds 0, OS waits 0
+RW-sx spins 0, rounds 0, OS waits 0
+Spin rounds per wait: 0.00 RW-shared, 0.00 RW-excl, 0.00 RW-sx
+------------------------
+LATEST FOREIGN KEY ERROR
+------------------------
+2026-10-18 21:42:57 0x4d74 Transaction:
+TRANSACTION 91099, ACTIVE 0 sec inserting, thread declared inside InnoDB 5000
+mysql tables in use 5, locked 5
+3 lock struct(s), heap size 1128, 1 row lock(s), undo log entries 1
+MySQL thread id 1663, OS thread handle 19828, query id 982977 localhost 127.0.0.1 root
+INSERT INTO bank_txn.Transactions(account_id,transaction_type,amount,balance_after,channel,status,reference_no) VALUES(-1,'Deposit',1,1,'Online','Completed',LEFT(UUID(),30))
+Foreign key constraint fails for table `bank_txn`.`transactions`:
+,
+  CONSTRAINT `fk_transactions_account_id` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+Trying to add in child table, in index fk_transactions_account_id tuple:
+DATA TUPLE: 2 fields;
+ 0: len 4; hex 7fffffff; asc     ;;
+ 1: len 8; hex 8000000000000080; asc         ;;
+
+But in parent table `bank_txn`.`accounts`, in index PRIMARY,
+the closest match we can find is record:
+PHYSICAL RECORD: n_fields 10; compact format; info bits 0
+ 0: len 4; hex 80000001; asc     ;;
+ 1: len 6; hex 000000016104; asc     a ;;
+ 2: len 7; hex 01000001921834; asc       4;;
+ 3: len 4; hex 80000001; asc     ;;
+ 4: len 4; hex 80000001; asc     ;;
+ 5: len 4; hex 80000001; asc     ;;
+ 6: len 9; hex 534545442d30303031; asc SEED-0001;;
+ 7: len 7; hex 8000000494af00; asc        ;;
+ 8: len 1; hex 01; asc  ;;
+ 9: len 3; hex 8fd552; asc   R;;
+
+------------------------
+LATEST DETECTED DEADLOCK
+------------------------
+2026-10-18 21:44:30 0x1bf8
+*** (1) TRANSACTION:
+TRANSACTION 283447725071624, ACTIVE 3 sec starting index read
+mysql tables in use 2, locked 2
+LOCK WAIT 3 lock struct(s), heap size 1128, 2 row lock(s)
+MySQL thread id 1775, OS thread handle 19828, query id 1155312 localhost 127.0.0.1 root statistics
+CALL sp_internal_post_transfer(p_from_account_id,p_to_account_id,p_amount,p_channel,p_employee_id,p_device_id,p_location_id,p_lab_mode,0,p_transfer_group_id,p_debit_txn_id,p_credit_txn_id)
+
+*** (1) HOLDS THE LOCK(S):
+RECORD LOCKS space id 2589 page no 4 n bits 176 index PRIMARY of table `bank_txn`.`accounts` trx id 283447725071624 lock mode S locks rec but not gap
+Record lock, heap no 11 PHYSICAL RECORD: n_fields 10; compact format; info bits 0
+ 0: len 4; hex 8000000a; asc     ;;
+ 1: len 6; hex 0000000189c5; asc       ;;
+ 2: len 7; hex 020000014d0614; asc     M  ;;
+ 3: len 4; hex 80000007; asc     ;;
+ 4: len 4; hex 80000001; asc     ;;
+ 5: len 4; hex 80000001; asc     ;;
+ 6: len 8; hex 4c41422d30303032; asc LAB-0002;;
+ 7: len 7; hex 8000000f424000; asc     B@ ;;
+ 8: len 1; hex 01; asc  ;;
+ 9: len 3; hex 8fd552; asc   R;;
+
+
+*** (1) WAITING FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 2589 page no 4 n bits 176 index PRIMARY of table `bank_txn`.`accounts` trx id 283447725071624 lock mode S locks rec but not gap waiting
+Record lock, heap no 10 PHYSICAL RECORD: n_fields 10; compact format; info bits 0
+ 0: len 4; hex 80000009; asc     ;;
+ 1: len 6; hex 0000000189c3; asc       ;;
+ 2: len 7; hex 01000001732d12; asc     s- ;;
+ 3: len 4; hex 80000007; asc     ;;
+ 4: len 4; hex 80000001; asc     ;;
+ 5: len 4; hex 80000001; asc     ;;
+ 6: len 8; hex 4c41422d30303031; asc LAB-0001;;
+ 7: len 7; hex 8000000f424000; asc     B@ ;;
+ 8: len 1; hex 01; asc  ;;
+ 9: len 3; hex 8fd552; asc   R;;
+
+
+*** (2) TRANSACTION:
+TRANSACTION 101008, ACTIVE 3 sec starting index read
+mysql tables in use 1, locked 1
+LOCK WAIT 5 lock struct(s), heap size 1128, 4 row lock(s)
+MySQL thread id 1774, OS thread handle 15100, query id 1158433 localhost 127.0.0.1 root statistics
+SELECT account_id INTO v_lock FROM Accounts WHERE account_id=v_second FOR UPDATE
+
+*** (2) HOLDS THE LOCK(S):
+RECORD LOCKS space id 2589 page no 4 n bits 176 index PRIMARY of table `bank_txn`.`accounts` trx id 101008 lock_mode X locks rec but not gap
+Record lock, heap no 10 PHYSICAL RECORD: n_fields 10; compact format; info bits 0
+ 0: len 4; hex 80000009; asc     ;;
+ 1: len 6; hex 0000000189c3; asc       ;;
+ 2: len 7; hex 01000001732d12; asc     s- ;;
+ 3: len 4; hex 80000007; asc     ;;
+ 4: len 4; hex 80000001; asc     ;;
+ 5: len 4; hex 80000001; asc     ;;
+ 6: len 8; hex 4c41422d30303031; asc LAB-0001;;
+ 7: len 7; hex 8000000f424000; asc     B@ ;;
+ 8: len 1; hex 01; asc  ;;
+ 9: len 3; hex 8fd552; asc   R;;
+
+
+*** (2) WAITING FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 2589 page no 4 n bits 176 index PRIMARY of table `bank_txn`.`accounts` trx id 101008 lock_mode X locks rec but not gap waiting
+Record lock, heap no 11 PHYSICAL RECORD: n_fields 10; compact format; info bits 0
+ 0: len 4; hex 8000000a; asc     ;;
+ 1: len 6; hex 0000000189c5; asc       ;;
+ 2: len 7; hex 020000014d0614; asc     M  ;;
+ 3: len 4; hex 80000007; asc     ;;
+ 4: len 4; hex 80000001; asc     ;;
+ 5: len 4; hex 80000001; asc     ;;
+ 6: len 8; hex 4c41422d30303032; asc LAB-0002;;
+ 7: len 7; hex 8000000f424000; asc     B@ ;;
+ 8: len 1; hex 01; asc  ;;
+ 9: len 3; hex 8fd552; asc   R;;
+
+*** WE ROLL BACK TRANSACTION (1)
+------------
+TRANSACTIONS
+------------
+Trx id counter 102147
+Purge done for trx's n:o < 102147 undo n:o < 0 state: running but idle
+History list length 258
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 283447725070848, not started
+0 lock struct(s), heap size 1128, 0 row lock(s)
+---TRANSACTION 283447725070072, not started
+0 lock struct(s), heap size 1128, 0 row lock(s)
+---TRANSACTION 283447725069296, not started
+0 lock struct(s), heap size 1128, 0 row lock(s)
+--------
+FILE I/O
+--------
+I/O thread 0 state: wait Windows aio (insert buffer thread)
+I/O thread 1 state: wait Windows aio (read thread)
+I/O thread 2 state: wait Windows aio (read thread)
+I/O thread 3 state: wait Windows aio (read thread)
+I/O thread 4 state: wait Windows aio (read thread)
+I/O thread 5 state: wait Windows aio (read thread)
+I/O thread 6 state: wait Windows aio (read thread)
+I/O thread 7 state: wait Windows aio (read thread)
+I/O thread 8 state: wait Windows aio (read thread)
+I/O thread 9 state: wait Windows aio (read thread)
+I/O thread 10 state: wait Windows aio (write thread)
+I/O thread 11 state: wait Windows aio (write thread)
+I/O thread 12 state: wait Windows aio (write thread)
+I/O thread 13 state: wait Windows aio (write thread)
+Pending normal aio reads: [0, 0, 0, 0, 0, 0, 0, 0, 0] , aio writes: [0, 0, 0, 0] ,
+ ibuf aio reads:
+Pending flushes (fsync) log: 0; buffer pool: 0
+915 OS file reads, 322375 OS file writes, 139413 OS fsyncs
+0.00 reads/s, 0 avg bytes/read, 416.65 writes/s, 191.90 fsyncs/s
+-------------------------------------
+INSERT BUFFER AND ADAPTIVE HASH INDEX
+-------------------------------------
+Ibuf: size 1, free list len 0, seg size 2, 0 merges
+merged operations:
+ insert 0, delete mark 0, delete 0
+discarded operations:
+ insert 0, delete mark 0, delete 0
+Hash table size 34679, node heap has 0 buffer(s)
+Hash table size 34679, node heap has 0 buffer(s)
+Hash table size 34679, node heap has 0 buffer(s)
+Hash table size 34679, node heap has 0 buffer(s)
+Hash table size 34679, node heap has 0 buffer(s)
+Hash table size 34679, node heap has 0 buffer(s)
+Hash table size 34679, node heap has 0 buffer(s)
+Hash table size 34679, node heap has 0 buffer(s)
+0.00 hash searches/s, 5760.48 non-hash searches/s
+---
+LOG
+---
+Log capacity                 104857600
+Log capacity used            104857600
+Log sequence number          327751375
+Log buffer assigned up to    327751375
+Log buffer completed up to   327751375
+Log written up to            327751375
+Log flushed up to            327751375
+Added dirty pages up to      327751375
+Pages flushed up to          323417632
+Last checkpoint at           323414930
+Log minimum file id is       93
+Log maximum file id is       100
+161596 log i/o's done, 215.06 log i/o's/second
+----------------------
+BUFFER POOL AND MEMORY
+----------------------
+Total large memory allocated 0
+Dictionary memory allocated 1057390
+Buffer pool size   8191
+Free buffers       1087
+Database pages     7104
+Old database pages 2614
+Modified db pages  732
+Pending reads      0
+Pending writes: LRU 0, flush list 0, single page 0
+Pages made young 8011, not young 70340
+2.00 youngs/s, 94.71 non-youngs/s
+Pages read 890, created 20185, written 143808
+0.00 reads/s, 27.56 creates/s, 179.21 writes/s
+Buffer pool hit rate 1000 / 1000, young-making rate 0 / 1000 not 5 / 1000
+Pages read ahead 0.00/s, evicted without access 0.00/s, Random read ahead 0.00/s
+LRU len: 7104, unzip_LRU len: 0
+I/O sum[5357]:cur[49], unzip sum[0]:cur[0]
+--------------
+ROW OPERATIONS
+--------------
+0 queries inside InnoDB, 0 queries in queue
+0 read views open inside InnoDB
+Process ID=8056, Main thread ID=10968 , state=sleeping
+Number of rows inserted 58609, updated 7439, deleted 214, read 825988
+71.05 inserts/s, 14.47 updates/s, 0.00 deletes/s, 484.56 reads/s
+Number of system rows inserted 139198, updated 617268, deleted 132308, read 1398942
+196.40 inserts/s, 841.95 updates/s, 189.11 deletes/s, 1835.30 reads/s
+----------------------------
+END OF INNODB MONITOR OUTPUT
+============================

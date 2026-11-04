@@ -1,0 +1,1 @@
+1	SIMPLE	Fraud_Flags	NULL	ALL	NULL	NULL	NULL	NULL	132	50.00	Using where; Using filesort

@@ -1,0 +1,3 @@
+TEST|PASS|ordered locking missing high destination|expected errno=5002; actual errno=5002
+TEST|PASS|ordered locking missing high source|expected errno=5002; actual errno=5002
+TEST|PASS|missing second lock rolls back without ledger or audit writes|5002 preserves balances, ledger (including Failed rows) and audit counts

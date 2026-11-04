@@ -1,0 +1,10 @@
+RESULT|EXP-03|prepared|committed=100|uncommitted_connection=6457|client_pid=17520|expires_after_seconds=600
+Expected exactly one MySQL service and mysqld process; resolve ambiguity manually.
+At C:\Users\sinch\Desktop\DBS\DBS Project\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\ex
+periments\EXP-03_durability\kill_and_restart.ps1:7 char:52
++ ... ount -ne 1){throw 'Expected exactly one MySQL service and mysqld proc ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Expected exactl...guity manually.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Expected exactly one MySQL service and mysqld process; resolve ambiguity manually.
+ 
+RESULT|EXP-03|teardown|own sleeping connection removed; no server crash executed

@@ -1,0 +1,2 @@
+TEST|PASS|EXP17 pre-watermark row has no audit|expected=0; actual=0
+{"db": "bank_txn_scratch", "audit_max_id": 386, "installed_at": "2026-10-18 23:04:47.210000", "loans_max_id": 5, "accounts_max_id": 113, "transactions_max_id": 137}

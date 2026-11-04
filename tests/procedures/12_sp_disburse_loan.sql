@@ -1,0 +1,28 @@
+SOURCE tests/procedures/support/fixture.sql;
+SET @p3_old=(SELECT balance FROM Accounts WHERE account_id=@p3_a);
+CALL bank_lab.sp_expect_ok(DATABASE(),'loan routed','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,1000,6,12,NULL,@p3_loan)');
+SET @p3_ok=(SELECT principal_amount=1000 AND status='Active' AND disbursement_account_id=@p3_a AND (SELECT balance FROM Accounts WHERE account_id=@p3_a)=@p3_old+1000 FROM Loans WHERE loan_id=@p3_loan);
+CALL bank_lab.sp_assert_true(DATABASE(),'loan Deposit credit',@p3_ok,'Expected procedure contract');
+CALL bank_lab.sp_expect_ok(DATABASE(),'loan unrouted','CALL {db}.sp_disburse_loan(@p3_c1,NULL,1000,6,12,NULL,@p3_loan)');
+SET @p3_ok=(SELECT disbursement_account_id IS NULL FROM Loans WHERE loan_id=@p3_loan);
+CALL bank_lab.sp_assert_true(DATABASE(),'loan NULL route',@p3_ok,'Expected procedure contract');
+CALL bank_lab.sp_expect_error(DATABASE(),'loan principal 0','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,0,6,12,NULL,@p3_loan)',5001);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan principal -1','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,-1,6,12,NULL,@p3_loan)',5001);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan principal NULL','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,NULL,6,12,NULL,@p3_loan)',5001);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan negative rate','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,1000,-1,12,NULL,@p3_loan)',5018);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan NULL rate','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,1000,NULL,12,NULL,@p3_loan)',5018);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan zero tenure','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,1000,6,0,NULL,@p3_loan)',5018);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan NULL tenure','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,1000,6,NULL,NULL,@p3_loan)',5018);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan missing customer','CALL {db}.sp_disburse_loan(-1,@p3_a,1000,6,12,NULL,@p3_loan)',5007);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan missing route','CALL {db}.sp_disburse_loan(@p3_c1,-1,1000,6,12,NULL,@p3_loan)',5007);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan wrong owner','CALL {db}.sp_disburse_loan(@p3_c1,@p3_b,1000,6,12,NULL,@p3_loan)',5010);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan wrong branch employee','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,1000,6,12,@p3_t2,@p3_loan)',5010);
+CALL bank_lab.sp_expect_ok(DATABASE(),'loan Branch teller','CALL {db}.sp_disburse_loan(@p3_c1,@p3_a,1000,6,12,@p3_t1,@p3_loan)');
+CALL sp_set_account_status(@p3_b,'Frozen',@p3_t2);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan Frozen route','CALL {db}.sp_disburse_loan(@p3_c2,@p3_b,1000,6,12,NULL,@p3_loan)',5003);
+CALL sp_set_account_status(@p3_b,'Active',@p3_t2);
+CALL sp_close_account(@p3_b,NULL,1);
+CALL sp_update_customer(@p3_c2,NULL,NULL,NULL,NULL,NULL,0);
+CALL bank_lab.sp_expect_error(DATABASE(),'loan inactive customer','CALL {db}.sp_disburse_loan(@p3_c2,NULL,1000,6,12,NULL,@p3_loan)',5011);
+
+SOURCE tests/procedures/support/extra_12_sp_disburse_loan.sql;

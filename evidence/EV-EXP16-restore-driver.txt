@@ -1,0 +1,3 @@
+RESULT|EXP-16|dump-only|PASS (JSON-normalized; native checksum differs)
+RESULT|EXP-16|before-loss|NEEDS MANUAL VERIFICATION
+RESULT|EXP-16|before-oops|NEEDS MANUAL VERIFICATION

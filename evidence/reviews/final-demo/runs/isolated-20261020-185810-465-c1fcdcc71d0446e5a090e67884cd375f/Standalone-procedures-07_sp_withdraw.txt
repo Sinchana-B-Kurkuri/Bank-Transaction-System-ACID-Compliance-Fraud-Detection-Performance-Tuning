@@ -1,0 +1,18 @@
+TEST|PASS|withdraw success|actual errno=0
+TEST|PASS|withdraw output and ledger|Expected procedure contract
+TEST|PASS|withdraw Branch|actual errno=0
+TEST|PASS|withdraw amount 0|expected errno=5001; actual errno=5001
+TEST|PASS|withdraw amount -1|expected errno=5001; actual errno=5001
+TEST|PASS|withdraw amount NULL|expected errno=5001; actual errno=5001
+TEST|PASS|withdraw missing account|expected errno=5002; actual errno=5002
+TEST|PASS|withdraw insufficient funds|expected errno=5004; actual errno=5004
+TEST|PASS|withdraw exact minimum boundary|actual errno=0
+TEST|PASS|withdraw retained minimum|Expected procedure contract
+TEST|PASS|withdraw below minimum|expected errno=5004; actual errno=5004
+TEST|PASS|withdraw exactly one Failed|Expected procedure contract
+TEST|PASS|withdraw wrong branch|expected errno=5010; actual errno=5010
+TEST|PASS|withdraw non-branch employee|expected errno=5010; actual errno=5010
+TEST|PASS|withdraw invalid channel|expected errno=5018; actual errno=5018
+TEST|PASS|withdraw Frozen|expected errno=5003; actual errno=5003
+TEST|PASS|withdraw spoofed employee|expected errno=5010; actual errno=5010
+TEST|PASS|withdraw Closed|expected errno=5003; actual errno=5003

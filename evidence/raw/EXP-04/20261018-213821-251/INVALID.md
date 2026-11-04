@@ -1,0 +1,1 @@
+REJECTED: driver indexed a scalar PowerShell string, so reported actual balance was its first character. Raw server sessions are retained; do not use this report in the matrix. Superseded by corrected measured runs.

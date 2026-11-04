@@ -1,0 +1,54 @@
+{
+    "Tables":  [
+                   {
+                       "Table":  "Branches",
+                       "Checksum":  "3820862213",
+                       "Rows":  3
+                   },
+                   {
+                       "Table":  "Employees",
+                       "Checksum":  "3343467282",
+                       "Rows":  5
+                   },
+                   {
+                       "Table":  "Customers",
+                       "Checksum":  "4187877886",
+                       "Rows":  7
+                   },
+                   {
+                       "Table":  "Account_Types",
+                       "Checksum":  "3543379354",
+                       "Rows":  3
+                   },
+                   {
+                       "Table":  "Accounts",
+                       "Checksum":  "1031837710",
+                       "Rows":  108
+                   },
+                   {
+                       "Table":  "Transactions",
+                       "Checksum":  "3351280955",
+                       "Rows":  622
+                   },
+                   {
+                       "Table":  "Loans",
+                       "Checksum":  "0",
+                       "Rows":  0
+                   },
+                   {
+                       "Table":  "Fraud_Flags",
+                       "Checksum":  "0",
+                       "Rows":  0
+                   },
+                   {
+                       "Table":  "Audit_Log",
+                       "Checksum":  "3580167472",
+                       "Rows":  1355
+                   }
+               ],
+    "Time":  "2026-10-18T23:02:57.543555",
+    "Position":  {
+                     "File":  "LAPTOP-TEKJAJEQ-bin.000009",
+                     "Position":  843553
+                 }
+}

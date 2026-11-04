@@ -1,0 +1,9 @@
+619	DEADLOCK_RETRY	{"attempt": 1, "to_account": 9, "from_account": 10}
+620	DEADLOCK_RETRY	{"attempt": 1, "to_account": 10, "from_account": 9}
+621	DEADLOCK_RETRY	{"attempt": 1, "to_account": 9, "from_account": 10}
+622	DEADLOCK_RETRY	{"attempt": 2, "to_account": 9, "from_account": 10}
+623	DEADLOCK_RETRY	{"attempt": 3, "to_account": 9, "from_account": 10}
+624	DEADLOCK_RETRY	{"attempt": 1, "to_account": 10, "from_account": 9}
+625	DEADLOCK_RETRY	{"attempt": 1, "to_account": 9, "from_account": 10}
+626	DEADLOCK_RETRY	{"attempt": 1, "to_account": 9, "from_account": 10}
+627	DEADLOCK_RETRY	{"attempt": 1, "to_account": 10, "from_account": 9}

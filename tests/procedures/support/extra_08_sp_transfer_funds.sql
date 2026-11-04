@@ -1,0 +1,15 @@
+CALL sp_open_account(@p3_c1,@p3_b1,@p3_type,2000,NULL,NULL,@p3_context,@p3_number);
+INSERT INTO Devices(customer_id,device_fingerprint,device_type,first_seen_at,last_seen_at) VALUES(@p3_c1,SHA2(CONCAT(@p3_tag,'context'),256),'Synthetic',NOW(),NOW());
+SET @p3_device=LAST_INSERT_ID();
+INSERT INTO Locations(city,country,latitude,longitude) VALUES('Synthetic','Synthetic',0,0);
+SET @p3_location=LAST_INSERT_ID();
+CALL bank_lab.sp_expect_ok(DATABASE(),'transfer device context debit only','CALL {db}.sp_transfer_funds(@p3_context,@p3_low,1,''Mobile'',NULL,@p3_device,@p3_location,0,@p3_group,@p3_debit,@p3_credit)');
+SET @p3_ok=(SELECT COUNT(*)=2 AND SUM(transaction_type='TransferOut' AND device_id=@p3_device AND location_id=@p3_location)=1 AND SUM(transaction_type='TransferIn' AND device_id IS NULL AND location_id IS NULL)=1 FROM Transactions WHERE transfer_group_id=@p3_group);
+CALL bank_lab.sp_assert_true(DATABASE(),'transfer credit context NULL',@p3_ok,'Expected procedure contract');
+CALL bank_lab.sp_expect_error(DATABASE(),'transfer NULL from','CALL {db}.sp_transfer_funds(NULL,@p3_low,1,''Online'',NULL,NULL,NULL,0,@p3_group,@p3_debit,@p3_credit)',5002);
+CALL bank_lab.sp_expect_error(DATABASE(),'transfer NULL to','CALL {db}.sp_transfer_funds(@p3_context,NULL,1,''Online'',NULL,NULL,NULL,0,@p3_group,@p3_debit,@p3_credit)',5002);
+CALL bank_lab.sp_expect_error(DATABASE(),'transfer NULL lab mode','CALL {db}.sp_transfer_funds(@p3_context,@p3_low,1,''Online'',NULL,NULL,NULL,NULL,@p3_group,@p3_debit,@p3_credit)',5018);
+CALL sp_set_account_status(@p3_context,'Frozen',@p3_t1);
+CALL bank_lab.sp_expect_error(DATABASE(),'transfer Frozen source','CALL {db}.sp_transfer_funds(@p3_context,@p3_low,1,''Online'',NULL,NULL,NULL,0,@p3_group,@p3_debit,@p3_credit)',5003);
+CALL sp_close_account(@p3_context,NULL,1);
+CALL bank_lab.sp_expect_error(DATABASE(),'transfer Closed source','CALL {db}.sp_transfer_funds(@p3_context,@p3_low,1,''Online'',NULL,NULL,NULL,0,@p3_group,@p3_debit,@p3_credit)',5003);

@@ -1,0 +1,3 @@
+TOTAL|PASS=41|FAIL=0
+Database=bank_a_ci_demo_a99a890cc80b_main
+No restricted-role certification; no global settings changed.

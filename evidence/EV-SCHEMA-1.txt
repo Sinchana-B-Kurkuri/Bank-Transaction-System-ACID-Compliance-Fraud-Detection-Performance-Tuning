@@ -1,0 +1,113 @@
+*************************** 1. row ***************************
+Transactions
+CREATE TABLE `transactions` (
+  `transaction_id` bigint NOT NULL AUTO_INCREMENT,
+  `account_id` int NOT NULL,
+  `related_account_id` int DEFAULT NULL,
+  `employee_id` int DEFAULT NULL,
+  `transfer_group_id` char(36) DEFAULT NULL,
+  `device_id` int DEFAULT NULL,
+  `location_id` int DEFAULT NULL,
+  `transaction_type` enum('Deposit','Withdrawal','TransferIn','TransferOut','InterestCredit','Fee') NOT NULL,
+  `amount` decimal(14,2) NOT NULL,
+  `balance_after` decimal(14,2) NOT NULL,
+  `channel` enum('ATM','Branch','Online','Mobile') NOT NULL,
+  `status` enum('Pending','Completed','Failed','RolledBack') NOT NULL,
+  `transaction_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reference_no` varchar(30) NOT NULL,
+  PRIMARY KEY (`transaction_id`),
+  UNIQUE KEY `uq_transactions_reference` (`reference_no`),
+  UNIQUE KEY `uq_transactions_group_type` (`transfer_group_id`,`transaction_type`),
+  KEY `fk_transactions_account_id` (`account_id`),
+  KEY `fk_transactions_related_account_id` (`related_account_id`),
+  KEY `fk_transactions_employee_id` (`employee_id`),
+  KEY `fk_transactions_device` (`device_id`),
+  KEY `fk_transactions_location` (`location_id`),
+  CONSTRAINT `fk_transactions_account_id` FOREIGN KEY (`account_id`) REFERENCES `accounts` (`account_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_transactions_device` FOREIGN KEY (`device_id`) REFERENCES `devices` (`device_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_transactions_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_transactions_location` FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_transactions_related_account_id` FOREIGN KEY (`related_account_id`) REFERENCES `accounts` (`account_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `chk_transactions_amount` CHECK ((`amount` > 0))
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+*************************** 1. row ***************************
+Accounts
+CREATE TABLE `accounts` (
+  `account_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `branch_id` int NOT NULL,
+  `account_type_id` int NOT NULL,
+  `account_number` varchar(20) NOT NULL,
+  `balance` decimal(14,2) NOT NULL,
+  `status` enum('Active','Frozen','Closed') NOT NULL DEFAULT 'Active',
+  `opened_date` date NOT NULL,
+  PRIMARY KEY (`account_id`),
+  UNIQUE KEY `uq_accounts_number` (`account_number`),
+  KEY `fk_accounts_customer_id` (`customer_id`),
+  KEY `fk_accounts_branch_id` (`branch_id`),
+  KEY `fk_accounts_account_type_id` (`account_type_id`),
+  CONSTRAINT `fk_accounts_account_type_id` FOREIGN KEY (`account_type_id`) REFERENCES `account_types` (`account_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_accounts_branch_id` FOREIGN KEY (`branch_id`) REFERENCES `branches` (`branch_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_accounts_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `chk_accounts_balance` CHECK ((`balance` >= 0))
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+*************************** 1. row ***************************
+Loans
+CREATE TABLE `loans` (
+  `loan_id` int NOT NULL AUTO_INCREMENT,
+  `customer_id` int NOT NULL,
+  `disbursement_account_id` int DEFAULT NULL,
+  `principal_amount` decimal(14,2) NOT NULL,
+  `interest_rate` decimal(5,2) NOT NULL,
+  `tenure_months` int NOT NULL,
+  `status` enum('Active','Closed','Defaulted') NOT NULL,
+  `disbursed_date` date NOT NULL,
+  PRIMARY KEY (`loan_id`),
+  KEY `fk_loans_customer_id` (`customer_id`),
+  KEY `fk_loans_disbursement_account_id` (`disbursement_account_id`),
+  CONSTRAINT `fk_loans_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_loans_disbursement_account_id` FOREIGN KEY (`disbursement_account_id`) REFERENCES `accounts` (`account_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `chk_loans_principal` CHECK ((`principal_amount` > 0)),
+  CONSTRAINT `chk_loans_tenure` CHECK ((`tenure_months` > 0))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+*************************** 1. row ***************************
+Audit_Log
+CREATE TABLE `audit_log` (
+  `audit_id` bigint NOT NULL AUTO_INCREMENT,
+  `table_name` varchar(50) NOT NULL,
+  `record_pk` varchar(50) NOT NULL,
+  `action_type` enum('INSERT','UPDATE','DELETE') NOT NULL,
+  `old_value` json DEFAULT NULL,
+  `new_value` json DEFAULT NULL,
+  `db_session_user` varchar(100) NOT NULL,
+  `actor_type` enum('Customer','Employee','System') NOT NULL,
+  `actor_employee_id` int DEFAULT NULL,
+  `actor_customer_id` int DEFAULT NULL,
+  `performed_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`audit_id`),
+  KEY `fk_audit_log_actor_employee_id` (`actor_employee_id`),
+  KEY `fk_audit_log_actor_customer_id` (`actor_customer_id`),
+  CONSTRAINT `fk_audit_log_actor_customer_id` FOREIGN KEY (`actor_customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_audit_log_actor_employee_id` FOREIGN KEY (`actor_employee_id`) REFERENCES `employees` (`employee_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `chk_audit_log_actor` CHECK ((((`actor_type` = _utf8mb4'Employee') and (`actor_employee_id` is not null) and (`actor_customer_id` is null)) or ((`actor_type` = _utf8mb4'Customer') and (`actor_customer_id` is not null) and (`actor_employee_id` is null)) or ((`actor_type` = _utf8mb4'System') and (`actor_employee_id` is null) and (`actor_customer_id` is null))))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+*************************** 1. row ***************************
+Fraud_Flags
+CREATE TABLE `fraud_flags` (
+  `flag_id` int NOT NULL AUTO_INCREMENT,
+  `transaction_id` bigint NOT NULL,
+  `rule_id` int NOT NULL,
+  `risk_score` decimal(5,2) NOT NULL,
+  `evidence` json DEFAULT NULL,
+  `flag_status` enum('Open','UnderReview','Confirmed','Dismissed') NOT NULL DEFAULT 'Open',
+  `reviewed_by` int DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`flag_id`),
+  UNIQUE KEY `uq_fraud_flags_transaction_rule` (`transaction_id`,`rule_id`),
+  KEY `fk_fraud_flags_reviewed_by` (`reviewed_by`),
+  KEY `fk_fraud_flags_rule` (`rule_id`),
+  CONSTRAINT `fk_fraud_flags_reviewed_by` FOREIGN KEY (`reviewed_by`) REFERENCES `employees` (`employee_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_fraud_flags_rule` FOREIGN KEY (`rule_id`) REFERENCES `fraud_rules` (`rule_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_fraud_flags_transaction_id` FOREIGN KEY (`transaction_id`) REFERENCES `transactions` (`transaction_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `chk_fraud_flags_risk` CHECK ((`risk_score` between 0 and 100))
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

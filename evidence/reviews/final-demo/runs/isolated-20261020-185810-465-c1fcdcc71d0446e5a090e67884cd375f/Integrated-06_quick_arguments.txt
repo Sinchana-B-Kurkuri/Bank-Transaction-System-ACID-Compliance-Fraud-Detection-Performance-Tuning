@@ -1,0 +1,3 @@
+TEST|PASS|Quick invalid arguments -Quick -SkipThroughput|Rejected before workload dispatch
+TEST|PASS|Quick invalid arguments -Quick -ResumeThroughput|Rejected before workload dispatch
+TEST|PASS|Quick invalid arguments -Quik|Rejected before workload dispatch

@@ -1,0 +1,27 @@
+SOURCE tests/procedures/support/fixture.sql;
+SET @p3_ok=(SELECT account_number REGEXP '^AC[0-9]{10}$' FROM Accounts WHERE account_id=@p3_a);
+CALL bank_lab.sp_assert_true(DATABASE(),'open automatic number',@p3_ok,'Expected procedure contract');
+SET @p3_ok=(SELECT a.balance=500000 AND (SELECT SUM(amount) FROM Transactions WHERE account_id=a.account_id AND status='Completed')=500000 FROM Accounts a WHERE account_id=@p3_a);
+CALL bank_lab.sp_assert_true(DATABASE(),'open ledger balance',@p3_ok,'Expected procedure contract');
+CALL bank_lab.sp_expect_ok(DATABASE(),'open minimum boundary','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,1000,@p3_t1,NULL,@p3_new,@p3_number)');
+SET @p3_fixed=CONCAT('P3X',LEFT(@p3_tag,17));
+CALL bank_lab.sp_expect_ok(DATABASE(),'open explicit account number','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,2000,NULL,@p3_fixed,@p3_new,@p3_number)');
+CALL bank_lab.sp_expect_error(DATABASE(),'open duplicate account number','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,2000,NULL,@p3_fixed,@p3_new,@p3_number)',1062);
+CALL bank_lab.sp_expect_error(DATABASE(),'open invalid amount 0','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,0,NULL,NULL,@p3_new,@p3_number)',5001);
+CALL bank_lab.sp_expect_error(DATABASE(),'open invalid amount -1','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,-1,NULL,NULL,@p3_new,@p3_number)',5001);
+CALL bank_lab.sp_expect_error(DATABASE(),'open invalid amount NULL','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,NULL,NULL,NULL,@p3_new,@p3_number)',5001);
+CALL bank_lab.sp_expect_error(DATABASE(),'open below minimum','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,999.99,NULL,NULL,@p3_new,@p3_number)',5004);
+CALL bank_lab.sp_expect_error(DATABASE(),'open missing customer','CALL {db}.sp_open_account(-1,@p3_b1,@p3_type,1000,NULL,NULL,@p3_new,@p3_number)',5007);
+CALL bank_lab.sp_expect_error(DATABASE(),'open missing branch','CALL {db}.sp_open_account(@p3_c1,-1,@p3_type,1000,NULL,NULL,@p3_new,@p3_number)',5007);
+CALL bank_lab.sp_expect_error(DATABASE(),'open missing type','CALL {db}.sp_open_account(@p3_c1,@p3_b1,-1,1000,NULL,NULL,@p3_new,@p3_number)',5007);
+CALL bank_lab.sp_expect_error(DATABASE(),'open empty account number','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,1000,NULL,'''',@p3_new,@p3_number)',5018);
+CALL bank_lab.sp_expect_error(DATABASE(),'open wrong branch teller','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,1000,@p3_t2,NULL,@p3_new,@p3_number)',5010);
+CALL bank_lab.sp_expect_error(DATABASE(),'open manager is not teller','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,1000,@p3_m1,NULL,@p3_new,@p3_number)',5010);
+CALL sp_close_account(@p3_b,NULL,1);
+CALL sp_update_customer(@p3_c2,NULL,NULL,NULL,NULL,NULL,0);
+CALL bank_lab.sp_expect_error(DATABASE(),'open inactive customer','CALL {db}.sp_open_account(@p3_c2,@p3_b1,@p3_type,1000,NULL,NULL,@p3_new,@p3_number)',5011);
+INSERT INTO DB_User_Map(db_login,actor_type,customer_id) VALUES(USER(),'Customer',@p3_c2);
+CALL bank_lab.sp_expect_error(DATABASE(),'open other customer forbidden','CALL {db}.sp_open_account(@p3_c1,@p3_b1,@p3_type,1000,NULL,NULL,@p3_new,@p3_number)',5010);
+DELETE FROM DB_User_Map WHERE db_login=USER();
+
+SOURCE tests/procedures/support/extra_03_sp_open_account.sql;

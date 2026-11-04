@@ -1,0 +1,1 @@
+SELECT VERSION(),@@version_comment,NOW(6),DATABASE();

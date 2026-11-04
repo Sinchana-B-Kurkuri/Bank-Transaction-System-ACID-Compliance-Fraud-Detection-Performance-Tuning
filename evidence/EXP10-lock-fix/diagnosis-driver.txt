@@ -1,0 +1,2 @@
+RESULT|EXP-10|original|shared_records_before_first_exclusive_read|2
+RESULT|EXP-10|corrected|shared_records_before_first_exclusive_read|0

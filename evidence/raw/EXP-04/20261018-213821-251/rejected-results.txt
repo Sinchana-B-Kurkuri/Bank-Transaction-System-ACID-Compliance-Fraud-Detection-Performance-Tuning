@@ -1,0 +1,24 @@
+RESULT|EXP-04|READ UNCOMMITTED|naive|OBSERVED
+RESULT|EXP-04|READ UNCOMMITTED|naive-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|READ UNCOMMITTED|atomic|OBSERVED
+RESULT|EXP-04|READ UNCOMMITTED|atomic-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|READ UNCOMMITTED|ordered|OBSERVED
+RESULT|EXP-04|READ UNCOMMITTED|ordered-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|READ COMMITTED|naive|OBSERVED
+RESULT|EXP-04|READ COMMITTED|naive-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|READ COMMITTED|atomic|OBSERVED
+RESULT|EXP-04|READ COMMITTED|atomic-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|READ COMMITTED|ordered|OBSERVED
+RESULT|EXP-04|READ COMMITTED|ordered-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|REPEATABLE READ|naive|OBSERVED
+RESULT|EXP-04|REPEATABLE READ|naive-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|REPEATABLE READ|atomic|OBSERVED
+RESULT|EXP-04|REPEATABLE READ|atomic-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|REPEATABLE READ|ordered|OBSERVED
+RESULT|EXP-04|REPEATABLE READ|ordered-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|SERIALIZABLE|naive|OBSERVED
+RESULT|EXP-04|SERIALIZABLE|naive-balances|expected=999900;actual=9;committed_amount=100
+RESULT|EXP-04|SERIALIZABLE|atomic|OBSERVED
+RESULT|EXP-04|SERIALIZABLE|atomic-balances|expected=999700;actual=9;committed_amount=300
+RESULT|EXP-04|SERIALIZABLE|ordered|OBSERVED
+RESULT|EXP-04|SERIALIZABLE|ordered-balances|expected=999700;actual=9;committed_amount=300

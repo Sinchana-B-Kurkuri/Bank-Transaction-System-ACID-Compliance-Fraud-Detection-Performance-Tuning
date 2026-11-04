@@ -1,0 +1,20 @@
+TEST|PASS|register success|actual errno=0
+TEST|PASS|register defaults|Expected procedure contract
+TEST|PASS|register empty name|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL name|expected errno=5018; actual errno=5018
+TEST|PASS|register future dob|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL dob|expected errno=5018; actual errno=5018
+TEST|PASS|register bad email|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL email|expected errno=5018; actual errno=5018
+TEST|PASS|register bad phone|expected errno=5018; actual errno=5018
+TEST|PASS|register empty address|expected errno=5018; actual errno=5018
+TEST|PASS|register empty proof|expected errno=5018; actual errno=5018
+TEST|PASS|register bad proof type|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL proof type|expected errno=5018; actual errno=5018
+TEST|PASS|register duplicate email|expected errno=5018; actual errno=5018
+TEST|PASS|register duplicate phone|expected errno=5018; actual errno=5018
+TEST|PASS|register duplicate proof|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL phone|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL address|expected errno=5018; actual errno=5018
+TEST|PASS|register NULL proof|expected errno=5018; actual errno=5018
+TEST|PASS|register plus phone accepted|actual errno=0

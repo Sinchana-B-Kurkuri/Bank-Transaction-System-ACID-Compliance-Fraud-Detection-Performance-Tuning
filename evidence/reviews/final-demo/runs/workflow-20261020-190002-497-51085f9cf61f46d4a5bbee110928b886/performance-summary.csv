@@ -1,0 +1,7 @@
+﻿"Group","Samples","MeanMicroseconds","MinMicroseconds","MaxMicroseconds"
+"Baseline, 0","20","759.35","375","1988"
+"Baseline, 1","20","926.05","638","1719"
+"Baseline, 2","20","827","405","2489"
+"Optimized, 0","20","1226.4","403","3254"
+"Optimized, 1","20","1159.1","715","3296"
+"Optimized, 2","20","673.3","355","2444"

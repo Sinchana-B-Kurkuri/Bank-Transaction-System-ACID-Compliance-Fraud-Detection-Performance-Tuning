@@ -1,0 +1,69 @@
+{
+    "S2":  null,
+    "S1":  null,
+    "Evidence":  "C:\\Users\\sinch\\Desktop\\DBS\\DBS Project\\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\\evidence\\raw\\EXP-16\\20261018-230223-685",
+    "BeforeOops":  null,
+    "Start":  {
+                  "File":  "LAPTOP-TEKJAJEQ-bin.000009",
+                  "Position":  158
+              },
+    "DumpSeconds":  0.3121703,
+    "S0":  {
+               "Tables":  [
+                              {
+                                  "Table":  "Branches",
+                                  "Checksum":  "3820862213",
+                                  "Rows":  3
+                              },
+                              {
+                                  "Table":  "Employees",
+                                  "Checksum":  "3343467282",
+                                  "Rows":  5
+                              },
+                              {
+                                  "Table":  "Customers",
+                                  "Checksum":  "4187877886",
+                                  "Rows":  7
+                              },
+                              {
+                                  "Table":  "Account_Types",
+                                  "Checksum":  "3543379354",
+                                  "Rows":  3
+                              },
+                              {
+                                  "Table":  "Accounts",
+                                  "Checksum":  "2950455732",
+                                  "Rows":  108
+                              },
+                              {
+                                  "Table":  "Transactions",
+                                  "Checksum":  "1975241564",
+                                  "Rows":  121
+                              },
+                              {
+                                  "Table":  "Loans",
+                                  "Checksum":  "519280957",
+                                  "Rows":  1
+                              },
+                              {
+                                  "Table":  "Fraud_Flags",
+                                  "Checksum":  "0",
+                                  "Rows":  0
+                              },
+                              {
+                                  "Table":  "Audit_Log",
+                                  "Checksum":  "1511053436",
+                                  "Rows":  352
+                              }
+                          ],
+               "Time":  "2026-10-18T23:02:26.637148",
+               "Position":  {
+                                "File":  "LAPTOP-TEKJAJEQ-bin.000009",
+                                "Position":  158
+                            }
+           },
+    "DumpBytes":  316423,
+    "LossTime":  null,
+    "Dump":  "C:\\Users\\sinch\\Desktop\\DBS\\DBS Project\\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\\backup\\out\\full_20261018_230223_691.sql",
+    "Database":  "bank_txn_scratch"
+}

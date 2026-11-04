@@ -1,0 +1,16 @@
+MySQL wrapper regression and initial failure-diagnostic verification
+Original reproduction: mysql.exe --no-defaults --abort-source-on-error -e "SELECT 1;" -> mysql: [ERROR] unknown option '--abort-source-on-error'; exit 2
+
+TEST|PASS|wrapper include expansion|Nested include with spaces expanded before batch execution
+TEST|PASS|wrapper paths with spaces|Executable and first option-file argument survived Windows PowerShell quoting; SQL used stdin
+TEST|PASS|wrapper stderr and exit code|Exit 2, partial stdout and original stderr retained in exception data and message
+TEST|PASS|wrapper recursive include guard|Rejected include cycle before starting a process
+Process probe exit: 0
+Initial real mysql client diagnostic (temporary credential-free option file; observed authentication failure): mysql exited 1:
+ERROR 1045 (28000): Access denied for user 'ODBC'@'localhost' (using password: NO)
+Separate stderr: ERROR 1045 (28000): Access denied for user 'ODBC'@'localhost' (using password: NO)
+
+Exit code: 1
+
+Subsequent verification with the user-provided option file succeeded: environment check, two rebuilds and 186/0 schema test results. See EV-MYSQL-BATCH-1.txt and EV-MYSQL-SPACES-1.txt for real-client fail-fast and space-path checks.
+

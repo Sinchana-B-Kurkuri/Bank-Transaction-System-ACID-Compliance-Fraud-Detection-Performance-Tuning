@@ -1,0 +1,5 @@
+DRY-RUN ONLY: no command executed.
+NEEDS MANUAL VERIFICATION: service detection returned 1 matches (MySQL84); mysqld PID candidates: 6888, 8056.
+Pending PID verification: taskkill /F /PID <verified server PID>
+Pending verification: Start-Service -Name 'MySQL84'
+Resolve the target instance in an elevated shell; rerun with -MysqldPid <verified server PID> -ServiceName <verified Get-Service name>. No PID or service is guessed.

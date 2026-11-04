@@ -1,0 +1,1 @@
+TEST|PASS|Standalone boundary identified|Account_Risk_Profile absent; no real-B constraint claim made

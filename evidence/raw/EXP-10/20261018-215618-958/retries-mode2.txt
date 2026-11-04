@@ -1,0 +1,6 @@
+718	DEADLOCK_RETRY	{"attempt": 1, "to_account": 9, "from_account": 10}
+719	DEADLOCK_RETRY	{"attempt": 1, "to_account": 9, "from_account": 10}
+720	DEADLOCK_RETRY	{"attempt": 1, "to_account": 9, "from_account": 10}
+721	DEADLOCK_RETRY	{"attempt": 1, "to_account": 9, "from_account": 10}
+722	DEADLOCK_RETRY	{"attempt": 1, "to_account": 10, "from_account": 9}
+723	DEADLOCK_RETRY	{"attempt": 1, "to_account": 9, "from_account": 10}

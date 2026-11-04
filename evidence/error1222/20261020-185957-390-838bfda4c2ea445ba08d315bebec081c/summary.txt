@@ -1,0 +1,26 @@
+TEST|PASS|1222 seed customers|expected=6; actual=6
+TEST|PASS|1222 seed accounts|expected=8; actual=8
+TEST|PASS|1222 seed loan|expected=1; actual=1
+TEST|PASS|1222 seed rerun idempotent|No duplicate rows or extra audit/flag writes
+TEST|PASS|1222 independent opening account|Real sp_open_account returned and committed
+TEST|PASS|1222 opening ledger|expected=1; actual=1
+TEST|PASS|1222 automatic fraud evaluation|Actual AFTER INSERT fraud trigger wrote flags
+TEST|PASS|1222 opening risk profile|expected=1; actual=1
+TEST|PASS|1222 direct evaluator timestamp|Fifth SELECT value reaches v_txn_ts and JSON evidence
+TEST|PASS|1222 opening account INSERT audit|expected=1; actual=1
+TEST|PASS|1222 opening account UPDATE audit|expected=1; actual=1
+TEST|PASS|1222 opening transaction audit|expected=1; actual=1
+TEST|PASS|1222 audit before fraud|Real installed AFTER INSERT action ordering
+TEST|PASS|1222 transfer real injected rollback|expected errno=5016; actual errno=5016
+TEST|PASS|1222 rollback balances ledger audit fraud|Both balances and all transactional side effects unchanged
+TEST|PASS|1222 ordered forward pair|expected=2; actual=2
+TEST|PASS|1222 ordered reverse pair|expected=2; actual=2
+TEST|PASS|1222 invariant I1|violations=0
+TEST|PASS|1222 invariant I1b|violations=0
+TEST|PASS|1222 invariant I2|violations=0
+TEST|PASS|1222 invariant I3|violations=0
+TEST|PASS|1222 invariant I4|violations=0
+TEST|PASS|1222 invariant I5|violations=0
+TEST|PASS|installed routines target disposable schema|Installed nested routine/trigger definitions contain no protected schema references
+TEST|PASS|after isolated cleanup|Fresh owned database removed
+TOTAL|PASS=25|FAIL=0

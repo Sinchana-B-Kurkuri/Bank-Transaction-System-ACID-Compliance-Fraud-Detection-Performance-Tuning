@@ -1,0 +1,11 @@
+{
+  "Memory": {
+    "TotalPhysicalMemory": 16568156160
+  },
+  "OS": "Microsoft Windows NT 10.0.26200.0",
+  "Cpu": {
+    "Name": "Intel(R) Core(TM) Ultra 5 125H",
+    "NumberOfCores": 14,
+    "NumberOfLogicalProcessors": 18
+  }
+}

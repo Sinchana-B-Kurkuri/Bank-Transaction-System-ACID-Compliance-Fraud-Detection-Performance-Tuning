@@ -1,0 +1,62 @@
+TEST|PASS|table Branches InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Branches.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Branches.uq_branches_ifsc|Named UNIQUE required
+TEST|PASS|table Employees InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Employees.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Employees.uq_employees_email|Named UNIQUE required
+TEST|PASS|table Customers InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Customers.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Customers.uq_customers_email|Named UNIQUE required
+TEST|PASS|constraint Customers.uq_customers_phone|Named UNIQUE required
+TEST|PASS|constraint Customers.uq_customers_id_proof|Named UNIQUE required
+TEST|PASS|table Account_Types InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Account_Types.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Account_Types.uq_account_types_name|Named UNIQUE required
+TEST|PASS|table Accounts InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Accounts.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Accounts.uq_accounts_number|Named UNIQUE required
+TEST|PASS|constraint Accounts.chk_accounts_balance|Named CHECK required
+TEST|PASS|table Transactions InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Transactions.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Transactions.uq_transactions_reference|Named UNIQUE required
+TEST|PASS|constraint Transactions.uq_transactions_group_type|Named UNIQUE required
+TEST|PASS|constraint Transactions.chk_transactions_amount|Named CHECK required
+TEST|PASS|table Loans InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Loans.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Loans.chk_loans_principal|Named CHECK required
+TEST|PASS|constraint Loans.chk_loans_tenure|Named CHECK required
+TEST|PASS|table Fraud_Flags InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Fraud_Flags.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Fraud_Flags.uq_fraud_flags_transaction_rule|Named UNIQUE required
+TEST|PASS|constraint Fraud_Flags.chk_fraud_flags_risk|Named CHECK required
+TEST|PASS|table Audit_Log InnoDB|Core table must exist and use InnoDB
+TEST|PASS|constraint Audit_Log.PRIMARY|Named PRIMARY KEY required
+TEST|PASS|constraint Audit_Log.chk_audit_log_actor|Named CHECK required
+TEST|PASS|FK fk_employees_branch_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_accounts_customer_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_accounts_branch_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_accounts_account_type_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_account_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_related_account_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_employee_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_loans_customer_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_loans_disbursement_account_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_fraud_flags_transaction_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_fraud_flags_reviewed_by|FK required with RESTRICT actions
+TEST|PASS|FK fk_audit_log_actor_employee_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_audit_log_actor_customer_id|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_device|FK required with RESTRICT actions
+TEST|PASS|FK fk_transactions_location|FK required with RESTRICT actions
+TEST|PASS|FK fk_fraud_flags_rule|FK required with RESTRICT actions
+TEST|PASS|no legacy Card|Final schema only
+TEST|PASS|no legacy CustomerAccount|Final schema only
+TEST|PASS|no legacy TransactionType|Final schema only
+TEST|PASS|no legacy TransactionLog|Final schema only
+TEST|PASS|no legacy FraudAlert|Final schema only
+TEST|PASS|column Customers.is_active|Required interface column
+TEST|PASS|column Transactions.transfer_group_id|Required interface column
+TEST|PASS|column Transactions.device_id|Required interface column
+TEST|PASS|column Transactions.location_id|Required interface column
+TEST|PASS|column Loans.disbursement_account_id|Required interface column
+TEST|PASS|column Audit_Log.db_session_user|Required interface column
+TEST|PASS|cross FKs idempotent|Both repeated applications completed

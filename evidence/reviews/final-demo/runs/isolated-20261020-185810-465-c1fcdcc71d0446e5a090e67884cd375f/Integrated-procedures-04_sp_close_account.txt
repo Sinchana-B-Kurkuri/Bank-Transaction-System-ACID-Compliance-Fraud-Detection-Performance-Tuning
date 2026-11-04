@@ -1,0 +1,10 @@
+TEST|PASS|close nonzero default|expected errno=5008; actual errno=5008
+TEST|PASS|close nonexistent|expected errno=5002; actual errno=5002
+TEST|PASS|close invalid flag|expected errno=5018; actual errno=5018
+TEST|PASS|close wrong branch teller|expected errno=5010; actual errno=5010
+TEST|PASS|close active loan blocks settlement|expected errno=5008; actual errno=5008
+TEST|PASS|close settle atomically|actual errno=0
+TEST|PASS|close final withdrawal and zero|Expected procedure contract
+TEST|PASS|close already closed|expected errno=5011; actual errno=5011
+TEST|PASS|close NULL settlement|expected errno=5018; actual errno=5018
+TEST|PASS|close Frozen settlement|actual errno=0

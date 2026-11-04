@@ -1,0 +1,1 @@
+1	SIMPLE	Transactions	NULL	range	idx_transactions_account_time	idx_transactions_account_time	9	NULL	7	100.00	Using index condition; Backward index scan

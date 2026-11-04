@@ -1,0 +1,6 @@
+TEST|PASS|reference branches repeatable|Second load leaves branch row count unchanged
+TEST|PASS|reference types repeatable|Second load leaves type row count unchanged
+TEST|PASS|reference employees repeatable|Second load leaves employee row count unchanged
+TEST|PASS|reference three synthetic branches|Natural IFSC keys
+TEST|PASS|reference account type rates and minima|Exact SPEC reference values
+TEST|PASS|reference five employee assignments|Branch resolved by natural key, never assumed surrogate id

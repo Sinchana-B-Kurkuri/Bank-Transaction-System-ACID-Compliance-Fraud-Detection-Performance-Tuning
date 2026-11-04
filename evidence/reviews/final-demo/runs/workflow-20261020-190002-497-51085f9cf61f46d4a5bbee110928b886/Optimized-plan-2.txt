@@ -1,0 +1,1 @@
+1	SIMPLE	Transaction_Approvals	NULL	ref	idx_approvals_status_requested	idx_approvals_status_requested	1	const	1	100.00	Using index condition

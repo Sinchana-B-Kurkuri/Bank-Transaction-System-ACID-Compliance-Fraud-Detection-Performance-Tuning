@@ -1,0 +1,13 @@
+ALTER TABLE Employees ADD CONSTRAINT fk_employees_branch_id FOREIGN KEY (branch_id) REFERENCES Branches(branch_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Accounts ADD CONSTRAINT fk_accounts_customer_id FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Accounts ADD CONSTRAINT fk_accounts_branch_id FOREIGN KEY (branch_id) REFERENCES Branches(branch_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Accounts ADD CONSTRAINT fk_accounts_account_type_id FOREIGN KEY (account_type_id) REFERENCES Account_Types(account_type_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Transactions ADD CONSTRAINT fk_transactions_account_id FOREIGN KEY (account_id) REFERENCES Accounts(account_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Transactions ADD CONSTRAINT fk_transactions_related_account_id FOREIGN KEY (related_account_id) REFERENCES Accounts(account_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Transactions ADD CONSTRAINT fk_transactions_employee_id FOREIGN KEY (employee_id) REFERENCES Employees(employee_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Loans ADD CONSTRAINT fk_loans_customer_id FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Loans ADD CONSTRAINT fk_loans_disbursement_account_id FOREIGN KEY (disbursement_account_id) REFERENCES Accounts(account_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Fraud_Flags ADD CONSTRAINT fk_fraud_flags_transaction_id FOREIGN KEY (transaction_id) REFERENCES Transactions(transaction_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Fraud_Flags ADD CONSTRAINT fk_fraud_flags_reviewed_by FOREIGN KEY (reviewed_by) REFERENCES Employees(employee_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Audit_Log ADD CONSTRAINT fk_audit_log_actor_employee_id FOREIGN KEY (actor_employee_id) REFERENCES Employees(employee_id) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE Audit_Log ADD CONSTRAINT fk_audit_log_actor_customer_id FOREIGN KEY (actor_customer_id) REFERENCES Customers(customer_id) ON DELETE RESTRICT ON UPDATE RESTRICT;

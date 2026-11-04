@@ -1,0 +1,1 @@
+mysqlslap: [ERROR] unknown variable 'default-character-set=utf8mb4'.

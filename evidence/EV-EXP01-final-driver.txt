@@ -1,0 +1,3 @@
+RESULT|EXP-01|ALL|iterations|200
+RESULT|EXP-01|ALL|partial_transfers|0
+RESULT|EXP-01|ALL|kill_snapshot_unchanged|YES

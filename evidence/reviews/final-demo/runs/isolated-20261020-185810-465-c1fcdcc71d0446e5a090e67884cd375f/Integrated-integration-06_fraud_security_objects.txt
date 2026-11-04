@@ -1,0 +1,5 @@
+TEST|PASS|fraud trigger installed|expected=1; actual=1
+TEST|PASS|fraud evaluator installed|expected=1; actual=1
+TEST|PASS|fraud queue view installed|expected=1; actual=1
+TEST|PASS|customer summary view installed|expected=1; actual=1
+TEST|PASS|fraud_security_objects|required objects installed

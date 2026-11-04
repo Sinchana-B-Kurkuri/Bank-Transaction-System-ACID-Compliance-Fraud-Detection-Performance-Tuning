@@ -1,0 +1,5 @@
+TEST|PASS|wrapper include expansion|Nested include with spaces expanded before batch execution
+TEST|PASS|wrapper paths with spaces|Executable and first option-file argument survived Windows PowerShell quoting; SQL used stdin
+TEST|PASS|wrapper Windows installation fallback|No PATH or override; standard-install lookup works in Windows PowerShell 5.1
+TEST|PASS|wrapper stderr and exit code|Exit 2, partial stdout and original stderr retained in exception data and message
+TEST|PASS|wrapper recursive include guard|Rejected include cycle before starting a process

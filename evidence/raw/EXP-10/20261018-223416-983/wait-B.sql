@@ -1,0 +1,2 @@
+SELECT CONCAT('META|',VERSION(),'|',NOW(6),'|',CONNECTION_ID()); SELECT CONCAT('CONNECTION|',CONNECTION_ID());
+SET SESSION innodb_lock_wait_timeout=2; CALL sp_deposit(9,10,'Online',NULL,NULL,NULL,@t,@b);

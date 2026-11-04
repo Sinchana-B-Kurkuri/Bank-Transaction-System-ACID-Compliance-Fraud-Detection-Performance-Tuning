@@ -1,0 +1,63 @@
+{
+    "RecoveryExecuted":  false,
+    "ConnectionId":  6457,
+    "Before":  {
+                   "Tables":  [
+                                  {
+                                      "Table":  "Branches",
+                                      "Checksum":  "3820862213",
+                                      "Rows":  3
+                                  },
+                                  {
+                                      "Table":  "Employees",
+                                      "Checksum":  "3343467282",
+                                      "Rows":  5
+                                  },
+                                  {
+                                      "Table":  "Customers",
+                                      "Checksum":  "1387324128",
+                                      "Rows":  7
+                                  },
+                                  {
+                                      "Table":  "Account_Types",
+                                      "Checksum":  "3543379354",
+                                      "Rows":  3
+                                  },
+                                  {
+                                      "Table":  "Accounts",
+                                      "Checksum":  "1710400251",
+                                      "Rows":  108
+                                  },
+                                  {
+                                      "Table":  "Transactions",
+                                      "Checksum":  "1398618177",
+                                      "Rows":  221
+                                  },
+                                  {
+                                      "Table":  "Loans",
+                                      "Checksum":  "519280957",
+                                      "Rows":  1
+                                  },
+                                  {
+                                      "Table":  "Fraud_Flags",
+                                      "Checksum":  "0",
+                                      "Rows":  0
+                                  },
+                                  {
+                                      "Table":  "Audit_Log",
+                                      "Checksum":  "150456440",
+                                      "Rows":  552
+                                  }
+                              ],
+                   "Time":  "2026-10-18T23:08:08.078209",
+                   "Position":  {
+                                    "File":  "LAPTOP-TEKJAJEQ-bin.000010",
+                                    "Position":  2954605
+                                }
+               },
+    "Database":  "bank_txn_scratch",
+    "Reference":  "DUR-UNCOMMITTED-230808315",
+    "ClientPid":  17520,
+    "Evidence":  "C:\\Users\\sinch\\Desktop\\DBS\\DBS Project\\Bank-Transaction-System-ACID-Compliance-Fraud-Detection-Performance-Tuning\\evidence\\raw\\EXP-03\\20261018-230805-373",
+    "PreparedAt":  "2026-10-18T23:08:08.4330048+05:30"
+}
