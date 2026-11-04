@@ -1,1 +1,0 @@
-﻿Rebuilt bank_txn (Integrated) in 6.82 seconds.

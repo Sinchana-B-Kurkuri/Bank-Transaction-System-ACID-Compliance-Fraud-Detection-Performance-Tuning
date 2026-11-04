@@ -40,4 +40,4 @@ Session SQL, stdout and stderr retained; META includes server version, time and 
 
 Both corrected runs passed RequireOrderedZero and all six invariants. Full regression: 734 PASS, 0 FAIL. Raw corrected runs: evidence/raw/EXP-10/20261018-223416-983/ and 20261018-223504-859/. The original results and SHA256 manifest are preserved under evidence/EXP10-lock-fix/original/. The original raw nine-deadlock run remains unchanged.
 
-Root cause and precise correction: docs/member-a/EXP10_ORDERED_LOCK_FIX.md. The original prevention target is now met for this repeated workload. Native server error-log file access remains NEEDS MANUAL VERIFICATION; this does not replace the captured actual 1213, 1205, lock snapshots or InnoDB graphs.
+Root cause and precise correction: evidence/EXP10-lock-fix/. The original prevention target is now met for this repeated workload. Native server error-log file access remains NEEDS MANUAL VERIFICATION; this does not replace the captured actual 1213, 1205, lock snapshots or InnoDB graphs.

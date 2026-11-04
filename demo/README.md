@@ -210,5 +210,5 @@ over evaluated transactions, not a replacement transaction-local score.
 
 Distance/odd-hour functions are callable diagnostics, but there is no active
 location-change/time-anomaly rule in this seed. Adding one needs a separate
-policy decision. Security, recovery and performance limitations are also listed
-in `evidence/reviews/final-demo/REPORT.md`.
+policy decision. See `security/README.md`, `backup/README.md`, and the experiment
+READMEs for security, recovery, and performance limitations.

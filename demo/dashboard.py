@@ -64,8 +64,11 @@ class Dashboard:
             raise ValueError("Dashboard requires an active, valid owned demo session")
         if not re.fullmatch(r"[a-f0-9]{32}", state.get("Owner", "")):
             raise ValueError("Invalid owner token")
-        self.args = SimpleNamespace(database=state["Database"], config=os.environ.get("BANK_MYSQL_CNF"), mysql=os.environ.get("BANK_MYSQL_BIN"), non_security_demo=True)
-        if not self.args.config or not Path(self.args.config).is_file() or not self.args.mysql:
+        mysql = os.environ.get("BANK_MYSQL_BIN")
+        if mysql and Path(mysql).is_dir():
+            mysql = str(Path(mysql) / ("mysql.exe" if os.name == "nt" else "mysql"))
+        self.args = SimpleNamespace(database=state["Database"], config=os.environ.get("BANK_MYSQL_CNF"), mysql=mysql, non_security_demo=True)
+        if not self.args.config or not Path(self.args.config).is_file() or not self.args.mysql or not Path(self.args.mysql).is_file():
             raise ValueError("Set BANK_MYSQL_CNF and BANK_MYSQL_BIN externally")
         actual = self.sql("SELECT owner_token FROM _a_test_owner;").strip().splitlines()[-1]
         if not secrets.compare_digest(actual, state["Owner"]):

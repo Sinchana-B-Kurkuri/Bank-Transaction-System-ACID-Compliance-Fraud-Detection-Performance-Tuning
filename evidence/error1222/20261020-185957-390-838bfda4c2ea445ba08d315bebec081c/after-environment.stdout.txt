@@ -1,0 +1,1 @@
+8.4.11	MySQL Community Server - GPL	2026-10-20 18:59:57.675955	information_schema

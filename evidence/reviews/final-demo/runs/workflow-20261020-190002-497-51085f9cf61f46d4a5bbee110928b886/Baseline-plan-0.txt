@@ -1,0 +1,1 @@
+1	SIMPLE	Transactions	NULL	ref	fk_transactions_account_id	fk_transactions_account_id	4	const	7	33.33	Using where; Using filesort

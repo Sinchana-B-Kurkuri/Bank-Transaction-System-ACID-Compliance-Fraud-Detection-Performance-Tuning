@@ -1,0 +1,2 @@
+authenticated_session	privilege_identity	active_roles
+root@localhost	root@localhost	NONE

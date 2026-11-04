@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM information_schema.SCHEMATA WHERE SCHEMA_NAME='bank_b_1222_60d32abf44c547a7b27132499e59e855_after';

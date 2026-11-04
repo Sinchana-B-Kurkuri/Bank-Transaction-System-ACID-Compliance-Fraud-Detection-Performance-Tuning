@@ -2,7 +2,7 @@ param([switch]$Check)
 $ErrorActionPreference='Stop'
 $root=Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent
 $signatures=[ordered]@{}
-foreach($line in Get-Content "$root/docs/member-a/SPEC.md") {
+foreach($line in Get-Content "$root/tests/integration/support/procedure_contract.md") {
  if($line -match '^sp_deposit / sp_withdraw\((.*)\)') {
   $signatures['sp_deposit']=$Matches[1];$signatures['sp_withdraw']=$Matches[1]
  } elseif($line -match '^(sp_\w+)\((.*)\)') {

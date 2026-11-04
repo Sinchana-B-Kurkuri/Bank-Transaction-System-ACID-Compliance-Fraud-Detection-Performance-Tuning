@@ -1,0 +1,3 @@
+1	SIMPLE	Transactions	NULL	range	idx_transactions_account_time	idx_transactions_account_time	9	NULL	6	100.00	Using index condition; Backward index scan
+1	SIMPLE	Fraud_Flags	NULL	ALL	idx_fraud_flags_status_score	NULL	NULL	NULL	1	100.00	Using where; Using filesort
+1	SIMPLE	Transaction_Approvals	NULL	ref	idx_approvals_status_requested	idx_approvals_status_requested	1	const	1	100.00	Using index condition

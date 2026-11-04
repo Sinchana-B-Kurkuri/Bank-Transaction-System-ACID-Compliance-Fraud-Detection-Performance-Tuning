@@ -1,0 +1,6 @@
+8.4.11	MySQL Community Server - GPL	root@localhost	2026-10-20 19:00:13.938994
+innodb_flush_log_at_trx_commit	1
+log_bin	ON
+performance_schema	ON
+sync_binlog	1
+transaction_isolation	REPEATABLE-READ

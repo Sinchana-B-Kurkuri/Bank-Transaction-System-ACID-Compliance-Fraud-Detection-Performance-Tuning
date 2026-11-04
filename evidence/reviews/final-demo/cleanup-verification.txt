@@ -1,0 +1,3 @@
+Exact demo session schema names checked=18
+Remaining=0
+Protected database targets=NONE

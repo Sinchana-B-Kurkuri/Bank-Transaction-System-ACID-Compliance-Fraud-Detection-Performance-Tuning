@@ -1,0 +1,1 @@
+1	SIMPLE	Fraud_Flags	NULL	ALL	idx_fraud_flags_status_score	NULL	NULL	NULL	116	100.00	Using where; Using filesort

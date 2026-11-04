@@ -1,6 +1,6 @@
 param([string]$Database='bank_txn')
 . "$PSScriptRoot/../../build/mysql_common.ps1"
-$path=Join-Path $PSScriptRoot '../../docs/er/er_core.mmd'
+$path=Join-Path $PSScriptRoot '../../schema/er_core.mmd'
 if(!(Test-Path $path)){throw 'ER source missing.'}
 $er=[IO.File]::ReadAllText((Resolve-Path $path))
 $columns=@();$tables=@();$table=$null

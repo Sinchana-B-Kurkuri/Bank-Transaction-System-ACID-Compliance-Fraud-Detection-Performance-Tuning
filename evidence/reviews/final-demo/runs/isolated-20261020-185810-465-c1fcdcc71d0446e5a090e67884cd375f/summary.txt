@@ -1,0 +1,102 @@
+TEST|PASS|release source generation|Static generation only; no banking database rebuilt
+TEST|PASS|Standalone actual owner-scoped rebuild|Rebuilt bank_a_ci_check_2d0b15039833_main (Standalone/Baseline) in 4.37 seconds.
+TEST|PASS|Standalone-schema-00_interface_contract|PASS=38;FAIL=0;EXIT=0
+TEST|PASS|Standalone-schema-01_negative_constraints|PASS=57;FAIL=0;EXIT=0
+TEST|PASS|Standalone-schema-02_structure|PASS=62;FAIL=0;EXIT=0
+TEST|PASS|Standalone-functions-01_functions|PASS=38;FAIL=0;EXIT=0
+TEST|PASS|Standalone-functions-02_reference_data|PASS=6;FAIL=0;EXIT=0
+SKIP|tests/functions/03_fraud_score.sql|Standalone has no B runtime
+SKIP|tests/functions/04_fraud_spec_functions.sql|Standalone has no B runtime
+TEST|PASS|Standalone-triggers-01_guards|PASS=17;FAIL=0;EXIT=0
+TEST|PASS|Standalone-triggers-02_audit|PASS=11;FAIL=0;EXIT=0
+TEST|PASS|Standalone-triggers-04_trigger_inventory|PASS=15;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-01_sp_register_customer|PASS=20;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-02_sp_update_customer|PASS=16;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-03_sp_open_account|PASS=25;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-04_sp_close_account|PASS=10;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-05_sp_set_account_status|PASS=14;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-06_sp_deposit|PASS=26;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-07_sp_withdraw|PASS=18;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-08_sp_transfer_funds|PASS=40;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-09_sp_transfer_funds_retry|PASS=12;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-10_sp_request_approval|PASS=15;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-11_sp_decide_approval|PASS=16;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-12_sp_disburse_loan|PASS=21;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-13_sp_review_fraud_flag|PASS=10;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-14_sp_generate_statement|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-15_sp_reconcile_balances|PASS=3;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-16_sp_post_monthly_interest|PASS=12;FAIL=0;EXIT=0
+TEST|PASS|Standalone-procedures-19_transfer_missing_second_lock|PASS=3;FAIL=0;EXIT=0
+TEST|PASS|Standalone-invariants-01_invariants|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|Standalone-integration-02_interface_contract_b|PASS=38;FAIL=0;EXIT=0
+TEST|PASS|Standalone-integration-03_exp02|PASS=18;FAIL=0;EXIT=0
+TEST|PASS|Standalone-integration-04_after_experiments|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|Standalone-integration-05_exp17|PASS=9;FAIL=0;EXIT=0
+SKIP|tests/integration/06_fraud_security_objects.sql|Standalone has no B runtime
+TEST|PASS|Standalone-integration-06_signature_check|PASS=34;FAIL=0;EXIT=0
+TEST|PASS|Standalone-integration-07_statement_authorization|PASS=10;FAIL=0;EXIT=0
+TEST|PASS|Standalone-03_source_order|PASS=144;FAIL=0;EXIT=0
+TEST|PASS|Standalone-04_mysql_wrapper|PASS=5;FAIL=0;EXIT=0
+TEST|PASS|Standalone-05_isolated_context|PASS=14;FAIL=0;EXIT=0
+TEST|PASS|Standalone-06_quick_arguments|PASS=3;FAIL=0;EXIT=0
+TEST|PASS|Standalone-07_real_b_schema|PASS=1;FAIL=0;EXIT=0
+TEST|PASS|Standalone-14_statement_resultsets|PASS=1;FAIL=0;EXIT=0
+TEST|PASS|Standalone-17_statement_after_interest|PASS=1;FAIL=0;EXIT=0
+TEST|PASS|Standalone-p6-static|PASS=11;FAIL=0;EXIT=0
+TEST|PASS|Standalone-six-invariants|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|Integrated actual owner-scoped rebuild|Rebuilt bank_a_ci_check_2d0b15039833_main (Integrated/Baseline) in 5.06 seconds.
+TEST|PASS|Integrated-schema-00_interface_contract|PASS=38;FAIL=0;EXIT=0
+TEST|PASS|Integrated-schema-01_negative_constraints|PASS=57;FAIL=0;EXIT=0
+TEST|PASS|Integrated-schema-02_structure|PASS=62;FAIL=0;EXIT=0
+TEST|PASS|Integrated-functions-01_functions|PASS=38;FAIL=0;EXIT=0
+TEST|PASS|Integrated-functions-02_reference_data|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|Integrated-functions-03_fraud_score|PASS=4;FAIL=0;EXIT=0
+TEST|PASS|Integrated-functions-04_fraud_spec_functions|PASS=47;FAIL=0;EXIT=0
+TEST|PASS|Integrated-triggers-01_guards|PASS=17;FAIL=0;EXIT=0
+TEST|PASS|Integrated-triggers-02_audit|PASS=11;FAIL=0;EXIT=0
+TEST|PASS|Integrated-triggers-04_trigger_inventory|PASS=15;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-01_sp_register_customer|PASS=20;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-02_sp_update_customer|PASS=16;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-03_sp_open_account|PASS=25;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-04_sp_close_account|PASS=10;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-05_sp_set_account_status|PASS=14;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-06_sp_deposit|PASS=26;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-07_sp_withdraw|PASS=18;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-08_sp_transfer_funds|PASS=40;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-09_sp_transfer_funds_retry|PASS=12;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-10_sp_request_approval|PASS=15;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-11_sp_decide_approval|PASS=16;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-12_sp_disburse_loan|PASS=21;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-13_sp_review_fraud_flag|PASS=10;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-14_sp_generate_statement|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-15_sp_reconcile_balances|PASS=3;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-16_sp_post_monthly_interest|PASS=12;FAIL=0;EXIT=0
+TEST|PASS|Integrated-procedures-19_transfer_missing_second_lock|PASS=3;FAIL=0;EXIT=0
+TEST|PASS|Integrated-invariants-01_invariants|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|Integrated-integration-02_interface_contract_b|PASS=38;FAIL=0;EXIT=0
+TEST|PASS|Integrated-integration-03_exp02|PASS=18;FAIL=0;EXIT=0
+TEST|PASS|Integrated-integration-04_after_experiments|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|Integrated-integration-05_exp17|PASS=9;FAIL=0;EXIT=0
+TEST|PASS|Integrated-integration-06_fraud_security_objects|PASS=5;FAIL=0;EXIT=0
+TEST|PASS|Integrated-integration-06_signature_check|PASS=34;FAIL=0;EXIT=0
+TEST|PASS|Integrated-integration-07_statement_authorization|PASS=10;FAIL=0;EXIT=0
+TEST|PASS|Integrated-03_source_order|PASS=144;FAIL=0;EXIT=0
+TEST|PASS|Integrated-04_mysql_wrapper|PASS=5;FAIL=0;EXIT=0
+TEST|PASS|Integrated-05_isolated_context|PASS=14;FAIL=0;EXIT=0
+TEST|PASS|Integrated-06_quick_arguments|PASS=3;FAIL=0;EXIT=0
+TEST|PASS|Integrated-07_real_b_schema|PASS=10;FAIL=0;EXIT=0
+TEST|PASS|Integrated-14_statement_resultsets|PASS=1;FAIL=0;EXIT=0
+TEST|PASS|Integrated-17_statement_after_interest|PASS=1;FAIL=0;EXIT=0
+TEST|PASS|Integrated-p6-static|PASS=11;FAIL=0;EXIT=0
+TEST|PASS|Integrated-six-invariants|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|runtime behavior acceptance without global grants|behavior failures=0; pending role checks=2; exit=2; not a complete-role acceptance claim
+TEST|PASS|bounded Quick real sessions|PASS=10;FAIL=0;EXIT=0
+TEST|PASS|post-Quick-six-invariants|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|actual explicit optimized entry build|Uses run_all_optimized.sql on fresh owned scratch; no protected scratch target
+TEST|PASS|explicit optimized indexes|Seven named B performance indexes; no performance claim
+TEST|PASS|optimized native EXPLAIN compatibility|Three actual EXPLAIN SELECTs, no EXPLAIN ANALYZE or throughput
+TEST|PASS|optimized-six-invariants|PASS=6;FAIL=0;EXIT=0
+TEST|PASS|owned cleanup bank_a_ci_check_2d0b15039833_main|Owner verified; zero remaining schema
+TEST|PASS|owned cleanup bank_a_ci_check_2d0b15039833_scratch|Owner verified; zero remaining schema
+TEST|PASS|owned cleanup bank_a_ci_check_2d0b15039833_lab|Owner verified; zero remaining schema
+TOTAL|CHECK_PASS=98|CHECK_FAIL=0

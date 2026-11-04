@@ -1,0 +1,4 @@
+TEST|PASS|production source preservation|No routine/schema/trigger/view/RBAC/index/build source changes
+TEST|PASS|source conflict marker scan|zero markers
+TEST|PASS|new PowerShell parse|all four scripts parsed
+TEST|PASS|tracked whitespace check|git diff --check clean

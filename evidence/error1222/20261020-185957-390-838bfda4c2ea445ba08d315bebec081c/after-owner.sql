@@ -1,0 +1,1 @@
+CREATE TABLE _error1222_owner(owner_token CHAR(32) NOT NULL); INSERT INTO _error1222_owner VALUES('9cbf28afd9bd4232ae89a6875cd88131');

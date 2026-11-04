@@ -1,1 +1,0 @@
-TEST|PASS|protected database and global sensors|18 core table checksums, helper row counts and monitored settings unchanged

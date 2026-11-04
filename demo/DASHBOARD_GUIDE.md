@@ -96,8 +96,8 @@ run with source/date labels. If that evidence is not present in another checkout
 the UI says unavailable rather than generating invented values. Include the
 referenced evidence folders when packaging the submission.
 
-Academic report: [FINAL_PROJECT_REPORT.md](../docs/FINAL_PROJECT_REPORT.md).
-Delivery/test evidence: [final-dashboard REPORT](../evidence/reviews/final-dashboard/REPORT.md).
+Academic report: [Final Project Report.docx](../docs/Final%20Project%20Report.docx).
+Recorded experiment data: [evidence](../evidence/).
 
 ## Focused tests (do not rerun the expensive suite unnecessarily)
 
@@ -114,3 +114,14 @@ The application does not require Node or Playwright. Browser QA may use an
 existing local tool environment; no bundled Codex path is a project prerequisite.
 Use a new output folder for each test. After browser mutations run six invariants,
 stop the server, and use the explicit ownership-checked Stop command.
+
+## Refreshed presentation layout
+
+The sidebar groups Banking, Fraud and Database lab pages. Customers & Accounts
+and Banking Transactions now use tabs, so one task is visible at a time. Expand
+supporting tables, raw output and historical evidence only when needed. Typed
+form drafts survive Refresh data and navigation. Online/Mobile/ATM disable the
+Branch employee field; Branch enables an active Teller selection. Fraud review
+shows only the selected flag's next legal states.
+
+Use the Professor flow above for the demonstration route and expected observations.

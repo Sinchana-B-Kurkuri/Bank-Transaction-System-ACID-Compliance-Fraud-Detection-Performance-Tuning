@@ -95,5 +95,38 @@ class HttpSafetyTests(unittest.TestCase):
                 dashboard.Dashboard(p)
 
 
+class StartupPathTests(unittest.TestCase):
+    def make_session(self, folder):
+        p = Path(folder) / "session.json"
+        p.write_text(json.dumps({"Prefix": "bank_a_ci_demo_123456abcdef", "Database": "bank_a_ci_demo_123456abcdef_main", "Status": "ready", "Owner": "a" * 32}))
+        return p
+
+    def test_mysql_directory_resolved_without_changing_environment(self):
+        import os
+        import tempfile
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as folder:
+            executable = Path(folder) / ("mysql.exe" if os.name == "nt" else "mysql")
+            executable.touch()
+            config = Path(folder) / "external.cnf"
+            config.touch()
+            with patch.dict(os.environ, {"BANK_MYSQL_BIN": folder, "BANK_MYSQL_CNF": str(config)}), patch.object(dashboard.Dashboard, "sql", return_value="a" * 32):
+                app = dashboard.Dashboard(self.make_session(folder))
+                self.assertEqual(app.args.mysql, str(executable))
+                self.assertEqual(os.environ["BANK_MYSQL_BIN"], folder)
+
+    def test_missing_mysql_executable_refused_before_sql(self):
+        import os
+        import tempfile
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as folder:
+            config = Path(folder) / "external.cnf"
+            config.touch()
+            with patch.dict(os.environ, {"BANK_MYSQL_BIN": folder, "BANK_MYSQL_CNF": str(config)}), patch.object(dashboard.Dashboard, "sql") as sql:
+                with self.assertRaisesRegex(ValueError, "BANK_MYSQL_BIN"):
+                    dashboard.Dashboard(self.make_session(folder))
+                sql.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()

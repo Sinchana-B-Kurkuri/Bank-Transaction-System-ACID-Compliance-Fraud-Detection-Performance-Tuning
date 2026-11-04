@@ -1,0 +1,11 @@
+HIGH_AMOUNT	20.00	{"minimum_amount": 5000}
+UNTRUSTED_DEVICE	20.00	NULL
+DIGITAL_CHANNEL	10.00	NULL
+HIGH_ACCOUNT_RISK	25.00	{"minimum_risk": 60}
+RAPID_ACTIVITY	25.00	{"minimum_count": 3, "window_minutes": 10}
+104	HIGH_AMOUNT	70.00	High	{"amount": 6000.00, "channel": "Online", "device_id": null, "rule_code": "HIGH_AMOUNT", "device_trusted": 0, "account_profile_risk": 100.00, "evaluated_transaction_timestamp": "2026-10-20 19:00:24.000000"}
+105	UNTRUSTED_DEVICE	90.00	Critical	{"amount": 6000.00, "channel": "Online", "device_id": null, "rule_code": "UNTRUSTED_DEVICE", "device_trusted": 0, "account_profile_risk": 100.00, "evaluated_transaction_timestamp": "2026-10-20 19:00:24.000000"}
+106	DIGITAL_CHANNEL	100.00	Critical	{"amount": 6000.00, "channel": "Online", "device_id": null, "rule_code": "DIGITAL_CHANNEL", "device_trusted": 0, "account_profile_risk": 100.00, "evaluated_transaction_timestamp": "2026-10-20 19:00:24.000000"}
+107	HIGH_ACCOUNT_RISK	100.00	Critical	{"amount": 6000.00, "channel": "Online", "device_id": null, "rule_code": "HIGH_ACCOUNT_RISK", "device_trusted": 0, "account_profile_risk": 100.00, "evaluated_transaction_timestamp": "2026-10-20 19:00:24.000000"}
+108	RAPID_ACTIVITY	100.00	Critical	{"amount": 6000.00, "channel": "Online", "device_id": null, "rule_code": "RAPID_ACTIVITY", "device_trusted": 0, "account_profile_risk": 100.00, "evaluated_transaction_timestamp": "2026-10-20 19:00:24.000000"}
+850.362	1

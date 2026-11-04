@@ -1,0 +1,10 @@
+TEST|PASS|real B latitude check|expected errno=3819; actual errno=3819
+TEST|PASS|real B longitude check|expected errno=3819; actual errno=3819
+TEST|PASS|real B rule weight check|expected errno=3819; actual errno=3819
+TEST|PASS|real B account risk check|expected errno=3819; actual errno=3819
+TEST|PASS|real B map exactly one actor|expected errno=3819; actual errno=3819
+TEST|PASS|real B approval distinct accounts|expected errno=3819; actual errno=3819
+TEST|PASS|real B approval requester check|expected errno=3819; actual errno=3819
+TEST|PASS|real B approval requester FK|expected errno=1452; actual errno=1452
+TEST|PASS|real B risk profile FK|expected errno=1452; actual errno=1452
+TEST|PASS|real B ground truth FK|expected errno=1452; actual errno=1452

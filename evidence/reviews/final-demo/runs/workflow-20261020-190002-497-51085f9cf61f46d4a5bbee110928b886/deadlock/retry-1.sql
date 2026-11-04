@@ -1,0 +1,2 @@
+SELECT CONCAT('META|',VERSION(),'|',NOW(6),'|',CONNECTION_ID()); SELECT CONCAT('CONNECTION|',CONNECTION_ID());
+SET @lab_sleep_seconds=0.5;SET SESSION innodb_lock_wait_timeout=5;CALL sp_transfer_funds_retry(2,1,1,'Online',NULL,NULL,NULL,3,5,@g,@d,@c,@tries);SELECT CONCAT('ATTEMPTS|',@tries);

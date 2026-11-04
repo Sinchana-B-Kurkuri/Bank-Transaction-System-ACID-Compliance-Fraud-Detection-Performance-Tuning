@@ -1,1 +1,0 @@
-TEST|PASS|SPEC signature fixture provenance|Generated expectations match current SPEC
